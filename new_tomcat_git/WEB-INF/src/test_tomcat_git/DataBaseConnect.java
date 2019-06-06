@@ -17,6 +17,10 @@ public class DataBaseConnect
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
 	protected int timeoutseconds = 30;//タイムアウト時間
 
+
+
+
+
 	int[] reference(int id,int type)//idはカードidなど、typeは攻防か、ルーム検索か
 	{
 		for(int i = 0;i < Result.length;i++)
@@ -105,11 +109,11 @@ public class DataBaseConnect
 		return Result;
 	}
 
-	String[] update(String username)//受け渡されたusernameをデータベースへインサートする
+	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
 	{
 		reference(0,-1);//空いているルームと攻守を検索
 
-		String[] userinfo = new String[3];
+		int[] userinfo = new int[3];
 		try
 		{
 			conn = DriverManager.getConnection(url,user,password);
@@ -136,7 +140,7 @@ public class DataBaseConnect
 
 			}
 		}
-		//データベースからのintデータをString配列にキャスト
+
 		return userinfo;
 
 
