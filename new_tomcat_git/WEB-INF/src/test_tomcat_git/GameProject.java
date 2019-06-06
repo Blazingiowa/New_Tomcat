@@ -2,9 +2,11 @@ package test_tomcat_git;
 
 public class GameProject
 {
-	String[] player = new String[2];
-	String[] player1 = new String[2];
-	String[] player2 = new String[2];
+	int[] player = new int[2];
+	final int[] player1 =
+	{ 1, 0 };
+	final int[] player2 =
+	{ 0, 1 };
 
 	int[][] atcard = new int[12][5];//攻撃のカード（カードID０～１１の計１２枚）
 	int[][] defcard = new int[8][2];//防御のカード（カードID１２～１９の計８枚）
@@ -25,66 +27,25 @@ public class GameProject
 	DataBaseConnect DBC = new DataBaseConnect();//DBクラスのインスタンス
 	Text tx = new Text();//テキストクラスのインスタンス
 
-	/*playerinfoの配列内容------------------/usecardの配列の内容----/
+	/*infoの配列内容------------------------/useの配列の内容--------/
 	/										/						/
 	/	[ユーザID][ルームID][ユーザ番号]	/	[カードID][][]...	/
 	/										/						/
 	/---------------------------------------/----------------------*/
 
 	//メインメソッド
-	void main(int[] playerinfo, int[] usecard)
+	void main(int[] info, int[] use)
 	{
 		//textmainの内容を初期化
-		textreset();
+		start();
 
 		//テキストファイルを検索[ルームID][ユーザ番号][行数][書0、読1][書き込みたい配列、読みはnull]
-		textW = tx.editer(playerinfo[1], playerinfo[2], 0, 1, null);
+		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
+		textW = tx.editer(info[1], info[2], 0, 1, null);
 
-		//プレイヤーの処理が終わっているのかどうか（０はまだ、１で処理済み）
-		if (textW[0] == 0)
-		{
-			for (int i = 0; i < textmain.length; i++)
-			{
-				textW = tx.editer(playerinfo[1], playerinfo[2], i, 1, null);
+		//テキストを読み込み、書き換える
+		txtReadWrite(info, use);
 
-				//テキストには初期で入ってるデータを配列に入れる
-				for (int j = 0; j < textW.length; j++)
-				{
-					w = textW[j];
-					textmain[i][j] = w;
-				}
-
-			}
-
-			textmain[0][0] = 1;//とりあえず、処理済みにデータを変更
-			//for文を使って２次元配列を１次元配列に退避し、テキストファイルに書き込む
-			for (int i = 0; i < textmain.length; i++)
-			{
-				if (i == 1)//１行目の時が自分が使ったカードの情報
-				{
-					for (int j = 0; j < textmain[1].length; j++)
-					{
-						w = usecard[j];
-						textW[j] = w;
-					}
-				}
-				else//それ以外の時は退避用変数に入れて、そこから１次元配列にデータを入れてテキストに書き込む
-				{
-					for (int j = 0; j < textmain[1].length; j++)
-					{
-						w = textmain[i][j];
-						textW[j] = w;
-					}
-				}
-				tx.editer(playerinfo[1], playerinfo[2], i, 0, textW);
-			}
-		}
-
-		//プレイヤーの処理がどうなのか？（０でまだ、１で処理済み）
-		if(textmain[0][0] == 0)
-		{
-			textmain[0][0]=1;//０を１にして、処理済みに変更する
-		}
 	}
 
 	/*攻撃カードの手札の配列内容(5×5)--------------------------/
@@ -129,16 +90,71 @@ public class GameProject
 
 	}
 
-	//textの初期化（使わないデータの場所には-1）
-	void textreset()
+	//初期設定
+	void start()
 	{
+		//（使わないデータの場所には-1）
 		for (int i = 0; i < textmain.length; i++)
 		{
 			for (int j = 0; j < textmain[0].length; j++)
 			{
 				textmain[i][j] = -1;
 			}
+		}
+		//処理情報のところを０にし、処理前の情報にする。
+		textmain[0][0] = 0;
+	}
 
+	//textの読み込みと書き込み
+	void txtReadWrite(int[] playerinfo, int[] usecard)
+	{
+		//プレイヤーの処理が終わっているのかどうか判定（０はまだ、１で処理済み）
+		if (textW[0] == 0)
+		{
+			for (int i = 0; i < textmain.length; i++)
+			{
+				textW = tx.editer(playerinfo[1], playerinfo[2], i, 1, null);
+
+				//テキストには初期で入ってるデータを配列に入れる
+				for (int j = 0; j < textW.length; j++)
+				{
+					w = textW[j];
+					textmain[i][j] = w;
+				}
+
+			}
+
+			textmain[0][0] = 1;//とりあえず、処理済みにデータを変更
+			//for文を使って２次元配列を１次元配列に退避し、テキストファイルに書き込む
+			for (int i = 0; i < textmain.length; i++)
+			{
+				if (i == 1)//１行目の時が自分が使ったカードの情報
+				{
+					for (int j = 0; j < textmain[1].length; j++)
+					{
+						w = usecard[j];
+						textW[j] = w;
+					}
+				}
+				else//それ以外の時は退避用変数に入れて、そこから１次元配列にデータを入れてテキストに書き込む
+				{
+					for (int j = 0; j < textmain[1].length; j++)
+					{
+						w = textmain[i][j];
+						textW[j] = w;
+					}
+				}
+				tx.editer(playerinfo[1], playerinfo[2], i, 0, textW);
+			}
+
+			if (playerinfo[2] == 1)
+			{
+				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player1);
+			}
+			else if (playerinfo[2] == 2)
+			{
+				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player2);
+			}
 		}
 	}
 
