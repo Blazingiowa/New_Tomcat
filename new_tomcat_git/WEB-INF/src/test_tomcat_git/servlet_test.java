@@ -14,18 +14,18 @@ import com.google.gson.Gson;
 @WebServlet(urlPatterns = { "/servlet_test"})
 public class servlet_test extends HttpServlet
 {
-	Gson gson = new Gson();
+	private Gson gson = new Gson();
 
-	UserBean ub = new UserBean();
-	Gamestart game_start = new Gamestart();
-	Gamemain game_main = new Gamemain();
+	private UserBean ub = new UserBean();
+	private Gamestart game_start = new Gamestart();
+	private Gamemain game_main = new Gamemain();
 
-	GameProject game_project = new GameProject();
+	private GameProject game_project = new GameProject();
 
-	String name_val;
-	String[] user_info;
-	int[] user_session;
-	int[] use_hand;
+	private String name_val;
+	private String[] user_info;
+	private int[] user_session;
+	private int[] use_hand;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
