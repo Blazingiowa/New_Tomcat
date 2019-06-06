@@ -6,15 +6,15 @@ public class Gamestart
 	Text tx = new Text();
 	DataBaseConnect DBC = new DataBaseConnect();
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
+	int[] player = new int[3];
 
 	String[] createdirectry(String user_name) //
 	{
-		userinfo = DBC.update(user_name);
-		int[] player = new int[3];
+		player = DBC.update(user_name);
 
 		for(int i = 0;i<userinfo.length;i++)
 		{
-			player[i] = Integer.parseInt(userinfo[i]);
+			userinfo[i] = String.valueOf(player[i]);
 		}
 
 		tx.editer(player[1], player[2],0,0,null);
