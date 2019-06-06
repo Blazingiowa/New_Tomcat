@@ -2,9 +2,14 @@ package test_tomcat_git;
 
 public class GameProject
 {
+	//ルーム状況を入れるための配列
 	int[] player = new int[2];
+
+	//ルーム状況表にプレイヤー１の情報を書き込むための配列
 	final int[] player1 =
 	{ 1, 0 };
+
+	//ルーム状況表にプレイヤー２の情報を書き込むための配列
 	final int[] player2 =
 	{ 0, 1 };
 
@@ -147,12 +152,17 @@ public class GameProject
 				tx.editer(playerinfo[1], playerinfo[2], i, 0, textW);
 			}
 
+			//プレイヤー１のときの処理
 			if (playerinfo[2] == 1)
 			{
+				//ルーム状況表にプレイヤー１の処理が終わったことを書き込む
 				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player1);
 			}
+
+			//プレイヤー２の時の処理
 			else if (playerinfo[2] == 2)
 			{
+				//ルーム状況表にプレイヤー２の処理が終わったことを書き込む
 				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player2);
 			}
 		}
