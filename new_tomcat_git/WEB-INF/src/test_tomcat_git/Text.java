@@ -28,7 +28,18 @@ public class Text
 	int[] editer(int room,int number,int linenumber,int WriteorRead,int[] rewrite)//試験的に作るため呼び出し禁止 room 部屋番号　number プレイヤー番号 書き換える配列
 	{
 		String[] line = new String[10];//配列数(行数)は仮設定、各行の情報が入力
-		file = new File("");//roomidとplayernumberを使用してファイルを特定
+
+		if(number == 3)//numberが3であたったらルームファイルを確認するまた、この場合はlinenumberにプレイヤー番号が入る
+		{
+			file = new File("");
+			number = linenumber;
+			linenumber = 0;
+		}
+		else
+		{
+			file = new File("");//roomidとplayernumberを使用してファイルを特定
+		}
+
 
 		//以下テキストファイル読み込み
 		try
