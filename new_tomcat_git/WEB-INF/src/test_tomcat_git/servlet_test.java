@@ -18,7 +18,7 @@ public class servlet_test extends HttpServlet
 
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
-	private Gamemain game_main = new Gamemain();
+	//private Gamemain game_main = new Gamemain();
 
 	private GameProject game_project = new GameProject();
 
