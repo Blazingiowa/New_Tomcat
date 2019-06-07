@@ -16,18 +16,12 @@ public class GameProject
 	int[][] atcard = new int[12][5];//攻撃のカード（カードID０～１１の計１２枚）
 	int[][] defcard = new int[8][2];//防御のカード（カードID１２～１９の計８枚）
 
-	int p1_movept;//ｐ１のリソース（行動値的なもの）
-	int p2_movept;//ｐ２のリソース（行動値的なもの）
-
-	int p1_hp;//ｐ１のHP（信頼度）
-	int p2_hp;//ｐ２のHP（信頼度）
-
 	int[] atcardinfo = new int[5];//DBから攻撃カードのデータを受け取るときの退避用配列
 	int[] defcardinfo = new int[2];//DBから防御カードのデータを受け取るときの退避用配列
 
 	int[] textW;//テキストファイルの内容を一時的に避難させるための１次元配列
 	int w;//みんな大好き一時退避変数だよ！＜＜０にｗを代入＞＞
-	int[][] textmain = new int[5][3];//避難させた内容を格納するための配列
+	int[][] textmain = new int[7][3];//避難させた内容を格納するための配列
 
 	DataBaseConnect DBC = new DataBaseConnect();//DBクラスのインスタンス
 	Text tx = new Text();//テキストクラスのインスタンス
@@ -48,8 +42,26 @@ public class GameProject
 		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
 		textW = tx.editer(info[1], info[2], 0, 1, null);
 
-		//テキストを読み込み、書き換える
+		//テキストを読み込み、書き換え
 		txtReadWrite(info, use);
+
+		//ルーム状況表から情報をもってくる
+		player = tx.editer(info[1], 3, info[2], 1, null);
+
+		//それぞれのプレイヤーが処理が終わっているかどうかの判定
+		if (player[0] == 1 && player[1] == 1)
+		{
+			//ｐ１のとき
+			if (info[2] == 1)
+			{
+
+			}
+			//ｐ２のとき
+			else if (info[2] == 2)
+			{
+
+			}
+		}
 
 	}
 
@@ -95,7 +107,7 @@ public class GameProject
 
 	}
 
-	//初期設定
+	//テキストの初期化
 	void start()
 	{
 		//（使わないデータの場所には-1）
@@ -106,8 +118,18 @@ public class GameProject
 				textmain[i][j] = -1;
 			}
 		}
-		//処理情報のところを０にし、処理前の情報にする。
-		textmain[0][0] = 0;
+		textmain[0][0] = 0;//処理判定を０に戻す
+		textmain[1][1] = 100;//ｐ１のｈｐを初期化
+		textmain[1][2] = 100;//ｐ２のｈｐを初期化
+		textmain[2][1] = 1;//ｐ１の行動値を初期化
+		textmain[2][2] = 1;//ｐ２の行動値を初期化
+		//自分が与えるダメージと相手から受けるダメージの初期値は０にする
+		for (int j = 0; j < textmain[0].length; j++)
+		{
+			textmain[4][j] = 0;
+			textmain[6][j] = 0;
+		}
+
 	}
 
 	//textの読み込みと書き込み
@@ -133,7 +155,7 @@ public class GameProject
 			//for文を使って２次元配列を１次元配列に退避し、テキストファイルに書き込む
 			for (int i = 0; i < textmain.length; i++)
 			{
-				if (i == 1)//１行目の時が自分が使ったカードの情報
+				if (i == 3)//３行目の時が自分が使ったカードの情報
 				{
 					for (int j = 0; j < textmain[1].length; j++)
 					{
