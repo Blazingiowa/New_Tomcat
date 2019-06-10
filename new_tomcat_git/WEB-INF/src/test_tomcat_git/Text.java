@@ -28,6 +28,7 @@ public class Text
 	int[] editer(int room,int number,int linenumber,int WriteorRead,int[] rewrite)//試験的に作るため呼び出し禁止 room 部屋番号　number プレイヤー番号 書き換える配列
 	{
 		String[] line = new String[10];//配列数(行数)は仮設定、各行の情報が入力
+		String[][] alltext = new String[10][3];
 
 		if(number == 3)//numberが3であたったらルームファイルを確認するまた、この場合はlinenumberにプレイヤー番号が入る
 		{
@@ -47,12 +48,30 @@ public class Text
 			br = new BufferedReader(new FileReader(file));
 			String str = br.readLine();
 
-			for(int i = 0;str != null;i++)
-			{
-				line[i] = str;
+			String[] array = str.split(",");
 
-				str = br.readLine();
+			for(int i = 0,j = 0,k = 0;k<array.length;k++)
+			{
+				System.out.println(i+","+j+","+k);
+				if(!array[k].equals("s"))
+				{
+					alltext[i][j] = array[k];
+
+					j++;
+				}
+				else
+				{
+					i++;
+					j=0;
+				}
+
 			}
+
+			for(int i =0;i<alltext.length;i++)
+			{
+				line[i] = alltext[i][0]+","+alltext[i][1]+","+alltext[i][2];
+			}
+
 		}
 
 		catch(Exception e)
@@ -161,7 +180,7 @@ public class Text
 
 			if((i+1)<lineinfo.length)
 			{
-				text = text+"\r\n";
+				text = text+",s,";
 			}
 		}
 
