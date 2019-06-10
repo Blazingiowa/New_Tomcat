@@ -18,8 +18,8 @@ public class Text
 	BufferedWriter bw;
 	PrintWriter pw;
 
-	int[] playerinfo = new int[3];//配列数は仮設定
-	int[] set = new int[3];
+	int[] playerinfo;//配列数は仮設定
+	
 
 	//int roomid,playernumber;//ルーム番号をintにキャスト
 
@@ -27,6 +27,7 @@ public class Text
 
 	int[] editer(int room,int number,int linenumber,int WriteorRead,int[] rewrite)//試験的に作るため呼び出し禁止 room 部屋番号　number プレイヤー番号 書き換える配列
 	{
+		playerinfo = new int[3];
 		String[] line = new String[10];//配列数(行数)は仮設定、各行の情報が入力
 		String[][] alltext = new String[10][3];
 
@@ -89,6 +90,8 @@ public class Text
 		{
 			if(rewrite == null)
 			{
+				int[] set = new int[3];
+				
 				for(int i = 0;i<set.length;i++)
 				{
 					set[i] = -1;
@@ -112,7 +115,7 @@ public class Text
 		}
 	}
 
-	private String[] startup(String[] lineinfo,int[] write)//ゲームの初期設定
+	private String[] startup(String[] lineinfo,int[] write/*-1の塊*/)//ゲームの初期設定
 	{
 		String text = "",linestr ="";
 		try
@@ -136,7 +139,7 @@ public class Text
 
 				if((i+1)<lineinfo.length)
 				{
-					text = text+"\r\n";
+					text = text+",s,";
 				}
 			}
 
