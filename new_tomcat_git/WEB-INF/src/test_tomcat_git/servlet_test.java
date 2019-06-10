@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-@WebServlet(urlPatterns = { "/servlet_test"})
+@WebServlet("/servlet_test")
 public class servlet_test extends HttpServlet
 {
 	private Gson gson = new Gson();
 
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
-	private Gamemain game_main = new Gamemain();
+	//private Gamemain game_main = new Gamemain();
 
 	private GameProject game_project = new GameProject();
 
