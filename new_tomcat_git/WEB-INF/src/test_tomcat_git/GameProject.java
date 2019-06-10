@@ -22,11 +22,8 @@ public class GameProject
 	int[][] p1_card = new int[3][8];//統合処理の時の、カード判定時に使う
 	int[][] p2_card = new int[3][8];//上に同じ
 
-	int[][] atcard = new int[12][5];//攻撃のカード（カードID０～１１の計１２枚）
-	int[][] defcard = new int[8][2];//防御のカード（カードID１２～１９の計８枚）
-
-	int[] atcardinfo = new int[5];//DBから攻撃カードのデータを受け取るときの退避用配列
-	int[] defcardinfo = new int[2];//DBから防御カードのデータを受け取るときの退避用配列
+	int[] p1_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p1
+	int[] p2_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p2
 
 	int[] textW;//テキストファイルの内容を一時的に避難させるための１次元配列
 	int w;//みんな大好き一時退避変数だよ！＜＜０にｗを代入＞＞
@@ -64,59 +61,37 @@ public class GameProject
 			if (info[2] == 1)
 			{
 				textW = tx.editer(info[1], 2, 5, 1, null);//相手が使ったカードの情報を持ってきて退避
+
+				//自分のところに相手の情報を持ってくる
 				for (int i = 0; i < p2_card.length; i++)
 				{
 					textmain[5][i] = textW[i];//２次元配列の相手のカード情報のところにセット
 					p2_card[i][0] = textW[i];//相手のカード情報の場所にもセット
 					p1_card[i][0] = textmain[3][i];//２次元配列から自分の使ったカードの情報をセット
 				}
+
+				//使ったカードの情報をDBから持ってくる
+				for (int i = 0; i < p1_card.length; i++)
+				{
+					p1_cardinfo = DBC.reference(p1_card[i][0], 0);//p1の使ったカード情報
+					p2_cardinfo = DBC.reference(p2_card[i][0], 0);//p2の使ったカード情報
+
+					for(int j = 0;j<p1_cardinfo.length;j++)
+					{
+						//先にｐ１の情報を入れていく
+						w = p1_cardinfo[j];
+						p1_card[i][j] = w;
+
+						//次にｐ２
+						w = p2_cardinfo[j];
+						p2_card[i][j] = w;
+					}
+				}
 			}
 			//ｐ２のとき
 			else if (info[2] == 2)
 			{
 
-			}
-		}
-
-	}
-
-	/*攻撃カードの手札の配列内容(5×5)--------------------------/
-	/															/
-	/	[カードID][ダメージ値][コスト][防カード１][防カード２]	/
-	/															/
-	/----------------------------------------------------------*/
-
-	//攻撃カードの設定
-	void atcard()
-	{
-		for (int i = 0; i < 12; i++)
-		{
-			atcardinfo = DBC.reference(i, 0);//DBのカード情報を取り出して退避用配列に入れる
-			for (int j = 0; j < 5; j++)
-			{
-				//攻撃のカード情報をセット
-				atcard[i][j] = atcardinfo[j];
-			}
-		}
-
-	}
-
-	/*防御カードの配列内容(8×2)----/
-	/								/
-	/	[カードID][コスト]			/
-	/								/
-	/------------------------------*/
-
-	//防御カードの設定
-	void defcard()
-	{
-		for (int i = 0; i < 8; i++)
-		{
-			defcardinfo = DBC.reference(i, 0);//DBのカード情報を取り出して退避用配列に入れる
-			for (int j = 0; j < 2; j++)
-			{
-				//防御のカード情報をセット
-				defcard[i][j] = defcardinfo[j];
 			}
 		}
 
