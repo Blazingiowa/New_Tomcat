@@ -17,7 +17,21 @@ public class DataBaseConnect
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
 	protected int timeoutseconds = 30;//タイムアウト時間
 
+	/*
 
+
+	クラスキレイキレイ中
+
+
+
+	*/
+
+	int[] connect(int id,int RefeorUp)
+	{
+
+
+		return null;
+	}
 
 
 
