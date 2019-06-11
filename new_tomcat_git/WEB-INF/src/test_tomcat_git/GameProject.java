@@ -13,12 +13,6 @@ public class GameProject
 	final int[] player2 =
 	{ 0, 1 };
 
-	int p1_hp = 100;//ｐ１のｈｐの変数
-	int p2_hp = 100;//ｐ２のｈｐの変数
-
-	int p1_movept = 1;//ｐ１の行動値
-	int p2_movept = 1;//ｐ２の行動値
-
 	int[][] p1_card = new int[3][8];//統合処理の時の、カード判定時に使う
 	int[][] p2_card = new int[3][8];//上に同じ
 
@@ -28,6 +22,11 @@ public class GameProject
 	int[] textW;//テキストファイルの内容を一時的に避難させるための１次元配列
 	int w;//みんな大好き一時退避変数だよ！＜＜０にｗを代入＞＞
 	int[][] textmain = new int[7][3];//避難させた内容を格納するための配列
+	int[][] textsub = new int[4][3];//相手のテキストに記述する際に使用する２次元配列
+
+	//攻撃が通せるかどうか判定するための変数とフラグ
+	int count = 0;
+	boolean flag = false;
 
 	DataBaseConnect DBC = new DataBaseConnect();//DBクラスのインスタンス
 	Text tx = new Text();//テキストクラスのインスタンス
@@ -66,6 +65,8 @@ public class GameProject
 				for (int i = 0; i < p2_card.length; i++)
 				{
 					textmain[5][i] = textW[i];//２次元配列の相手のカード情報のところにセット
+					textsub[0][i] = textW[i];//あとで使う２次元配列にも相手のカード情報をセット
+
 					p2_card[i][0] = textW[i];//相手のカード情報の場所にもセット
 					p1_card[i][0] = textmain[3][i];//２次元配列から自分の使ったカードの情報をセット
 				}
@@ -76,7 +77,7 @@ public class GameProject
 					p1_cardinfo = DBC.reference(p1_card[i][0], 0);//p1の使ったカード情報
 					p2_cardinfo = DBC.reference(p2_card[i][0], 0);//p2の使ったカード情報
 
-					for(int j = 0;j<p1_cardinfo.length;j++)
+					for (int j = 0; j < p1_cardinfo.length; j++)
 					{
 						//先にｐ１の情報を入れていく
 						w = p1_cardinfo[j];
@@ -87,6 +88,83 @@ public class GameProject
 						p2_card[i][j] = w;
 					}
 				}
+
+				//p1_cardの行を回すためのfor
+				for (int i = 0; i < p1_card.length; i++)
+				{
+					//攻撃が通せるか判定するためのフラグリセット
+					flag = false;
+
+					//使ったカードがあるかどうか判定
+					if (p1_card[i][0] != -1)
+					{
+						//p1_cardの対応IDの列を回すためのfor
+						for (int j = 3; j < p1_card[0].length; j++)
+						{
+							//攻撃が通せるか判定するための変数リセット
+							count = 0;
+
+							//対応IDがあるかどうかの判定
+							if (p1_card[i][j] != -1)
+							{
+								//p2_cardのIDの行を回すためのfor
+								for (int k = 0; k < p2_card.length; k++)
+								{
+									//p1_cardの使ったカードIDに対応しているIDがp2_cardにあるか判定
+									if (p1_card[i][j] == p2_card[k][0])
+									{
+										//自分のカードが攻撃で、相手の防御に防がれたとき
+										if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+										{
+											textmain[6][k] -= p1_card[i][2] / 2;//ｐ１が受けたダメージを計算して配列に入れる
+											textsub[1][k] += p1_card[i][2] / 2;//ｐ２が与えたダメージを計算して配列に入れる
+											flag = true;
+										}
+										//自分のカードが防御で、相手の攻撃を防いだとき
+										else
+										{
+											textmain[4][i] += p2_card[k][2] / 2;//ｐ１がリフレクトしたダメージを計算して配列に入れる
+											textsub[3][i] -= p2_card[k][2] / 2;//ｐ２がリフレクトされたダメージを計算して配列に入れる
+										}
+									}
+
+									//対応しているIDでなかった場合
+									else
+									{
+										//攻撃カードかどうかの判定
+										if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+										{
+											//カウントをプラスする
+											count++;
+
+											//カウントが３回溜まっていて、相手の使ったカードに対応IDがなかった場合
+											if (count == 3 && flag == false)
+											{
+												textmain[4][i] = p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
+												textsub[3][i] = -(p1_card[i][2]);//ｐ２が受けたダメージを配列に入れる
+												count = 0;//カウントリセット
+											}
+										}
+									}
+
+								}
+							}
+						}
+					}
+				}
+
+				//統合処理の結果、発生したダメージをｈｐから減らす
+				//ｐ１のｈｐを減らす
+				for (int i = 0; i < textmain[0].length; i++)
+				{
+					textmain[1][1] -= textmain[6][i];
+				}
+				//ｐ２のｈｐを減らす
+				for (int i = 0; i < textmain[0].length; i++)
+				{
+					textmain[1][2] -= textmain[4][i];
+				}
+
 			}
 			//ｐ２のとき
 			else if (info[2] == 2)
@@ -163,6 +241,8 @@ public class GameProject
 						w = usecard[j];//退避用変数に使ったカード情報をセット
 						textmain[3][j] = w;//２次元配列の方にも入れておく
 						textW[j] = w;//テキストに書き込む際に使用する退避用１次元配列にセット
+
+						textsub[2][j] = w;//あとで使う２次元配列にも自分のカード情報をセット
 					}
 				}
 				else//それ以外の時は退避用変数に入れて、そこから１次元配列にデータを入れてテキストに書き込む
