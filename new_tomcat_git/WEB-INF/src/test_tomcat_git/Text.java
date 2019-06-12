@@ -19,7 +19,7 @@ public class Text
 	PrintWriter pw;
 
 	int[] playerinfo;//配列数は仮設定
-	
+
 
 	//int roomid,playernumber;//ルーム番号をintにキャスト
 
@@ -91,7 +91,7 @@ public class Text
 			if(rewrite == null)
 			{
 				int[] set = new int[3];
-				
+
 				for(int i = 0;i<set.length;i++)
 				{
 					set[i] = -1;
@@ -102,8 +102,10 @@ public class Text
 				rewrite[1] = -1;
 				rewrite[2] = -1;
 			}
-
-			filewriter(line,linenumber,rewrite);//テキストファイルの更新　行配列、行番号、書き込む配列
+			else
+			{
+				filewriter(line,linenumber,rewrite);//テキストファイルの更新　行配列、行番号、書き込む配列
+			}
 
 			return null;
 		}
