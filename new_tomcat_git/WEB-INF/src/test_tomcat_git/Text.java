@@ -127,7 +127,7 @@ public class Text
 			defSet[i] = -1;
 		}
 
-		for(int i = 0;i<defSet.length;i++)
+		for(int i = 0;i<defSet.length;i++)//linestrに1行分の-1を挿入
 		{
 			linestr = linestr+defSet[i];
 
@@ -137,6 +137,7 @@ public class Text
 			}
 		}
 
+		/*以下textファイルへ出力*/
 		lineinfo[0] = "0,-1,-1,s,";
 
 		for(int i = 1;i<lineinfo.length;i++)
@@ -169,6 +170,7 @@ public class Text
 			close();
 		}
 
+		/*-1以外の初期値を入力*/
 		filewriter(lineinfo,1,hpSet);
 		filewriter(lineinfo,2,manaSet);
 		filewriter(lineinfo,4,defDamage);
