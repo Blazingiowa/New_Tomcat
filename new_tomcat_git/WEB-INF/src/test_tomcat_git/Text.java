@@ -90,18 +90,13 @@ public class Text
 		{
 			if(rewrite == null)
 			{
-				int[] set = new int[3];
-
-				for(int i = 0;i<set.length;i++)
-				{
-					set[i] = -1;
-				}
-				line = startup(line,set);//一番最初はlineの中身が空だから-1を入力しテキストファイルの更新で最初の行を変更
-				rewrite = new int[3];
+				startup(line);//一番最初はlineの中身が空だから-1を入力しテキストファイルの更新で最初の行を変更
+				/*rewrite = new int[3];
 				rewrite[0] = 0;
 				rewrite[1] = -1;
-				rewrite[2] = -1;
+				rewrite[2] = -1;*/
 			}
+
 			else
 			{
 				filewriter(line,linenumber,rewrite);//テキストファイルの更新　行配列、行番号、書き込む配列
@@ -117,34 +112,47 @@ public class Text
 		}
 	}
 
-	private String[] startup(String[] lineinfo,int[] write/*-1の塊*/)//ゲームの初期設定
+	private String[] startup(String[] lineinfo)//ゲームの初期設定
 	{
 		String text = "",linestr ="";
+
+		int[] defSet = new int[3];
+		int[] hpSet = {-1,100,100};
+		int[] manaSet = {-1,1,1};
+		int[] defDamage = {0,0,0};
+
+
+		for(int i = 0;i<defSet.length;i++)
+		{
+			defSet[i] = -1;
+		}
+
+		for(int i = 0;i<defSet.length;i++)
+		{
+			linestr = linestr+defSet[i];
+
+			if((i+1)<defSet.length)
+			{
+				linestr = linestr+",";
+			}
+		}
+
+		lineinfo[0] = "0,-1,-1,s,";
+
+		for(int i = 1;i<lineinfo.length;i++)
+		{
+			lineinfo[i] = linestr;
+
+			text = text+linestr;
+
+			if((i+1)<lineinfo.length)
+			{
+				text = text+",s,";
+			}
+		}
+
 		try
 		{
-
-			for(int i = 0;i<write.length;i++)
-			{
-				linestr = linestr+write[i];
-
-				if((i+1)<write.length)
-				{
-					linestr = linestr+",";
-				}
-			}
-
-			for(int i = 0;i<lineinfo.length;i++)
-			{
-				lineinfo[i] = linestr;
-
-				text = text+linestr;
-
-				if((i+1)<lineinfo.length)
-				{
-					text = text+",s,";
-				}
-			}
-
 			filewriter = new FileWriter(file);
 			bw = new BufferedWriter(filewriter);
 			pw = new PrintWriter(bw);
@@ -161,7 +169,12 @@ public class Text
 			close();
 		}
 
-		return lineinfo;
+		filewriter(lineinfo,1,hpSet);
+		filewriter(lineinfo,2,manaSet);
+		filewriter(lineinfo,4,defDamage);
+		filewriter(lineinfo,6,defDamage);
+
+		return null;
 	}
 
 	private void filewriter(String[] lineinfo,int linenumber,int[] write) //ファイル書き込み
