@@ -19,10 +19,10 @@ public class GameProject
 	int[] p1_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p1
 	int[] p2_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p2
 
-	int[] textW;//テキストファイルの内容を一時的に避難させるための１次元配列
+	int[] textW = new int[3];//テキストファイルの内容を一時的に避難させるための１次元配列
+	int[] textF;//テキストファイルの内容を一時的に避難させるための可変可能な１次元配列
 	int w;//みんな大好き一時退避変数だよ！＜＜０にｗを代入＞＞
 	int[][] textmain = new int[7][3];//避難させた内容を格納するための配列
-	int[][] textsub = new int[4][3];//相手のテキストに記述する際に使用する２次元配列
 
 	//攻撃が通せるかどうか判定するための変数とフラグ
 	int count = 0;
@@ -45,12 +45,12 @@ public class GameProject
 
 		//テキストファイルを検索[ルームID][ユーザ番号][行数][書0、読1][書き込みたい配列、読みはnull]
 		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
-		textW = tx.editer(info[1], info[2], 0, 1, null);
+		textF = tx.editer(info[1], info[2], 0, 1, null);
 
 		//テキストを読み込み、書き換え
 		txtReadWrite(info, use);
 
-		//ルーム状況表から情報をもってくる
+		//ルーム状況表から情報をもってくる[ルームID][共有ファイルについてなので、３][ユーザ番号で行数指定][書０読１][書き込みたい配列またはnull]
 		player = tx.editer(info[1], 3, info[2], 1, null);
 
 		//それぞれのプレイヤーが処理が終わっているかどうかの判定
@@ -59,15 +59,14 @@ public class GameProject
 			//ｐ１のとき
 			if (info[2] == 1)
 			{
-				textW = tx.editer(info[1], 2, 5, 1, null);//相手が使ったカードの情報を持ってきて退避
+				textF = tx.editer(info[1], 2, 5, 1, null);//相手が使ったカードの情報を持ってきて退避
 
-				//自分のところに相手の情報を持ってくる
+				//ｐ１のところにｐ２の情報を持ってくる
 				for (int i = 0; i < p2_card.length; i++)
 				{
-					textmain[5][i] = textW[i];//２次元配列の相手のカード情報のところにセット
-					textsub[0][i] = textW[i];//あとで使う２次元配列にも相手のカード情報をセット
+					textmain[5][i] = textF[i];//２次元配列のｐ２のカード情報のところにセット
 
-					p2_card[i][0] = textW[i];//相手のカード情報の場所にもセット
+					p2_card[i][0] = textF[i];//相手のカード情報の場所にもセット
 					p1_card[i][0] = textmain[3][i];//２次元配列から自分の使ったカードの情報をセット
 				}
 
@@ -117,14 +116,12 @@ public class GameProject
 										if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
 										{
 											textmain[6][k] -= p1_card[i][2] / 2;//ｐ１が受けたダメージを計算して配列に入れる
-											textsub[1][k] += p1_card[i][2] / 2;//ｐ２が与えたダメージを計算して配列に入れる
 											flag = true;
 										}
 										//自分のカードが防御で、相手の攻撃を防いだとき
 										else
 										{
 											textmain[4][i] += p2_card[k][2] / 2;//ｐ１がリフレクトしたダメージを計算して配列に入れる
-											textsub[3][i] -= p2_card[k][2] / 2;//ｐ２がリフレクトされたダメージを計算して配列に入れる
 										}
 									}
 
@@ -141,7 +138,6 @@ public class GameProject
 											if (count == 3 && flag == false)
 											{
 												textmain[4][i] = p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
-												textsub[3][i] = -(p1_card[i][2]);//ｐ２が受けたダメージを配列に入れる
 												count = 0;//カウントリセット
 											}
 										}
@@ -165,6 +161,63 @@ public class GameProject
 					textmain[1][2] -= textmain[4][i];
 				}
 
+				textmain[2][1]++;//ｐ１の行動値を１増やす
+				textmain[2][2]++;//ｐ２の行動値を２増やす
+
+				//ｐ１の統合処理後の情報をテキストに書き込む
+				for (int i = 0; i < textmain.length; i++)
+				{
+					for (int j = 0; j < textmain[1].length; j++)
+					{
+						w = textmain[i][j];//２次元配列の情報をセット
+						textW[j] = w;
+					}
+
+					tx.editer(info[1], info[2], i, 0, textW);//テキストに書き込み
+				}
+				//ｐ２の統合処理後の情報をテキストに書き込む
+				for (int i = 0; i < textmain.length; i++)
+				{
+					switch (i)
+					{
+						case 3:
+							for (int j = 0; j < textmain[1].length; j++)
+							{
+								w = textmain[5][j];
+								textW[j] = w;
+							}
+							break;
+						case 4:
+							for (int j = 0; j < textmain[1].length; j++)
+							{
+								w = textmain[6][j] * (-1);
+								textW[j] = w;
+							}
+							break;
+						case 5:
+							for (int j = 0; j < textmain[1].length; j++)
+							{
+								w = textmain[3][j];
+								textW[j] = w;
+							}
+							break;
+						case 6:
+							for (int j = 0; j < textmain[1].length; j++)
+							{
+								w = textmain[4][j] * (-1);
+								textW[j] = w;
+							}
+							break;
+						default:
+							for (int j = 0; j < textmain[1].length; j++)
+							{
+								w = textmain[i][j];//２次元配列の情報をセット
+								textW[j] = w;
+							}
+					}
+
+					tx.editer(info[1], 2, i, 0, textW);//テキストに書き込み
+				}
 			}
 			//ｐ２のとき
 			else if (info[2] == 2)
@@ -215,16 +268,16 @@ public class GameProject
 	void txtReadWrite(int[] playerinfo, int[] usecard)
 	{
 		//プレイヤーの処理が終わっているのかどうか判定（０はまだ、１で処理済み）
-		if (textW[0] == 0)
+		if (textF[0] == 0)
 		{
 			for (int i = 0; i < textmain.length; i++)
 			{
-				textW = tx.editer(playerinfo[1], playerinfo[2], i, 1, null);
+				textF = tx.editer(playerinfo[1], playerinfo[2], i, 1, null);
 
 				//テキストに初期で入ってるデータを配列に入れる
 				for (int j = 0; j < textW.length; j++)
 				{
-					w = textW[j];
+					w = textF[j];
 					textmain[i][j] = w;
 				}
 
@@ -241,8 +294,6 @@ public class GameProject
 						w = usecard[j];//退避用変数に使ったカード情報をセット
 						textmain[3][j] = w;//２次元配列の方にも入れておく
 						textW[j] = w;//テキストに書き込む際に使用する退避用１次元配列にセット
-
-						textsub[2][j] = w;//あとで使う２次元配列にも自分のカード情報をセット
 					}
 				}
 				else//それ以外の時は退避用変数に入れて、そこから１次元配列にデータを入れてテキストに書き込む
