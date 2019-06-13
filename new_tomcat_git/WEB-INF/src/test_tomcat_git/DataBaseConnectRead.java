@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataBaseConnect
+public class DataBaseConnectRead
 {
 	protected Connection conn = null;
 	protected String url = "jdbc:mysql://localhost/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
@@ -16,22 +16,6 @@ public class DataBaseConnect
 	protected int[] Result = new int[6];//受け渡す情報が入る
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
 	protected int timeoutseconds = 30;//タイムアウト時間
-
-	/*
-
-
-	クラスキレイキレイ中
-
-
-
-	*/
-
-	int[] connect(int id,int RefeorUp)
-	{
-
-
-		return null;
-	}
 
 
 
