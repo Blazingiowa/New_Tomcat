@@ -4,7 +4,7 @@ import java.io.File;
 
 public class StartupText extends Text
 {
-	DataBaseConnect DBC = new DataBaseConnect();
+	DataBaseConnectRead DBCR = new DataBaseConnectRead();
 
 	void createcardlist()
 	{
