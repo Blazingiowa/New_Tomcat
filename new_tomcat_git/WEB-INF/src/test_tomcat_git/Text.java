@@ -18,8 +18,8 @@ public class Text
 	BufferedWriter bw;
 	PrintWriter pw;
 
-	int[] playerinfo = new int[3];//配列数は仮設定
-	int[] set = new int[3];
+	int[] playerinfo;//配列数は仮設定
+
 
 	//int roomid,playernumber;//ルーム番号をintにキャスト
 
@@ -27,8 +27,21 @@ public class Text
 
 	int[] editer(int room,int number,int linenumber,int WriteorRead,int[] rewrite)//試験的に作るため呼び出し禁止 room 部屋番号　number プレイヤー番号 書き換える配列
 	{
+		playerinfo = new int[3];
 		String[] line = new String[10];//配列数(行数)は仮設定、各行の情報が入力
-		file = new File("");//roomidとplayernumberを使用してファイルを特定
+		String[][] alltext = new String[10][3];
+
+		if(number == 3)//numberが3であたったらルームファイルを確認するまた、この場合はlinenumberにプレイヤー番号が入る
+		{
+			file = new File("");
+			number = linenumber;
+			linenumber = 0;
+		}
+		else
+		{
+			file = new File("");//roomidとplayernumberを使用してファイルを特定
+		}
+
 
 		//以下テキストファイル読み込み
 		try
@@ -36,12 +49,30 @@ public class Text
 			br = new BufferedReader(new FileReader(file));
 			String str = br.readLine();
 
-			for(int i = 0;str != null;i++)
-			{
-				line[i] = str;
+			String[] array = str.split(",");
 
-				str = br.readLine();
+			for(int i = 0,j = 0,k = 0;k<array.length;k++)
+			{
+				System.out.println(i+","+j+","+k);
+				if(!array[k].equals("s"))
+				{
+					alltext[i][j] = array[k];
+
+					j++;
+				}
+				else
+				{
+					i++;
+					j=0;
+				}
+
 			}
+
+			for(int i =0;i<alltext.length;i++)
+			{
+				line[i] = alltext[i][0]+","+alltext[i][1]+","+alltext[i][2];
+			}
+
 		}
 
 		catch(Exception e)
@@ -59,18 +90,17 @@ public class Text
 		{
 			if(rewrite == null)
 			{
-				for(int i = 0;i<set.length;i++)
-				{
-					set[i] = -1;
-				}
-				line = startup(line,set);//一番最初はlineの中身が空だから-1を入力しテキストファイルの更新で最初の行を変更
-				rewrite = new int[3];
+				startup(line);//一番最初はlineの中身が空だから-1を入力しテキストファイルの更新で最初の行を変更
+				/*rewrite = new int[3];
 				rewrite[0] = 0;
 				rewrite[1] = -1;
-				rewrite[2] = -1;
+				rewrite[2] = -1;*/
 			}
 
-			filewriter(line,linenumber,rewrite);//テキストファイルの更新　行配列、行番号、書き込む配列
+			else
+			{
+				filewriter(line,linenumber,rewrite);//テキストファイルの更新　行配列、行番号、書き込む配列
+			}
 
 			return null;
 		}
@@ -82,34 +112,48 @@ public class Text
 		}
 	}
 
-	private String[] startup(String[] lineinfo,int[] write)//ゲームの初期設定
+	private String[] startup(String[] lineinfo)//ゲームの初期設定
 	{
 		String text = "",linestr ="";
+
+		int[] defSet = new int[3];
+		int[] hpSet = {-1,100,100};
+		int[] manaSet = {-1,1,1};
+		int[] defDamage = {0,0,0};
+
+
+		for(int i = 0;i<defSet.length;i++)
+		{
+			defSet[i] = -1;
+		}
+
+		for(int i = 0;i<defSet.length;i++)//linestrに1行分の-1を挿入
+		{
+			linestr = linestr+defSet[i];
+
+			if((i+1)<defSet.length)
+			{
+				linestr = linestr+",";
+			}
+		}
+
+		/*以下textファイルへ出力*/
+		lineinfo[0] = "0,-1,-1,s,";
+
+		for(int i = 1;i<lineinfo.length;i++)
+		{
+			lineinfo[i] = linestr;
+
+			text = text+linestr;
+
+			if((i+1)<lineinfo.length)
+			{
+				text = text+",s,";
+			}
+		}
+
 		try
 		{
-
-			for(int i = 0;i<write.length;i++)
-			{
-				linestr = linestr+write[i];
-
-				if((i+1)<write.length)
-				{
-					linestr = linestr+",";
-				}
-			}
-
-			for(int i = 0;i<lineinfo.length;i++)
-			{
-				lineinfo[i] = linestr;
-
-				text = text+linestr;
-
-				if((i+1)<lineinfo.length)
-				{
-					text = text+"\r\n";
-				}
-			}
-
 			filewriter = new FileWriter(file);
 			bw = new BufferedWriter(filewriter);
 			pw = new PrintWriter(bw);
@@ -126,7 +170,13 @@ public class Text
 			close();
 		}
 
-		return lineinfo;
+		/*-1以外の初期値を入力*/
+		filewriter(lineinfo,1,hpSet);
+		filewriter(lineinfo,2,manaSet);
+		filewriter(lineinfo,4,defDamage);
+		filewriter(lineinfo,6,defDamage);
+
+		return null;
 	}
 
 	private void filewriter(String[] lineinfo,int linenumber,int[] write) //ファイル書き込み
@@ -150,7 +200,7 @@ public class Text
 
 			if((i+1)<lineinfo.length)
 			{
-				text = text+"\r\n";
+				text = text+",s,";
 			}
 		}
 

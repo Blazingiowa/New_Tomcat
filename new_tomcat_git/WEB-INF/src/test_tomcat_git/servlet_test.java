@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-@WebServlet(urlPatterns = { "/servlet_test"})
+@WebServlet("/servlet_test")
 public class servlet_test extends HttpServlet
 {
-	Gson gson = new Gson();
+	private Gson gson = new Gson();
 
-	UserBean ub = new UserBean();
-	Gamestart game_start = new Gamestart();
-	Gamemain game_main = new Gamemain();
+	private UserBean ub = new UserBean();
+	private Gamestart game_start = new Gamestart();
+	//private Gamemain game_main = new Gamemain();
 
-	GameProject game_project = new GameProject();
+	private GameProject game_project = new GameProject();
 
-	String name_val;
-	String[] user_info;
-	int[] user_session;
-	int[] use_hand;
+	private String name_val;
+	private String[] user_info;
+	private int[] user_session;
+	private int[] use_hand;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -41,6 +41,7 @@ public class servlet_test extends HttpServlet
 
 		user_info = new String[3];//順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
 		user_session = new int[3];
+		use_hand = new int[3];
 
 
 		//ゲーム途中で落とさなければ基本この中
@@ -90,14 +91,18 @@ public class servlet_test extends HttpServlet
 		user_session[1] =Integer.parseInt(request.getParameter("roomID"));
 		user_session[2] =Integer.parseInt(request.getParameter("user_number"));
 
-		use_hand = conversion((String[])request.getParameterValues("Use_hand"));
+		use_hand[0] =Integer.parseInt(request.getParameter("user_number1"));
+		use_hand[1]=Integer.parseInt(request.getParameter("user_number2"));
+		use_hand[2]=Integer.parseInt(request.getParameter("user_number3"));
+
+		//use_hand = conversion((String[])request.getParameterValues("Use_hand"));
 
 
 		game_project.main(user_session, use_hand);
 	}
 
 
-	int[] conversion(String[] str)
+	int[] conversion(String[] str)//使っていない
 	{
 		int[] h_int = new int[str.length];
 		for (int i = 0; i < h_int.length; i++)

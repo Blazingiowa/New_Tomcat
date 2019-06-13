@@ -6,22 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataBaseConnect
+public class DataBaseConnectRead
 {
 	protected Connection conn = null;
 	protected String url = "jdbc:mysql://localhost/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
 	protected String user = "root";//データベースへアクセスするID
 	protected String password = "yasutaka13";//データベースのパスワード
 
-	protected int[] reference = new int[6];//受け渡す情報が入る
+	protected int[] Result = new int[6];//受け渡す情報が入る
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
 	protected int timeoutseconds = 30;//タイムアウト時間
 
+
+
 	int[] reference(int id,int type)//idはカードidなど、typeは攻防か、ルーム検索か
 	{
-		for(int i = 0;i < reference.length;i++)
+		for(int i = 0;i < Result.length;i++)
 		{
-			reference[i] = 0;
+			Result[i] = 0;
 		}
 
 
@@ -71,12 +73,12 @@ public class DataBaseConnect
 				Statement stmt = conn.createStatement();
 				//結果の挿入
 				ResultSet rs = stmt.executeQuery("");
-				reference[0] = rs.getInt("id");
-				reference[1] = rs.getInt("ダメージ");
-				reference[2] = rs.getInt("攻防");
-				reference[3] = rs.getInt("防カードid1(仮)");
-				reference[4] = rs.getInt("防カードid2(仮)");
-				reference[5] = rs.getInt("コスト");
+				Result[0] = rs.getInt("id");
+				Result[1] = rs.getInt("ダメージ");
+				Result[2] = rs.getInt("攻防");
+				Result[3] = rs.getInt("防カードid1(仮)");
+				Result[4] = rs.getInt("防カードid2(仮)");
+				Result[5] = rs.getInt("コスト");
 
 			}
 			catch(SQLException e)
@@ -102,14 +104,14 @@ public class DataBaseConnect
 
 
 		}
-		return reference;
+		return Result;
 	}
 
-	String[] update(String username)//受け渡されたusernameをデータベースへインサートする
+	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
 	{
 		reference(0,-1);//空いているルームと攻守を検索
 
-		String[] userinfo = new String[3];
+		int[] userinfo = new int[3];
 		try
 		{
 			conn = DriverManager.getConnection(url,user,password);
@@ -136,7 +138,7 @@ public class DataBaseConnect
 
 			}
 		}
-		//データベースからのintデータをString配列にキャスト
+
 		return userinfo;
 
 
