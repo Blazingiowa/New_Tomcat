@@ -23,7 +23,7 @@ public class GameProject
 	int count = 0;
 	boolean flag = false;
 
-	DataBaseConnect DBC = new DataBaseConnect();//DBクラスのインスタンス
+	DataBaseConnectRead DBC = new DataBaseConnectRead();//DBクラスのインスタンス
 	Text tx = new Text();//テキストクラスのインスタンス
 
 	/*infoの配列内容------------------------/useの配列の内容--------/
