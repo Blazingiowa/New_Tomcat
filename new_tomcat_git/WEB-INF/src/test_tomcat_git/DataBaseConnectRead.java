@@ -19,7 +19,7 @@ public class DataBaseConnectRead
 
 
 
-	int[] reference(int id,int type)//idはカードidなど、typeは攻防か、ルーム検索か
+	int[] reference(int id)//idはカードidなど、typeは攻防か、ルーム検索か
 	{
 			Result = new int[8];
 			String card;
