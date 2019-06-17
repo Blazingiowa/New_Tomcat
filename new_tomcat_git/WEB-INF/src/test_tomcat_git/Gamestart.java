@@ -21,20 +21,6 @@ public class Gamestart
 
 		tx.editer(player[1], player[2],0,0,null);
 
-		//ローカル上のフォルダを検索
-
-		/*------------------------以下再考中-----------------------------------*/
-		/*
-		 try{
-		    	Path path1 = Paths.get("");//相対指定でルームidフォルダ作成
-		    	System.out.println(path1);
-				Files.createDirectory(path1);
-			}
-		    catch (IOException e)
-		    {
-				e.printStackTrace();
-			}
-		*/
 		return userinfo;
 
 
