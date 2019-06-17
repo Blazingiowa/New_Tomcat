@@ -22,10 +22,16 @@ public class DataBaseConnectRead
 	int[] reference(int id,int type)//idはカードidなど、typeは攻防か、ルーム検索か
 	{
 
+
+
 		if(type == -1)//ルームの空き情報を検索
 		{
 			 Result = new int[3];
-			
+			 for(int i = 0;i < Result.length;i++)
+				{
+					Result[i] = 0;
+				}
+
 			try
 			{
 				conn = DriverManager.getConnection(url,user,password);
@@ -34,9 +40,9 @@ public class DataBaseConnectRead
 				Statement stmt = conn.createStatement();
 				//結果の挿入
 				ResultSet rs = stmt.executeQuery("");
-				room[0] = rs.getInt("ユーザid");
-				room[1] = rs.getInt("ルームid");
-				room[3] = rs.getInt("プレイヤー番号");//ルームでのユーザ番号(プレイヤー１など)
+				Result[0] = rs.getInt("ユーザid");
+				Result[1] = rs.getInt("ルームid");
+				Result[2] = rs.getInt("プレイヤー番号");
 			}
 			catch(SQLException e)
 			{
@@ -61,7 +67,14 @@ public class DataBaseConnectRead
 		}
 		else//カード情報を検索
 		{
-			Result = new int[6];
+			Result = new int[8];
+			String card;
+
+			for(int i = 0;i < Result.length;i++)
+			{
+				Result[i] = -1;
+			}
+
 			try
 			{
 				conn = DriverManager.getConnection(url,user,password);
@@ -71,11 +84,15 @@ public class DataBaseConnectRead
 				//結果の挿入
 				ResultSet rs = stmt.executeQuery("");
 				Result[0] = rs.getInt("id");
-				Result[1] = rs.getInt("ダメージ");
-				Result[2] = rs.getInt("攻防");
-				Result[3] = rs.getInt("防カードid1(仮)");
-				Result[4] = rs.getInt("防カードid2(仮)");
-				Result[5] = rs.getInt("コスト");
+				Result[1] = rs.getInt("コスト");
+				Result[2] = rs.getInt("ダメージ");
+				card= rs.getString("対応ID");
+
+				String[] array = card.split(",");
+				for(int i = 0,j = 3;i<array.length;i++,j++)
+				{
+					Result[j] = Integer.parseInt(array[i]);
+				}
 
 			}
 			catch(SQLException e)
