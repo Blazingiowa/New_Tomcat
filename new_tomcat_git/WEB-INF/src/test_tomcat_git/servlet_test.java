@@ -14,6 +14,9 @@ import com.google.gson.Gson;
 @WebServlet("/servlet_test")
 public class servlet_test extends HttpServlet
 {
+	private HttpServletRequest req;
+	private HttpServletResponse res;
+
 	private Gson gson = new Gson();
 
 	private UserBean ub = new UserBean();
@@ -44,6 +47,39 @@ public class servlet_test extends HttpServlet
 		use_hand = new int[3];
 
 
+		req =request;
+
+		if(req.getParameter("flag") == null)//game継続
+		{
+			if (req.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
+			{
+				test_new_connect();
+				//JSONを生成
+				response.setContentType("application/json");
+				response.setCharacterEncoding("utf-8");
+				response.getWriter().println(gson.toJson(
+					      Collections.singletonMap("param", gson.toJson(ub))
+					    ));
+			}
+			else
+			{
+
+				test_connect();
+
+			}
+
+		}
+		else if(req.getParameter("flag") == "1")//Clientが更新したい時用
+		{
+
+		}
+		else if(req.getParameter("flag") == "2")//Clientが落としたい時用
+		{
+
+		}
+
+
+		/*
 		//ゲーム途中で落とさなければ基本この中
 		if(request.getParameter("end_flag") == null)
 		{
@@ -57,7 +93,7 @@ public class servlet_test extends HttpServlet
 					      Collections.singletonMap("param", gson.toJson(ub))
 					    ));
 			}
-			else
+			else if(request.getParameter("roomID") != null)
 			{
 
 				connect(request);
@@ -69,9 +105,39 @@ public class servlet_test extends HttpServlet
 		{
 
 		}
+	*/
+	}
 
+	void test_new_connect()
+	{
+		name_val = req.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
+
+		user_info = game_start.createdirectry(name_val);
+
+		ub.setUserID(user_info[0]);
+		ub.setRoomID(user_info[1]);
+		ub.setUserNumber(user_info[2]);
 
 	}
+
+	void test_connect()
+	{
+
+		user_session[0] =Integer.parseInt(req.getParameter("userID"));
+		user_session[1] =Integer.parseInt(req.getParameter("roomID"));
+		user_session[2] =Integer.parseInt(req.getParameter("user_number"));
+
+		use_hand[0] =Integer.parseInt(req.getParameter("user_number1"));
+		use_hand[1]=Integer.parseInt(req.getParameter("user_number2"));
+		use_hand[2]=Integer.parseInt(req.getParameter("user_number3"));
+
+		//use_hand = conversion((String[])request.getParameterValues("Use_hand"));
+
+
+		game_project.main(user_session, use_hand);
+	}
+
+	/*
 	void new_connect(HttpServletRequest request)
 	{
 		name_val = request.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
@@ -113,6 +179,6 @@ public class servlet_test extends HttpServlet
 		return h_int;
 
 	}
-
+	*/
 
 }
