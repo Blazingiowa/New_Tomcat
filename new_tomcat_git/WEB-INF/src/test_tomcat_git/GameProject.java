@@ -259,8 +259,8 @@ public class GameProject
 			//使ったカードの情報をDBから持ってくる
 			for (int i = 0; i < p1_card.length; i++)
 			{
-				p1_cardinfo = DBC.reference(p1_card[i][0], 0);//p1の使ったカード情報
-				p2_cardinfo = DBC.reference(p2_card[i][0], 0);//p2の使ったカード情報
+				p1_cardinfo = DBC.reference(p1_card[i][0]);//p1の使ったカード情報
+				p2_cardinfo = DBC.reference(p2_card[i][0]);//p2の使ったカード情報
 
 				for (int j = 0; j < p1_cardinfo.length; j++)
 				{
@@ -423,8 +423,8 @@ public class GameProject
 			//使ったカードの情報をDBから持ってくる
 			for (int i = 0; i < p2_card.length; i++)
 			{
-				p1_cardinfo = DBC.reference(p1_card[i][0], 0);//p1の使ったカード情報
-				p2_cardinfo = DBC.reference(p2_card[i][0], 0);//p2の使ったカード情報
+				p1_cardinfo = DBC.reference(p1_card[i][0]);//p1の使ったカード情報
+				p2_cardinfo = DBC.reference(p2_card[i][0]);//p2の使ったカード情報
 
 				for (int j = 0; j < p1_cardinfo.length; j++)
 				{
