@@ -36,11 +36,11 @@ public class DataBaseConnectRead
 				//SQL
 				Statement stmt = conn.createStatement();
 				//結果の挿入
-				ResultSet rs = stmt.executeQuery("");
-				Result[0] = rs.getInt("id");
-				Result[1] = rs.getInt("コスト");
-				Result[2] = rs.getInt("ダメージ");
-				card= rs.getString("対応ID");
+				ResultSet rs = stmt.executeQuery("SELECT * FROM card WHERE card_id = "+id+";");
+				Result[0] = rs.getInt("card_id");
+				Result[1] = rs.getInt("cost");
+				Result[2] = rs.getInt("dmg");
+				card= rs.getString("taio_id");
 
 				String[] array = card.split(",");
 				for(int i = 0,j = 3;i<array.length;i++,j++)
