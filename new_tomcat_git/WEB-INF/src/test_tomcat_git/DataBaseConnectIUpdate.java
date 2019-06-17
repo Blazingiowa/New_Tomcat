@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 public class DataBaseConnectIUpdate extends DataBaseConnectRead
 {
-	int[] playerdata;//ユーザーid,ルームid,プレイヤー番号
+	int[] userinfo;//ルームid,プレイヤー番号
 
 	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
 	{
@@ -14,16 +14,15 @@ public class DataBaseConnectIUpdate extends DataBaseConnectRead
 		user = "root";
 		password = "yasutaka13";
 
-		playerdata=beforeupdate();//空いているルームと攻守を検索
+		userinfo=beforeupdate();//空いているルームと攻守を検索
 
-		int[] userinfo = new int[3];
 		try
 		{
 			conn = DriverManager.getConnection(url,user,password);
 
 			//SQL
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("");
+			stmt.executeUpdate("UPADATE user SET user_name = "+username+" WHERE user_id = "+userinfo[0]+";");
 		}
 		catch(SQLException e)
 		{
