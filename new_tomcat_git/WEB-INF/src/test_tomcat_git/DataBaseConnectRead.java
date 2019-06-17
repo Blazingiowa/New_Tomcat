@@ -21,52 +21,6 @@ public class DataBaseConnectRead
 
 	int[] reference(int id,int type)//idはカードidなど、typeは攻防か、ルーム検索か
 	{
-
-
-
-		if(type == -1)//ルームの空き情報を検索
-		{
-			 Result = new int[3];
-			 for(int i = 0;i < Result.length;i++)
-				{
-					Result[i] = 0;
-				}
-
-			try
-			{
-				conn = DriverManager.getConnection(url,user,password);
-				DriverManager.setLoginTimeout(timeoutseconds);
-				//SQL
-				Statement stmt = conn.createStatement();
-				//結果の挿入
-				ResultSet rs = stmt.executeQuery("");
-				Result[0] = rs.getInt("ユーザid");
-				Result[1] = rs.getInt("ルームid");
-				Result[2] = rs.getInt("プレイヤー番号");
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e);
-			}
-			finally
-			{
-				try
-				{
-					if (conn != null)
-					{
-						conn.close();
-					}
-				}
-				catch(SQLException e)
-				{
-					System.out.println(e);
-					//例外処理
-				}
-			}
-
-		}
-		else//カード情報を検索
-		{
 			Result = new int[8];
 			String card;
 
@@ -115,10 +69,51 @@ public class DataBaseConnectRead
 
 				}
 			}
-
-
-		}
 		return Result;
+	}
+
+	int[] beforeupdate()
+	{
+		 Result = new int[3];
+		 for(int i = 0;i < Result.length;i++)
+			{
+				Result[i] = 0;
+			}
+
+		try
+		{
+			conn = DriverManager.getConnection(url,user,password);
+			DriverManager.setLoginTimeout(timeoutseconds);
+			//SQL
+			Statement stmt = conn.createStatement();
+			//結果の挿入
+			ResultSet rs = stmt.executeQuery("");
+			Result[0] = rs.getInt("ユーザid");
+			Result[1] = rs.getInt("ルームid");
+			Result[2] = rs.getInt("プレイヤー番号");
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+		}
+		finally
+		{
+			try
+			{
+				if (conn != null)
+				{
+					conn.close();
+				}
+			}
+			catch(SQLException e)
+			{
+				System.out.println(e);
+				//例外処理
+			}
+		}
+
+		return Result;
+
 	}
 
 

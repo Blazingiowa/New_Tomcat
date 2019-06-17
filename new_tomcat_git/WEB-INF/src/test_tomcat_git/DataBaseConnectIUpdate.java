@@ -14,7 +14,7 @@ public class DataBaseConnectIUpdate extends DataBaseConnectRead
 		user = "root";
 		password = "yasutaka13";
 
-		playerdata=reference(0,-1);//空いているルームと攻守を検索
+		playerdata=beforeupdate();//空いているルームと攻守を検索
 
 		int[] userinfo = new int[3];
 		try
