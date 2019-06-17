@@ -5,8 +5,14 @@ import java.sql.SQLException;
 
 public class DataBaseConnectIUpdate extends DataBaseConnectRead
 {
+	
+	
 	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
 	{
+		url = "jdbc:mysql://localhost/u22?characterEncoding=UTF-8&serverTimezone=JST";
+		user = "root";
+		password = "yasutaka13";
+		
 		reference(0,-1);//空いているルームと攻守を検索
 
 		int[] userinfo = new int[3];

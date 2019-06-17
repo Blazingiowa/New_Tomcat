@@ -13,7 +13,7 @@ public class DataBaseConnectRead
 	protected String user = "root";//データベースへアクセスするID
 	protected String password = "yasutaka13";//データベースのパスワード
 
-	protected int[] Result = new int[6];//受け渡す情報が入る
+	protected int[] Result;//受け渡す情報が入る
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
 	protected int timeoutseconds = 30;//タイムアウト時間
 
@@ -21,14 +21,11 @@ public class DataBaseConnectRead
 
 	int[] reference(int id,int type)//idはカードidなど、typeは攻防か、ルーム検索か
 	{
-		for(int i = 0;i < Result.length;i++)
-		{
-			Result[i] = 0;
-		}
-
 
 		if(type == -1)//ルームの空き情報を検索
 		{
+			 Result = new int[3];
+			
 			try
 			{
 				conn = DriverManager.getConnection(url,user,password);
@@ -39,7 +36,7 @@ public class DataBaseConnectRead
 				ResultSet rs = stmt.executeQuery("");
 				room[0] = rs.getInt("ユーザid");
 				room[1] = rs.getInt("ルームid");
-				room[3] = rs.getInt("");//ルームでのユーザ番号(プレイヤー１など)
+				room[3] = rs.getInt("プレイヤー番号");//ルームでのユーザ番号(プレイヤー１など)
 			}
 			catch(SQLException e)
 			{
@@ -62,9 +59,9 @@ public class DataBaseConnectRead
 			}
 
 		}
-
 		else//カード情報を検索
 		{
+			Result = new int[6];
 			try
 			{
 				conn = DriverManager.getConnection(url,user,password);
