@@ -21,64 +21,85 @@ public class DataBaseConnectRead
 
 	int[] reference(int id)//idはカードidなど、typeは攻防か、ルーム検索か
 	{
-			Result = new int[8];
-			String card;
+		Result = new int[8];
+		String card;
 
-			for(int i = 0;i < Result.length;i++)
+		for(int i = 0;i < Result.length;i++)
+		{
+			Result[i] = -1;
+		}
+
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch (ClassNotFoundException e1)
+		{
+
+			e1.printStackTrace();
+		}
+
+		try
+		{
+
+			conn = DriverManager.getConnection(url,user,password);
+			DriverManager.setLoginTimeout(timeoutseconds);
+			//SQL
+			Statement stmt = conn.createStatement();
+			//結果の挿入
+			ResultSet rs = stmt.executeQuery("SELECT * FROM card WHERE card_id = "+id+";");
+			Result[0] = rs.getInt("card_id");
+			Result[1] = rs.getInt("cost");
+			Result[2] = rs.getInt("dmg");
+			card= rs.getString("taio_id");
+
+			String[] array = card.split(",");
+			for(int i = 0,j = 3;i<array.length;i++,j++)
 			{
-				Result[i] = -1;
+				Result[j] = Integer.parseInt(array[i]);
 			}
 
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+		}
+		finally
+		{
 			try
 			{
-				conn = DriverManager.getConnection(url,user,password);
-				DriverManager.setLoginTimeout(timeoutseconds);
-				//SQL
-				Statement stmt = conn.createStatement();
-				//結果の挿入
-				ResultSet rs = stmt.executeQuery("SELECT * FROM card WHERE card_id = "+id+";");
-				Result[0] = rs.getInt("card_id");
-				Result[1] = rs.getInt("cost");
-				Result[2] = rs.getInt("dmg");
-				card= rs.getString("taio_id");
-
-				String[] array = card.split(",");
-				for(int i = 0,j = 3;i<array.length;i++,j++)
+				if (conn != null)
 				{
-					Result[j] = Integer.parseInt(array[i]);
+					conn.close();
 				}
-
 			}
 			catch(SQLException e)
 			{
 				System.out.println(e);
-			}
-			finally
-			{
-				try
-				{
-					if (conn != null)
-					{
-						conn.close();
-					}
-				}
-				catch(SQLException e)
-				{
-					System.out.println(e);
-					//例外処理
+				//例外処理
 
-				}
 			}
+		}
 		return Result;
 	}
 
 	int[] beforeupdate()
 	{
-		 Result = new int[3];
-		 for(int i = 0;i < Result.length;i++)
-			{
-				Result[i] = 0;
-			}
+		Result = new int[3];
+		for(int i = 0;i < Result.length;i++)
+		{
+			Result[i] = 0;
+		}
+
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch (ClassNotFoundException e1)
+		{
+
+			e1.printStackTrace();
+		}
 
 		try
 		{

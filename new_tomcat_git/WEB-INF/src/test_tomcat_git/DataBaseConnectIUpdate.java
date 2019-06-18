@@ -18,6 +18,16 @@ public class DataBaseConnectIUpdate extends DataBaseConnectRead
 
 		try
 		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch (ClassNotFoundException e1)
+		{
+
+			e1.printStackTrace();
+		}
+
+		try
+		{
 			conn = DriverManager.getConnection(url,user,password);
 
 			//SQL
