@@ -48,7 +48,11 @@ public class servlet_test extends HttpServlet
 
 
 		DataBaseConnectRead dc = new DataBaseConnectRead();
-		dc.reference(1);
+		int[] a = dc.reference(1);
+		for(int i = 0;i<a.length;i++)
+		{
+			System.out.println(a[i]);
+		}
 
 
 
