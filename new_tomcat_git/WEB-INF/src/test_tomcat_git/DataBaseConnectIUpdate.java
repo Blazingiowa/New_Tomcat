@@ -30,7 +30,7 @@ public class DataBaseConnectIUpdate extends DataBaseConnectRead
 		{
 			conn = DriverManager.getConnection(url,user,password);
 
-
+			//SQL
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("UPADATE user SET user_name = "+username+" WHERE user_id = "+userinfo[0]+";");
 		}
