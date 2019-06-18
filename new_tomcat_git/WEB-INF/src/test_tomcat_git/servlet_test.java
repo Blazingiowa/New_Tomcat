@@ -47,6 +47,11 @@ public class servlet_test extends HttpServlet
 		use_hand = new int[3];
 
 
+		DataBaseConnectRead dc = new DataBaseConnectRead();
+		dc.reference(1);
+
+
+
 		req =request;
 
 		if(req.getParameter("flag") == null)//game継続
