@@ -5,7 +5,7 @@ public class Gamestart
 	Gamemain Gm = new Gamemain();
 	Text tx = new Text();
 
-	 DataBaseConnectIUpdate DBCU = new  DataBaseConnectIUpdate();
+	 DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
 
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
