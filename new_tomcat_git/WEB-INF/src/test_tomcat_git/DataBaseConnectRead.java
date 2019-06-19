@@ -142,7 +142,7 @@ public class DataBaseConnectRead
 			catch(SQLException e)
 			{
 				System.out.println(e);
-				System.out.println("だおだお");
+
 				//例外処理
 			}
 		}
