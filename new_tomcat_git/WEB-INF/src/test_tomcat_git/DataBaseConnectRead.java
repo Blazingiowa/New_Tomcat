@@ -9,9 +9,9 @@ import java.sql.Statement;
 public class DataBaseConnectRead
 {
 	protected Connection conn = null;
-	protected String url = "jdbc:mysql://localhost/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
+	protected String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
 	protected String user = "root";//データベースへアクセスするID
-	protected String password = "yasutaka13";//データベースのパスワード
+	protected String password = "ncc_NCC2019";//データベースのパスワード
 
 	protected int[] Result;//受け渡す情報が入る
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
