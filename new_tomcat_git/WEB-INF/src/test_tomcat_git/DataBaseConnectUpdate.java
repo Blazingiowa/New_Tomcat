@@ -10,9 +10,15 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
 	{
+<<<<<<< HEAD
 		url = "jdbc:mysql://localhost/u22?characterEncoding=UTF-8&serverTimezone=JST";
 		user = "root";
 		password = "yasutaka13";
+=======
+		url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST";
+		user = "root";
+		password = "ncc_NCC2019";
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 
 		userinfo=beforeupdate();//空いているルームと攻守を検索
 
