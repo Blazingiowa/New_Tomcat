@@ -13,9 +13,9 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 		url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST";
 		user = "root";
 		password = "ncc_NCC2019";
-		
+
 		userinfo=beforeupdate();//空いているルームと攻守を検索
-		
+
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -32,7 +32,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 			//SQL
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("UPADATE user SET user_name = "+username+" WHERE user_id = "+userinfo[0]+";");
+			stmt.executeUpdate("UPDATE user SET user_name = "+username+" WHERE user_id = "+userinfo[0]+";");
 		}
 		catch(SQLException e)
 		{
