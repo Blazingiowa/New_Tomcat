@@ -48,6 +48,7 @@ public class DataBaseConnectRead
 			Statement stmt = conn.createStatement();
 			//結果の挿入
 			ResultSet rs = stmt.executeQuery("SELECT * FROM card WHERE card_id = "+id+";");
+			rs.next();
 			Result[0] = rs.getInt("card_id");
 			Result[1] = rs.getInt("cost");
 			Result[2] = rs.getInt("dmg");
