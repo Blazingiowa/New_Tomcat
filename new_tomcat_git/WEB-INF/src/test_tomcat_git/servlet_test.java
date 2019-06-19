@@ -55,6 +55,10 @@ public class servlet_test extends HttpServlet
 		}
 		DataBaseConnectUpdate DBCU = new DataBaseConnectUpdate();
 		int[] b = DBCU.update("waithi");
+		for(int i=0;i<b.length;i++)
+		{
+			System.out.println(b[i]);
+		}
 
 
 
