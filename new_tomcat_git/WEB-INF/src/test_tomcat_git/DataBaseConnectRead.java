@@ -108,7 +108,7 @@ public class DataBaseConnectRead
 			DriverManager.setLoginTimeout(timeoutseconds);
 			//SQL
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name = null ORDER BY user_id LIMIT 1;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name IS null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
 			rs.next();
 			Result[0] = rs.getInt("user_id");
@@ -118,6 +118,11 @@ public class DataBaseConnectRead
 			rs.next();
 			Result[1] = rs.getInt("room_id");
 			Result[2] = rs.getInt("player_number");
+
+			for(int i=0;i<Result.length;i++)
+			{
+				System.out.println("あいてる部屋とかだお"+Result[i]);
+			}
 
 
 		}
