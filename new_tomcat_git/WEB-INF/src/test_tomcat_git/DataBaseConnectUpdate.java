@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataBaseConnectIUpdate extends DataBaseConnectRead
+public class DataBaseConnectUpdate extends DataBaseConnectRead
 {
 	int[] userinfo;//ルームid,プレイヤー番号
 
