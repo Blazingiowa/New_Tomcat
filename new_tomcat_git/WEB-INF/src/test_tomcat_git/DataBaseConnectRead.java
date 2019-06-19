@@ -110,10 +110,12 @@ public class DataBaseConnectRead
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name = null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
+			rs.next();
 			Result[0] = rs.getInt("user_id");
 
 			rs = stmt.executeQuery("SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;");
 			//結果の挿入
+			rs.next();
 			Result[1] = rs.getInt("room_id");
 			Result[2] = rs.getInt("player_number");
 
