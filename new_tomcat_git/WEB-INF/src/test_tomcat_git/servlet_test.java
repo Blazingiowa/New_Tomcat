@@ -123,7 +123,7 @@ public class servlet_test extends HttpServlet
 	*/
 	}
 
-	void test_new_connect()
+	void test_new_connect() 
 	{
 		name_val = req.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
 

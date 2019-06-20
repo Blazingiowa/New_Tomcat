@@ -111,6 +111,11 @@ public class Text
 			return playerinfo;
 		}
 	}
+	
+	void taiou()
+	{
+		
+	}
 
 	private String[] startup(String[] lineinfo)//ゲームの初期設定
 	{
