@@ -108,7 +108,7 @@ public class DataBaseConnectRead
 			DriverManager.setLoginTimeout(timeoutseconds);
 			//SQL
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name IS NULL ORDER BY user_id LIMIT 1;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name IS null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
 			rs.next();
 			Result[0] = rs.getInt("user_id");
