@@ -33,6 +33,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 			//SQL
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("UPDATE user SET user_name = "+"'"+username+"'"+" WHERE user_id = "+userinfo[0]+";");
+			stmt.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");
 		}
 		catch(SQLException e)
 		{
@@ -57,6 +58,11 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 		return userinfo;
 
+
+	}
+
+	void reset()
+	{
 
 	}
 

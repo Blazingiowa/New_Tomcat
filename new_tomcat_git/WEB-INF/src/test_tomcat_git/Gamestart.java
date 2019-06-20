@@ -1,5 +1,7 @@
 package test_tomcat_git;
 
+import java.io.File;
+
 public class Gamestart
 {
 	Gamemain Gm = new Gamemain();
@@ -20,6 +22,13 @@ public class Gamestart
 		}
 
 		tx.editer(player[1], player[2],0,0,null);
+		
+		File file = new File("");
+		
+		if(file.exists() == false)
+		{
+			
+		}
 
 		return userinfo;
 
