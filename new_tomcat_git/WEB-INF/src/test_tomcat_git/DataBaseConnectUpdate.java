@@ -33,7 +33,10 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 			//SQL
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("UPDATE user SET user_name = "+"'"+username+"'"+" WHERE user_id = "+userinfo[0]+";");
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 		}
 		catch(SQLException e)
 		{
