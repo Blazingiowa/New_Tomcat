@@ -47,12 +47,12 @@ public class servlet_test extends HttpServlet
 		use_hand = new int[3];
 
 
-		DataBaseConnectRead dc = new DataBaseConnectRead();
+		/*DataBaseConnectRead dc = new DataBaseConnectRead();
 		int[] a = dc.reference(1);
 		for(int i = 0;i<a.length;i++)
 		{
 			System.out.println(a[i]);
-		}
+		}*/
 		DataBaseConnectUpdate DBCU = new DataBaseConnectUpdate();
 		int[] b = DBCU.update("waithi");
 		for(int i=0;i<b.length;i++)
