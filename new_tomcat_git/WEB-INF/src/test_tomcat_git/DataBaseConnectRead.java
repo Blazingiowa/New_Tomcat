@@ -119,10 +119,10 @@ public class DataBaseConnectRead
 			Result[1] = rs.getInt("room_id");
 			Result[2] = rs.getInt("player_number");
 
-			for(int i=0;i<Result.length;i++)
-			{
-				System.out.println("あいてる部屋とかだお"+Result[i]);
-			}
+			System.out.println("ユーザーidだお"+Result[0]);
+			System.out.println("あいてる部屋だお"+Result[1]);
+			System.out.println("プレイヤー番号だお"+Result[2]);
+
 
 
 		}
