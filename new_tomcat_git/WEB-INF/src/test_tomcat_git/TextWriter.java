@@ -1,17 +1,15 @@
 package test_tomcat_git;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 
 public class TextWriter extends TextRead
 {
-	BufferedReader br;
 	BufferedWriter bw;
 	PrintWriter pw;
 
-	void write()
+	void write(int room_id,int player_number,int line_number,int[] write)
 	{
-
+		settext(room_id,player_number);
 	}
 }
