@@ -108,12 +108,12 @@ public class DataBaseConnectRead
 			DriverManager.setLoginTimeout(timeoutseconds);
 			//SQL
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name IS null AND user_id = 1 ORDER BY user_id dsc LIMIT 1;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name IS null ORDER BY user_id dsc LIMIT 1;");
 			//結果の挿入
 			rs.next();
 			Result[0] = rs.getInt("user_id");
 
-			rs = stmt.executeQuery("SELECT * FROM room WHERE user_id = 1 ORDER BY room_id LIMIT 1;");
+			rs = stmt.executeQuery("SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;");
 			//結果の挿入
 			rs.next();
 			Result[1] = rs.getInt("room_id");
