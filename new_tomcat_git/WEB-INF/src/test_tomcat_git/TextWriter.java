@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 
-public class TextWriter
+public class TextWriter extends TextRead
 {
 	BufferedReader br;
 	BufferedWriter bw;
