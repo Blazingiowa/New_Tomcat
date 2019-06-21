@@ -2,7 +2,7 @@ package test_tomcat_git;
 
 import java.io.File;
 
-public class StartupText extends Text
+public class StartupText extends TextWrite
 {
 
 	DataBaseConnectRead DBCR = new DataBaseConnectRead();
