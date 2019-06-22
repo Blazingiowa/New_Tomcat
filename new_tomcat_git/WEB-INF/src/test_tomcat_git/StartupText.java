@@ -4,10 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class StartupText extends TextWrite
+public class StartupText extends TextWrite/* 月曜中に対応表作成テキストクラスとデータベースクラスの分割をやること*/
 {
-	DataBaseConnectRead DBCR = new DataBaseConnectRead();
-
 	void textfile(int room_id,int player_number,int line_number)
 	{
 		settext(room_id,player_number);
