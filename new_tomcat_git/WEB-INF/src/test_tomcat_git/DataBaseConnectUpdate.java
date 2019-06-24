@@ -1,22 +1,22 @@
 package test_tomcat_git;
 
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataBaseConnectUpdate extends DataBaseConnectRead
 {
 	int[] userinfo;//ルームid,プレイヤー番号
+	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
 
 	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
 	{
-		url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST";
+		/*url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST";
 		user = "root";
-		password = "ncc_NCC2019";
+		password = "ncc_NCC2019";*/
 
-		userinfo=beforeupdate();//空いているルームと攻守を検索
+		userinfo=DBCB.beforeupdate();//空いているルームと攻守を検索
 
-		try
+		/*try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 		}
@@ -24,11 +24,11 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 		{
 
 			e1.printStackTrace();
-		}
+		}*/
 
 		try
 		{
-			conn = DriverManager.getConnection(url,user,password);
+			//conn = DriverManager.getConnection(url,user,password);
 
 			//SQL
 			Statement stmt = conn.createStatement();
