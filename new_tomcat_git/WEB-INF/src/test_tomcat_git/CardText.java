@@ -15,5 +15,6 @@ public class CardText extends TextWrite
 		rs = DBCC.cardinfo();
 		/*取得したデータをもとにテキストファイルに出力する*/
 
+
 	}
 }
