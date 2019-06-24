@@ -6,8 +6,10 @@ public class Gamestart
 {
 	Gamemain Gm = new Gamemain();
 	Text tx = new Text();
+	File file;
 
 	 DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
+	 TaiouText tt = new TaiouText();
 
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
@@ -23,9 +25,16 @@ public class Gamestart
 
 		tx.editer(player[1], player[2],0,0,null);
 		
-		File file = new File("");
+		file = new File("");
 		
-		if(file.exists() == false)
+		if(file.exists() == false)//対応表の有無
+		{
+			tt.create(player[1]);
+		}
+		
+		file = new File("");
+		
+		if(file.exists() == false)//カード表の有無
 		{
 			
 		}
