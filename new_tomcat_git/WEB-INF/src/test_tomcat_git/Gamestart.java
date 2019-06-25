@@ -11,6 +11,7 @@ public class Gamestart
 	 DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
 	 TaiouText tt = new TaiouText();
 	 CardText ct = new CardText();
+	 RoomText rt = new RoomText();
 
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
@@ -38,6 +39,13 @@ public class Gamestart
 		if(file.exists() == false)//カード表の有無
 		{
 			ct.cardcreate(player[1]);
+		}
+
+		file = new File("");
+
+		if(file.exists() == false)//room.txtの有無
+		{
+			rt.createroomtxt(player[1],file);
 		}
 
 		return userinfo;
