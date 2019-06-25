@@ -129,6 +129,17 @@ public class servlet_test extends HttpServlet
 		}
 	*/
 	}
+	void check()
+	{
+		if(req.getParameter("roomID") == null)
+		{
+
+
+
+		}
+
+
+	}
 	void substitution()
 	{
 		str_test[0] =req.getParameter("userID");
