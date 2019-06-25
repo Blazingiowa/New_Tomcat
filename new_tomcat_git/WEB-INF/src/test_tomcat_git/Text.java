@@ -33,13 +33,13 @@ public class Text
 
 		if(number == 3)//numberが3であたったらルームファイルを確認するまた、この場合はlinenumberにプレイヤー番号が入る
 		{
-			file = new File("/var/www/html/"+ room + "/" + number + ".txt");
+			file = new File("/var/www/html/"+ room + "/room.txt");
 			number = linenumber;
 			linenumber = 0;
 		}
 		else
 		{
-			file = new File("");//roomidとplayernumberを使用してファイルを特定
+			file = new File("/var/www/html/"+ room + "/" + number + ".txt");//roomidとplayernumberを使用してファイルを特定
 		}
 
 
