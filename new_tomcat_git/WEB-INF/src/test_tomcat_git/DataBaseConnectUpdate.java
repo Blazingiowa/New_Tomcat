@@ -28,7 +28,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 		try
 		{
-			connect();
+			conn = connect();
 
 			//SQL
 			Statement stmt = conn.createStatement();

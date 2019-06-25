@@ -13,7 +13,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			Result[i] = 0;
 		}
 
-		connect();
+		conn = connect();
 
 		/*try
 		{
