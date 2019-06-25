@@ -4,17 +4,51 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CardText extends TextWrite //カードリストテキストを作るクラス
 {
 	DataBaseConnectCard DBCC = new DataBaseConnectCard();
 	ResultSet rs;
 	int[][] cardlist;
+	Connection conn;
+	protected String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
+	protected String user = "root";//データベースへアクセスするID
+	protected String password = "ncc_NCC2019";//データベースのパスワード
 
 	void cardcreate(int room)
 	{
+
+		conn = connect();
+		try
+		{
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM card");
+		}
+		catch(SQLException e)
+		{
+
+		}
+		finally
+		{
+			try
+			{
+				if (conn != null)
+				{
+					conn.close();
+				}
+			}
+			catch(SQLException e)
+			{
+				System.out.println(e);
+				//例外処理
+			}
+		}
+
 		file = new File("var/www/html/"+room+"/card.txt");
 		/*データベースにアクセスしカード情報を確保する*/
 		rs = DBCC.cardinfo();
@@ -68,5 +102,30 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 			bwclose();
 		}
+	}
+
+	Connection connect()
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch (ClassNotFoundException e1)
+		{
+
+			e1.printStackTrace();
+		}
+
+		try
+		{
+			conn = DriverManager.getConnection(url,user,password);
+			//DriverManager.setLoginTimeout(timeoutseconds);
+		}
+		catch(SQLException e)
+		{
+
+		}
+
+		return conn;
 	}
 }
