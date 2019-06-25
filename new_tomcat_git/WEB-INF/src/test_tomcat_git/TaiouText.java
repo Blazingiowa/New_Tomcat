@@ -54,7 +54,7 @@ public class TaiouText extends CardText
 
 		file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
 		/*データベースにアクセスし対応表を確保する*/
-		rs = DBCC.cardinfo();
+		//rs = DBCC.cardinfo();
 		/*取得したデータをもとにテキストファイルに出力する*/
 		cardlist = new int[20][6];
 		line = new String[20];
