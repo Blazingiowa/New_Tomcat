@@ -33,7 +33,7 @@ public class Text
 
 		if(number == 3)//numberが3であたったらルームファイルを確認するまた、この場合はlinenumberにプレイヤー番号が入る
 		{
-			file = new File("");
+			file = new File("/var/www/html/"+ room + "/" + number + ".txt");
 			number = linenumber;
 			linenumber = 0;
 		}
@@ -111,10 +111,10 @@ public class Text
 			return playerinfo;
 		}
 	}
-	
+
 	void taiou()
 	{
-		
+
 	}
 
 	private String[] startup(String[] lineinfo)//ゲームの初期設定
