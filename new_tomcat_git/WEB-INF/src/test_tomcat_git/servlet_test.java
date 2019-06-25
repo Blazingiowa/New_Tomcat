@@ -21,8 +21,9 @@ public class servlet_test extends HttpServlet
 
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
+	private GameEND game_end = new GameEND();
 	//private Gamemain game_main = new Gamemain();
-	
+
 
 	private GameProject game_project = new GameProject();
 
@@ -51,12 +52,12 @@ public class servlet_test extends HttpServlet
 		req =request;
 
 		substitution();
-		
+
 		if(req.getParameter("flag") == null)//game継続
 		{
 			if (req.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
 			{
-				test_new_connect();
+				new_connect();
 				//JSONを生成
 				response.setContentType("application/json");
 				response.setCharacterEncoding("utf-8");
@@ -67,7 +68,7 @@ public class servlet_test extends HttpServlet
 			else
 			{
 
-				test_connect();
+				connect();
 
 			}
 
@@ -78,7 +79,7 @@ public class servlet_test extends HttpServlet
 		}
 		else if(req.getParameter("flag").equals("2"))//Clientが落としたい時用
 		{
-			
+			game_end.main(int_user_info);
 		}
 
 
@@ -116,8 +117,8 @@ public class servlet_test extends HttpServlet
 		int_user_info[1] =Integer.parseInt(req.getParameter("roomID"));
 		int_user_info[2] =Integer.parseInt(req.getParameter("user_number"));
 	}
-	
-	void test_new_connect()
+
+	void new_connect()
 	{
 		name_val = req.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
 
@@ -129,7 +130,7 @@ public class servlet_test extends HttpServlet
 
 	}
 
-	void test_connect()
+	void connect()
 	{
 		use_hand[0] =Integer.parseInt(req.getParameter("user_number1"));
 		use_hand[1]=Integer.parseInt(req.getParameter("user_number2"));
