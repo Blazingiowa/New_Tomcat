@@ -83,7 +83,7 @@ public class servlet_test extends HttpServlet
 			}
 			else
 			{
-
+				substitution();
 				connect();
 
 			}
@@ -96,6 +96,7 @@ public class servlet_test extends HttpServlet
 		}
 		else if(req.getParameter("flag").equals("2"))//Clientが落としたい時用
 		{
+			substitution();
 			game_end.main(int_user_info);
 		}
 
