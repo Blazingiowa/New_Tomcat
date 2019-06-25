@@ -55,7 +55,7 @@ public class TaiouText extends CardText
 
 		for(int i =0;i<line.length;i++)
 		{
-			for(int j = 0;j<cardlist[i].length;i++)
+			for(int j = 0;j<cardlist[i].length;j++)
 			{
 				line[i] += cardlist[i][j];
 				if((i+1)<cardlist[i].length)
