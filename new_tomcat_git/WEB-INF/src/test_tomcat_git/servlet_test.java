@@ -143,32 +143,32 @@ public class servlet_test extends HttpServlet
 		//入れたい値を右の ""の中に入れる
 		if(req.getParameter("userID") == null)
 		{
-			req.setAttribute("userID", "");
+			req.setAttribute("userID", "1");
 		}
 
 		if(req.getParameter("roomID") == null)
 		{
-			req.setAttribute("roomID", "");
+			req.setAttribute("roomID", "1");
 		}
 
 		if(req.getParameter("user_number") == null)
 		{
-			req.setAttribute("user_number", "");
+			req.setAttribute("user_number", "1");
 		}
 
 		if(req.getParameter("user_number1") == null)
 		{
-			req.setAttribute("user_number1", "");
+			req.setAttribute("user_number1", "0");
 		}
 
 		if(req.getParameter("user_number2") == null)
 		{
-			req.setAttribute("user_number2", "");
+			req.setAttribute("user_number2", "1");
 		}
 
 		if(req.getParameter("user_number3") == null)
 		{
-			req.setAttribute("user_number3", "");
+			req.setAttribute("user_number3", "2");
 		}
 	}
 	/*
