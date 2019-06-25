@@ -4,6 +4,9 @@ import java.io.File;
 
 public class GameEND
 {
+	//プレイヤーが退出したときのDBを更新するためのクラスをインスタンス
+	DataBasePlayerout DBP = new DataBasePlayerout();
+
 	//メインメソッド
 	void main(int info[])
 	{
@@ -20,6 +23,7 @@ public class GameEND
 		if (file.exists())
 		{
 			file.delete();
+			DBP.logout(playerinfo);
 		}
 		//なかった場合
 		else
