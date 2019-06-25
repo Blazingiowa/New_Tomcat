@@ -3,7 +3,7 @@ package test_tomcat_git;
 public class GameProject
 {
 	//ルーム状況を入れるための配列
-	int[] player = new int[2];
+	int[] player = new int[3];
 
 	int[][] p1_card = new int[3][8];//統合処理の時の、カード判定時に使う
 	int[][] p2_card = new int[3][8];//上に同じ
@@ -49,7 +49,7 @@ public class GameProject
 		player = tx.editer(info[1], 3, info[2], 1, null);
 
 		//それぞれのプレイヤーが処理が終わっているかどうかの判定
-		if (player[0] == 1 && player[1] == 1)
+		if (player[1] == 1 && player[2] == 1)
 		{
 			//統合処理
 			Integrated(info);
@@ -67,11 +67,11 @@ public class GameProject
 		player = tx.editer(playerinfo[1], 3, playerinfo[2], 1, null);
 
 		//それぞれの状況が１だったらターンが進んでいるのでHPと行動値の情報を更新して、ほかの部分を初期化
-		if (player[0] == 1 && player[1] == 1)
+		if (player[1] == 1 && player[2] == 1)
 		{
 			//ルーム状況表を０，０にして次の処理ができるように初期化
-			player[0] = 0;
 			player[1] = 0;
+			player[2] = 0;
 			tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);
 
 			//前のターンの時に変化した、HPと行動値の情報を持ってくる
@@ -198,17 +198,20 @@ public class GameProject
 			{
 				//ルーム状況表を読み込む
 				player = tx.editer(playerinfo[1], 3, playerinfo[2], 1, null);
-				if (player[0] == 0 && player[1] == 0)
+				if (player[1] == 0 && player[2] == 0)
 				{
-					player[0] = 1;
-					player[1] = 0;
+					player[1] = 1;
+					player[2] = 0;
 				}
 
-				else if (player[0] == 0 && player[1] == 1)
+				else if (player[1] == 0 && player[2] == 1)
 				{
-					player[0] = 1;
 					player[1] = 1;
+					player[2] = 1;
 				}
+				//ユニティが見続ける場所を++して更新
+				player[0]++;
+
 				//ルーム状況 表にプレイヤー１の処理が終わったことを書き込む
 				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);
 			}
@@ -218,17 +221,19 @@ public class GameProject
 			{
 				//ルーム状況表を読み込む
 				player = tx.editer(playerinfo[1], 3, playerinfo[2], 1, null);
-				if (player[0] == 0 && player[1] == 0)
+				if (player[1] == 0 && player[2] == 0)
 				{
-					player[0] = 0;
-					player[1] = 1;
+					player[1] = 0;
+					player[2] = 1;
 				}
 
-				else if (player[0] == 1 && player[1] == 0)
+				else if (player[1] == 1 && player[2] == 0)
 				{
-					player[0] = 1;
 					player[1] = 1;
+					player[2] = 1;
 				}
+				//ユニティが見続ける場所を++して更新
+				player[0]++;
 
 				//ルーム状況表にプレイヤー２の処理が終わったことを書き込む
 				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);
@@ -567,6 +572,10 @@ public class GameProject
 				}
 
 				tx.editer(playerinfo[1], 1, i, 0, textW);//テキストに書き込み
+
+				//ユニティが見続ける場所を統合処理が終わったので初期値（０）に戻す
+				player[0] = 0;
+				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);//テキストに書き込む
 			}
 		}
 	}

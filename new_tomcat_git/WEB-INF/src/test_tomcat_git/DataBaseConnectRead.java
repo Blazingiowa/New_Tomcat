@@ -16,6 +16,7 @@ public class DataBaseConnectRead
 	protected int[] Result;//受け渡す情報が入る
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
 	protected int timeoutseconds = 30;//タイムアウト時間
+	protected ResultSet rs;
 
 
 
@@ -101,7 +102,7 @@ public class DataBaseConnectRead
 			//SQL
 			Statement stmt = conn.createStatement();
 			//結果の挿入
-			ResultSet rs = stmt.executeQuery("SELECT * FROM card WHERE card_id = "+id+";");
+			rs = stmt.executeQuery("SELECT * FROM card WHERE card_id = "+id+";");
 			rs.next();
 			Result[0] = rs.getInt("card_id");
 			Result[1] = rs.getInt("cost");

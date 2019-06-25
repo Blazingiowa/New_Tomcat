@@ -1,6 +1,5 @@
 package test_tomcat_git;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -33,7 +32,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 
 			//SQL
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE user_name = null ORDER BY user_id LIMIT 1;");
+			rs = stmt.executeQuery("SELECT * FROM user WHERE user_name = null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
 			Result[0] = rs.getInt("user_id");
 

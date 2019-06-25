@@ -28,11 +28,11 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 		try
 		{
-			//conn = DriverManager.getConnection(url,user,password);
+			connect();
 
 			//SQL
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("UPDATE user SET user_name = "+"'"+username+"'"+" WHERE user_id = "+userinfo[0]+";");
+			stmt.executeUpdate("UPDATE user SET user_name = '"+username+"' WHERE user_id = "+userinfo[0]+";");
 			stmt.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");
 		}
 		catch(SQLException e)

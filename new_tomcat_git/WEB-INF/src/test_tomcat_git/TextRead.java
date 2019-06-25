@@ -33,18 +33,20 @@ public class TextRead
 	{
 		if(player==3)
 		{
-			alltext = new String[2][2];
+			alltext = new String[2][3];
 			line = new String[2];
-			data = new int[2];
+			data = new int[3];
+			file = new File("/var/www/html/"+ room + "/room.txt");
 		}
 		else
 		{
 			alltext = new String[10][3];
 			line = new String[10];
 			data = new int[3];
+			file = new File("/var/www/html/"+ room + "/"+player+".txt");
 		}
 
-		file = new File("");
+
 
 		try
 		{
