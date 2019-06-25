@@ -73,6 +73,7 @@ public class servlet_test extends HttpServlet
 			}
 
 		}
+		//flagが立った!
 		else if(req.getParameter("flag").equals("1"))//Clientが更新したい時用
 		{
 
