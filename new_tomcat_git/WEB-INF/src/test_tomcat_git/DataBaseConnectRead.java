@@ -95,7 +95,7 @@ public class DataBaseConnectRead
 			Result[i] = -1;
 		}
 
-		connect();
+		conn = connect();
 
 		try
 		{
@@ -139,7 +139,7 @@ public class DataBaseConnectRead
 		return Result;
 	}
 
-	protected void connect()
+	protected Connection connect()
 	{
 		try
 		{
@@ -160,6 +160,8 @@ public class DataBaseConnectRead
 		{
 
 		}
+
+		return conn;
 	}
 
 

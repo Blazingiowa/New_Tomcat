@@ -9,6 +9,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate
 	{
 		try
 		{
+			conn = connect();
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("UPDATE user SET user_name = NULL WHERE user_id = "+playerinfo[1]+";");
 			stmt.executeUpdate("UPDATE room SET user_id = 0 WHERE user_id = "+playerinfo[1]+";");

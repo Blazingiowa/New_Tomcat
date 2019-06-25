@@ -8,7 +8,7 @@ public class DataBaseConnectCard extends DataBaseConnectRead
 {
 	ResultSet cardinfo()
 	{
-		connect();
+		conn = connect();
 		try
 		{
 			Statement stmt = conn.createStatement();
