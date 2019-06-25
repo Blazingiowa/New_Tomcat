@@ -22,12 +22,13 @@ public class servlet_test extends HttpServlet
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
 	//private Gamemain game_main = new Gamemain();
+	
 
 	private GameProject game_project = new GameProject();
 
 	private String name_val;
-	private String[] user_info;
-	private int[] user_session;
+	private String[] str_user_info;
+	private int[] int_user_info;
 	private int[] use_hand;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,13 +43,15 @@ public class servlet_test extends HttpServlet
 		request.setCharacterEncoding("UTF-8");
 
 
-		user_info = new String[3];//順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
-		user_session = new int[3];
+		str_user_info = new String[3];//順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
+		int_user_info = new int[3];
 		use_hand = new int[3];
 
 
 		req =request;
 
+		substitution();
+		
 		if(req.getParameter("flag") == null)//game継続
 		{
 			if (req.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
@@ -75,7 +78,7 @@ public class servlet_test extends HttpServlet
 		}
 		else if(req.getParameter("flag").equals("2"))//Clientが落としたい時用
 		{
-
+			
 		}
 
 
@@ -107,26 +110,27 @@ public class servlet_test extends HttpServlet
 		}
 	*/
 	}
-
+	void substitution()
+	{
+		int_user_info[0] =Integer.parseInt(req.getParameter("userID"));
+		int_user_info[1] =Integer.parseInt(req.getParameter("roomID"));
+		int_user_info[2] =Integer.parseInt(req.getParameter("user_number"));
+	}
+	
 	void test_new_connect()
 	{
 		name_val = req.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
 
-		user_info = game_start.createdirectry(name_val);
+		str_user_info = game_start.createdirectry(name_val);
 
-		ub.setUserID(user_info[0]);
-		ub.setRoomID(user_info[1]);
-		ub.setUserNumber(user_info[2]);
+		ub.setUserID(str_user_info[0]);
+		ub.setRoomID(str_user_info[1]);
+		ub.setUserNumber(str_user_info[2]);
 
 	}
 
 	void test_connect()
 	{
-
-		user_session[0] =Integer.parseInt(req.getParameter("userID"));
-		user_session[1] =Integer.parseInt(req.getParameter("roomID"));
-		user_session[2] =Integer.parseInt(req.getParameter("user_number"));
-
 		use_hand[0] =Integer.parseInt(req.getParameter("user_number1"));
 		use_hand[1]=Integer.parseInt(req.getParameter("user_number2"));
 		use_hand[2]=Integer.parseInt(req.getParameter("user_number3"));
@@ -134,7 +138,7 @@ public class servlet_test extends HttpServlet
 		//use_hand = conversion((String[])request.getParameterValues("Use_hand"));
 
 
-		game_project.main(user_session, use_hand);
+		game_project.main(int_user_info, use_hand);
 	}
 
 	/*

@@ -28,7 +28,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 		try
 		{
-			//conn = DriverManager.getConnection(url,user,password);
+			connect();
 
 			//SQL
 			Statement stmt = conn.createStatement();
