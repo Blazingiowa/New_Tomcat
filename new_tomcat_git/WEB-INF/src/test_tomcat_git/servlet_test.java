@@ -57,16 +57,16 @@ public class servlet_test extends HttpServlet
 		//以下テストコード自由に変えてよし
 		System.out.println(request);
 
-		request.setAttribute("userID", "1");
-		request.setAttribute("roomID", "1");
-		request.setAttribute("user_number", "1");
-
-		System.out.println(request);
+//		request.setAttribute("userID", "1");
+//		request.setAttribute("roomID", "1");
+//		request.setAttribute("user_number", "1");
+//
+//		System.out.println(request);
 
 
 		//ここまでテストコード
 
-		substitution();
+		//substitution();
 
 
 		if(req.getParameter("flag") == null)//game継続
