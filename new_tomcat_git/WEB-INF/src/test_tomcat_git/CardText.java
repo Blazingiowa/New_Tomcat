@@ -51,7 +51,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 
 		file = new File("var/www/html/"+room+"/card.txt");
 		/*データベースにアクセスしカード情報を確保する*/
-		rs = DBCC.cardinfo();
+		//rs = DBCC.cardinfo();
 		/*取得したデータをもとにテキストファイルに出力する*/
 		cardlist = new int[20][3];
 		line = new String[20];
