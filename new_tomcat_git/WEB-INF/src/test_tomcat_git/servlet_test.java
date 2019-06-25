@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 public class servlet_test extends HttpServlet
 {
 	private HttpServletRequest req;
-	private HttpServletResponse res;
+	//private HttpServletResponse res;
 
 	private Gson gson = new Gson();
 
@@ -52,15 +52,10 @@ public class servlet_test extends HttpServlet
 
 		req =request;
 
-
-
 		//以下テストコード自由に変えてよし
 		System.out.println(request);
 
-//		request.setAttribute("userID", "1");
-//		request.setAttribute("roomID", "1");
-//		request.setAttribute("user_number", "1");
-//
+//		check();
 //		System.out.println(request);
 
 
@@ -99,35 +94,6 @@ public class servlet_test extends HttpServlet
 			substitution();
 			game_end.main(int_user_info);
 		}
-
-
-		/*
-		//ゲーム途中で落とさなければ基本この中
-		if(request.getParameter("end_flag") == null)
-		{
-			if (request.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
-			{
-				new_connect(request);
-				//JSONを生成
-				response.setContentType("application/json");
-				response.setCharacterEncoding("utf-8");
-				response.getWriter().println(gson.toJson(
-					      Collections.singletonMap("param", gson.toJson(ub))
-					    ));
-			}
-			else if(request.getParameter("roomID") != null)
-			{
-
-				connect(request);
-
-			}
-
-		}
-		else//Clientが落としたい時用
-		{
-
-		}
-	*/
 	}
 	void substitution()
 	{
@@ -135,9 +101,13 @@ public class servlet_test extends HttpServlet
 		str_test[1] =req.getParameter("roomID");
 		str_test[2] =req.getParameter("user_number");
 
-		int_user_info[0] =Integer.parseInt(str_test[0]);
-		int_user_info[1] =Integer.parseInt(str_test[1]);
-		int_user_info[2] =Integer.parseInt(str_test[2]);
+		int_user_info[0] = Integer.parseInt(str_test[0]);
+		int_user_info[1] = Integer.parseInt(str_test[1]);
+		int_user_info[2] = Integer.parseInt(str_test[2]);
+
+//		int_user_info[0] =Integer.parseInt(req.getParameter("userID"));
+//		int_user_info[1] =Integer.parseInt(req.getParameter("roomID"));
+//		int_user_info[2] =Integer.parseInt(req.getParameter("user_number"));
 	}
 
 	void new_connect()
@@ -158,47 +128,50 @@ public class servlet_test extends HttpServlet
 		str_test[1] =req.getParameter("user_number2");
 		str_test[2] =req.getParameter("user_number3");
 
-		use_hand[0] =Integer.parseInt(req.getParameter(str_test[0]));
-		use_hand[1]=Integer.parseInt(req.getParameter(str_test[1]));
-		use_hand[2]=Integer.parseInt(req.getParameter(str_test[2]));
+		use_hand[0] = Integer.parseInt(req.getParameter(str_test[0]));
+		use_hand[1] = Integer.parseInt(req.getParameter(str_test[1]));
+		use_hand[2] = Integer.parseInt(req.getParameter(str_test[2]));
 
-		//use_hand = conversion((String[])request.getParameterValues("Use_hand"));
-
+//		use_hand[0] = Integer.parseInt(req.getParameter("user_number1"));
+//		use_hand[1] = Integer.parseInt(req.getParameter("user_number2"));
+//		use_hand[2] = Integer.parseInt(req.getParameter("user_number3"));
 
 		game_project.main(int_user_info, use_hand);
 	}
+	void check()
+	{
+		//入れたい値を右の ""の中に入れる
+		if(req.getParameter("userID") == null)
+		{
+			req.setAttribute("userID", "");
+		}
 
+		if(req.getParameter("roomID") == null)
+		{
+			req.setAttribute("roomID", "");
+		}
+
+		if(req.getParameter("user_number") == null)
+		{
+			req.setAttribute("user_number", "");
+		}
+
+		if(req.getParameter("user_number1") == null)
+		{
+			req.setAttribute("user_number1", "");
+		}
+
+		if(req.getParameter("user_number2") == null)
+		{
+			req.setAttribute("user_number2", "");
+		}
+
+		if(req.getParameter("user_number3") == null)
+		{
+			req.setAttribute("user_number3", "");
+		}
+	}
 	/*
-	void new_connect(HttpServletRequest request)
-	{
-		name_val = request.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
-
-		user_info = game_start.createdirectry(name_val);
-
-		ub.setUserID(user_info[0]);
-		ub.setRoomID(user_info[1]);
-		ub.setUserNumber(user_info[2]);
-
-	}
-
-	void connect(HttpServletRequest request)
-	{
-
-		user_session[0] =Integer.parseInt(request.getParameter("userID"));
-		user_session[1] =Integer.parseInt(request.getParameter("roomID"));
-		user_session[2] =Integer.parseInt(request.getParameter("user_number"));
-
-		use_hand[0] =Integer.parseInt(request.getParameter("user_number1"));
-		use_hand[1]=Integer.parseInt(request.getParameter("user_number2"));
-		use_hand[2]=Integer.parseInt(request.getParameter("user_number3"));
-
-		//use_hand = conversion((String[])request.getParameterValues("Use_hand"));
-
-
-		game_project.main(user_session, use_hand);
-	}
-
-
 	int[] conversion(String[] str)//使っていない
 	{
 		int[] h_int = new int[str.length];
