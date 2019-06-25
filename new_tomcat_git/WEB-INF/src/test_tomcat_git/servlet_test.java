@@ -69,11 +69,11 @@ public class servlet_test extends HttpServlet
 			}
 
 		}
-		else if(req.getParameter("flag") == "1")//Clientが更新したい時用
+		else if(req.getParameter("flag").equals("1"))//Clientが更新したい時用
 		{
 
 		}
-		else if(req.getParameter("flag") == "2")//Clientが落としたい時用
+		else if(req.getParameter("flag").equals("2"))//Clientが落としたい時用
 		{
 
 		}
@@ -108,7 +108,7 @@ public class servlet_test extends HttpServlet
 	*/
 	}
 
-	void test_new_connect() 
+	void test_new_connect()
 	{
 		name_val = req.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
 
