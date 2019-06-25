@@ -46,7 +46,7 @@ public class GameProject
 		txtReadWrite(info, use);
 
 		//ルーム状況表から情報をもってくる[ルームID][共有ファイルについてなので、３][ユーザ番号で行数指定][書０読１][書き込みたい配列またはnull]
-		player = tx.editer(info[1], 3, info[2], 1, null);
+		player = tx.editer(info[1], 3, 1, 1, null);
 
 		//それぞれのプレイヤーが処理が終わっているかどうかの判定
 		if (player[1] == 1 && player[2] == 1)
@@ -64,7 +64,7 @@ public class GameProject
 	void start(int[] playerinfo)
 	{
 		//ルーム状況表から情報を持ってくる
-		player = tx.editer(playerinfo[1], 3, playerinfo[2], 1, null);
+		player = tx.editer(playerinfo[1], 3, 1, 1, null);
 
 		//それぞれの状況が１だったらターンが進んでいるのでHPと行動値の情報を更新して、ほかの部分を初期化
 		if (player[1] == 1 && player[2] == 1)
@@ -72,7 +72,7 @@ public class GameProject
 			//ルーム状況表を０，０にして次の処理ができるように初期化
 			player[1] = 0;
 			player[2] = 0;
-			tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);
+			tx.editer(playerinfo[1], 3, 1, 0, player);
 
 			//前のターンの時に変化した、HPと行動値の情報を持ってくる
 			hp = tx.editer(playerinfo[1], playerinfo[2], 1, 1, null);//hp
@@ -197,7 +197,7 @@ public class GameProject
 			if (playerinfo[2] == 1)
 			{
 				//ルーム状況表を読み込む
-				player = tx.editer(playerinfo[1], 3, playerinfo[2], 1, null);
+				player = tx.editer(playerinfo[1], 3, 1, 1, null);
 				if (player[1] == 0 && player[2] == 0)
 				{
 					player[1] = 1;
@@ -213,14 +213,14 @@ public class GameProject
 				player[0]++;
 
 				//ルーム状況 表にプレイヤー１の処理が終わったことを書き込む
-				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);
+				tx.editer(playerinfo[1], 3, 1, 0, player);
 			}
 
 			//プレイヤー２の時の処理
 			else if (playerinfo[2] == 2)
 			{
 				//ルーム状況表を読み込む
-				player = tx.editer(playerinfo[1], 3, playerinfo[2], 1, null);
+				player = tx.editer(playerinfo[1], 3, 1, 1, null);
 				if (player[1] == 0 && player[2] == 0)
 				{
 					player[1] = 0;
@@ -236,7 +236,7 @@ public class GameProject
 				player[0]++;
 
 				//ルーム状況表にプレイヤー２の処理が終わったことを書き込む
-				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);
+				tx.editer(playerinfo[1], 3, 1, 0, player);
 			}
 		}
 	}
@@ -575,7 +575,7 @@ public class GameProject
 
 				//ユニティが見続ける場所を統合処理が終わったので初期値（０）に戻す
 				player[0] = 0;
-				tx.editer(playerinfo[1], 3, playerinfo[2], 0, player);//テキストに書き込む
+				tx.editer(playerinfo[1], 3, 1, 0, player);//テキストに書き込む
 			}
 		}
 	}
