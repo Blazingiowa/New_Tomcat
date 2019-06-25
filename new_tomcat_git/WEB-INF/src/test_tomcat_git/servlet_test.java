@@ -28,6 +28,7 @@ public class servlet_test extends HttpServlet
 	private GameProject game_project = new GameProject();
 
 	private String name_val;
+	private String[] str_test;
 	private String[] str_user_info;
 	private int[] int_user_info;
 	private int[] use_hand;
@@ -43,7 +44,7 @@ public class servlet_test extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 
-
+		str_test = new String[3];
 		str_user_info = new String[3];//順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
 		int_user_info = new int[3];
 		use_hand = new int[3];
@@ -51,7 +52,22 @@ public class servlet_test extends HttpServlet
 
 		req =request;
 
-		substitution();
+
+
+		//以下テストコード自由に変えてよし
+		System.out.println(request);
+
+//		request.setAttribute("userID", "1");
+//		request.setAttribute("roomID", "1");
+//		request.setAttribute("user_number", "1");
+//
+//		System.out.println(request);
+
+
+		//ここまでテストコード
+
+		//substitution();
+
 
 		if(req.getParameter("flag") == null)//game継続
 		{
@@ -114,9 +130,13 @@ public class servlet_test extends HttpServlet
 	}
 	void substitution()
 	{
-		int_user_info[0] =Integer.parseInt(req.getParameter("userID"));
-		int_user_info[1] =Integer.parseInt(req.getParameter("roomID"));
-		int_user_info[2] =Integer.parseInt(req.getParameter("user_number"));
+		str_test[0] =req.getParameter("userID");
+		str_test[1] =req.getParameter("roomID");
+		str_test[2] =req.getParameter("user_number");
+
+		int_user_info[0] =Integer.parseInt(str_test[0]);
+		int_user_info[1] =Integer.parseInt(str_test[1]);
+		int_user_info[2] =Integer.parseInt(str_test[2]);
 	}
 
 	void new_connect()
@@ -133,9 +153,13 @@ public class servlet_test extends HttpServlet
 
 	void connect()
 	{
-		use_hand[0] =Integer.parseInt(req.getParameter("user_number1"));
-		use_hand[1]=Integer.parseInt(req.getParameter("user_number2"));
-		use_hand[2]=Integer.parseInt(req.getParameter("user_number3"));
+		str_test[0] =req.getParameter("user_number1");
+		str_test[1] =req.getParameter("user_number2");
+		str_test[2] =req.getParameter("user_number3");
+
+		use_hand[0] =Integer.parseInt(req.getParameter(str_test[0]));
+		use_hand[1]=Integer.parseInt(req.getParameter(str_test[1]));
+		use_hand[2]=Integer.parseInt(req.getParameter(str_test[2]));
 
 		//use_hand = conversion((String[])request.getParameterValues("Use_hand"));
 
