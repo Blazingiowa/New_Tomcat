@@ -33,9 +33,9 @@ public class TaiouText extends CardText
 		}
 		try
 		{
-			Statement stmt = conn.createStatement();
-			stmt.executeQuery("SELECT * FROM card;");
-			rs = stmt.getResultSet();
+			Statement stmt1 = conn.createStatement();
+			stmt1.executeQuery("SELECT * FROM card;");
+			rs = stmt1.getResultSet();
 			System.out.println("SQL 動いたよ");
 		}
 		catch(SQLException e)
@@ -44,7 +44,7 @@ public class TaiouText extends CardText
 		}
 		finally
 		{
-			Close();
+
 		}
 
 		file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
@@ -70,19 +70,19 @@ public class TaiouText extends CardText
 				System.out.println("rsは入ってるよ");
 			}
 
+			int a=0;
 			//rs.next();
-			for(int i =0;i<cardlist.length;i++)
+			while(rs.next())
 			{
-
-				rs.next();
-				cardlist[i][0] = rs.getInt("card_id");
+				cardlist[a][0] = rs.getInt("card_id");
 				String[] array = rs.getString("taio_id").split(",");
 
 				for(int j = 0,k=1;j<array.length;j++,k++)
 				{
 
-					cardlist[i][k] = Integer.parseInt(array[j]);
+					cardlist[a][k] = Integer.parseInt(array[j]);
 				}
+				a++;
 
 			}
 		}
@@ -129,6 +129,7 @@ public class TaiouText extends CardText
 		{
 			bwclose();
 		}
+		Close();
 	}
 
 	Connection connect()
