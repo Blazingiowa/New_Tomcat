@@ -61,7 +61,7 @@ public class servlet_test extends HttpServlet
 
 		//ここまでテストコード
 
-		//substitution();
+		substitution();
 
 
 		if(req.getParameter("flag") == null)//game継続
@@ -78,7 +78,6 @@ public class servlet_test extends HttpServlet
 			}
 			else
 			{
-				substitution();
 				connect();
 
 			}
@@ -91,23 +90,39 @@ public class servlet_test extends HttpServlet
 		}
 		else if(req.getParameter("flag").equals("2"))//Clientが落としたい時用
 		{
-			substitution();
 			game_end.main(int_user_info);
 		}
 	}
 	void substitution()
 	{
-		str_test[0] =req.getParameter("userID");
-		str_test[1] =req.getParameter("roomID");
-		str_test[2] =req.getParameter("user_number");
+		if(req.getParameter("userID") ==  null)
+		{
+			int_user_info[0] = -1;
+		}
+		else
+		{
+			int_user_info[0] =Integer.parseInt(req.getParameter("userID"));
+		}
 
-		int_user_info[0] = Integer.parseInt(str_test[0]);
-		int_user_info[1] = Integer.parseInt(str_test[1]);
-		int_user_info[2] = Integer.parseInt(str_test[2]);
 
-//		int_user_info[0] =Integer.parseInt(req.getParameter("userID"));
-//		int_user_info[1] =Integer.parseInt(req.getParameter("roomID"));
-//		int_user_info[2] =Integer.parseInt(req.getParameter("user_number"));
+		if(req.getParameter("roomID") ==  null)
+		{
+			int_user_info[1] = -1;
+		}
+		else
+		{
+			int_user_info[1] =Integer.parseInt(req.getParameter("roomID"));
+		}
+
+
+		if(req.getParameter("user_number") ==  null)
+		{
+			int_user_info[2] = -1;
+		}
+		else
+		{
+			int_user_info[2] =Integer.parseInt(req.getParameter("user_number"));
+		}
 	}
 
 	void new_connect()
@@ -124,52 +139,34 @@ public class servlet_test extends HttpServlet
 
 	void connect()
 	{
-		str_test[0] =req.getParameter("user_number1");
-		str_test[1] =req.getParameter("user_number2");
-		str_test[2] =req.getParameter("user_number3");
+		if(req.getParameter("user_number1") ==  null)
+		{
+			use_hand[0] = -1;
+		}
+		else
+		{
+			use_hand[0] = Integer.parseInt(req.getParameter("user_number1"));
+		}
 
-		use_hand[0] = Integer.parseInt(req.getParameter(str_test[0]));
-		use_hand[1] = Integer.parseInt(req.getParameter(str_test[1]));
-		use_hand[2] = Integer.parseInt(req.getParameter(str_test[2]));
+		if(req.getParameter("user_number2") ==  null)
+		{
+			use_hand[1] = -1;
+		}
+		else
+		{
+			use_hand[1] = Integer.parseInt(req.getParameter("user_number2"));
+		}
 
-//		use_hand[0] = Integer.parseInt(req.getParameter("user_number1"));
-//		use_hand[1] = Integer.parseInt(req.getParameter("user_number2"));
-//		use_hand[2] = Integer.parseInt(req.getParameter("user_number3"));
+		if(req.getParameter("user_number3") ==  null)
+		{
+			use_hand[2] = -1;
+		}
+		else
+		{
+			use_hand[2] = Integer.parseInt(req.getParameter("user_number3"));
+		}
 
 		game_project.main(int_user_info, use_hand);
-	}
-	void check()
-	{
-		//入れたい値を右の ""の中に入れる
-		if(req.getParameter("userID") == null)
-		{
-			req.setAttribute("userID", "1");
-		}
-
-		if(req.getParameter("roomID") == null)
-		{
-			req.setAttribute("roomID", "1");
-		}
-
-		if(req.getParameter("user_number") == null)
-		{
-			req.setAttribute("user_number", "1");
-		}
-
-		if(req.getParameter("user_number1") == null)
-		{
-			req.setAttribute("user_number1", "0");
-		}
-
-		if(req.getParameter("user_number2") == null)
-		{
-			req.setAttribute("user_number2", "1");
-		}
-
-		if(req.getParameter("user_number3") == null)
-		{
-			req.setAttribute("user_number3", "2");
-		}
 	}
 	/*
 	int[] conversion(String[] str)//使っていない
