@@ -129,8 +129,8 @@ public class servlet_test extends HttpServlet
 		System.out.println(req.getParameter("name"));
 		System.out.println(name_val);
 
-		String test_name = "test";
-		str_user_info = game_start.createdirectry(test_name);
+		//String test_name = "test";
+		str_user_info = game_start.createdirectry(name_val);
 
 		ub.setUserID(str_user_info[0]);
 		ub.setRoomID(str_user_info[1]);
