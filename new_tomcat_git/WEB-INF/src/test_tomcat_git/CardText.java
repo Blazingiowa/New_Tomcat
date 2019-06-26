@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,7 +29,6 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		cardlist = new int[20][3];
 		line = new String[20];
 
-		conn = connect();
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 
 		try
@@ -62,6 +60,20 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		catch (SQLException e)
 		{
 			e.printStackTrace();
+		}
+		finally
+		{
+			CC.close();
+			try
+			{
+				rs.close();
+			}
+
+			catch (SQLException e)
+			{
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 		}
 
 		for(int i = 0;i<line.length;i++)
@@ -95,45 +107,5 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		}
 	}
 
-	Connection connect()
-	{
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-		}
-		catch (ClassNotFoundException e1)
-		{
 
-			e1.printStackTrace();
-		}
-
-		try
-		{
-			conn = DriverManager.getConnection(url,user,password);
-			//DriverManager.setLoginTimeout(timeoutseconds);
-		}
-		catch(SQLException e)
-		{
-
-		}
-		Close();
-
-		return conn;
-	}
-
-	void Close()
-	{
-		try
-		{
-			if (conn != null)
-			{
-				conn.close();
-			}
-		}
-		catch(SQLException e)
-		{
-			System.out.println(e);
-			//例外処理
-		}
-	}
 }

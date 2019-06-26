@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,8 +12,9 @@ import java.sql.Statement;
 public class TaiouText extends CardText
 {
 	DataBaseConnectRead DBCR = new DataBaseConnectRead();
-
 	DataBaseConnectCard DBCC = new DataBaseConnectCard();
+	CreateConnection CC = new CreateConnection();
+
 	ResultSet rs;
 	Connection conn;
 	protected String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
@@ -26,36 +26,7 @@ public class TaiouText extends CardText
 	{
 
 
-		conn = connect();
-		try
-		{
-			Statement stmt2 = conn.createStatement();
-			stmt2.executeQuery("SELECT * FROM card;");
-			rs = stmt2.getResultSet();
-		}
-		catch(SQLException e)
-		{
-
-		}
-		finally
-		{
-			try
-			{
-				if (conn != null)
-				{
-					conn.close();
-				}
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e);
-				//例外処理
-			}
-		}
-
 		file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
-		/*データベースにアクセスし対応表を確保する*/
-		//rs = DBCC.cardinfo();
 		/*取得したデータをもとにテキストファイルに出力する*/
 		cardlist = new int[20][6];
 		line = new String[20];
@@ -68,32 +39,34 @@ public class TaiouText extends CardText
 			}
 		}
 
+		Statement stmt = CC.createstatement(conn = CC.createconnection());
 		try
 		{
-			int a = 0;
-			/*for(int i =0;i<cardlist.length;i++)
-			{
-				rs.next();
-				cardlist[i][0] = rs.getInt("card_id");
-				String[] array = rs.getString("taio_id").split(",");
+			stmt.executeQuery("SELECT * FROM card;");
+			rs = stmt.getResultSet();
+		}
+		catch(SQLException e)
+		{
 
-				for(int j = 0,k=1;j<array.length;j++,k++)
-				{
-					cardlist[i][k] = Integer.parseInt(array[j]);
-				}
-				//rs.next();
-			}*/
+		}
+		finally
+		{
+			CC.close();
+		}
 
+		try
+		{
+			int count = 0;
 			while(rs.next())
 			{
-				cardlist[a][0] = rs.getInt("card_id");
+				cardlist[count][0] = rs.getInt("card_id");
 				String[] array = rs.getString("taio_id").split(",");
 
 				for(int j = 0,k=1;j<array.length;j++,k++)
 				{
-					cardlist[a][k] = Integer.parseInt(array[j]);
+					cardlist[count][k] = Integer.parseInt(array[j]);
 				}
-				a++;
+				count++;
 			}
 		}
 
@@ -139,30 +112,5 @@ public class TaiouText extends CardText
 		{
 			bwclose();
 		}
-	}
-
-	Connection connect()
-	{
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-		}
-		catch (ClassNotFoundException e1)
-		{
-
-			e1.printStackTrace();
-		}
-
-		try
-		{
-			conn = DriverManager.getConnection(url,user,password);
-			//DriverManager.setLoginTimeout(timeoutseconds);
-		}
-		catch(SQLException e)
-		{
-
-		}
-
-		return conn;
 	}
 }
