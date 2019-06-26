@@ -31,10 +31,11 @@ public class TaiouText extends CardText
 		{
 			Statement stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM card;");
+			System.out.println("SQL 動いたよ");
 		}
 		catch(SQLException e)
 		{
-			System.out.println("SQL aaaaaaaa");
+			
 		}
 		finally
 		{
@@ -69,13 +70,12 @@ public class TaiouText extends CardText
 
 		try
 		{
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM card;");
-			if(rs == null)
+			
+			if(rs != null)
 			{
-				System.out.println("fuck");
+				System.out.println("rsは入ってるよ");
 			}
-
+			
 			rs.next();
 			for(int i =0;i<cardlist.length;i++)
 			{
