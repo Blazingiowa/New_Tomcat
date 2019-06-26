@@ -34,7 +34,7 @@ public class TaiouText extends CardText
 		}
 		catch(SQLException e)
 		{
-
+			System.out.println("SQL aaaaaaaa");
 		}
 		finally
 		{
@@ -69,10 +69,10 @@ public class TaiouText extends CardText
 
 		try
 		{
-			/*if(rs == null)
+			if(rs == null)
 			{
 				System.out.println("fuck");
-			}*/
+			}
 			rs.next();
 			for(int i =0;i<cardlist.length;i++)
 			{
