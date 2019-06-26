@@ -35,7 +35,7 @@ public class TaiouText extends CardText
 		}
 		catch(SQLException e)
 		{
-			
+
 		}
 		finally
 		{
@@ -70,12 +70,12 @@ public class TaiouText extends CardText
 
 		try
 		{
-			
+
 			if(rs != null)
 			{
 				System.out.println("rsは入ってるよ");
 			}
-			
+
 			rs.next();
 			for(int i =0;i<cardlist.length;i++)
 			{
