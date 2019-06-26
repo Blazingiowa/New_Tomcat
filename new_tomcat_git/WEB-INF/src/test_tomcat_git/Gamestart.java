@@ -38,7 +38,7 @@ public class Gamestart
 
 		if(file.exists() == false)//対応表の有無
 		{
-			System.out.println(file);
+			//System.out.println(file);
 			createfile(file);
 			tt.taioucreate(player[1]);
 		}
