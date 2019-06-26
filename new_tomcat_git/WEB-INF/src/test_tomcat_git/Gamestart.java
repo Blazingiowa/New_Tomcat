@@ -58,6 +58,8 @@ public class Gamestart
 			createfile(file);
 			rt.createroomtxt(player[1],file);
 		}
+		
+		
 
 
 
@@ -67,11 +69,11 @@ public class Gamestart
 
 	}
 
-	void createfile(File file)
+	void createfile(File newfile)
 	{
 		try
 		{
-			file.createNewFile();
+			newfile.createNewFile();
 		}
 
 		catch (IOException e)

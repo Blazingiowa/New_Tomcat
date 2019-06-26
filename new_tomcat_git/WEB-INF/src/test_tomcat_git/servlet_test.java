@@ -128,6 +128,7 @@ public class servlet_test extends HttpServlet
 
 		name_val = req.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
 
+		System.out.println(req.getParameter("name"));
 		System.out.println(name_val);
 
 		str_user_info = game_start.createdirectry(name_val);
