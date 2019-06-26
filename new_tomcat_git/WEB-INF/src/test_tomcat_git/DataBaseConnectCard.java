@@ -8,10 +8,11 @@ public class DataBaseConnectCard extends DataBaseConnectRead
 {
 	ResultSet cardinfo()
 	{
-		conn = connect();
+		Statement stmt = CC.createstatement(conn = CC.createconnection());
+
 		try
 		{
-			Statement stmt = conn.createStatement();
+
 			rs = stmt.executeQuery("SELECT * FROM card");
 		}
 		catch(SQLException e)
@@ -20,12 +21,10 @@ public class DataBaseConnectCard extends DataBaseConnectRead
 		}
 		finally
 		{
+			CC.close();
 			try
 			{
-				if (conn != null)
-				{
-					conn.close();
-				}
+				rs.close();
 			}
 			catch(SQLException e)
 			{

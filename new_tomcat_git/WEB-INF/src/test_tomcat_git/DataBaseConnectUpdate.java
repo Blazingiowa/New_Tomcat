@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class DataBaseConnectUpdate extends DataBaseConnectRead
 {
-	int[] userinfo;//ルームid,プレイヤー番号
+	int[] userinfo;//ユーザID,ルームID,プレイヤー番号
 	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
 
 	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
@@ -28,13 +28,12 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 		try
 		{
-			conn = connect();
+			Statement stmt1 = CC.createstatement(conn = CC.createconnection());
+			Statement stmt2 = CC.createstatement(conn = CC.createconnection());
 
-			//SQL
-			Statement stmt3 = conn.createStatement();
-			Statement stmt4 = conn.createStatement();
-			stmt3.executeUpdate("UPDATE user SET user_name = '"+username+"' WHERE user_id = "+userinfo[0]+";");
-			stmt4.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");
+
+			stmt1.executeUpdate("UPDATE user SET user_name = '"+username+"' WHERE user_id = "+userinfo[0]+";");
+			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");
 		}
 		catch(SQLException e)
 		{
@@ -42,19 +41,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 		}
 		finally
 		{
-			try
-			{
-				if (conn != null)
-				{
-					conn.close();
-				}
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e);
-				//例外処理
-
-			}
+			CC.close();
 		}
 
 		return userinfo;

@@ -13,7 +13,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			Result[i] = 0;
 		}
 
-		conn = connect();
+		Statement stmt = CC.createstatement(conn = CC.createconnection());
 
 		/*try
 		{
@@ -31,7 +31,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			DriverManager.setLoginTimeout(timeoutseconds);*/
 
 			//SQL
-			Statement stmt = conn.createStatement();
+
 			rs = stmt.executeQuery("SELECT * FROM user WHERE user_name = null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
 			Result[0] = rs.getInt("user_id");
