@@ -51,8 +51,6 @@ public class servlet_test extends HttpServlet
 		req =request;
 
 		//以下テストコード自由に変えてよし
-		System.out.println(request);
-
 		//test();
 		//一番下に作ったメソッド  Unityから送られてくるものをセットしておける
 
@@ -131,7 +129,8 @@ public class servlet_test extends HttpServlet
 		System.out.println(req.getParameter("name"));
 		System.out.println(name_val);
 
-		str_user_info = game_start.createdirectry(name_val);
+		String test_name = "test";
+		str_user_info = game_start.createdirectry(test_name);
 
 		ub.setUserID(str_user_info[0]);
 		ub.setRoomID(str_user_info[1]);
