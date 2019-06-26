@@ -47,41 +47,13 @@ public class Servlet extends HttpServlet
 		//以下テストコード自由に変えてよし
 		//test();
 		//一番下に作ったメソッド  Unityから送られてくるものをセットしておける
-
-		if(request.getParameter("userID") ==  null)
-		{
-			int_user_info[0] = -1;
-		}
-		else
-		{
-			int_user_info[0] =Integer.parseInt(request.getParameter("userID"));
-		}
-
-
-		if(request.getParameter("roomID") ==  null)
-		{
-			int_user_info[1] = -1;
-		}
-		else
-		{
-			int_user_info[1] =Integer.parseInt(request.getParameter("roomID"));
-		}
-
-
-		if(request.getParameter("user_number") ==  null)
-		{
-			int_user_info[2] = -1;
-		}
-		else
-		{
-			int_user_info[2] =Integer.parseInt(request.getParameter("user_number"));
-		}
-
+		System.out.println("userID:"+ request.getParameter("userID"));
+		System.out.println("roomID:"+ request.getParameter("roomID"));
+		System.out.println("user_number:"+ request.getParameter("user_number"));
+		System.out.println("name:" + request.getParameter("name"));
 		//ここまでテストコード
 
 
-
-		System.out.println(request.getParameter("name"));
 		if(request.getParameter("flag") == null)//game継続
 		{
 			if (request.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
@@ -105,6 +77,7 @@ public class Servlet extends HttpServlet
 			}
 			else
 			{
+				//int変換でNULLを入れるのを防ぐ
 				if(request.getParameter("user_number1") ==  null)
 				{
 					use_hand[0] = -1;
@@ -132,6 +105,37 @@ public class Servlet extends HttpServlet
 					use_hand[2] = Integer.parseInt(request.getParameter("user_number3"));
 				}
 
+				//何かしらの値を入れないといけない。テスト的に値を入れてある
+				if(request.getParameter("userID") ==  null)
+				{
+					int_user_info[0] = 1;
+				}
+				else
+				{
+					int_user_info[0] =Integer.parseInt(request.getParameter("userID"));
+				}
+
+
+				if(request.getParameter("roomID") ==  null)
+				{
+					int_user_info[1] = 111;
+				}
+				else
+				{
+					int_user_info[1] =Integer.parseInt(request.getParameter("roomID"));
+				}
+
+
+				if(request.getParameter("user_number") ==  null)
+				{
+					int_user_info[2] = 2;
+				}
+				else
+				{
+					int_user_info[2] =Integer.parseInt(request.getParameter("user_number"));
+				}
+
+
 				game_project.main(int_user_info, use_hand);
 
 			}
@@ -144,6 +148,36 @@ public class Servlet extends HttpServlet
 		}
 		else if(request.getParameter("flag").equals("2"))//Clientが落としたい時用
 		{
+			//何かしらの値を入れないといけない。テスト的に値を入れてある
+			if(request.getParameter("userID") ==  null)
+			{
+				int_user_info[0] = 1;
+			}
+			else
+			{
+				int_user_info[0] =Integer.parseInt(request.getParameter("userID"));
+			}
+
+
+			if(request.getParameter("roomID") ==  null)
+			{
+				int_user_info[1] = 111;
+			}
+			else
+			{
+				int_user_info[1] =Integer.parseInt(request.getParameter("roomID"));
+			}
+
+
+			if(request.getParameter("user_number") ==  null)
+			{
+				int_user_info[2] = 2;
+			}
+			else
+			{
+				int_user_info[2] =Integer.parseInt(request.getParameter("user_number"));
+			}
+
 			game_end.main(int_user_info);
 		}
 	}
