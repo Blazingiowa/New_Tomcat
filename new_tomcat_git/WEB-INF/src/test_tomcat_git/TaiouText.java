@@ -66,35 +66,6 @@ public class TaiouText extends CardText
 		{
 
 			int a = 0;
-			/*for(int i =0;i<cardlist.length;i++)
->>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
-			{
-<<<<<<< HEAD
-				System.out.println("rsは入ってるよ");
-			}
-
-			int a=0;
-			//rs.next();
-			while(rs.next())
-			{
-				cardlist[a][0] = rs.getInt("card_id");
-=======
-				rs.next();
-				cardlist[i][0] = rs.getInt("card_id");
->>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
-				String[] array = rs.getString("taio_id").split(",");
-
-				for(int j = 0,k=1;j<array.length;j++,k++)
-				{
-
-					cardlist[a][k] = Integer.parseInt(array[j]);
-				}
-<<<<<<< HEAD
-				a++;
-
-=======
-				//rs.next();
-			}*/
 
 			while(rs.next())
 			{
