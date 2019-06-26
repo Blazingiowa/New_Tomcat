@@ -33,10 +33,16 @@ public class TaiouText extends CardText
 		}
 		try
 		{
+<<<<<<< HEAD
 			Statement stmt1 = conn.createStatement();
 			stmt1.executeQuery("SELECT * FROM card;");
 			rs = stmt1.getResultSet();
 			System.out.println("SQL 動いたよ");
+=======
+			Statement stmt2 = conn.createStatement();
+			stmt2.executeQuery("SELECT * FROM card;");
+			rs = stmt2.getResultSet();
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 		}
 		catch(SQLException e)
 		{
@@ -64,9 +70,15 @@ public class TaiouText extends CardText
 
 		try
 		{
+<<<<<<< HEAD
 
 			if(rs != null)
+=======
+			int a = 0;
+			/*for(int i =0;i<cardlist.length;i++)
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 			{
+<<<<<<< HEAD
 				System.out.println("rsは入ってるよ");
 			}
 
@@ -75,6 +87,10 @@ public class TaiouText extends CardText
 			while(rs.next())
 			{
 				cardlist[a][0] = rs.getInt("card_id");
+=======
+				rs.next();
+				cardlist[i][0] = rs.getInt("card_id");
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 				String[] array = rs.getString("taio_id").split(",");
 
 				for(int j = 0,k=1;j<array.length;j++,k++)
@@ -82,8 +98,24 @@ public class TaiouText extends CardText
 
 					cardlist[a][k] = Integer.parseInt(array[j]);
 				}
+<<<<<<< HEAD
 				a++;
 
+=======
+				//rs.next();
+			}*/
+
+			while(rs.next())
+			{
+				cardlist[a][0] = rs.getInt("card_id");
+				String[] array = rs.getString("taio_id").split(",");
+
+				for(int j = 0,k=1;j<array.length;j++,k++)
+				{
+					cardlist[a][k] = Integer.parseInt(array[j]);
+				}
+				a++;
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 			}
 		}
 

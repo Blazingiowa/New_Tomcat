@@ -26,10 +26,16 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		conn = connect();
 		try
 		{
+<<<<<<< HEAD
 			Statement stmt2 = conn.createStatement();
 			stmt2.executeQuery("SELECT * FROM card;");
 			rs = stmt2.getResultSet();
 			System.out.println("SQL 動いたよ");
+=======
+			Statement stmt1 = conn.createStatement();
+			stmt1.executeQuery("SELECT * FROM card;");
+			rs = stmt1.getResultSet();
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 		}
 		catch(SQLException e)
 		{
@@ -125,9 +131,14 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 
 		}
+		Close();
 
 		return conn;
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'neo_yt' of https://github.com/Blazingiowa/New_Tomcat.git
 	void Close()
 	{
 		try
