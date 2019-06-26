@@ -53,8 +53,8 @@ public class servlet_test extends HttpServlet
 		//以下テストコード自由に変えてよし
 		System.out.println(request);
 
-//		check();
-//		System.out.println(request);
+		//test();
+		//一番下に作ったメソッド  Unityから送られてくるものをセットしておける
 
 
 		//ここまでテストコード
@@ -165,6 +165,15 @@ public class servlet_test extends HttpServlet
 		}
 
 		game_project.main(int_user_info, use_hand);
+	}
+	void test()
+	{
+		req.setAttribute("userID", "");
+		req.setAttribute("roomID", "");
+		req.setAttribute("user_number", "");
+		req.setAttribute("usehand1", "");
+		req.setAttribute("usehand2", "");
+		req.setAttribute("usehand3", "");
 	}
 	/*
 	int[] conversion(String[] str)//使っていない
