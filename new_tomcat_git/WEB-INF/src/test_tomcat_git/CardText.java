@@ -57,6 +57,15 @@ public class CardText extends TextWrite //カードリストテキストを作�
 				cardlist[i][2] = rs.getInt("cost");
 				rs.next();
 			}*/
+			if(rs != null)
+			{
+				System.out.println("rs is not null");
+			}
+			else
+			{
+				System.out.println("rs is null");
+			}
+
 			int a = 0;
 			while(rs.next())
 			{
