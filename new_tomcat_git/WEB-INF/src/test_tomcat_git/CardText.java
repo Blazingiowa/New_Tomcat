@@ -26,8 +26,9 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		conn = connect();
 		try
 		{
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM card;");
+			Statement stmt1 = conn.createStatement();
+			stmt1.executeQuery("SELECT * FROM card;");
+			rs = stmt1.getResultSet();
 		}
 		catch(SQLException e)
 		{
@@ -35,18 +36,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		}
 		finally
 		{
-			try
-			{
-				if (conn != null)
-				{
-					conn.close();
-				}
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e);
-				//例外処理
-			}
+
 		}
 
 		file = new File("var/www/html/"+room+"/card.txt");
@@ -58,13 +48,21 @@ public class CardText extends TextWrite //カードリストテキストを作�
 
 		try
 		{
-			rs.next();
+			/*rs.next();
 			for(int i=0;i<cardlist.length;i++)
 			{
 				cardlist[i][0] = rs.getInt("card_id");
 				cardlist[i][1] = rs.getInt("dmg");
 				cardlist[i][2] = rs.getInt("cost");
 				rs.next();
+			}*/
+			int a = 0;
+			while(rs.next())
+			{
+				cardlist[a][0] = rs.getInt("card_id");
+				cardlist[a][1] = rs.getInt("dmg");
+				cardlist[a][2] = rs.getInt("cost");
+				a++;
 			}
 
 		}
@@ -125,7 +123,24 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 
 		}
+		Close();
 
 		return conn;
+	}
+
+	void Close()
+	{
+		try
+		{
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+			//例外処理
+		}
 	}
 }

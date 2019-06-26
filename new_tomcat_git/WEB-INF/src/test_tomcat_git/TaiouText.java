@@ -29,8 +29,9 @@ public class TaiouText extends CardText
 		conn = connect();
 		try
 		{
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM card;");
+			Statement stmt2 = conn.createStatement();
+			stmt2.executeQuery("SELECT * FROM card;");
+			rs = stmt2.getResultSet();
 		}
 		catch(SQLException e)
 		{
@@ -69,11 +70,10 @@ public class TaiouText extends CardText
 
 		try
 		{
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM card;");
-			rs.next();
-			for(int i =0;i<cardlist.length;i++)
+			int a = 0;
+			/*for(int i =0;i<cardlist.length;i++)
 			{
+				rs.next();
 				cardlist[i][0] = rs.getInt("card_id");
 				String[] array = rs.getString("taio_id").split(",");
 
@@ -81,7 +81,19 @@ public class TaiouText extends CardText
 				{
 					cardlist[i][k] = Integer.parseInt(array[j]);
 				}
-				rs.next();
+				//rs.next();
+			}*/
+
+			while(rs.next())
+			{
+				cardlist[a][0] = rs.getInt("card_id");
+				String[] array = rs.getString("taio_id").split(",");
+
+				for(int j = 0,k=1;j<array.length;j++,k++)
+				{
+					cardlist[a][k] = Integer.parseInt(array[j]);
+				}
+				a++;
 			}
 		}
 
