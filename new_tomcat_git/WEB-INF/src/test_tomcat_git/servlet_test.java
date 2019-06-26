@@ -28,7 +28,6 @@ public class servlet_test extends HttpServlet
 	private GameProject game_project = new GameProject();
 
 	private String name_val;
-	private String[] str_test;
 	private String[] str_user_info;
 	private int[] int_user_info;
 	private int[] use_hand;
@@ -44,7 +43,6 @@ public class servlet_test extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 
-		str_test = new String[3];
 		str_user_info = new String[3];//順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
 		int_user_info = new int[3];
 		use_hand = new int[3];
