@@ -59,7 +59,7 @@ public class servlet_test extends HttpServlet
 
 		substitution();
 
-
+		System.out.println(request.getParameter("name"));
 		if(req.getParameter("flag") == null)//game継続
 		{
 			if (req.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
