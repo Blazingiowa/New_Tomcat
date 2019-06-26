@@ -39,18 +39,7 @@ public class TaiouText extends CardText
 		}
 		finally
 		{
-			try
-			{
-				if (conn != null)
-				{
-					conn.close();
-				}
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e);
-				//例外処理
-			}
+			Close();
 		}
 
 		file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
@@ -157,5 +146,21 @@ public class TaiouText extends CardText
 		}
 
 		return conn;
+	}
+
+	void Close()
+	{
+		try
+		{
+			if (conn != null)
+			{
+				conn.close();
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+			//例外処理
+		}
 	}
 }
