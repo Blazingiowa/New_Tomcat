@@ -146,6 +146,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 			if (conn != null)
 			{
 				conn.close();
+				rs.close();
 			}
 		}
 		catch(SQLException e)

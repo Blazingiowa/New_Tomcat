@@ -157,6 +157,7 @@ public class TaiouText extends CardText
 			if (conn != null)
 			{
 				conn.close();
+				rs.close();
 			}
 		}
 		catch(SQLException e)
