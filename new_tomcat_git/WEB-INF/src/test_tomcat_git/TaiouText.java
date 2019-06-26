@@ -30,7 +30,7 @@ public class TaiouText extends CardText
 		try
 		{
 			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM card");
+			rs = stmt.executeQuery("SELECT * FROM card;");
 		}
 		catch(SQLException e)
 		{
@@ -69,6 +69,8 @@ public class TaiouText extends CardText
 
 		try
 		{
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM card;");
 			rs.next();
 			for(int i =0;i<cardlist.length;i++)
 			{
