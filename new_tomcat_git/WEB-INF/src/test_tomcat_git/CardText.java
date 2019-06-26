@@ -26,8 +26,8 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		conn = connect();
 		try
 		{
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM card;");
+			Statement stmt2 = conn.createStatement();
+			rs = stmt2.executeQuery("SELECT * FROM card;");
 		}
 		catch(SQLException e)
 		{
