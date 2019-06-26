@@ -97,7 +97,7 @@ public class servlet_test extends HttpServlet
 	{
 		if(req.getParameter("userID") ==  null)
 		{
-			int_user_info[0] = -1;
+			int_user_info[0] = 1;
 		}
 		else
 		{
@@ -107,7 +107,7 @@ public class servlet_test extends HttpServlet
 
 		if(req.getParameter("roomID") ==  null)
 		{
-			int_user_info[1] = -1;
+			int_user_info[1] = 111;
 		}
 		else
 		{
@@ -117,7 +117,7 @@ public class servlet_test extends HttpServlet
 
 		if(req.getParameter("user_number") ==  null)
 		{
-			int_user_info[2] = -1;
+			int_user_info[2] = 2;
 		}
 		else
 		{
