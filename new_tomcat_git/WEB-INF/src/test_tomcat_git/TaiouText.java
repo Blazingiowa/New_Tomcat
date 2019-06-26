@@ -27,10 +27,15 @@ public class TaiouText extends CardText
 
 
 		conn = connect();
+		if(conn != null)
+		{
+			System.out.println("connは入ってるよ");
+		}
 		try
 		{
 			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM card;");
+			stmt.executeQuery("SELECT * FROM card;");
+			rs = stmt.getResultSet();
 			System.out.println("SQL 動いたよ");
 		}
 		catch(SQLException e)
@@ -68,6 +73,7 @@ public class TaiouText extends CardText
 			//rs.next();
 			for(int i =0;i<cardlist.length;i++)
 			{
+
 				rs.next();
 				cardlist[i][0] = rs.getInt("card_id");
 				String[] array = rs.getString("taio_id").split(",");
