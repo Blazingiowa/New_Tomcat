@@ -68,12 +68,13 @@ public class TaiouText extends CardText
 			//rs.next();
 			for(int i =0;i<cardlist.length;i++)
 			{
+				rs.next();
 				cardlist[i][0] = rs.getInt("card_id");
 				String[] array = rs.getString("taio_id").split(",");
 
 				for(int j = 0,k=1;j<array.length;j++,k++)
 				{
-					rs.next();
+
 					cardlist[i][k] = Integer.parseInt(array[j]);
 				}
 
