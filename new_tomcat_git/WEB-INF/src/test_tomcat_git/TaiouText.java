@@ -69,10 +69,13 @@ public class TaiouText extends CardText
 
 		try
 		{
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM card;");
 			if(rs == null)
 			{
 				System.out.println("fuck");
 			}
+
 			rs.next();
 			for(int i =0;i<cardlist.length;i++)
 			{
