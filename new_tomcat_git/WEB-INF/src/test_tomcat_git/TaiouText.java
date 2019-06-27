@@ -57,6 +57,10 @@ public class TaiouText extends CardText
 		try
 		{
 			int count = 0;
+			if(rs != null)
+			{
+				System.out.println("rsはnullじゃないお");
+			}
 			while(rs.next())
 			{
 				cardlist[count][0] = rs.getInt("card_id");
