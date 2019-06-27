@@ -19,21 +19,31 @@ public class Servlet extends HttpServlet
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
 	private GameEND game_end = new GameEND();
-	//private Gamemain game_main = new Gamemain();
-
-
 	private GameProject game_project = new GameProject();
 
-	private String name_val;
-	private String[] str_user_info;
-	private int[] int_user_info;
-	private int[] use_hand;
+	private String[] str_user_info = new String[3]; //順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
+	private int[] int_user_info = new int[3];
 
-	String us_id = "";
-	String room_id = "";
-	String us_num = "";
-	String name = "";
-	String flag = "";
+	private String[] str_use_hand = new String[3];
+	private int[] use_hand = new int[3];
+
+	private String us_id;
+	private String room_id;
+	private String us_num;
+	private String name;
+	private String flag;
+
+	Servlet()
+	{
+		us_id = "";
+		room_id = "";
+		us_num = "";
+		name = "";
+		flag = "";
+		str_use_hand [0] = "";
+		str_use_hand [1] = "";
+		str_use_hand [2] = "";
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -46,10 +56,6 @@ public class Servlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 
-		str_user_info = new String[3];//順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
-		int_user_info = new int[3];
-		use_hand = new int[3];
-
 		//以下テストコード自由に変えてよし
 		//test();
 		//一番下に作ったメソッド  Unityから送られてくるものをセットしておける
@@ -58,6 +64,10 @@ public class Servlet extends HttpServlet
 		us_num = request.getParameter("user_number");
 		name = request.getParameter("name");
 		flag = request.getParameter("flag");
+		str_use_hand [0] = request.getParameter("use_hand1");
+		str_use_hand [1] = request.getParameter("use_hand2");
+		str_use_hand [2] = request.getParameter("use_hand3");
+
 
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
@@ -81,6 +91,7 @@ public class Servlet extends HttpServlet
 				ub.setRoomID(str_user_info[1]);
 				ub.setUserNumber(str_user_info[2]);
 
+				System.out.println(ub);
 
 				//JSONを生成
 				response.setContentType("application/json");
@@ -92,62 +103,36 @@ public class Servlet extends HttpServlet
 			else
 			{
 				//int変換でNULLを入れるのを防ぐ
-				if(request.getParameter("user_hand1") ==  null)
+				if(str_use_hand [0] ==  null)
 				{
 					use_hand[0] = -1;
 				}
 				else
 				{
-					use_hand[0] = Integer.parseInt(request.getParameter("user_number1"));
+					use_hand[0] = Integer.parseInt(str_use_hand [0]);
 				}
 
-				if(request.getParameter("user_hand2") ==  null)
+				if(str_use_hand [1] ==  null)
 				{
 					use_hand[1] = -1;
 				}
 				else
 				{
-					use_hand[1] = Integer.parseInt(request.getParameter("user_number2"));
+					use_hand[1] = Integer.parseInt(str_use_hand [1]);
 				}
 
-				if(request.getParameter("user_hand3") ==  null)
+				if(str_use_hand [2] ==  null)
 				{
 					use_hand[2] = -1;
 				}
 				else
 				{
-					use_hand[2] = Integer.parseInt(request.getParameter("user_number3"));
+					use_hand[2] = Integer.parseInt(str_use_hand [2]);
 				}
 
 				//何かしらの値を入れないといけない。テスト的に値を入れてある
-				if(us_id ==  null)
-				{
-					int_user_info[0] = 1;
-				}
-				else
-				{
-					int_user_info[0] =Integer.parseInt(request.getParameter("userID"));
-				}
 
-
-				if(room_id ==  null)
-				{
-					int_user_info[1] = 111;
-				}
-				else
-				{
-					int_user_info[1] =Integer.parseInt(request.getParameter("roomID"));
-				}
-
-
-				if(us_num ==  null)
-				{
-					int_user_info[2] = 2;
-				}
-				else
-				{
-					int_user_info[2] =Integer.parseInt(request.getParameter("user_number"));
-				}
+				//info();
 
 				//game_project.main(int_user_info, use_hand);
 
@@ -162,39 +147,42 @@ public class Servlet extends HttpServlet
 		else if(flag.equals("2"))//Clientが落としたい時用
 		{
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
-			if(us_id ==  null)
-			{
-				int_user_info[0] = 1;
-			}
-			else
-			{
-				int_user_info[0] =Integer.parseInt(request.getParameter("userID"));
-			}
-
-
-			if(room_id ==  null)
-			{
-				int_user_info[1] = 111;
-			}
-			else
-			{
-				int_user_info[1] =Integer.parseInt(request.getParameter("roomID"));
-			}
-
-
-			if(us_num ==  null)
-			{
-				int_user_info[2] = 2;
-			}
-			else
-			{
-				int_user_info[2] =Integer.parseInt(request.getParameter("user_number"));
-			}
+			//info();
 
 			//game_end.main(int_user_info);
 		}
 
 	}
+	void info()
+	{
+		if(us_id ==  null)
+		{
+			int_user_info[0] = 1;
+		}
+		else
+		{
+			int_user_info[0] =Integer.parseInt(us_id);
+		}
 
+
+		if(room_id ==  null)
+		{
+			int_user_info[1] = 111;
+		}
+		else
+		{
+			int_user_info[1] =Integer.parseInt(room_id);
+		}
+
+
+		if(us_num ==  null)
+		{
+			int_user_info[2] = 2;
+		}
+		else
+		{
+			int_user_info[2] =Integer.parseInt(us_num);
+		}
+	}
 
 }
