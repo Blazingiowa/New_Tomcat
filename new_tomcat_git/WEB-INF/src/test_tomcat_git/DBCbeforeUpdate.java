@@ -15,23 +15,8 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 
-		/*try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-		}
-		catch (ClassNotFoundException e1)
-		{
-
-			e1.printStackTrace();
-		}*/
-
 		try
 		{
-			/*conn = DriverManager.getConnection(url,user,password);
-			DriverManager.setLoginTimeout(timeoutseconds);*/
-
-			//SQL
-
 			rs = stmt.executeQuery("SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
 			rs.next();
