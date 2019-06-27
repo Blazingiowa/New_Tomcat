@@ -91,6 +91,10 @@ public class Servlet extends HttpServlet
 				ub.setRoomID(str_user_info[1]);
 				ub.setUserNumber(str_user_info[2]);
 
+				System.out.println("return チェック");
+				System.out.println(str_user_info[0]);
+				System.out.println(str_user_info[1]);
+				System.out.println(str_user_info[2]);
 				System.out.println(ub);
 
 				//JSONを生成
@@ -100,6 +104,8 @@ public class Servlet extends HttpServlet
 					      Collections.singletonMap("param", gson.toJson(ub))
 					    ));
 			}
+
+			/*
 			else
 			{
 				//int変換でNULLを入れるのを防ぐ
@@ -137,7 +143,7 @@ public class Servlet extends HttpServlet
 				//game_project.main(int_user_info, use_hand);
 
 			}
-
+			*/
 		}
 		//flagが立った!
 		else if(flag.equals("1"))//Clientが更新したい時用
@@ -151,7 +157,6 @@ public class Servlet extends HttpServlet
 
 			//game_end.main(int_user_info);
 		}
-
 	}
 	void info()
 	{
@@ -183,6 +188,8 @@ public class Servlet extends HttpServlet
 		{
 			int_user_info[2] =Integer.parseInt(us_num);
 		}
+
 	}
+
 
 }
