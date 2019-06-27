@@ -33,6 +33,8 @@ public class Gamestart
 		file = new File(url);
 		if(file.exists() == false)//player.txt
 		{
+			System.out.println("プレイヤーファイルはないよ");
+			System.out.println(url);
 			createfile(file);
 		}
 
