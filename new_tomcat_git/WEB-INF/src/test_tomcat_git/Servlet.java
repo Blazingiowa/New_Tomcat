@@ -1,6 +1,7 @@
 package test_tomcat_git;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +33,7 @@ public class Servlet extends HttpServlet
 	String room_id = "";
 	String us_num = "";
 	String name = "";
+	String flag = "";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -55,23 +57,25 @@ public class Servlet extends HttpServlet
 		room_id = request.getParameter("roomID");
 		us_num = request.getParameter("user_number");
 		name = request.getParameter("name");
+		flag = request.getParameter("flag");
 
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
 		System.out.println("roomID:"+ room_id);
 		System.out.println("user_number:"+ us_num);
 		System.out.println("name:" + name);
+		System.out.println("flag:" + flag);
 		//ここまでテストコード
 
-		/*
-		if(request.getParameter("flag") == null)//game継続
+
+		if(flag == null)//game継続
 		{
-			if (request.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
+			if (room_id == null)//ルームID値持っていないとき始めてきたと認識
 			{
-				name_val = request.getParameter("name"); //リクエスト内に[name]パラメーターで名前を入れてもらう
+				//リクエスト内に[name]パラメーターで名前を入れてもらう
 
 				//String test_name = "test";
-				str_user_info = game_start.createdirectry(name_val);
+				str_user_info = game_start.createdirectry(name);
 
 				ub.setUserID(str_user_info[0]);
 				ub.setRoomID(str_user_info[1]);
@@ -88,7 +92,7 @@ public class Servlet extends HttpServlet
 			else
 			{
 				//int変換でNULLを入れるのを防ぐ
-				if(request.getParameter("user_number1") ==  null)
+				if(request.getParameter("user_hand1") ==  null)
 				{
 					use_hand[0] = -1;
 				}
@@ -97,7 +101,7 @@ public class Servlet extends HttpServlet
 					use_hand[0] = Integer.parseInt(request.getParameter("user_number1"));
 				}
 
-				if(request.getParameter("user_number2") ==  null)
+				if(request.getParameter("user_hand2") ==  null)
 				{
 					use_hand[1] = -1;
 				}
@@ -106,7 +110,7 @@ public class Servlet extends HttpServlet
 					use_hand[1] = Integer.parseInt(request.getParameter("user_number2"));
 				}
 
-				if(request.getParameter("user_number3") ==  null)
+				if(request.getParameter("user_hand3") ==  null)
 				{
 					use_hand[2] = -1;
 				}
@@ -116,7 +120,7 @@ public class Servlet extends HttpServlet
 				}
 
 				//何かしらの値を入れないといけない。テスト的に値を入れてある
-				if(request.getParameter("userID") ==  null)
+				if(us_id ==  null)
 				{
 					int_user_info[0] = 1;
 				}
@@ -126,7 +130,7 @@ public class Servlet extends HttpServlet
 				}
 
 
-				if(request.getParameter("roomID") ==  null)
+				if(room_id ==  null)
 				{
 					int_user_info[1] = 111;
 				}
@@ -136,7 +140,7 @@ public class Servlet extends HttpServlet
 				}
 
 
-				if(request.getParameter("user_number") ==  null)
+				if(us_num ==  null)
 				{
 					int_user_info[2] = 2;
 				}
@@ -145,21 +149,20 @@ public class Servlet extends HttpServlet
 					int_user_info[2] =Integer.parseInt(request.getParameter("user_number"));
 				}
 
-
-				game_project.main(int_user_info, use_hand);
+				//game_project.main(int_user_info, use_hand);
 
 			}
 
 		}
 		//flagが立った!
-		else if(request.getParameter("flag").equals("1"))//Clientが更新したい時用
+		else if(flag.equals("1"))//Clientが更新したい時用
 		{
 
 		}
-		else if(request.getParameter("flag").equals("2"))//Clientが落としたい時用
+		else if(flag.equals("2"))//Clientが落としたい時用
 		{
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
-			if(request.getParameter("userID") ==  null)
+			if(us_id ==  null)
 			{
 				int_user_info[0] = 1;
 			}
@@ -169,7 +172,7 @@ public class Servlet extends HttpServlet
 			}
 
 
-			if(request.getParameter("roomID") ==  null)
+			if(room_id ==  null)
 			{
 				int_user_info[1] = 111;
 			}
@@ -179,7 +182,7 @@ public class Servlet extends HttpServlet
 			}
 
 
-			if(request.getParameter("user_number") ==  null)
+			if(us_num ==  null)
 			{
 				int_user_info[2] = 2;
 			}
@@ -188,9 +191,9 @@ public class Servlet extends HttpServlet
 				int_user_info[2] =Integer.parseInt(request.getParameter("user_number"));
 			}
 
-			game_end.main(int_user_info);
+			//game_end.main(int_user_info);
 		}
-		*/
+
 	}
 
 
