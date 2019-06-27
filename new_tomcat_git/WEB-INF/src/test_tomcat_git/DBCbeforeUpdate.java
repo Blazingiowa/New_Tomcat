@@ -34,12 +34,16 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 
 			rs = stmt.executeQuery("SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
+			rs.next();
 			Result[0] = rs.getInt("user_id");
+			rs.close();
 
 			rs = stmt.executeQuery("SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;");
 			//結果の挿入
+			rs.next();
 			Result[1] = rs.getInt("room_id");
 			Result[2] = rs.getInt("player_number");
+			rs.close();
 
 			System.out.println("DBCbeforeUpdate上での値だお");
 			System.out.println("user_id:"+Result[0]);
@@ -71,4 +75,5 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 		return Result;
 
 	}
+
 }
