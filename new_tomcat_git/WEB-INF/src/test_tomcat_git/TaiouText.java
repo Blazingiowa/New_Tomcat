@@ -17,10 +17,6 @@ public class TaiouText extends CardText
 
 	ResultSet rs;
 	Connection conn;
-	protected String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
-	protected String user = "root";//データベースへアクセスするID
-	protected String password = "ncc_NCC2019";//データベースのパスワード
-
 
 	void taioucreate(int room)
 	{

@@ -16,9 +16,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	ResultSet rs;
 	int[][] cardlist;
 	Connection conn;
-	protected String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
-	protected String user = "root";//データベースへアクセスするID
-	protected String password = "ncc_NCC2019";//データベースのパスワード
+
 
 	void cardcreate(int room)
 	{
