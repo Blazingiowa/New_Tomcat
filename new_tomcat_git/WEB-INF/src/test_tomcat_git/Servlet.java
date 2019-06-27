@@ -83,7 +83,6 @@ public class Servlet extends HttpServlet
 				System.out.println(str_user_info[0]);
 				System.out.println(str_user_info[1]);
 				System.out.println(str_user_info[2]);
-				System.out.println(ub);
 
 				//JSONを生成
 				response.setContentType("application/json");

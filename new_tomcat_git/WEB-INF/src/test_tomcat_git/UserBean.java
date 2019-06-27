@@ -13,6 +13,7 @@ public class UserBean
 	public void setUserID(String userID) {
 		// TODO 自動生成されたメソッド・スタブ
 		this.userID = userID;
+		System.out.println("userid通った");
 	}
 
 
@@ -22,6 +23,7 @@ public class UserBean
 	public void setRoomID(String roomID) {
 		// TODO 自動生成されたメソッド・スタブ
 		this.roomID = roomID;
+		System.out.println("roomid通った");
 	}
 
 
@@ -31,5 +33,6 @@ public class UserBean
 	public void setUserNumber(String userNumber) {
 		// TODO 自動生成されたメソッド・スタブ
 		this.userNumber = userNumber;
+		System.out.println("user number通った");
 	}
 }
