@@ -256,7 +256,7 @@ public class GameProject
 			for (int i = 0; i < p1_card.length; i++)
 			{
 				//使ったカードがあったら（つまり、－１でなければ）
-				if (p1_card[i][0] != 0)
+				if (p1_card[i][0] != -1)
 				{
 					p1_cardinfo = DBC.reference(p1_card[i][0]);//p1の使ったカード情報をDBからもってくる
 
@@ -273,7 +273,7 @@ public class GameProject
 			for (int i = 0; i < p2_card.length; i++)
 			{
 				//使ったカードがあったら（つまり、－１でなければ）
-				if (p2_card[i][0] != 0)
+				if (p2_card[i][0] != -1)
 				{
 					p2_cardinfo = DBC.reference(p2_card[i][0]);//p2の使ったカード情報をDBからもってくる
 
@@ -436,7 +436,7 @@ public class GameProject
 			for (int i = 0; i < p1_card.length; i++)
 			{
 				//使ったカードがあったら（つまり、－１でなければ）
-				if (p1_card[i][0] != 0)
+				if (p1_card[i][0] != -1)
 				{
 					p1_cardinfo = DBC.reference(p1_card[i][0]);//p1の使ったカード情報をDBからもってくる
 
@@ -453,7 +453,7 @@ public class GameProject
 			for (int i = 0; i < p2_card.length; i++)
 			{
 				//使ったカードがあったら（つまり、－１でなければ）
-				if (p2_card[i][0] != 0)
+				if (p2_card[i][0] != -1)
 				{
 					p2_cardinfo = DBC.reference(p2_card[i][0]);//p2の使ったカード情報をDBからもってくる
 
