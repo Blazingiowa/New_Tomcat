@@ -42,7 +42,7 @@ public class Servlet extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
 	{
-		//request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 
 		str_user_info = new String[3];//順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
 		int_user_info = new int[3];
