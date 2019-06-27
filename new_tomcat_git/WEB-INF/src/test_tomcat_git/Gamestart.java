@@ -33,10 +33,12 @@ public class Gamestart
 		file = new File(url);
 		if(file.exists() == false)//player.txt
 		{
+			System.out.println("プレイヤーファイルはないよ");
+			System.out.println(url);
 			createfile(file);
 		}
 
-		tx.editer(player[1], player[2],0,0,null);
+		/*tx.editer(player[1], player[2],0,0,null);
 
 		url= "/var/www/html/"+player[1]+"/taiou.txt";
 		file = new File(url);
@@ -63,7 +65,7 @@ public class Gamestart
 		{
 			createfile(file);
 			rt.createroomtxt(player[1],file);
-		}
+		}*/
 
 		System.out.println("GameStartクラス上での情報だお");
 		System.out.println("user_id:"+userinfo[0]);
