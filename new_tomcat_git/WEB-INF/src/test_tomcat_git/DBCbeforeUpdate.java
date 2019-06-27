@@ -32,7 +32,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 
 			//SQL
 
-			rs = stmt.executeQuery("SELECT * FROM user WHERE user_name = null ORDER BY user_id LIMIT 1;");
+			rs = stmt.executeQuery("SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;");
 			//結果の挿入
 			Result[0] = rs.getInt("user_id");
 
