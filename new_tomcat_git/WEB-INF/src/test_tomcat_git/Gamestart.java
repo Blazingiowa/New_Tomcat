@@ -16,6 +16,7 @@ public class Gamestart
 
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
+	String url;
 
 	String[] createdirectry(String user_name) //
 	{
@@ -27,9 +28,9 @@ public class Gamestart
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
-		/*テストのためテキスト作成は無視*/
-		/*
-		file = new File("/var/www/html/"+player[1]+"/"+player[2]+".txt");
+		url = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
+
+		file = new File(url);
 		if(file.exists() == false)//player.txt
 		{
 			createfile(file);
@@ -37,7 +38,8 @@ public class Gamestart
 
 		tx.editer(player[1], player[2],0,0,null);
 
-		file = new File("/var/www/html/"+player[1]+"/taiou.txt");
+		url= "/var/www/html/"+player[1]+"/taiou.txt";
+		file = new File(url);
 
 		if(file.exists() == false)//対応表の有無
 		{
@@ -45,7 +47,8 @@ public class Gamestart
 			tt.taioucreate(player[1]);
 		}
 
-		file = new File("/var/www/html/"+player[1]+"/card.txt");
+		url = "/var/www/html/"+player[1]+"/card.txt";
+		file = new File(url);
 
 		if(file.exists() == false)//カード表の有無
 		{
@@ -53,13 +56,14 @@ public class Gamestart
 			ct.cardcreate(player[1]);
 		}
 
-		file = new File("/var/www/html/"+player[1]+"/room.txt");
+		url = "/var/www/html/"+player[1]+"/room.txt";
+		file = new File(url);
 
 		if(file.exists() == false)//room.txtの有無
 		{
 			createfile(file);
 			rt.createroomtxt(player[1],file);
-		}*/
+		}
 
 		System.out.println("GameStartクラス上での情報だお");
 		System.out.println("user_id:"+userinfo[0]);
