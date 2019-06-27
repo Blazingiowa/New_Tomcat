@@ -61,10 +61,10 @@ public class Gamestart
 			rt.createroomtxt(player[1],file);
 		}*/
 
-
-
-
-
+		System.out.println("GameStartクラス上での情報だお");
+		System.out.println("user_id:"+userinfo[0]);
+		System.out.println("room_id:"+userinfo[1]);
+		System.out.println("player_number:"+userinfo[2]);
 
 		return userinfo;
 

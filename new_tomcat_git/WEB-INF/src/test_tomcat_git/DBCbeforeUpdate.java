@@ -41,6 +41,11 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			Result[1] = rs.getInt("room_id");
 			Result[2] = rs.getInt("player_number");
 
+			System.out.println("DBCbeforeUpdate上での値だお");
+			System.out.println("user_id:"+Result[0]);
+			System.out.println("room_id:"+Result[1]);
+			System.out.println("player_number:"+Result[2]);
+
 
 		}
 		catch(SQLException e)

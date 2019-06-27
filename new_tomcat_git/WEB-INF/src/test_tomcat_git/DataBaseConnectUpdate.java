@@ -15,10 +15,10 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 		password = "ncc_NCC2019";*/
 
 		userinfo=DBCB.beforeupdate();//空いているルームと攻守を検索
-		for(int i=0;i<userinfo.length;i++)
-		{
-
-		}
+		System.out.println("DataBaseUpdateクラス上での情報だお");
+		System.out.println("user_id:"+userinfo[0]);
+		System.out.println("room_id:"+userinfo[1]);
+		System.out.println("player_number:"+userinfo[2]);
 
 		/*try
 		{
