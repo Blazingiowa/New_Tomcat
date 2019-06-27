@@ -1,7 +1,6 @@
 package test_tomcat_git;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,7 +52,7 @@ public class Servlet extends HttpServlet
 		System.out.println("name:" + request.getParameter("name"));
 		//ここまでテストコード
 
-
+		/*
 		if(request.getParameter("flag") == null)//game継続
 		{
 			if (request.getParameter("roomID") == null)//ルームID値持っていないとき始めてきたと認識
@@ -180,6 +179,7 @@ public class Servlet extends HttpServlet
 
 			game_end.main(int_user_info);
 		}
+		*/
 	}
 
 
