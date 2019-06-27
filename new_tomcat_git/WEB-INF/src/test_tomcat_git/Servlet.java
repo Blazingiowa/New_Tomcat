@@ -33,18 +33,6 @@ public class Servlet extends HttpServlet
 	private String name;
 	private String flag;
 
-	Servlet()
-	{
-		us_id = "";
-		room_id = "";
-		us_num = "";
-		name = "";
-		flag = "";
-		str_use_hand [0] = "";
-		str_use_hand [1] = "";
-		str_use_hand [2] = "";
-	}
-
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
 	{
