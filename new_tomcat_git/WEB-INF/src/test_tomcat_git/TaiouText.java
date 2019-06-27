@@ -49,10 +49,6 @@ public class TaiouText extends CardText
 		{
 
 		}
-		finally
-		{
-			CC.close();
-		}
 
 		try
 		{
@@ -80,6 +76,20 @@ public class TaiouText extends CardText
 			e.printStackTrace();
 		}
 
+		finally
+		{
+			CC.close();
+			try
+			{
+				rs.close();
+			}
+			catch (SQLException e)
+			{
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}
+
 		for(int i =0;i<line.length;i++)
 		{
 			for(int j = 0;j<cardlist[i].length;j++)
@@ -91,6 +101,8 @@ public class TaiouText extends CardText
 				}
 			}
 		}
+
+
 
 		for(int i =0;i<line.length;i++)
 		{

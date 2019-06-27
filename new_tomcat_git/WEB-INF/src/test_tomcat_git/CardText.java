@@ -40,10 +40,6 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 
 		}
-		finally
-		{
-
-		}
 
 		try
 		{
