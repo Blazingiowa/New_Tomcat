@@ -21,11 +21,14 @@ public class Gamestart
 	{
 		player = DBCU.update(user_name);
 
+
 		for(int i = 0;i<userinfo.length;i++)
 		{
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
+		/*テストのためテキスト作成は無視*/
+		/*
 		file = new File("/var/www/html/"+player[1]+"/"+player[2]+".txt");
 		if(file.exists() == false)//player.txt
 		{
@@ -56,7 +59,7 @@ public class Gamestart
 		{
 			createfile(file);
 			rt.createroomtxt(player[1],file);
-		}
+		}*/
 
 
 
