@@ -56,6 +56,7 @@ public class Servlet extends HttpServlet
 		us_num = request.getParameter("user_number");
 		name = request.getParameter("name");
 
+		System.out.println(request);
 		System.out.println("userID:"+ us_id);
 		System.out.println("roomID:"+ room_id);
 		System.out.println("user_number:"+ us_num);
