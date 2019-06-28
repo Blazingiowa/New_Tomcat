@@ -14,6 +14,12 @@ public class StartupText extends TextWrite
 		int[] hpSet = {-1,100,100};
 		int[] manaSet = {-1,1,1};
 		int[] defDamage = {0,0,0};
+		line = new String[7];
+
+		for(int i = 0;i<line.length;i++)
+		{
+			line[i] = "";
+		}
 
 		for(int i = 0;i<defSet.length;i++)
 		{
