@@ -53,9 +53,10 @@ public class CardText extends TextWrite //カードリストテキストを作�
 			System.out.println("cardlist配列の中身だお");
 			for(int i =0;i<cardlist.length;i++)
 			{
-				System.out.println("card_id:"+cardlist[i][0]);
+				System.out.print("card_id:"+cardlist[i][0]);
 				System.out.print("dmg:"+cardlist[i][1]);
 				System.out.print("cost:"+cardlist[i][2]);
+				System.out.println("");
 			}
 
 		}
