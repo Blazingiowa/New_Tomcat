@@ -17,7 +17,7 @@ public class TextRead
 
 	int[] read(int room_id,int player_number,int line_number)
 	{
-		settext(room_id,player_number);
+		line = settext(room_id,player_number);
 
 		String[] array = line[line_number].split(",");
 
@@ -29,7 +29,7 @@ public class TextRead
 		return data;
 	}
 
-	protected void settext(int room,int player)
+	protected String[] settext(int room,int player)
 	{
 		if(player==3)
 		{
@@ -85,6 +85,8 @@ public class TextRead
 		{
 			brclose();
 		}
+
+		return line;
 	}
 
 	private void brclose()

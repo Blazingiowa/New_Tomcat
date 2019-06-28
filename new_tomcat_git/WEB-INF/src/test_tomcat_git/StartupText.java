@@ -36,7 +36,7 @@ public class StartupText extends TextWrite
 			}
 		}
 
-		line[0] = "0,-1,-1,s,";
+		line[0] = "0,-1,-1";
 
 		for(int i = 1;i<line.length;i++)
 		{
@@ -75,7 +75,7 @@ public class StartupText extends TextWrite
 			bwclose();
 		}
 
-		write(room_id,player_number,1,hpSet,line);/*
+		write(room_id,player_number,1,hpSet);/*
 		write(room_id,player_number,2,manaSet);
 		write(room_id,player_number,4,defDamage);
 		write(room_id,player_number,6,defDamage);*/
