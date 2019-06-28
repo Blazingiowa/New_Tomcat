@@ -17,10 +17,6 @@ public class TaiouText extends CardText
 
 	ResultSet rs;
 	Connection conn;
-	protected String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
-	protected String user = "root";//データベースへアクセスするID
-	protected String password = "ncc_NCC2019";//データベースのパスワード
-
 
 	void taioucreate(int room)
 	{
@@ -52,10 +48,11 @@ public class TaiouText extends CardText
 
 		try
 		{
+			System.out.println("以下はTaiouTextのデバッグだお");
 			int count = 0;
 			if(rs != null)
 			{
-				System.out.println("rsはnullじゃないお");
+				System.out.println("TaiouText.javaのrsはnullじゃないお");
 			}
 			while(rs.next())
 			{
@@ -67,6 +64,16 @@ public class TaiouText extends CardText
 					cardlist[count][k] = Integer.parseInt(array[j]);
 				}
 				count++;
+			}
+			System.out.println("taiou配列の中身だお 出力される-1は正常な値だお");
+			for(int i = 0;i<cardlist.length;i++)
+			{
+				System.out.println("card_id:"+cardlist[i][0]);
+				System.out.print("対応1:"+cardlist[i][1]);
+				System.out.print("対応2:"+cardlist[i][2]);
+				System.out.print("対応3:"+cardlist[i][3]);
+				System.out.print("対応4:"+cardlist[i][4]);
+				System.out.print("対応5:"+cardlist[i][5]);
 			}
 		}
 
@@ -101,6 +108,11 @@ public class TaiouText extends CardText
 				}
 			}
 		}
+		System.out.println("一行ごとの情報だお");
+		for(int i =0;i<line.length;i++)
+		{
+			System.out.println(i+"行目:"+line[i]);
+		}
 
 
 
@@ -112,6 +124,8 @@ public class TaiouText extends CardText
 				writetext += ",s,";
 			}
 		}
+		System.out.println("txtに出力される文字だお");
+		System.out.println(writetext);
 
 		try
 		{

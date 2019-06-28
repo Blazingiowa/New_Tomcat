@@ -17,10 +17,16 @@ public class Gamestart
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
 	String url;
+	String[] path = new String[4];
 
 	String[] createdirectry(String user_name) //
 	{
 		player = DBCU.update(user_name);
+
+		path[0] = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
+		path[1] = "/var/www/html/"+player[1]+"/taiou.txt";
+		path[2] = "/var/www/html/"+player[1]+"/card.txt";
+		path[3] = "/var/www/html/"+player[1]+"/room.txt";
 
 
 		for(int i = 0;i<userinfo.length;i++)
@@ -28,38 +34,29 @@ public class Gamestart
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
-		url = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
-
-		file = new File(url);
+		file = new File(path[0]);
 		if(file.exists() == false)//player.txt
 		{
-			System.out.println(url);
+			System.out.println(path[0]);
 			createfile(file);
 		}
-
 		tx.editer(player[1], player[2],0,0,null);
 
-		url= "/var/www/html/"+player[1]+"/taiou.txt";
-		file = new File(url);
-
+		file = new File(path[1]);
 		if(file.exists() == false)//対応表の有無
 		{
 			createfile(file);
 			tt.taioucreate(player[1]);
 		}
 
-		url = "/var/www/html/"+player[1]+"/card.txt";
-		file = new File(url);
-
+		file = new File(path[2]);
 		if(file.exists() == false)//カード表の有無
 		{
 			createfile(file);
 			ct.cardcreate(player[1]);
 		}
 
-		url = "/var/www/html/"+player[1]+"/room.txt";
-		file = new File(url);
-
+		file = new File(path[3]);
 		if(file.exists() == false)//room.txtの有無
 		{
 			createfile(file);
