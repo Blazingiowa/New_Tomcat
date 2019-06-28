@@ -12,7 +12,7 @@ public class TextWrite extends TextRead
 	FileWriter fw;
 	String text,writetext;
 
-	void write(int room_id,int player_number,int line_number,int[] write)
+	void write(int room_id,int player_number,int line_number,int[] write,String[] line)
 	{
 		settext(room_id,player_number);
 		text = "" ; writetext = "";
