@@ -20,17 +20,17 @@ public class TaiouText extends CardText
 
 	void taioucreate(int room)
 	{
-		for(int i =0;i<line.length;i++)
-		{
-			line[i] = "";
-		}
-		writetext = "";
-
 
 		file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
 		/*取得したデータをもとにテキストファイルに出力する*/
 		cardlist = new int[20][6];
 		line = new String[20];
+
+		for(int i =0;i<line.length;i++)
+		{
+			line[i] = "";
+		}
+		writetext = "";
 
 		for(int i = 0;i<cardlist.length;i++)
 		{

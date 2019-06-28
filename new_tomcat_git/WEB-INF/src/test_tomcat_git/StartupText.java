@@ -6,9 +6,8 @@ import java.io.PrintWriter;
 
 public class StartupText extends TextWrite
 {
-	void textfile(int room_id,int player_number,int line_number)
+	void textfile(int room_id,int player_number)
 	{
-		settext(room_id,player_number);
 		text = ""; writetext = "";
 
 		int[] defSet = new int[3];

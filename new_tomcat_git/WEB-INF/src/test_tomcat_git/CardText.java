@@ -20,11 +20,6 @@ public class CardText extends TextWrite //カードリストテキストを作�
 
 	void cardcreate(int room)
 	{
-		for(int i =0;i<line.length;i++)
-		{
-			line[i] = "";
-		}
-		writetext = "";
 
 		file = new File("var/www/html/"+room+"/card.txt");
 		/*データベースにアクセスしカード情報を確保する*/
@@ -32,6 +27,12 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		/*取得したデータをもとにテキストファイルに出力する*/
 		cardlist = new int[20][3];
 		line = new String[20];
+
+		for(int i =0;i<line.length;i++)
+		{
+			line[i] = "";
+		}
+		writetext = "";
 
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 

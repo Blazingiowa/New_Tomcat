@@ -13,6 +13,7 @@ public class Gamestart
 	 TaiouText tt = new TaiouText();
 	 CardText ct = new CardText();
 	 RoomText rt = new RoomText();
+	 StartupText st = new StartupText();
 
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
@@ -41,6 +42,7 @@ public class Gamestart
 			createfile(file);
 		}
 		tx.editer(player[1], player[2],0,0,null);
+		st.textfile(player[1], player[2]);
 
 		file = new File(path[1]);
 		if(file.exists() == false)//対応表の有無
