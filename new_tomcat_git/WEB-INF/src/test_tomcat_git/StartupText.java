@@ -74,11 +74,11 @@ public class StartupText extends TextWrite
 		{
 			bwclose();
 		}
-
+/*
 		write(room_id,player_number,1,hpSet);
 		write(room_id,player_number,2,manaSet);
 		write(room_id,player_number,4,defDamage);
-		write(room_id,player_number,6,defDamage);
+		write(room_id,player_number,6,defDamage);*/
 
 	}
 }
