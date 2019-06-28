@@ -90,7 +90,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 
 		for(int i = 0;i<line.length;i++)
 		{
-			writetext = line[i];
+			writetext += line[i];
 			if((i+1)<line.length)
 			{
 				writetext += ",s,";

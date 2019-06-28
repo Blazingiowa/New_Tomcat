@@ -68,12 +68,13 @@ public class TaiouText extends CardText
 			System.out.println("taiou配列の中身だお 出力される-1は正常な値だお");
 			for(int i = 0;i<cardlist.length;i++)
 			{
-				System.out.println("card_id:"+cardlist[i][0]);
+				System.out.print("card_id:"+cardlist[i][0]);
 				System.out.print("対応1:"+cardlist[i][1]);
 				System.out.print("対応2:"+cardlist[i][2]);
 				System.out.print("対応3:"+cardlist[i][3]);
 				System.out.print("対応4:"+cardlist[i][4]);
 				System.out.print("対応5:"+cardlist[i][5]);
+				System.out.println("");
 			}
 		}
 
