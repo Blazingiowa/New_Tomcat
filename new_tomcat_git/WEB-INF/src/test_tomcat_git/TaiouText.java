@@ -20,6 +20,11 @@ public class TaiouText extends CardText
 
 	void taioucreate(int room)
 	{
+		for(int i =0;i<line.length;i++)
+		{
+			line[i] = "";
+		}
+		writetext = "";
 
 
 		file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
@@ -96,11 +101,6 @@ public class TaiouText extends CardText
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-		}
-
-		for(int i =0;i<line.length;i++)
-		{
-			line[i] = "";
 		}
 
 		for(int i =0;i<line.length;i++)

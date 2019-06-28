@@ -20,6 +20,12 @@ public class CardText extends TextWrite //カードリストテキストを作�
 
 	void cardcreate(int room)
 	{
+		for(int i =0;i<line.length;i++)
+		{
+			line[i] = "";
+		}
+		writetext = "";
+
 		file = new File("var/www/html/"+room+"/card.txt");
 		/*データベースにアクセスしカード情報を確保する*/
 		//rs = DBCC.cardinfo();
