@@ -33,8 +33,8 @@ public class RoomText extends TextWrite
 			}
 		}
 
-		System.out.println("roomtextのデバッグだお");
-		System.out.println("出力される文字だお:"+writetext);
+		/*System.out.println("roomtextのデバッグだお");
+		System.out.println("出力される文字だお:"+writetext);*/
 
 		try
 		{

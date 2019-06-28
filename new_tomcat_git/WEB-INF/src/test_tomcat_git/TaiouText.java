@@ -55,10 +55,10 @@ public class TaiouText extends CardText
 		{
 			System.out.println("以下はTaiouTextのデバッグだお");
 			int count = 0;
-			if(rs != null)
+			/*if(rs != null)
 			{
 				System.out.println("TaiouText.javaのrsはnullじゃないお");
-			}
+			}*/
 			while(rs.next())
 			{
 				cardlist[count][0] = rs.getInt("card_id");

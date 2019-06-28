@@ -56,7 +56,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 				cardlist[count][2] = rs.getInt("cost");
 				count++;
 			}
-			System.out.println("以下はcardtextのデバッグだお");
+			/*System.out.println("以下はcardtextのデバッグだお");
 			System.out.println("cardlist配列の中身だお");
 			for(int i =0;i<cardlist.length;i++)
 			{
@@ -64,7 +64,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 				System.out.print("dmg:"+cardlist[i][1]);
 				System.out.print("cost:"+cardlist[i][2]);
 				System.out.println("");
-			}
+			}*/
 
 		}
 		catch (SQLException e)
@@ -90,11 +90,11 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 			line[i] = cardlist[i][0]+","+cardlist[i][1]+","+cardlist[i][2];
 		}
-		System.out.println("一行ごとの情報だお");
+		/*System.out.println("一行ごとの情報だお");
 		for(int i =0;i<line.length;i++)
 		{
 			System.out.println(i+"行目:"+line[i]);
-		}
+		}*/
 
 		for(int i = 0;i<line.length;i++)
 		{
@@ -104,8 +104,8 @@ public class CardText extends TextWrite //カードリストテキストを作�
 				writetext += ",s,";
 			}
 		}
-		System.out.println("txtに出力される文字だお");
-		System.out.println(writetext);
+		/*System.out.println("txtに出力される文字だお");
+		System.out.println(writetext);*/
 
 		try
 		{

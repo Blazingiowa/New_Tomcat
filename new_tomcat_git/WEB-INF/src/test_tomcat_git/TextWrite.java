@@ -37,6 +37,8 @@ public class TextWrite extends TextRead
 				text += "s";
 			}
 		}
+		System.out.println("TextWriteでの書き込まれる文字列だお");
+		System.out.println(text);
 
 		try
 		{
