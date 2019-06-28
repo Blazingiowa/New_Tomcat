@@ -17,6 +17,11 @@ public class TextWrite extends TextRead
 
 		line = settext(room_id,player_number);
 		text = "" ; writetext = "";
+		System.out.println("writetext上の最初のlineだよ");
+		for(int i =0;i<line.length;i++)
+		{
+			System.out.println(i+"行目:"+line[i]);
+		}
 
 		for(int i =0;i<write.length;i++)
 		{
@@ -26,6 +31,9 @@ public class TextWrite extends TextRead
 				writetext += ",";
 			}
 		}
+		System.out.println("更新する文字列だお");
+		System.out.println(writetext);
+
 
 		line[line_number] = writetext;
 
