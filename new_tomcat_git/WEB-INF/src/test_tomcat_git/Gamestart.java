@@ -41,7 +41,7 @@ public class Gamestart
 			System.out.println(path[0]);
 			createfile(file);
 		}
-		st.textfile(player[1], player[2]);
+		st.textfile(player[1], player[2],file);
 
 		file = new File(path[1]);
 		if(file.exists() == false)//対応表の有無
