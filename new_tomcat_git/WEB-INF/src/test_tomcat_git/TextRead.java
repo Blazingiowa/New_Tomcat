@@ -38,6 +38,7 @@ public class TextRead
 			line = new String[2];
 			data = new int[3];
 			file = new File("/var/www/html/"+ room + "/room.txt");
+			System.out.println("room.txt見ようとしてるよ");
 		}
 		else
 		{

@@ -49,20 +49,24 @@ public class Servlet extends HttpServlet
 		//一番下に作ったメソッド  Unityから送られてくるものをセットしておける
 		us_id = request.getParameter("userID");
 		room_id = request.getParameter("roomID");
-		us_num = request.getParameter("user_number");
+		us_num = request.getParameter("userNumber");
 		name = request.getParameter("name");
 		flag = request.getParameter("flag");
-		str_use_hand [0] = request.getParameter("use_hand1");
-		str_use_hand [1] = request.getParameter("use_hand2");
-		str_use_hand [2] = request.getParameter("use_hand3");
+		str_use_hand [0] = request.getParameter("usehand1");
+		str_use_hand [1] = request.getParameter("usehand2");
+		str_use_hand [2] = request.getParameter("usehand3");
 
 
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
 		System.out.println("roomID:"+ room_id);
-		System.out.println("user_number:"+ us_num);
+		System.out.println("userNumber:"+ us_num);
 		System.out.println("name:" + name);
 		System.out.println("flag:" + flag);
+
+		System.out.println("使ったカード1:" + str_use_hand [0]);
+		System.out.println("使ったカード2:" + str_use_hand [1]);
+		System.out.println("使ったカード3:" + str_use_hand [2]);
 		//ここまでテストコード
 
 
@@ -72,8 +76,7 @@ public class Servlet extends HttpServlet
 			{
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 
-				//String test_name = "test";
-				str_user_info = game_start.createdirectry("tukiya");
+				str_user_info = game_start.createdirectry(name);
 
 				ub.setUserID(str_user_info[0]);
 				ub.setRoomID(str_user_info[1]);
@@ -92,7 +95,7 @@ public class Servlet extends HttpServlet
 					    ));
 			}
 
-			/*
+
 			else
 			{
 				//int変換でNULLを入れるのを防ぐ
@@ -125,12 +128,17 @@ public class Servlet extends HttpServlet
 
 				//何かしらの値を入れないといけない。テスト的に値を入れてある
 
-				//info();
 
-				//game_project.main(int_user_info, use_hand);
+				System.out.println("使ったカード int 変換後");
+				System.out.println("使ったカード1:" + use_hand [0]);
+				System.out.println("使ったカード2:" + use_hand [1]);
+				System.out.println("使ったカード3:" + use_hand [2]);
+
+				info();
+
+				game_project.main(int_user_info, use_hand);
 
 			}
-			*/
 		}
 		//flagが立った!
 		else if(flag.equals("1"))//Clientが更新したい時用
@@ -140,9 +148,9 @@ public class Servlet extends HttpServlet
 		else if(flag.equals("2"))//Clientが落としたい時用
 		{
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
-			//info();
+			info();
 
-			//game_end.main(int_user_info);
+			game_end.main(int_user_info);
 		}
 	}
 	void info()
@@ -150,6 +158,7 @@ public class Servlet extends HttpServlet
 		if(us_id ==  null)
 		{
 			int_user_info[0] = 1;
+			System.out.println("UserID入ってない");
 		}
 		else
 		{
@@ -160,6 +169,7 @@ public class Servlet extends HttpServlet
 		if(room_id ==  null)
 		{
 			int_user_info[1] = 111;
+			System.out.println("ルームID入ってな");
 		}
 		else
 		{
@@ -170,6 +180,7 @@ public class Servlet extends HttpServlet
 		if(us_num ==  null)
 		{
 			int_user_info[2] = 2;
+			System.out.println("ナンバー入ってない");
 		}
 		else
 		{

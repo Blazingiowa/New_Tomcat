@@ -67,7 +67,7 @@ public class Gamestart
 			rt.createroomtxt(player[1],file);
 		}
 
-		online = tr.read(player[2],3,0);
+		online = tr.read(player[1],3,0);
 		online[player[2]] = 1;
 
 		tw.write(player[1],3,0, online);
