@@ -41,7 +41,6 @@ public class Gamestart
 			System.out.println(path[0]);
 			createfile(file);
 		}
-		tx.editer(player[1], player[2],0,0,null);
 		st.textfile(player[1], player[2]);
 
 		file = new File(path[1]);
