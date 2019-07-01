@@ -18,6 +18,10 @@ public class TextRead
 	int[] read(int room_id,int player_number,int line_number)
 	{
 		line = settext(room_id,player_number);
+		for(int i = 0;i<line.length;i++)
+		{
+			System.out.println(line[i]);
+		}
 
 		String[] array = line[line_number].split(",");
 
