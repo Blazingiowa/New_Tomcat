@@ -73,7 +73,7 @@ public class Servlet extends HttpServlet
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 
 				//String test_name = "test";
-				str_user_info = game_start.createdirectry("tukiya");
+				str_user_info = game_start.createdirectry(name);
 
 				ub.setUserID(str_user_info[0]);
 				ub.setRoomID(str_user_info[1]);
