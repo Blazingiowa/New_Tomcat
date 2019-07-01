@@ -43,7 +43,7 @@ public class TextWrite extends TextRead
 
 			if((i+1)<line.length)
 			{
-				text += "s";
+				text += ",s,";
 			}
 		}
 		System.out.println("TextWriteでの書き込まれる文字列だお");
