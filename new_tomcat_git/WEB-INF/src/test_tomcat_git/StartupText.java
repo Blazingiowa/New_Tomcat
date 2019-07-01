@@ -36,14 +36,16 @@ public class StartupText extends TextWrite
 			}
 		}
 
-		//line[0] = "0,-1,-1";
+		line[0] = "0,-1,-1";
+
+		for(int i = 1;i<line.length;i++)
+		{
+			line[i] =writetext;
+		}
 
 		for(int i = 0;i<line.length;i++)
 		{
-			line[i] =writetext;
-
-			text +=writetext;
-
+			text += line[i];
 			if((i+1)<line.length)
 			{
 				text = text+",s,";
