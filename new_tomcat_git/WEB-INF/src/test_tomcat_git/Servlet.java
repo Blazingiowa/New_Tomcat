@@ -52,9 +52,9 @@ public class Servlet extends HttpServlet
 		us_num = request.getParameter("user_number");
 		name = request.getParameter("name");
 		flag = request.getParameter("flag");
-		str_use_hand [0] = request.getParameter("use_hand1");
-		str_use_hand [1] = request.getParameter("use_hand2");
-		str_use_hand [2] = request.getParameter("use_hand3");
+		str_use_hand [0] = request.getParameter("usehand1");
+		str_use_hand [1] = request.getParameter("usehand2");
+		str_use_hand [2] = request.getParameter("usehand3");
 
 
 		System.out.println(request);
@@ -63,6 +63,10 @@ public class Servlet extends HttpServlet
 		System.out.println("user_number:"+ us_num);
 		System.out.println("name:" + name);
 		System.out.println("flag:" + flag);
+
+		System.out.println("使ったカード1" + str_use_hand [0]);
+		System.out.println("使ったカード2" + str_use_hand [1]);
+		System.out.println("使ったカード3" + str_use_hand [2]);
 		//ここまでテストコード
 
 
