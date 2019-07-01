@@ -1,12 +1,13 @@
 package test_tomcat_git;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class StartupText extends TextWrite
 {
-	void textfile(int room_id,int player_number)
+	void textfile(int room_id,int player_number,File file)
 	{
 		text = ""; writetext = "";
 
@@ -51,9 +52,9 @@ public class StartupText extends TextWrite
 				text = text+",s,";
 			}
 		}
-		System.out.println("以下はStartuptTextのデバッグだお");
+		/*System.out.println("以下はStartuptTextのデバッグだお");
 		System.out.println("一行ごとの情報だお");
-		System.out.println("ここでは完全に中の数字は入れきれてないよ書き込みでができてるかは実際に中身を見てね");
+		System.out.println("ここでは完全に中の数字は入れきれてないよ書き込みでができてるかは実際に中身を見てね");*/
 		for(int i =0;i<line.length;i++)
 		{
 			System.out.println(i+"行目:"+line[i]);

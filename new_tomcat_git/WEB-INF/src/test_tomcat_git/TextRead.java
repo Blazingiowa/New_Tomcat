@@ -53,7 +53,7 @@ public class TextRead
 			br = new BufferedReader(new FileReader(file));
 
 			text = br.readLine();
-			System.out.println("textread上での読み込んだテキストデータだお");
+			System.out.println("Readでのテキストファイルの中身");
 			System.out.println(text);
 
 			String[] array = text.split(",");
