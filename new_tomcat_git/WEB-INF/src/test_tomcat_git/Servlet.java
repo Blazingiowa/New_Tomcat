@@ -49,7 +49,7 @@ public class Servlet extends HttpServlet
 		//一番下に作ったメソッド  Unityから送られてくるものをセットしておける
 		us_id = request.getParameter("userID");
 		room_id = request.getParameter("roomID");
-		us_num = request.getParameter("user_number");
+		us_num = request.getParameter("userNumber");
 		name = request.getParameter("name");
 		flag = request.getParameter("flag");
 		str_use_hand [0] = request.getParameter("usehand1");
@@ -60,13 +60,13 @@ public class Servlet extends HttpServlet
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
 		System.out.println("roomID:"+ room_id);
-		System.out.println("user_number:"+ us_num);
+		System.out.println("userNumber:"+ us_num);
 		System.out.println("name:" + name);
 		System.out.println("flag:" + flag);
 
-		System.out.println("使ったカード1" + str_use_hand [0]);
-		System.out.println("使ったカード2" + str_use_hand [1]);
-		System.out.println("使ったカード3" + str_use_hand [2]);
+		System.out.println("使ったカード1:" + str_use_hand [0]);
+		System.out.println("使ったカード2:" + str_use_hand [1]);
+		System.out.println("使ったカード3:" + str_use_hand [2]);
 		//ここまでテストコード
 
 
@@ -127,6 +127,12 @@ public class Servlet extends HttpServlet
 				}
 
 				//何かしらの値を入れないといけない。テスト的に値を入れてある
+
+
+				System.out.println("使ったカード int 変換後");
+				System.out.println("使ったカード1:" + use_hand [0]);
+				System.out.println("使ったカード2:" + use_hand [1]);
+				System.out.println("使ったカード3:" + use_hand [2]);
 
 				info();
 
