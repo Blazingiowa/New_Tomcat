@@ -40,8 +40,8 @@ public class TextRead
 		}
 		else
 		{
-			alltext = new String[10][3];
-			line = new String[10];
+			alltext = new String[7][3];
+			line = new String[7];
 			data = new int[3];
 			file = new File("/var/www/html/"+ room + "/"+player+".txt");
 		}
