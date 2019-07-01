@@ -9,14 +9,17 @@ public class Gamestart
 	Text tx = new Text();
 	File file;
 
-	 DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
-	 TaiouText tt = new TaiouText();
-	 CardText ct = new CardText();
-	 RoomText rt = new RoomText();
-	 StartupText st = new StartupText();
+	DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
+	TaiouText tt = new TaiouText();
+	CardText ct = new CardText();
+	RoomText rt = new RoomText();
+	StartupText st = new StartupText();
+	TextWrite tw = new TextWrite();
+	TextRead tr = new TextRead();
 
 	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
+	int[] online;
 	String url;
 	String[] path = new String[4];
 
@@ -63,6 +66,11 @@ public class Gamestart
 			createfile(file);
 			rt.createroomtxt(player[1],file);
 		}
+
+		online = tr.read(player[2],3,0);
+		online[player[2]] = 1;
+
+		tw.write(player[1],3,0, online);
 
 		System.out.println("GameStartクラス上での情報だお");
 		System.out.println("user_id:"+userinfo[0]);
