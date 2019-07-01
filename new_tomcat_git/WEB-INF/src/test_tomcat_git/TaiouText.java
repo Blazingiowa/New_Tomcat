@@ -114,7 +114,7 @@ public class TaiouText extends CardText
 				}
 			}
 
-			i=0;
+
 		}
 		System.out.println("一行ごとの情報だお");
 		for(int i =0;i<line.length;i++)
