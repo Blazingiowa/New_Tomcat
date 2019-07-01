@@ -24,7 +24,8 @@ public class GameProject
 	boolean flag = false;
 
 	DataBaseConnectRead DBC = new DataBaseConnectRead();//DBクラスのインスタンス
-	Text tx = new Text();//テキストクラスのインスタンス
+	TextRead txR = new TextRead();//テキストの読み込みクラス
+	TextWrite txW = new TextWrite();//テキストの書き込みクラス
 
 	/*infoの配列内容------------------------/useの配列の内容--------/
 	/										/						/
@@ -38,15 +39,15 @@ public class GameProject
 		//textmainの内容を初期化
 		start(info);
 
-		//テキストファイルを検索[ルームID][ユーザ番号][行数][書0、読1][書き込みたい配列、読みはnull]
+		//テキストファイルを検索[ルームID][ユーザ番号][行数][書き込みの場合のみ配列をセット]
 		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
-		textF = tx.editer(info[1], info[2], 0, 1, null);
+		textF = txR.read(info[1], info[2], 0);
 
 		//テキストを読み込み、書き換え
 		txtReadWrite(info, use);
 
-		//ルーム状況表から情報をもってくる[ルームID][共有ファイルについてなので、３][ユーザ番号で行数指定][書０読１][書き込みたい配列またはnull]
-		player = tx.editer(info[1], 3, 1, 1, null);
+		//ルーム状況表から情報をもってくる[ルームID][共有ファイルについてなので、３][ユーザ番号で行数指定]
+		player = txR.read(info[1], 3, 1);
 
 		//それぞれのプレイヤーが処理が終わっているかどうかの判定
 		if (player[1] == 1 && player[2] == 1)
@@ -61,7 +62,7 @@ public class GameProject
 	void start(int[] playerinfo)
 	{
 		//ルーム状況表から情報を持ってくる
-		player = tx.editer(playerinfo[1], 3, 1, 1, null);
+		player = txR.read(playerinfo[1], 3, 1);
 
 		//それぞれの状況が１だったらターンが進んでいるのでHPと行動値の情報を更新して、ほかの部分を初期化
 		if (player[1] == 1 && player[2] == 1)
@@ -69,11 +70,11 @@ public class GameProject
 			//ルーム状況表を０，０にして次の処理ができるように初期化
 			player[1] = 0;
 			player[2] = 0;
-			tx.editer(playerinfo[1], 3, 1, 0, player);
+			txW.write(playerinfo[1], 3, 1, player);
 
 			//前のターンの時に変化した、HPと行動値の情報を持ってくる
-			hp = tx.editer(playerinfo[1], playerinfo[2], 1, 1, null);//hp
-			move_pt = tx.editer(playerinfo[1], playerinfo[2], 2, 1, null);//行動値
+			hp = txR.read(playerinfo[1], playerinfo[2], 1);//hp
+			move_pt = txR.read(playerinfo[1], playerinfo[2], 2);//行動値
 
 			//２次元配列の初期化
 			for (int i = 0; i < textmain.length; i++)
@@ -102,8 +103,8 @@ public class GameProject
 					w = textmain[i][j];
 					textW[j] = w;
 				}
-				tx.editer(playerinfo[1], 1, i, 0, textW);//ｐ１のテキストを更新
-				tx.editer(playerinfo[1], 2, i, 0, textW);//ｐ２のテキストを更新
+				txW.write(playerinfo[1], 1, i, textW);//ｐ１のテキストを更新
+				txW.write(playerinfo[1], 2, i, textW);//ｐ２のテキストを更新
 			}
 		}
 
@@ -152,7 +153,7 @@ public class GameProject
 		{
 			for (int i = 0; i < textmain.length; i++)
 			{
-				textF = tx.editer(playerinfo[1], playerinfo[2], i, 1, null);
+				textF = txR.read(playerinfo[1], playerinfo[2], i);
 
 				//テキストに初期で入ってるデータを配列に入れる
 				for (int j = 0; j < textW.length; j++)
@@ -184,14 +185,14 @@ public class GameProject
 						textW[j] = w;
 					}
 				}
-				tx.editer(playerinfo[1], playerinfo[2], i, 0, textW);//テキストに書き込み
+				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
 			//プレイヤー１のときの処理
 			if (playerinfo[2] == 1)
 			{
 				//ルーム状況表を読み込む
-				player = tx.editer(playerinfo[1], 3, 1, 1, null);
+				player = txR.read(playerinfo[1], 3, 1);
 				if (player[1] == 0 && player[2] == 0)
 				{
 					player[1] = 1;
@@ -207,14 +208,14 @@ public class GameProject
 				player[0]++;
 
 				//ルーム状況 表にプレイヤー１の処理が終わったことを書き込む
-				tx.editer(playerinfo[1], 3, 1, 0, player);
+				txW.write(playerinfo[1], 3, 1, player);
 			}
 
 			//プレイヤー２の時の処理
 			else if (playerinfo[2] == 2)
 			{
 				//ルーム状況表を読み込む
-				player = tx.editer(playerinfo[1], 3, 1, 1, null);
+				player = txR.read(playerinfo[1], 3, 1);
 				if (player[1] == 0 && player[2] == 0)
 				{
 					player[1] = 0;
@@ -230,7 +231,7 @@ public class GameProject
 				player[0]++;
 
 				//ルーム状況表にプレイヤー２の処理が終わったことを書き込む
-				tx.editer(playerinfo[1], 3, 1, 0, player);
+				txW.write(playerinfo[1], 3, 1, player);
 			}
 		}
 	}
@@ -241,7 +242,7 @@ public class GameProject
 		//ｐ１のとき
 		if (playerinfo[2] == 1)
 		{
-			textF = tx.editer(playerinfo[1], 2, 5, 1, null);//ｐ２が使ったカードの情報を持ってきて退避
+			textF = txR.read(playerinfo[1], 2, 5);//ｐ２が使ったカードの情報を持ってきて退避
 
 			//ｐ１のところにｐ２の情報を持ってくる
 			for (int i = 0; i < p2_card.length; i++)
@@ -371,7 +372,7 @@ public class GameProject
 					textW[j] = w;
 				}
 
-				tx.editer(playerinfo[1], playerinfo[2], i, 0, textW);//テキストに書き込み
+				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 			//ｐ２の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -414,14 +415,14 @@ public class GameProject
 						}
 				}
 
-				tx.editer(playerinfo[1], 2, i, 0, textW);//テキストに書き込み
+				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
 		}
 
 		//ｐ２のとき
 		else if (playerinfo[2] == 2)
 		{
-			textF = tx.editer(playerinfo[1], 1, 5, 1, null);//ｐ１が使ったカードの情報を持ってきて退避
+			textF = txR.read(playerinfo[1], 1, 5);//ｐ１が使ったカードの情報を持ってきて退避
 
 			//ｐ２のところにｐ１の情報を持ってくる
 			for (int i = 0; i < p1_card.length; i++)
@@ -551,7 +552,7 @@ public class GameProject
 					textW[j] = w;
 				}
 
-				tx.editer(playerinfo[1], playerinfo[2], i, 0, textW);//テキストに書き込み
+				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -594,11 +595,11 @@ public class GameProject
 						}
 				}
 
-				tx.editer(playerinfo[1], 1, i, 0, textW);//テキストに書き込み
+				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
 
 				//ユニティが見続ける場所を統合処理が終わったので初期値（０）に戻す
 				player[0] = 0;
-				tx.editer(playerinfo[1], 3, 1, 0, player);//テキストに書き込む
+				txW.write(playerinfo[1], 3, 1, player);//テキストに書き込む
 			}
 		}
 	}
