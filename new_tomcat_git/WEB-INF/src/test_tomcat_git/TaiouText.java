@@ -103,11 +103,16 @@ public class TaiouText extends CardText
 			}
 		}
 
+		System.out.println("cardlist[0].length="+cardlist[0].length);
 		for(int i =0;i<line.length;i++)
 		{
+			int a = i;
 			for(int j = 0;j<cardlist[i].length;j++)
 			{
 				line[i] += cardlist[i][j];
+
+				System.out.println(a+"行目の情報だよ"+cardlist[i][j]);
+
 				if((i+1)<cardlist[i].length)
 				{
 					line[i] += ",";
@@ -116,11 +121,11 @@ public class TaiouText extends CardText
 
 
 		}
-		System.out.println("一行ごとの情報だお");
+		/*System.out.println("一行ごとの情報だお");
 		for(int i =0;i<line.length;i++)
 		{
 			System.out.println(line[i]);
-		}
+		}*/
 
 
 
