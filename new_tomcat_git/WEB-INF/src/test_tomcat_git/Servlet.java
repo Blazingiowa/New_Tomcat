@@ -72,7 +72,6 @@ public class Servlet extends HttpServlet
 			{
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 
-				//String test_name = "test";
 				str_user_info = game_start.createdirectry(name);
 
 				ub.setUserID(str_user_info[0]);
@@ -92,7 +91,7 @@ public class Servlet extends HttpServlet
 					    ));
 			}
 
-			/*
+
 			else
 			{
 				//int変換でNULLを入れるのを防ぐ
@@ -125,12 +124,11 @@ public class Servlet extends HttpServlet
 
 				//何かしらの値を入れないといけない。テスト的に値を入れてある
 
-				//info();
+				info();
 
-				//game_project.main(int_user_info, use_hand);
+				game_project.main(int_user_info, use_hand);
 
 			}
-			*/
 		}
 		//flagが立った!
 		else if(flag.equals("1"))//Clientが更新したい時用
@@ -140,9 +138,9 @@ public class Servlet extends HttpServlet
 		else if(flag.equals("2"))//Clientが落としたい時用
 		{
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
-			//info();
+			info();
 
-			//game_end.main(int_user_info);
+			game_end.main(int_user_info);
 		}
 	}
 	void info()
@@ -150,6 +148,7 @@ public class Servlet extends HttpServlet
 		if(us_id ==  null)
 		{
 			int_user_info[0] = 1;
+			System.out.println("UserID入ってない");
 		}
 		else
 		{
@@ -160,6 +159,7 @@ public class Servlet extends HttpServlet
 		if(room_id ==  null)
 		{
 			int_user_info[1] = 111;
+			System.out.println("ルームID入ってな");
 		}
 		else
 		{
@@ -170,6 +170,7 @@ public class Servlet extends HttpServlet
 		if(us_num ==  null)
 		{
 			int_user_info[2] = 2;
+			System.out.println("ナンバー入ってない");
 		}
 		else
 		{
