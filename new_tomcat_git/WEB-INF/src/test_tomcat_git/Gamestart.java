@@ -2,6 +2,9 @@ package test_tomcat_git;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class Gamestart
 {
@@ -21,16 +24,18 @@ public class Gamestart
 	int[] player = new int[3];
 	int[] online;
 	String url;
-	String[] path = new String[4];
+	String[] path = new String[5];
 
 	String[] createdirectry(String user_name) //
 	{
 		player = DBCU.update(user_name);
 
-		path[0] = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
-		path[1] = "/var/www/html/"+player[1]+"/taiou.txt";
-		path[2] = "/var/www/html/"+player[1]+"/card.txt";
-		path[3] = "/var/www/html/"+player[1]+"/room.txt";
+		path[0] = "/var/www/html/"+player[1];
+		path[1] = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
+		path[2] = "/var/www/html/"+player[1]+"/taiou.txt";
+		path[3] = "/var/www/html/"+player[1]+"/card.txt";
+		path[4] = "/var/www/html/"+player[1]+"/room.txt";
+
 
 
 		for(int i = 0;i<userinfo.length;i++)
@@ -38,29 +43,39 @@ public class Gamestart
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
-		file = new File(path[0]);
+		Path dir = FileSystems.getDefault().getPath(path[0]);
+		try
+		{
+			Files.createDirectory(dir);
+		}
+		catch(IOException e)
+		{
+
+		}
+
+		file = new File(path[1]);
 		if(file.exists() == false)//player.txt
 		{
-			System.out.println(path[0]);
+			System.out.println(path[1]);
 			createfile(file);
 		}
 		st.textfile(player[1], player[2],file);
 
-		file = new File(path[1]);
+		file = new File(path[2]);
 		if(file.exists() == false)//対応表の有無
 		{
 			createfile(file);
 			tt.taioucreate(file);
 		}
 
-		file = new File(path[2]);
+		file = new File(path[3]);
 		if(file.exists() == false)//カード表の有無
 		{
 			createfile(file);
 			ct.cardcreate(file);
 		}
 
-		file = new File(path[3]);
+		file = new File(path[4]);
 		if(file.exists() == false)//room.txtの有無
 		{
 			createfile(file);
