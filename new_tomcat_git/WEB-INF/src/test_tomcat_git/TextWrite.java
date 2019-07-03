@@ -11,12 +11,11 @@ public class TextWrite extends TextRead
 	PrintWriter pw;
 	FileWriter fw;
 	String text,writetext;
-	SetText set = new SetText();
 
 	void write(int room_id,int player_number,int line_number,int[] write)
 	{
 
-		line = set.settext(room_id,player_number);
+		line = settext(room_id,player_number);
 		text = "" ; writetext = "";
 		System.out.println("writetext上の最初のlineだよ");
 		for(int i =0;i<line.length;i++)
