@@ -103,7 +103,7 @@ public class Gamestart
 		{
 			if(newfile.createNewFile())
 			{
-				System.out.println("ファイル作れたお");
+				System.out.println("ファイル作れたお＼(^_^)／");
 				newfile.setWritable(true,true);
 				newfile.setReadable(true,false);
 				newfile.setExecutable(true,true);
