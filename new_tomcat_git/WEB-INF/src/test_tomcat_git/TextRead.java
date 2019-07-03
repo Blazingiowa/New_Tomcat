@@ -20,6 +20,7 @@ public class TextRead
 
 
 		String[] array = line[line_number].split(",");
+		data = new int[array.length];
 
 		for(int i = 0;i<array.length;i++)
 		{

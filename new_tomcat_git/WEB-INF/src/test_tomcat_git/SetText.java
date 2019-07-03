@@ -5,15 +5,22 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class SetText extends TextRead
+public class SetText
 {
+	BufferedReader br;
+	File file;
+	String text;
+	String[][] alltext;
+	String[] line;
+	SetText set = new SetText();
+
 	String[] settext(int room,int player)
 	{
 		if(player==3)
 		{
 			alltext = new String[2][3];
 			line = new String[2];
-			data = new int[3];
+			//data = new int[3];
 			file = new File("/var/www/html/"+ room + "/room.txt");
 			System.out.println("room.txt見ようとしてるよ");
 		}
@@ -21,7 +28,7 @@ public class SetText extends TextRead
 		{
 			alltext = new String[7][3];
 			line = new String[7];
-			data = new int[3];
+			//data = new int[3];
 			file = new File("/var/www/html/"+ room + "/"+player+".txt");
 		}
 
