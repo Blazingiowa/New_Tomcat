@@ -36,10 +36,6 @@ public class SetText extends TextRead
 			System.out.println(text);
 
 			String[] array = text.split(",");
-			/*for(int i =0;i<array.length;i++)
-			{
-				System.out.println("array"+i+":"+array[i]);
-			}*/
 
 			for(int i = 0,j = 0,k=0;k<array.length;k++)
 			{
