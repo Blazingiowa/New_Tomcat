@@ -12,7 +12,7 @@ public class SetText
 	String text;
 	String[][] alltext;
 	String[] line;
-	SetText set = new SetText();
+	
 
 	String[] settext(int room,int player)
 	{
