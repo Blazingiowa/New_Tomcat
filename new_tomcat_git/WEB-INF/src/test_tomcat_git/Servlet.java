@@ -56,6 +56,8 @@ public class Servlet extends HttpServlet
 		str_use_hand [1] = request.getParameter("usehand2");
 		str_use_hand [2] = request.getParameter("usehand3");
 
+		name = check(name);
+
 
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
@@ -188,6 +190,16 @@ public class Servlet extends HttpServlet
 		}
 
 	}
+	String check(String s)
+	{
 
+		if (!s.matches("^[0-9a-zA-Z]+$"))
+		{
+			s = "miss";
+			System.out.println("英数字以外の物が入っています");
+		}
+
+		return s;
+	}
 
 }
