@@ -79,11 +79,7 @@ public class Servlet extends HttpServlet
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 				if(flag_name == false)
 				{
-					response.setContentType("application/json");
-					response.setCharacterEncoding("utf-8");
-					response.getWriter().println(gson.toJson(
-						      Collections.singletonMap("error", "name")
-						    ));
+					ub.setError("name");
 				}
 				else
 				{
@@ -97,14 +93,13 @@ public class Servlet extends HttpServlet
 					System.out.println(str_user_info[0]);
 					System.out.println(str_user_info[1]);
 					System.out.println(str_user_info[2]);
-
-					//JSONを生成
-					response.setContentType("application/json");
-					response.setCharacterEncoding("utf-8");
-					response.getWriter().println(gson.toJson(
-						      Collections.singletonMap("param", gson.toJson(ub))
-						    ));
 				}
+				//JSONを生成
+				response.setContentType("application/json");
+				response.setCharacterEncoding("utf-8");
+				response.getWriter().println(gson.toJson(
+					      Collections.singletonMap("param", gson.toJson(ub))
+					    ));
 			}
 
 
@@ -204,7 +199,7 @@ public class Servlet extends HttpServlet
 	{
 		flag_name = true;
 		System.out.println("check通った 値 : " + s);
-		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９a-zA-Z0-9]+$"))
+		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$"))
 		{
 			flag_name = false;
 			System.out.println("英数字以外の物が入っています");

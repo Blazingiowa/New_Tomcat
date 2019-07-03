@@ -5,6 +5,7 @@ public class UserBean
 	private String userID;//ユーザーID
 	private String roomID;	//ルームID
 	private String userNumber;//プレイヤー番号 1 or 2 ?
+	private String error;//エラー場所
 
 	//setter & getter
 	public String getUserID() {
@@ -34,5 +35,13 @@ public class UserBean
 		// TODO 自動生成されたメソッド・スタブ
 		this.userNumber = userNumber;
 		System.out.println("user number通った");
+	}
+	public String getError() {
+		return userNumber;
+	}
+	public void setError(String error) {
+		// TODO 自動生成されたメソッド・スタブ
+		this.error = error;
+		System.out.println("error通った");
 	}
 }
