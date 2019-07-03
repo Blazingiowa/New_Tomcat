@@ -57,7 +57,7 @@ public class Servlet extends HttpServlet
 		str_use_hand [1] = request.getParameter("usehand2");
 		str_use_hand [2] = request.getParameter("usehand3");
 
-		name = check(name);
+		check(name);
 
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
@@ -200,7 +200,7 @@ public class Servlet extends HttpServlet
 		}
 
 	}
-	String check(String s)
+	void check(String s)
 	{
 		flag_name = true;
 		System.out.println("check通った 値 : " + s);
@@ -209,8 +209,6 @@ public class Servlet extends HttpServlet
 			flag_name = false;
 			System.out.println("英数字以外の物が入っています");
 		}
-
-		return s;
 	}
 
 }
