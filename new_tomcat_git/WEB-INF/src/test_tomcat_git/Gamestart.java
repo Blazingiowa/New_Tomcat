@@ -89,9 +89,9 @@ public class Gamestart
 			if(newfile.createNewFile())
 			{
 				System.out.println("ファイル作れたお");
-				newfile.setWritable(true,false);
+				newfile.setWritable(true,true);
 				newfile.setReadable(true,false);
-				newfile.setExecutable(true,false);
+				newfile.setExecutable(true,true);
 			}
 		}
 

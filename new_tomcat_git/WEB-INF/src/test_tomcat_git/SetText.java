@@ -2,34 +2,12 @@ package test_tomcat_git;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
-public class TextRead
+public class SetText extends TextRead
 {
-	BufferedReader br;
-	File file;
-	String text;
-	String[][] alltext;
-	String[] line;
-	SetText set = new SetText();
-
-	int[] data;
-
-	int[] read(int room_id,int player_number,int line_number)
-	{
-		line = set.settext(room_id,player_number);
-
-
-		String[] array = line[line_number].split(",");
-
-		for(int i = 0;i<array.length;i++)
-		{
-			data[i] = Integer.parseInt(array[i]);
-		}
-
-		return data;
-	}
-
-	/*protected String[] settext(int room,int player)
+	String[] settext(int room,int player)
 	{
 		if(player==3)
 		{
@@ -58,6 +36,10 @@ public class TextRead
 			System.out.println(text);
 
 			String[] array = text.split(",");
+			/*for(int i =0;i<array.length;i++)
+			{
+				System.out.println("array"+i+":"+array[i]);
+			}*/
 
 			for(int i = 0,j = 0,k=0;k<array.length;k++)
 			{
@@ -110,5 +92,5 @@ public class TextRead
 				e.printStackTrace();
 			}
 		}
-	}*/
+	}
 }
