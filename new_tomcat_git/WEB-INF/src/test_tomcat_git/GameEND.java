@@ -6,12 +6,17 @@ public class GameEND
 {
 	//プレイヤーが退出したときのDBを更新するためのクラスをインスタンス
 	DataBasePlayerout DBP = new DataBasePlayerout();
+	TextWrite tw = new TextWrite();
+	TextRead tr = new TextRead();
 
 	String[] path = new String[2];
 	File[] file = new File[2];
+	int[] write;
 
 	void logout(int info[])//ユーザID　ルームID　プレイヤー番号
 	{
+
+
 		path[0] = "";
 		path[1] = "";
 
@@ -31,6 +36,11 @@ public class GameEND
 				}
 			}
 		}
+
+		write = tr.read(info[1],3,0);
+		write[info[2]] = 0;
+
+		tw.write(info[1],3,0,write);
 
 		DBP.logout(info);
 	}
