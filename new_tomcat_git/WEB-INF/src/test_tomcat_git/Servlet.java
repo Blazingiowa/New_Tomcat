@@ -192,7 +192,7 @@ public class Servlet extends HttpServlet
 	}
 	String check(String s)
 	{
-
+		System.out.println("check通った 値 : " + s);
 		if (!s.matches("^[0-9a-zA-Z]+$"))
 		{
 			s = "miss";
