@@ -32,6 +32,7 @@ public class Servlet extends HttpServlet
 	private String us_num;
 	private String name;
 	private String flag;
+	private boolean flag_name;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -76,25 +77,34 @@ public class Servlet extends HttpServlet
 			if (room_id == null)//ルームID値持っていないとき始めてきたと認識
 			{
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
-				name = check(name);
+				if(flag_name == false)
+				{
+					response.setContentType("application/json");
+					response.setCharacterEncoding("utf-8");
+					response.getWriter().println(gson.toJson(
+						      Collections.singletonMap("error", "name")
+						    ));
+				}
+				else
+				{
+					str_user_info = game_start.createdirectry(name);
 
-				str_user_info = game_start.createdirectry(name);
+					ub.setUserID(str_user_info[0]);
+					ub.setRoomID(str_user_info[1]);
+					ub.setUserNumber(str_user_info[2]);
 
-				ub.setUserID(str_user_info[0]);
-				ub.setRoomID(str_user_info[1]);
-				ub.setUserNumber(str_user_info[2]);
+					System.out.println("return チェック");
+					System.out.println(str_user_info[0]);
+					System.out.println(str_user_info[1]);
+					System.out.println(str_user_info[2]);
 
-				System.out.println("return チェック");
-				System.out.println(str_user_info[0]);
-				System.out.println(str_user_info[1]);
-				System.out.println(str_user_info[2]);
-
-				//JSONを生成
-				response.setContentType("application/json");
-				response.setCharacterEncoding("utf-8");
-				response.getWriter().println(gson.toJson(
-					      Collections.singletonMap("param", gson.toJson(ub))
-					    ));
+					//JSONを生成
+					response.setContentType("application/json");
+					response.setCharacterEncoding("utf-8");
+					response.getWriter().println(gson.toJson(
+						      Collections.singletonMap("param", gson.toJson(ub))
+						    ));
+				}
 			}
 
 
@@ -192,10 +202,11 @@ public class Servlet extends HttpServlet
 	}
 	String check(String s)
 	{
+		flag_name = true;
 		System.out.println("check通った 値 : " + s);
 		if (s==null || !s.matches("^[0-9a-zA-Z]+$"))
 		{
-			s = "miss";
+			flag_name = false;
 			System.out.println("英数字以外の物が入っています");
 		}
 
