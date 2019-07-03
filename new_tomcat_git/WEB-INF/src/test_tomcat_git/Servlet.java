@@ -150,7 +150,7 @@ public class Servlet extends HttpServlet
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
 			info();
 
-			game_end.main(int_user_info);
+			game_end.logout(int_user_info);
 		}
 	}
 	void info()

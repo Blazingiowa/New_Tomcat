@@ -18,10 +18,10 @@ public class TaiouText extends CardText
 	ResultSet rs;
 	Connection conn;
 
-	void taioucreate(int room)
+	void taioucreate(File file)
 	{
 
-		file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
+		//file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
 		/*取得したデータをもとにテキストファイルに出力する*/
 		cardlist = new int[20][6];
 		line = new String[20];

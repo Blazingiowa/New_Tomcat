@@ -50,14 +50,14 @@ public class Gamestart
 		if(file.exists() == false)//対応表の有無
 		{
 			createfile(file);
-			tt.taioucreate(player[1]);
+			tt.taioucreate(file);
 		}
 
 		file = new File(path[2]);
 		if(file.exists() == false)//カード表の有無
 		{
 			createfile(file);
-			ct.cardcreate(player[1]);
+			ct.cardcreate(file);
 		}
 
 		file = new File(path[3]);
