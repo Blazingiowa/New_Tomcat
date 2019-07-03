@@ -56,6 +56,7 @@ public class Servlet extends HttpServlet
 		str_use_hand [1] = request.getParameter("usehand2");
 		str_use_hand [2] = request.getParameter("usehand3");
 
+		name = check(name);
 
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
