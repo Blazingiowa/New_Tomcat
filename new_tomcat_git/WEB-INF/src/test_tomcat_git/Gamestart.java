@@ -50,7 +50,7 @@ public class Gamestart
 		}
 		catch(IOException e)
 		{
-
+			System.out.println("ディレクトリ存在しなかったけど作れなかった(´・ω・｀)");
 		}
 
 		file = new File(path[1]);
