@@ -67,6 +67,10 @@ public class GameProject
 		//それぞれの状況が１だったらターンが進んでいるのでHPと行動値の情報を更新して、ほかの部分を初期化
 		if (player[1] == 1 && player[2] == 1)
 		{
+			//ユニティが見続ける場所を統合処理が終わったので初期値（０）に戻す
+			player[0] = 0;
+			txW.write(playerinfo[1], 3, 1, player);//テキストに書き込む
+
 			//ルーム状況表を０，０にして次の処理ができるように初期化
 			player[1] = 0;
 			player[2] = 0;
@@ -596,10 +600,6 @@ public class GameProject
 				}
 
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
-
-				//ユニティが見続ける場所を統合処理が終わったので初期値（０）に戻す
-				player[0] = 0;
-				txW.write(playerinfo[1], 3, 1, player);//テキストに書き込む
 			}
 		}
 	}
