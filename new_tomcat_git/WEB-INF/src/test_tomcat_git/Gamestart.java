@@ -51,6 +51,7 @@ public class Gamestart
 		catch(IOException e)
 		{
 			System.out.println("ディレクトリ存在しなかったけど作れなかった(´・ω・｀)");
+			System.out.println(path[0]);
 		}
 
 		file = new File(path[1]);
@@ -83,6 +84,10 @@ public class Gamestart
 		}
 
 		online = tr.read(player[1],3,0);
+		for(int i =0;i<online.length;i++)
+		{
+			System.out.println("room.textの中身:"+online[i]);
+		}
 		online[player[2]] = 1;
 
 		tw.write(player[1],3,0, online);

@@ -32,6 +32,7 @@ public class Servlet extends HttpServlet
 	private String us_num;
 	private String name;
 	private String flag;
+	private boolean flag_name;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -56,8 +57,7 @@ public class Servlet extends HttpServlet
 		str_use_hand [1] = request.getParameter("usehand2");
 		str_use_hand [2] = request.getParameter("usehand3");
 
-		name = check(name);
-
+		check(name);
 
 		System.out.println(request);
 		System.out.println("userID:"+ us_id);
@@ -77,18 +77,23 @@ public class Servlet extends HttpServlet
 			if (room_id == null)//ルームID値持っていないとき始めてきたと認識
 			{
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
+				if(flag_name == false)
+				{
+					ub.setError("name");
+				}
+				else
+				{
+					str_user_info = game_start.createdirectry(name);
 
-				str_user_info = game_start.createdirectry(name);
+					ub.setUserID(str_user_info[0]);
+					ub.setRoomID(str_user_info[1]);
+					ub.setUserNumber(str_user_info[2]);
 
-				ub.setUserID(str_user_info[0]);
-				ub.setRoomID(str_user_info[1]);
-				ub.setUserNumber(str_user_info[2]);
-
-				System.out.println("return チェック");
-				System.out.println(str_user_info[0]);
-				System.out.println(str_user_info[1]);
-				System.out.println(str_user_info[2]);
-
+					System.out.println("return チェック");
+					System.out.println(str_user_info[0]);
+					System.out.println(str_user_info[1]);
+					System.out.println(str_user_info[2]);
+				}
 				//JSONを生成
 				response.setContentType("application/json");
 				response.setCharacterEncoding("utf-8");
@@ -190,16 +195,14 @@ public class Servlet extends HttpServlet
 		}
 
 	}
-	String check(String s)
+	void check(String s)
 	{
+		flag_name = true;
 		System.out.println("check通った 値 : " + s);
-		if (!s.matches("^[0-9a-zA-Z]+$"))
+		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$"))
 		{
-			s = "miss";
+			flag_name = false;
 			System.out.println("英数字以外の物が入っています");
 		}
-
-		return s;
 	}
-
 }
