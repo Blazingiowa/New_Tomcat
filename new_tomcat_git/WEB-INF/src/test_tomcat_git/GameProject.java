@@ -69,8 +69,6 @@ public class GameProject
 		{
 			//ユニティが見続ける場所を統合処理が終わったので初期値（０）に戻す
 			player[0] = 0;
-			txW.write(playerinfo[1], 3, 1, player);//テキストに書き込む
-
 			//ルーム状況表を０，０にして次の処理ができるように初期化
 			player[1] = 0;
 			player[2] = 0;
