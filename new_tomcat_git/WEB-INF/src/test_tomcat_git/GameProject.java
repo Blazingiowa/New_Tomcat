@@ -110,6 +110,16 @@ public class GameProject
 				txW.write(playerinfo[1], 1, i, textW);//ｐ１のテキストを更新
 				txW.write(playerinfo[1], 2, i, textW);//ｐ２のテキストを更新
 			}
+
+			//プレイヤーの使ったカード情報の配列の初期化
+			for (int i = 0; i < p1_card.length; i++)
+			{
+				for (int j = 0; j < p1_card[0].length; j++)
+				{
+					p1_card[i][j] = -1;//ｐ１の情報を初期化
+					p2_card[i][j] = -1;//ｐ２の情報を初期化
+				}
+			}
 		}
 
 		//そうでなければ、最初のターンなので普通に初期化
@@ -595,7 +605,7 @@ public class GameProject
 					textW[i] = -1;
 				}
 			}
-			txW.write(playerinfo[1], 2, 0, textW);//ｐ２の処理判定のところを書き換える
+			txW.write(playerinfo[1], 2, 0, textW);//ｐ２		の処理判定のところを書き換える
 
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
