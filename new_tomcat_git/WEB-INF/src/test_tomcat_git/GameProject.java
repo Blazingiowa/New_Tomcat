@@ -378,6 +378,25 @@ public class GameProject
 
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
+			//統合処理後に各プレイヤーの処理判定を０に戻す
+			/*ここでtextmainの処理判定部分を０に戻せばこの後に行われるｐ２の情報を
+			 	書き込む時にも０を入れてくれる*/
+			for (int i = 0; i < textW.length; i++)
+			{
+				if (i == 0)
+				{
+					textmain[0][0] = 0;
+					w = textmain[0][0];
+					textW[i] = w;
+				}
+
+				else
+				{
+					textW[i] = -1;
+				}
+			}
+			txW.write(playerinfo[1], 1, 0, textW);//ｐ１の処理判定のところを書き換える
+
 			//ｐ２の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
 			{
@@ -558,6 +577,26 @@ public class GameProject
 
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
+
+			//統合処理後に各プレイヤーの処理判定を０に戻す
+			/*ここでtextmainの処理判定部分を０に戻せばこの後に行われるｐ１の情報を
+			 	書き込む時にも０を入れてくれる*/
+			for (int i = 0; i < textW.length; i++)
+			{
+				if (i == 0)
+				{
+					textmain[0][0] = 0;
+					w = textmain[0][0];
+					textW[i] = w;
+				}
+
+				else
+				{
+					textW[i] = -1;
+				}
+			}
+			txW.write(playerinfo[1], 2, 0, textW);//ｐ２の処理判定のところを書き換える
+
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
 			{
