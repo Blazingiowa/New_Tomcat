@@ -48,6 +48,7 @@ public class TextWrite extends TextRead
 		}
 		System.out.println("TextWriteでの書き込まれる文字列だお");
 		System.out.println(text);
+		System.out.println("書き込むのは"+line_number+"行目だよ");
 
 		try
 		{

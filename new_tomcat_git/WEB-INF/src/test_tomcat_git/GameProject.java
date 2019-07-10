@@ -75,6 +75,8 @@ public class GameProject
 			//ルーム状況表を０，０にして次の処理ができるように初期化
 			player[1] = 0;
 			player[2] = 0;
+
+			System.out.println("書き込み１");
 			txW.write(playerinfo[1], 3, 1, player);
 
 			//前のターンの時に変化した、HPと行動値の情報を持ってくる
@@ -108,8 +110,10 @@ public class GameProject
 					w = textmain[i][j];
 					textW[j] = w;
 				}
-
+				System.out.println("書き込み２");
 				txW.write(playerinfo[1], 1, i, textW);//ｐ１のテキストを更新
+
+				System.out.println("書き込み３");
 				txW.write(playerinfo[1], 2, i, textW);//ｐ２のテキストを更新
 			}
 
@@ -201,6 +205,7 @@ public class GameProject
 						textW[j] = w;
 					}
 				}
+				System.out.println("書き込み４");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -223,6 +228,7 @@ public class GameProject
 				//ユニティが見続ける場所を++して更新
 				player[0]++;
 
+				System.out.println("書き込み５");
 				//ルーム状況 表にプレイヤー１の処理が終わったことを書き込む
 				txW.write(playerinfo[1], 3, 1, player);
 			}
@@ -246,6 +252,7 @@ public class GameProject
 				//ユニティが見続ける場所を++して更新
 				player[0]++;
 
+				System.out.println("書き込み６");
 				//ルーム状況表にプレイヤー２の処理が終わったことを書き込む
 				txW.write(playerinfo[1], 3, 1, player);
 			}
@@ -258,6 +265,8 @@ public class GameProject
 		//ｐ１のとき
 		if (playerinfo[2] == 1)
 		{
+			System.out.println("ｐ１で入った時の統合処理");
+
 			textF = txR.read(playerinfo[1], 2, 5);//ｐ２が使ったカードの情報を持ってきて退避
 
 			//ｐ１のところにｐ２の情報を持ってくる
@@ -449,6 +458,7 @@ public class GameProject
 					textW[j] = w;
 				}
 
+				System.out.println("書き込み7");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 			//統合処理後に各プレイヤーの処理判定を０に戻す
@@ -468,10 +478,11 @@ public class GameProject
 					textW[i] = -1;
 				}
 			}
+			System.out.println("書き込み8");
 			txW.write(playerinfo[1], 1, 0, textW);//ｐ１の処理判定のところを書き換える
 
 			//デバック用
-			System.out.println("ここからプレイヤー２のテキスト書き込み");
+			System.out.println("ここからｐ１で入った時のプレイヤー２のテキスト書き込み");
 
 			//ｐ２の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -513,7 +524,7 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-
+				System.out.println("書き込み9");
 				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
 
@@ -528,8 +539,11 @@ public class GameProject
 		}
 
 		//ｐ２のとき
+
 		else if (playerinfo[2] == 2)
 		{
+			System.out.println("ｐ１で入った時の統合処理");
+
 			textF = txR.read(playerinfo[1], 1, 5);//ｐ１が使ったカードの情報を持ってきて退避
 
 			//ｐ２のところにｐ１の情報を持ってくる
@@ -720,7 +734,7 @@ public class GameProject
 					w = textmain[i][j];//２次元配列の情報をセット
 					textW[j] = w;
 				}
-
+				System.out.println("書き込み10");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -741,10 +755,11 @@ public class GameProject
 					textW[i] = -1;
 				}
 			}
+			System.out.println("書き込み11");
 			txW.write(playerinfo[1], 2, 0, textW);//ｐ２の処理判定のところを書き換える
 
 			//デバック用
-			System.out.println("ここからプレイヤー１のテキスト書き込み");
+			System.out.println("ここからｐ２で入った時のプレイヤー１のテキスト書き込み");
 
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -786,7 +801,7 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-
+				System.out.println("書き込み12");
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
 			}
 
