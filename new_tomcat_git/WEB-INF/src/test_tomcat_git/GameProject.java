@@ -43,6 +43,9 @@ public class GameProject
 		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
 		textF = txR.read(info[1], info[2], 0);
 
+		//デバック用
+		System.out.println("ここから、ゲームスタート");
+
 		//テキストを読み込み、書き換え
 		txtReadWrite(info, use);
 
