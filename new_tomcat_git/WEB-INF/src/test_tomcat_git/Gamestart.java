@@ -2,9 +2,9 @@ package test_tomcat_git;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Gamestart
 {
@@ -30,7 +30,7 @@ public class Gamestart
 	{
 		player = DBCU.update(user_name);
 
-		path[0] = "/var/www/html/"+player[1];
+		path[0] = "/var/www/html/testdir"/*+player[1]*/;
 		path[1] = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
 		path[2] = "/var/www/html/"+player[1]+"/taiou.txt";
 		path[3] = "/var/www/html/"+player[1]+"/card.txt";
@@ -43,14 +43,14 @@ public class Gamestart
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
-		Path dir = FileSystems.getDefault().getPath(path[0]);
+		Path dir = Paths.get(path[0]);
 		try
 		{
 			Files.createDirectory(dir);
 		}
 		catch(IOException e)
 		{
-			System.out.println("ディレクトリ存在しなかったけど作れなかった(´・ω・｀)");
+			System.out.println("ディレクトリ作れなかった(´・ω・｀)");
 			System.out.println(path[0]);
 		}
 
