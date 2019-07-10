@@ -105,6 +105,7 @@ public class GameProject
 					w = textmain[i][j];
 					textW[j] = w;
 				}
+
 				txW.write(playerinfo[1], 1, i, textW);//ｐ１のテキストを更新
 				txW.write(playerinfo[1], 2, i, textW);//ｐ２のテキストを更新
 			}
@@ -448,6 +449,12 @@ public class GameProject
 
 				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
+
+			for (int i = 0; i < textmain[0].length; i++)
+			{
+				System.out.println(textmain[4][i]);
+				System.out.println(textmain[6][i]);
+			}
 		}
 
 		//ｐ２のとき
@@ -647,6 +654,12 @@ public class GameProject
 				}
 
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
+			}
+
+			for (int i = 0; i < textmain[0].length; i++)
+			{
+				System.out.println(textmain[4][i]);
+				System.out.println(textmain[6][i]);
 			}
 		}
 	}
