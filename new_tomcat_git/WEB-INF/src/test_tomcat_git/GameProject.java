@@ -450,11 +450,14 @@ public class GameProject
 				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
 
-			for (int i = 0; i < textmain[0].length; i++)
-			{
-				System.out.println(textmain[4][i]);
-				System.out.println(textmain[6][i]);
-			}
+			//デバック用シスアウト
+				System.out.println(textmain[4][0]);
+				System.out.println(textmain[4][1]);
+				System.out.println(textmain[4][2]);
+				System.out.println(textmain[6][0]);
+				System.out.println(textmain[6][1]);
+				System.out.println(textmain[6][2]);
+
 		}
 
 		//ｐ２のとき
@@ -656,11 +659,13 @@ public class GameProject
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
 			}
 
-			for (int i = 0; i < textmain[0].length; i++)
-			{
-				System.out.println(textmain[4][i]);
-				System.out.println(textmain[6][i]);
-			}
+			//デバック用シスアウト
+			System.out.println(textmain[4][0]);
+			System.out.println(textmain[4][1]);
+			System.out.println(textmain[4][2]);
+			System.out.println(textmain[6][0]);
+			System.out.println(textmain[6][1]);
+			System.out.println(textmain[6][2]);
 		}
 	}
 
