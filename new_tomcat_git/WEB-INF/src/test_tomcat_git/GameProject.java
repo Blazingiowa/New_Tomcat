@@ -109,10 +109,10 @@ public class GameProject
 					w = textmain[i][j];
 					textW[j] = w;
 				}
-				System.out.println("書き込み２" + i + "回目");
+				System.out.println("書き込み２の" + i + "回目");
 				txW.write(playerinfo[1], 1, i, textW);//ｐ１のテキストを更新
 
-				System.out.println("書き込み３" + i + "回目");
+				System.out.println("書き込み３の" + i + "回目");
 				txW.write(playerinfo[1], 2, i, textW);//ｐ２のテキストを更新
 			}
 
@@ -204,7 +204,7 @@ public class GameProject
 						textW[j] = w;
 					}
 				}
-				System.out.println("書き込み４" + i + "回目");
+				System.out.println("書き込み４の" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -266,7 +266,9 @@ public class GameProject
 		{
 			System.out.println("ｐ１で入った時の統合処理");
 
-			textF = txR.read(playerinfo[1], 2, 5);//ｐ２が使ったカードの情報を持ってきて退避
+			textF = txR.read(playerinfo[1], 2, 3);//ｐ２が使ったカードの情報を持ってきて退避
+
+			System.out.println("ｐ１の統合でｐ２の使ったカードを持ってくる" + textF);
 
 			//ｐ１のところにｐ２の情報を持ってくる
 			for (int i = 0; i < p2_card.length; i++)
@@ -456,7 +458,7 @@ public class GameProject
 					textW[j] = w;
 				}
 
-				System.out.println("書き込み7" + i + "回目");
+				System.out.println("書き込み7の" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 			//統合処理後に各プレイヤーの処理判定を０に戻す
@@ -521,7 +523,7 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-				System.out.println("書き込み9" + i + "回目");
+				System.out.println("書き込み9の" + i + "回目");
 				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
 
@@ -540,7 +542,8 @@ public class GameProject
 		{
 			System.out.println("ｐ２で入った時の統合処理");
 
-			textF = txR.read(playerinfo[1], 1, 5);//ｐ１が使ったカードの情報を持ってきて退避
+			textF = txR.read(playerinfo[1], 1, 3);//ｐ１が使ったカードの情報を持ってきて退避
+			System.out.println("ｐ２の統合でｐ１の使ったカードを持ってくる" + textF);
 
 			//ｐ２のところにｐ１の情報を持ってくる
 			for (int i = 0; i < p1_card.length; i++)
@@ -729,7 +732,7 @@ public class GameProject
 					w = textmain[i][j];//２次元配列の情報をセット
 					textW[j] = w;
 				}
-				System.out.println("書き込み10" + i + "回目");
+				System.out.println("書き込み10の" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -795,7 +798,7 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-				System.out.println("書き込み12" + i + "回目");
+				System.out.println("書き込み12の" + i + "回目");
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
 			}
 
