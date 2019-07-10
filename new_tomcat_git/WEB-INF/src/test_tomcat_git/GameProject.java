@@ -451,11 +451,11 @@ public class GameProject
 			}
 
 			//デバック用シスアウト
-				System.out.println(textmain[4][0]);
-				System.out.println(textmain[4][1]);
+				System.out.print(textmain[4][0]);
+				System.out.print(textmain[4][1]);
 				System.out.println(textmain[4][2]);
-				System.out.println(textmain[6][0]);
-				System.out.println(textmain[6][1]);
+				System.out.print(textmain[6][0]);
+				System.out.print(textmain[6][1]);
 				System.out.println(textmain[6][2]);
 
 		}
@@ -660,11 +660,11 @@ public class GameProject
 			}
 
 			//デバック用シスアウト
-			System.out.println(textmain[4][0]);
-			System.out.println(textmain[4][1]);
+			System.out.print(textmain[4][0]);
+			System.out.print(textmain[4][1]);
 			System.out.println(textmain[4][2]);
-			System.out.println(textmain[6][0]);
-			System.out.println(textmain[6][1]);
+			System.out.print(textmain[6][0]);
+			System.out.print(textmain[6][1]);
 			System.out.println(textmain[6][2]);
 		}
 	}
