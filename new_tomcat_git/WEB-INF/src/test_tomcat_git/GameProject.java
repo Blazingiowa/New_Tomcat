@@ -386,10 +386,10 @@ public class GameProject
 								//p2_cardの使ったカードIDに対応しているIDがp1_cardにあるか判定
 								if (p2_card[i][j] == p1_card[k][0])
 								{
-									//ｐ２のカードが攻撃で、ｐ１の防御に防がれたとき
+									//ｐ２のカードが攻撃で、ｐ１の防御が防いだ時
 									if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
 									{
-										textmain[6][k] -= p2_card[i][2] / 2;//ｐ２が受けたダメージを計算して配列に入れる
+										textmain[4][k] += p2_card[i][2] / 2;//ｐ１がリフレクトしたダメージを配列に入れる
 										flag = true;
 									}
 								}
@@ -406,7 +406,7 @@ public class GameProject
 										//カウントが３回溜まっていて、ｐ１の使ったカードに対応IDがなかった場合
 										if (count == 3 && flag == false)
 										{
-											textmain[4][i] = p2_card[i][2];//ｐ１が与えたダメージを配列に入れる
+											textmain[6][i] -= p2_card[i][2];//ｐ２がｐ１に与えたダメージを配列に入れる
 											count = 0;//カウントリセット
 										}
 									}
@@ -433,6 +433,9 @@ public class GameProject
 
 			textmain[2][1]++;//ｐ１の行動値を１増やす
 			textmain[2][2]++;//ｐ２の行動値を２増やす
+
+			//デバック用
+			System.out.println("ここからプレイヤー１のテキスト書き込み");
 
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -463,6 +466,9 @@ public class GameProject
 				}
 			}
 			txW.write(playerinfo[1], 1, 0, textW);//ｐ１の処理判定のところを書き換える
+
+			//デバック用
+			System.out.println("ここからプレイヤー２のテキスト書き込み");
 
 			//ｐ２の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -652,10 +658,10 @@ public class GameProject
 								//p1_cardの使ったカードIDに対応しているIDがp2_cardにあるか判定
 								if (p1_card[i][j] == p2_card[k][0])
 								{
-									//ｐ１のカードが攻撃で、ｐ２の防御に防がれたとき
+									//ｐ１のカードが攻撃で、ｐ２の防御が防いだ時
 									if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
 									{
-										textmain[6][k] -= p1_card[i][2] / 2;//ｐ１が受けたダメージを計算して配列に入れる
+										textmain[4][k] += p1_card[i][2] / 2;//ｐ２が防いで与えたリフレクトダメージを配列に入れる
 										flag = true;
 									}
 								}
@@ -672,7 +678,7 @@ public class GameProject
 										//カウントが３回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
 										if (count == 3 && flag == false)
 										{
-											textmain[4][i] = p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
+											textmain[6][i] -= p1_card[i][2];//ｐ２が受けるダメージを配列に入れる
 											count = 0;//カウントリセット
 										}
 									}
@@ -699,6 +705,9 @@ public class GameProject
 
 			textmain[2][1]++;//ｐ１の行動値を１増やす
 			textmain[2][2]++;//ｐ２の行動値を２増やす
+
+			//デバック用
+			System.out.println("ここからプレイヤー２のテキスト書き込み");
 
 			//ｐ２の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -729,7 +738,10 @@ public class GameProject
 					textW[i] = -1;
 				}
 			}
-			txW.write(playerinfo[1], 2, 0, textW);//ｐ２		の処理判定のところを書き換える
+			txW.write(playerinfo[1], 2, 0, textW);//ｐ２の処理判定のところを書き換える
+
+			//デバック用
+			System.out.println("ここからプレイヤー１のテキスト書き込み");
 
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
