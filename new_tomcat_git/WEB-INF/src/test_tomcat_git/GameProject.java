@@ -43,7 +43,6 @@ public class GameProject
 		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
 		textF = txR.read(info[1], info[2], 0);
 
-		//デバック用
 		System.out.println("ここから、ゲームスタート");
 
 		//テキストを読み込み、書き換え
@@ -110,10 +109,10 @@ public class GameProject
 					w = textmain[i][j];
 					textW[j] = w;
 				}
-				System.out.println("書き込み２");
+				System.out.println("書き込み２" + i + "回目");
 				txW.write(playerinfo[1], 1, i, textW);//ｐ１のテキストを更新
 
-				System.out.println("書き込み３");
+				System.out.println("書き込み３" + i + "回目");
 				txW.write(playerinfo[1], 2, i, textW);//ｐ２のテキストを更新
 			}
 
@@ -205,7 +204,7 @@ public class GameProject
 						textW[j] = w;
 					}
 				}
-				System.out.println("書き込み４");
+				System.out.println("書き込み４" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -446,7 +445,6 @@ public class GameProject
 			textmain[2][1]++;//ｐ１の行動値を１増やす
 			textmain[2][2]++;//ｐ２の行動値を２増やす
 
-			//デバック用
 			System.out.println("ここからプレイヤー１のテキスト書き込み");
 
 			//ｐ１の統合処理後の情報をテキストに書き込む
@@ -458,7 +456,7 @@ public class GameProject
 					textW[j] = w;
 				}
 
-				System.out.println("書き込み7");
+				System.out.println("書き込み7" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 			//統合処理後に各プレイヤーの処理判定を０に戻す
@@ -481,7 +479,6 @@ public class GameProject
 			System.out.println("書き込み8");
 			txW.write(playerinfo[1], 1, 0, textW);//ｐ１の処理判定のところを書き換える
 
-			//デバック用
 			System.out.println("ここからｐ１で入った時のプレイヤー２のテキスト書き込み");
 
 			//ｐ２の統合処理後の情報をテキストに書き込む
@@ -524,11 +521,10 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-				System.out.println("書き込み9");
+				System.out.println("書き込み9" + i + "回目");
 				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
 
-			//デバック用シスアウト
 			System.out.print(textmain[4][0]);
 			System.out.print(textmain[4][1]);
 			System.out.println(textmain[4][2]);
@@ -542,7 +538,7 @@ public class GameProject
 
 		else if (playerinfo[2] == 2)
 		{
-			System.out.println("ｐ１で入った時の統合処理");
+			System.out.println("ｐ２で入った時の統合処理");
 
 			textF = txR.read(playerinfo[1], 1, 5);//ｐ１が使ったカードの情報を持ってきて退避
 
@@ -723,7 +719,6 @@ public class GameProject
 			textmain[2][1]++;//ｐ１の行動値を１増やす
 			textmain[2][2]++;//ｐ２の行動値を２増やす
 
-			//デバック用
 			System.out.println("ここからプレイヤー２のテキスト書き込み");
 
 			//ｐ２の統合処理後の情報をテキストに書き込む
@@ -734,7 +729,7 @@ public class GameProject
 					w = textmain[i][j];//２次元配列の情報をセット
 					textW[j] = w;
 				}
-				System.out.println("書き込み10");
+				System.out.println("書き込み10" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -758,7 +753,6 @@ public class GameProject
 			System.out.println("書き込み11");
 			txW.write(playerinfo[1], 2, 0, textW);//ｐ２の処理判定のところを書き換える
 
-			//デバック用
 			System.out.println("ここからｐ２で入った時のプレイヤー１のテキスト書き込み");
 
 			//ｐ１の統合処理後の情報をテキストに書き込む
@@ -801,11 +795,10 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-				System.out.println("書き込み12");
+				System.out.println("書き込み12" + i + "回目");
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
 			}
 
-			//デバック用シスアウト
 			System.out.print(textmain[4][0]);
 			System.out.print(textmain[4][1]);
 			System.out.println(textmain[4][2]);
