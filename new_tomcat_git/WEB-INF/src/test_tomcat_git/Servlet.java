@@ -19,7 +19,7 @@ public class Servlet extends HttpServlet
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
 	private GameEND game_end = new GameEND();
-	private GameProject game_project = new GameProject();
+	//private GameProject game_project = new GameProject();
 
 	private GameProject_Main gpm = new GameProject_Main();
 
