@@ -530,12 +530,12 @@ public class GameProject
 				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
 
-			System.out.print(textmain[4][0]);
-			System.out.print(textmain[4][1]);
-			System.out.println(textmain[4][2]);
-			System.out.print(textmain[6][0]);
-			System.out.print(textmain[6][1]);
-			System.out.println(textmain[6][2]);
+			System.out.print("ｐ１が１枚目のカードで与えるダメージ：" + textmain[4][0]);
+			System.out.print("ｐ１が２枚目のカード与えるダメージ：" + textmain[4][1]);
+			System.out.println("ｐ１が３枚目のカードで与えるダメージ：" + textmain[4][2]);
+			System.out.print("ｐ２が１枚目のカードで与えるダメージ：" + textmain[6][0]);
+			System.out.print("ｐ２が２枚目のカードで与えるダメージ：" + textmain[6][1]);
+			System.out.println("ｐ２が３枚目のカードで与えるダメージ：" + textmain[6][2]);
 
 		}
 
@@ -808,12 +808,12 @@ public class GameProject
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
 			}
 
-			System.out.print(textmain[4][0]);
-			System.out.print(textmain[4][1]);
-			System.out.println(textmain[4][2]);
-			System.out.print(textmain[6][0]);
-			System.out.print(textmain[6][1]);
-			System.out.println(textmain[6][2]);
+			System.out.print("ｐ２が１枚目のカードで与えるダメージ：" + textmain[4][0]);
+			System.out.print("ｐ２が２枚目のカードで与えるダメージ：" + textmain[4][1]);
+			System.out.println("ｐ２が３枚目のカードで与えるダメージ：" + textmain[4][2]);
+			System.out.print("ｐ１が１枚目のカードで与えるダメージ：" + textmain[6][0]);
+			System.out.print("ｐ１が２枚目のカードで与えるダメージ：" + textmain[6][1]);
+			System.out.println("ｐ１が３枚目のカードで与えるダメージ：" + textmain[6][2]);
 		}
 	}
 
