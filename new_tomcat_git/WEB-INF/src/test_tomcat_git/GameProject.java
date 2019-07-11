@@ -537,7 +537,6 @@ public class GameProject
 		}
 
 		//ｐ２のとき
-
 		else if (playerinfo[2] == 2)
 		{
 			System.out.println("ｐ２で入った時の統合処理");
@@ -649,6 +648,7 @@ public class GameProject
 				}
 			}
 
+			//現在修正箇所、＜問題＞：ｐ２に与えるダメージがおかしい
 			/*------------追記場所-------------------------------------------------------------------------------------*/
 			//ｐ１の使用したカードに攻撃カードがあった場合の処理
 			for (int i = 0; i < p1_card.length; i++)
@@ -659,34 +659,34 @@ public class GameProject
 				//使ったカードがあるかどうか判定
 				if (p1_card[i][0] != -1)
 				{
-					//p1_cardの対応IDの列を回すためのfor
-					for (int j = 3; j < p1_card[0].length; j++)
+					//攻撃カードかどうかの判定
+					if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
 					{
-						//攻撃が通せるか判定するための変数リセット
-						count = 0;
-
-						//対応IDがあるかどうかの判定
-						if (p1_card[i][j] != -1)
+						//p1_cardの対応IDの列を回すためのfor
+						for (int j = 3; j < p1_card[0].length; j++)
 						{
-							//p2_cardのIDの行を回すためのfor
-							for (int k = 0; k < p2_card.length; k++)
-							{
-								//p1_cardの使ったカードIDに対応しているIDがp2_cardにあるか判定
-								if (p1_card[i][j] == p2_card[k][0])
-								{
-									//ｐ１のカードが攻撃で、ｐ２の防御が防いだ時
-									if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
-									{
-										textmain[4][k] += p1_card[i][2] / 2;//ｐ２が防いで与えたリフレクトダメージを配列に入れる
-										flag = true;
-									}
-								}
+							//攻撃が通せるか判定するための変数リセット
+							count = 0;
 
-								//対応しているIDでなかった場合
-								else
+							//対応IDがあるかどうかの判定
+							if (p1_card[i][j] != -1)
+							{
+								//p2_cardのIDの行を回すためのfor
+								for (int k = 0; k < p2_card.length; k++)
 								{
-									//攻撃カードかどうかの判定
-									if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+									//p1_cardの使ったカードIDに対応しているIDがp2_cardにあるか判定
+									if (p1_card[i][j] == p2_card[k][0])
+									{
+										//ｐ１のカードが攻撃で、ｐ２の防御に防がれたとき
+										if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+										{
+											flag = true;
+										}
+
+									}
+
+									//対応しているIDでなかった場合
+									else
 									{
 										//カウントをプラスする
 										count++;
@@ -694,12 +694,12 @@ public class GameProject
 										//カウントが３回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
 										if (count == 3 && flag == false)
 										{
-											textmain[6][i] -= p1_card[i][2];//ｐ２が受けるダメージを配列に入れる
+											textmain[6][i] -= p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
 											count = 0;//カウントリセット
 										}
 									}
-								}
 
+								}
 							}
 						}
 					}
