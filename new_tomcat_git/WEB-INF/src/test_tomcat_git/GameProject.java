@@ -319,15 +319,15 @@ public class GameProject
 				//攻撃が通せるか判定するためのフラグリセット
 				flag = false;
 
+				//攻撃が通せるか判定するための変数リセット
+				count = 0;
+
 				//使ったカードがあるかどうか判定
 				if (p1_card[i][0] != -1)
 				{
 					//p1_cardの対応IDの列を回すためのfor
 					for (int j = 3; j < p1_card[0].length; j++)
 					{
-						//攻撃が通せるか判定するための変数リセット
-						count = 0;
-
 						//対応IDがあるかどうかの判定
 						if (p1_card[i][j] != -1)
 						{
@@ -360,10 +360,12 @@ public class GameProject
 										count++;
 
 										//カウントが３回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
-										if (count == 3 && flag == false)
+										if (count == 6 && flag == false)
 										{
-											textmain[4][i] = p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
+											textmain[4][i] += p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
 											count = 0;//カウントリセット
+
+											System.out.println("ｐ１の攻撃が通ったよ！" + textmain[6][i] + "ダメージ");
 										}
 									}
 								}
@@ -381,46 +383,47 @@ public class GameProject
 				//攻撃が通せるか判定するためのフラグリセット
 				flag = false;
 
+				//攻撃が通せるか判定するための変数リセット
+				count = 0;
+
 				//使ったカードがあるかどうか判定
 				if (p2_card[i][0] != -1)
 				{
-					//p2_cardの対応IDの列を回すためのfor
-					for (int j = 3; j < p2_card[0].length; j++)
+					//攻撃カードかどうかの判定
+					if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
 					{
-						//攻撃が通せるか判定するための変数リセット
-						count = 0;
-
-						//対応IDがあるかどうかの判定
-						if (p2_card[i][j] != -1)
+						//p2_cardの対応IDの列を回すためのfor
+						for (int j = 3; j < p2_card[0].length; j++)
 						{
-							//p1_cardのIDの行を回すためのfor
-							for (int k = 0; k < p1_card.length; k++)
+							//対応IDがあるかどうかの判定
+							if (p2_card[i][j] != -1)
 							{
-								//p2_cardの使ったカードIDに対応しているIDがp1_cardにあるか判定
-								if (p2_card[i][j] == p1_card[k][0])
+								//p1_cardのIDの行を回すためのfor
+								for (int k = 0; k < p1_card.length; k++)
 								{
-									//ｐ２のカードが攻撃で、ｐ１の防御が防いだ時
-									if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
+									//p2_cardの使ったカードIDに対応しているIDがp1_cardにあるか判定
+									if (p2_card[i][j] == p1_card[k][0])
 									{
-										textmain[4][k] += p2_card[i][2] / 2;//ｐ１がリフレクトしたダメージを配列に入れる
-										flag = true;
+										//ｐ２のカードが攻撃で、ｐ１の防御が防いだ時
+										if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
+										{
+											flag = true;
+										}
 									}
-								}
 
-								//対応しているIDでなかった場合
-								else
-								{
-									//攻撃カードかどうかの判定
-									if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
+									//対応しているIDでなかった場合
+									else
 									{
 										//カウントをプラスする
 										count++;
 
 										//カウントが３回溜まっていて、ｐ１の使ったカードに対応IDがなかった場合
-										if (count == 3 && flag == false)
+										if (count == 6 && flag == false)
 										{
 											textmain[6][i] -= p2_card[i][2];//ｐ２がｐ１に与えたダメージを配列に入れる
 											count = 0;//カウントリセット
+
+											System.out.println("ｐ２の攻撃が通ったよ！" + textmain[6][i] + "ダメージ");
 										}
 									}
 								}
@@ -639,7 +642,7 @@ public class GameProject
 											textmain[4][i] += p2_card[i][2];//ｐ２が与えたダメージを配列に入れる
 											count = 0;//カウントリセット
 
-											System.out.println("ｐ２の攻撃が通ったよ！"+ textmain[4][i]+"ダメージ");
+											System.out.println("ｐ２の攻撃が通ったよ！" + textmain[4][i] + "ダメージ");
 										}
 									}
 								}
@@ -698,7 +701,7 @@ public class GameProject
 											textmain[6][i] -= p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
 											count = 0;//カウントリセット
 
-											System.out.println("ｐ１の攻撃が通ったよ！"+ textmain[6][i]+"ダメージ");
+											System.out.println("ｐ１の攻撃が通ったよ！" + textmain[6][i] + "ダメージ");
 										}
 									}
 
