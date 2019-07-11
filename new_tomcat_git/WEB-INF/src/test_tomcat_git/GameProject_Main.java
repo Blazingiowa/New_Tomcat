@@ -39,10 +39,10 @@ public class GameProject_Main
 	GameProject_txtReadWrite GPRW = new GameProject_txtReadWrite();
 
 	//ゲームのplayer1の統合処理クラス
-	GameProject_Integrated_P1 GIP1 = new GameProject_Integrated_P1();
+	GameProject_Integrated_P1 GPIP1 = new GameProject_Integrated_P1();
 
 	//ゲームのplayer2の統合処理クラス
-	GameProject_Integrated_P2 GIP2 = new GameProject_Integrated_P2();
+	GameProject_Integrated_P2 GPIP2 = new GameProject_Integrated_P2();
 
 	/*infoの配列内容------------------------/useの配列の内容--------/
 	/										/						/
@@ -52,6 +52,34 @@ public class GameProject_Main
 
 	void main(int[] info, int[] use)
 	{
+		//textmainの内容を初期化
+		GPS.start(info);
 
+		//テキストファイルを検索[ルームID][ユーザ番号][行数][書き込みの場合のみ配列をセット]
+		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
+		textF = txR.read(info[1], info[2], 0);
+
+		System.out.println("ここから、ゲームスタート");
+
+		//テキストを読み込み、書き換え
+		GPRW.txtReadWrite(info, use);
+
+		//ルーム状況表から情報をもってくる[ルームID][共有ファイルについてなので、３][ユーザ番号で行数指定]
+		player = txR.read(info[1], 3, 1);
+
+		//それぞれのプレイヤーが処理が終わっているかどうかの判定
+		if (player[1] == 1 && player[2] == 1)
+		{
+			if (info[2] == 1)
+			{
+				//統合処理
+				GPIP1.IntegratedP1(info);
+			}
+			else if (info[2] == 2)
+			{
+				//統合処理
+				GPIP2.IntegratedP2(info);
+			}
+		}
 	}
 }
