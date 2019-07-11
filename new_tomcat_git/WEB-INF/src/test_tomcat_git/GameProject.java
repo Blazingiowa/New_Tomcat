@@ -43,6 +43,8 @@ public class GameProject
 		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
 		textF = txR.read(info[1], info[2], 0);
 
+		System.out.println("ここから、ゲームスタート");
+
 		//テキストを読み込み、書き換え
 		txtReadWrite(info, use);
 
@@ -72,6 +74,8 @@ public class GameProject
 			//ルーム状況表を０，０にして次の処理ができるように初期化
 			player[1] = 0;
 			player[2] = 0;
+
+			System.out.println("書き込み１");
 			txW.write(playerinfo[1], 3, 1, player);
 
 			//前のターンの時に変化した、HPと行動値の情報を持ってくる
@@ -105,7 +109,10 @@ public class GameProject
 					w = textmain[i][j];
 					textW[j] = w;
 				}
+				System.out.println("書き込み２の" + i + "回目");
 				txW.write(playerinfo[1], 1, i, textW);//ｐ１のテキストを更新
+
+				System.out.println("書き込み３の" + i + "回目");
 				txW.write(playerinfo[1], 2, i, textW);//ｐ２のテキストを更新
 			}
 
@@ -157,7 +164,7 @@ public class GameProject
 
 	}
 
-	/*----textの読み込みと書き込みメソッド---------------------------------------------------------------------------------*/
+	/*----textの読み込みと書き込みメソッド-----------------------------------------------------------------------------*/
 	void txtReadWrite(int[] playerinfo, int[] usecard)
 	{
 		//プレイヤーの処理が終わっているのかどうか判定（０はまだ、１で処理済み）
@@ -197,6 +204,7 @@ public class GameProject
 						textW[j] = w;
 					}
 				}
+				System.out.println("書き込み４の" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -219,6 +227,7 @@ public class GameProject
 				//ユニティが見続ける場所を++して更新
 				player[0]++;
 
+				System.out.println("書き込み５");
 				//ルーム状況 表にプレイヤー１の処理が終わったことを書き込む
 				txW.write(playerinfo[1], 3, 1, player);
 			}
@@ -242,19 +251,24 @@ public class GameProject
 				//ユニティが見続ける場所を++して更新
 				player[0]++;
 
+				System.out.println("書き込み６");
 				//ルーム状況表にプレイヤー２の処理が終わったことを書き込む
 				txW.write(playerinfo[1], 3, 1, player);
 			}
 		}
 	}
 
-	/*----統合処理メソッド-------------------------------------------------------------------------------------------------*/
+	/*----統合処理メソッド---------------------------------------------------------------------------------------------*/
 	void Integrated(int[] playerinfo)
 	{
 		//ｐ１のとき
 		if (playerinfo[2] == 1)
 		{
-			textF = txR.read(playerinfo[1], 2, 5);//ｐ２が使ったカードの情報を持ってきて退避
+			System.out.println("ｐ１で入った時の統合処理");
+
+			textF = txR.read(playerinfo[1], 2, 3);//ｐ２が使ったカードの情報を持ってきて退避
+
+			System.out.println("ｐ１の統合でｐ２の使ったカードを持ってくる" + textF);
 
 			//ｐ１のところにｐ２の情報を持ってくる
 			for (int i = 0; i < p2_card.length; i++)
@@ -305,15 +319,15 @@ public class GameProject
 				//攻撃が通せるか判定するためのフラグリセット
 				flag = false;
 
+				//攻撃が通せるか判定するための変数リセット
+				count = 0;
+
 				//使ったカードがあるかどうか判定
 				if (p1_card[i][0] != -1)
 				{
 					//p1_cardの対応IDの列を回すためのfor
 					for (int j = 3; j < p1_card[0].length; j++)
 					{
-						//攻撃が通せるか判定するための変数リセット
-						count = 0;
-
 						//対応IDがあるかどうかの判定
 						if (p1_card[i][j] != -1)
 						{
@@ -346,10 +360,12 @@ public class GameProject
 										count++;
 
 										//カウントが３回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
-										if (count == 3 && flag == false)
+										if (count == 6 && flag == false)
 										{
-											textmain[4][i] = p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
+											textmain[4][i] += p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
 											count = 0;//カウントリセット
+
+											System.out.println("ｐ１の攻撃が通ったよ！" + textmain[6][i] + "ダメージ");
 										}
 									}
 								}
@@ -359,6 +375,65 @@ public class GameProject
 					}
 				}
 			}
+
+			/*------------追記場所-------------------------------------------------------------------------------------*/
+			//ｐ２の使用したカードに攻撃カードがあった場合の処理
+			for (int i = 0; i < p2_card.length; i++)
+			{
+				//攻撃が通せるか判定するためのフラグリセット
+				flag = false;
+
+				//攻撃が通せるか判定するための変数リセット
+				count = 0;
+
+				//使ったカードがあるかどうか判定
+				if (p2_card[i][0] != -1)
+				{
+					//攻撃カードかどうかの判定
+					if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
+					{
+						//p2_cardの対応IDの列を回すためのfor
+						for (int j = 3; j < p2_card[0].length; j++)
+						{
+							//対応IDがあるかどうかの判定
+							if (p2_card[i][j] != -1)
+							{
+								//p1_cardのIDの行を回すためのfor
+								for (int k = 0; k < p1_card.length; k++)
+								{
+									//p2_cardの使ったカードIDに対応しているIDがp1_cardにあるか判定
+									if (p2_card[i][j] == p1_card[k][0])
+									{
+										//ｐ２のカードが攻撃で、ｐ１の防御が防いだ時
+										if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
+										{
+											flag = true;
+										}
+									}
+
+									//対応しているIDでなかった場合
+									else
+									{
+										//カウントをプラスする
+										count++;
+
+										//カウントが３回溜まっていて、ｐ１の使ったカードに対応IDがなかった場合
+										if (count == 6 && flag == false)
+										{
+											textmain[6][i] -= p2_card[i][2];//ｐ２がｐ１に与えたダメージを配列に入れる
+											count = 0;//カウントリセット
+
+											System.out.println("ｐ２の攻撃が通ったよ！" + textmain[6][i] + "ダメージ");
+										}
+									}
+								}
+
+							}
+						}
+					}
+				}
+			}
+			/*---------------------------------------------------------------------------------------------------------*/
 
 			//統合処理の結果、発生したダメージをｈｐから減らす
 			//ｐ１のｈｐを減らす
@@ -375,6 +450,8 @@ public class GameProject
 			textmain[2][1]++;//ｐ１の行動値を１増やす
 			textmain[2][2]++;//ｐ２の行動値を２増やす
 
+			System.out.println("ここからプレイヤー１のテキスト書き込み");
+
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
 			{
@@ -384,6 +461,7 @@ public class GameProject
 					textW[j] = w;
 				}
 
+				System.out.println("書き込み7の" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 			//統合処理後に各プレイヤーの処理判定を０に戻す
@@ -403,7 +481,10 @@ public class GameProject
 					textW[i] = -1;
 				}
 			}
+			System.out.println("書き込み8");
 			txW.write(playerinfo[1], 1, 0, textW);//ｐ１の処理判定のところを書き換える
+
+			System.out.println("ここからｐ１で入った時のプレイヤー２のテキスト書き込み");
 
 			//ｐ２の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -445,15 +526,26 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-
+				System.out.println("書き込み9の" + i + "回目");
 				txW.write(playerinfo[1], 2, i, textW);//テキストに書き込み
 			}
+
+			System.out.print("ｐ１が１枚目のカードで与えるダメージ：" + textmain[4][0]);
+			System.out.print("ｐ１が２枚目のカード与えるダメージ：" + textmain[4][1]);
+			System.out.println("ｐ１が３枚目のカードで与えるダメージ：" + textmain[4][2]);
+			System.out.print("ｐ２が１枚目のカードで与えるダメージ：" + textmain[6][0]);
+			System.out.print("ｐ２が２枚目のカードで与えるダメージ：" + textmain[6][1]);
+			System.out.println("ｐ２が３枚目のカードで与えるダメージ：" + textmain[6][2]);
+
 		}
 
 		//ｐ２のとき
 		else if (playerinfo[2] == 2)
 		{
-			textF = txR.read(playerinfo[1], 1, 5);//ｐ１が使ったカードの情報を持ってきて退避
+			System.out.println("ｐ２で入った時の統合処理");
+
+			textF = txR.read(playerinfo[1], 1, 3);//ｐ１が使ったカードの情報を持ってきて退避
+			System.out.println("ｐ２の統合でｐ１の使ったカードを持ってくる" + textF);
 
 			//ｐ２のところにｐ１の情報を持ってくる
 			for (int i = 0; i < p1_card.length; i++)
@@ -504,15 +596,15 @@ public class GameProject
 				//攻撃が通せるか判定するためのフラグリセット
 				flag = false;
 
+				//攻撃が通せるか判定するための変数リセット
+				count = 0;
+
 				//使ったカードがあるかどうか判定
 				if (p2_card[i][0] != -1)
 				{
 					//p2_cardの対応IDの列を回すためのfor
 					for (int j = 3; j < p2_card[0].length; j++)
 					{
-						//攻撃が通せるか判定するための変数リセット
-						count = 0;
-
 						//対応IDがあるかどうかの判定
 						if (p2_card[i][j] != -1)
 						{
@@ -545,10 +637,12 @@ public class GameProject
 										count++;
 
 										//カウントが３回溜まっていて、ｐ１の使ったカードに対応IDがなかった場合
-										if (count == 3 && flag == false)
+										if (count == 6 && flag == false)
 										{
-											textmain[4][i] = p2_card[i][2];//ｐ１が与えたダメージを配列に入れる
+											textmain[4][i] += p2_card[i][2];//ｐ２が与えたダメージを配列に入れる
 											count = 0;//カウントリセット
+
+											System.out.println("ｐ２の攻撃が通ったよ！" + textmain[4][i] + "ダメージ");
 										}
 									}
 								}
@@ -558,6 +652,66 @@ public class GameProject
 					}
 				}
 			}
+
+			//現在修正箇所、＜問題＞：ｐ２に与えるダメージがおかしい
+			/*------------追記場所-------------------------------------------------------------------------------------*/
+			//ｐ１の使用したカードに攻撃カードがあった場合の処理
+			for (int i = 0; i < p1_card.length; i++)
+			{
+				//攻撃が通せるか判定するためのフラグリセット
+				flag = false;
+
+				//攻撃が通せるか判定するための変数リセット
+				count = 0;
+
+				//使ったカードがあるかどうか判定
+				if (p1_card[i][0] != -1)
+				{
+					//攻撃カードかどうかの判定
+					if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+					{
+						//p1_cardの対応IDの列を回すためのfor
+						for (int j = 3; j < p1_card[0].length; j++)
+						{
+							//対応IDがあるかどうかの判定
+							if (p1_card[i][j] != -1)
+							{
+								//p2_cardのIDの行を回すためのfor
+								for (int k = 0; k < p2_card.length; k++)
+								{
+									//p1_cardの使ったカードIDに対応しているIDがp2_cardにあるか判定
+									if (p1_card[i][j] == p2_card[k][0])
+									{
+										//ｐ１のカードが攻撃で、ｐ２の防御に防がれたとき
+										if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+										{
+											flag = true;
+										}
+									}
+
+									//対応しているIDでなかった場合
+									else
+									{
+										//カウントをプラスする
+										count++;
+
+										//カウントが３回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
+										if (count == 6 && flag == false)
+										{
+											textmain[6][i] -= p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
+											count = 0;//カウントリセット
+
+											System.out.println("ｐ１の攻撃が通ったよ！" + textmain[6][i] + "ダメージ");
+										}
+									}
+
+								}
+							}
+						}
+					}
+				}
+			}
+			/*----------------------------------------------------------------------------------------------------------*/
 
 			//統合処理の結果、発生したダメージをｈｐから減らす
 			//ｐ１のｈｐを減らす
@@ -574,6 +728,8 @@ public class GameProject
 			textmain[2][1]++;//ｐ１の行動値を１増やす
 			textmain[2][2]++;//ｐ２の行動値を２増やす
 
+			System.out.println("ここからプレイヤー２のテキスト書き込み");
+
 			//ｐ２の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
 			{
@@ -582,7 +738,7 @@ public class GameProject
 					w = textmain[i][j];//２次元配列の情報をセット
 					textW[j] = w;
 				}
-
+				System.out.println("書き込み10の" + i + "回目");
 				txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 			}
 
@@ -603,7 +759,10 @@ public class GameProject
 					textW[i] = -1;
 				}
 			}
-			txW.write(playerinfo[1], 2, 0, textW);//ｐ２		の処理判定のところを書き換える
+			System.out.println("書き込み11");
+			txW.write(playerinfo[1], 2, 0, textW);//ｐ２の処理判定のところを書き換える
+
+			System.out.println("ここからｐ２で入った時のプレイヤー１のテキスト書き込み");
 
 			//ｐ１の統合処理後の情報をテキストに書き込む
 			for (int i = 0; i < textmain.length; i++)
@@ -645,9 +804,16 @@ public class GameProject
 							textW[j] = w;
 						}
 				}
-
+				System.out.println("書き込み12の" + i + "回目");
 				txW.write(playerinfo[1], 1, i, textW);//テキストに書き込み
 			}
+
+			System.out.print("ｐ２が１枚目のカードで与えるダメージ：" + textmain[4][0]);
+			System.out.print("ｐ２が２枚目のカードで与えるダメージ：" + textmain[4][1]);
+			System.out.println("ｐ２が３枚目のカードで与えるダメージ：" + textmain[4][2]);
+			System.out.print("ｐ１が１枚目のカードで与えるダメージ：" + textmain[6][0]);
+			System.out.print("ｐ１が２枚目のカードで与えるダメージ：" + textmain[6][1]);
+			System.out.println("ｐ１が３枚目のカードで与えるダメージ：" + textmain[6][2]);
 		}
 	}
 
