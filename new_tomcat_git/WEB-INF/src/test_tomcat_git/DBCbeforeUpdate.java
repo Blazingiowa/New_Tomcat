@@ -8,6 +8,10 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 	int[] beforeupdate()
 	{
 		Result = new int[3];
+		String[] sql = new String[2];
+		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
+		sql[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
+
 		for(int i = 0;i < Result.length;i++)
 		{
 			Result[i] = 0;
@@ -17,13 +21,13 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 
 		try
 		{
-			rs = stmt.executeQuery("SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;");
+			rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
 			//結果の挿入
 			rs.next();
 			Result[0] = rs.getInt("user_id");
 			rs.close();
 
-			rs = stmt.executeQuery("SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;");
+			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
 			//結果の挿入
 			rs.next();
 			Result[1] = rs.getInt("room_id");
