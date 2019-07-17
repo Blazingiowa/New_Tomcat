@@ -19,7 +19,9 @@ public class Servlet extends HttpServlet
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
 	private GameEND game_end = new GameEND();
-	private GameProject game_project = new GameProject();
+	//private GameProject game_project = new GameProject();
+
+	private GameProject_Main gpm = new GameProject_Main();
 
 	private String[] str_user_info = new String[3]; //順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
 	private int[] int_user_info = new int[3];
@@ -143,7 +145,7 @@ public class Servlet extends HttpServlet
 
 				info();
 
-				game_project.main(int_user_info, use_hand);
+				gpm.main(int_user_info, use_hand);
 
 			}
 		}
