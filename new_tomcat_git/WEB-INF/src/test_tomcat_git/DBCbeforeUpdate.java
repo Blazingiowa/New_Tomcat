@@ -52,12 +52,10 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 				Result[2] = keep[1];
 			}
 
-
 			System.out.println("DBCbeforeUpdate上での値だお");
 			System.out.println("user_id:"+Result[0]);
 			System.out.println("room_id:"+Result[1]);
 			System.out.println("player_number:"+Result[2]);
-
 
 		}
 		catch(SQLException e)
