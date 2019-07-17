@@ -2,15 +2,12 @@ package test_tomcat_git;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Gamestart
 {
 	Gamemain Gm = new Gamemain();
 	Text tx = new Text();
-	File file;
+	File file,dir;
 
 	DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
 	TaiouText tt = new TaiouText();
@@ -20,7 +17,7 @@ public class Gamestart
 	TextWrite tw = new TextWrite();
 	TextRead tr = new TextRead();
 
-	String[] userinfo = new String[3];//ユーザID,ルームID,プレイヤー番号の順番で格納
+	String[] userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
 	int[] online;
 	String url;
@@ -30,35 +27,27 @@ public class Gamestart
 	{
 		player = DBCU.update(user_name);
 
-		path[0] = "/var/www/html/testdir"/*+player[1]*/;
+		path[0] = "/var/www/html/"+player[1];
 		path[1] = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
 		path[2] = "/var/www/html/"+player[1]+"/taiou.txt";
 		path[3] = "/var/www/html/"+player[1]+"/card.txt";
 		path[4] = "/var/www/html/"+player[1]+"/room.txt";
-
-
 
 		for(int i = 0;i<userinfo.length;i++)
 		{
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
-		Path dir = Paths.get(path[0]);
-		try
-		{
-			Files.createDirectory(dir);
-		}
-		catch(IOException e)
-		{
-			System.out.println("ディレクトリ作れなかった(´・ω・｀)");
-			System.out.println(path[0]);
-		}
+		dir = new File(path[0]);//ルームディレクトリの作成
+		dir.mkdir();
+		permission(dir);
 
 		file = new File(path[1]);
 		if(file.exists() == false)//player.txt
 		{
 			System.out.println(path[1]);
 			createfile(file);
+			permission(file);
 		}
 		st.textfile(player[1], player[2],file);
 
@@ -66,6 +55,7 @@ public class Gamestart
 		if(file.exists() == false)//対応表の有無
 		{
 			createfile(file);
+			permission(file);
 			tt.taioucreate(file);
 		}
 
@@ -73,6 +63,7 @@ public class Gamestart
 		if(file.exists() == false)//カード表の有無
 		{
 			createfile(file);
+			permission(file);
 			ct.cardcreate(file);
 		}
 
@@ -80,6 +71,7 @@ public class Gamestart
 		if(file.exists() == false)//room.txtの有無
 		{
 			createfile(file);
+			permission(file);
 			rt.createroomtxt(player[1],file);
 		}
 
@@ -98,8 +90,6 @@ public class Gamestart
 		System.out.println("player_number:"+userinfo[2]);
 
 		return userinfo;
-
-
 	}
 
 	void createfile(File newfile)
@@ -109,16 +99,19 @@ public class Gamestart
 			if(newfile.createNewFile())
 			{
 				System.out.println("ファイル作れたお＼(^_^)／");
-				newfile.setWritable(true);
-				newfile.setReadable(true,false);
-				newfile.setExecutable(true);
 			}
 		}
-
 		catch (IOException e)
 		{
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+	}
+
+	void permission(File giveperm)
+	{
+		giveperm.setWritable(true);
+		giveperm.setReadable(true);
+		giveperm.setExecutable(true);
 	}
 }
