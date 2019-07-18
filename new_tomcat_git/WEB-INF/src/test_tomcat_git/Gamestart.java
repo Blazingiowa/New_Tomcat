@@ -21,61 +21,64 @@ public class Gamestart
 	int[] player = new int[3];
 	int[] online;
 	String url;
-	String[] path = new String[5];
+	String[] path = new String[6];
 
+	File[] files = new File[5];
 	String[] createdirectry(String user_name) //
 	{
 		player = DBCU.update(user_name);
 
-		path[0] = "/var/www/html/"+player[1];
-		path[1] = "/var/www/html/"+player[1]+"/"+player[2]+".txt";
-		path[2] = "/var/www/html/"+player[1]+"/taiou.txt";
-		path[3] = "/var/www/html/"+player[1]+"/card.txt";
-		path[4] = "/var/www/html/"+player[1]+"/room.txt";
+		files[0] = new File("/var/www/html/"+player[1]+"/"+player[2]+".txt");
+		files[1] = new File("/var/www/html/"+player[1]+"/taiou.txt");
+		files[2] = new File("/var/www/html/"+player[1]+"/card.txt");
+		files[3] = new File( "/var/www/html/"+player[1]+"/room.txt");
+		files[4] = new File("/var/www/html/"+player[1]+"/cooltime.txt");
 
 		for(int i = 0;i<userinfo.length;i++)
 		{
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
-		dir = new File(path[0]);//ルームディレクトリの作成
+		dir = new File("/var/www/html/"+player[1]);//ルームディレクトリの作成
 		dir.mkdir();
 		permission(dir);
 
-		file = new File(path[1]);
-		if(file.exists() == false)//player.txt
+		if(files[0].exists() == false)//player.txt
 		{
 			System.out.println(path[1]);
-			createfile(file);
-			permission(file);
+			createfile(files[0]);
+			permission(files[0]);
 		}
 		st.textfile(player[1], player[2],file);
 
-		file = new File(path[2]);
-		if(file.exists() == false)//対応表の有無
+		if(files[1].exists() == false)//対応表の有無
 		{
-			createfile(file);
-			permission(file);
-			tt.taioucreate(file);
+			createfile(files[1]);
+			permission(files[1]);
+			tt.taioucreate(files[1]);
 		}
 
-		file = new File(path[3]);
-		if(file.exists() == false)//カード表の有無
+		if(files[2].exists() == false)//カード表の有無
 		{
-			createfile(file);
-			permission(file);
-			ct.cardcreate(file);
+			createfile(files[2]);
+			permission(files[2]);
+			ct.cardcreate(files[2]);
 		}
 
-		file = new File(path[4]);
-		if(file.exists() == false)//room.txtの有無
+		if(files[3].exists() == false)//room.txtの有無
 		{
-			createfile(file);
-			permission(file);
-			rt.createroomtxt(player[1],file);
+			createfile(files[3]);
+			permission(files[3]);
+			rt.createroomtxt(player[1],files[3]);
 		}
 
-		online = tr.read(player[1],3,0);
+		if(files[4].exists() == false)//cooltime.txtの有無
+		{
+			createfile(files[4]);
+			permission(files[4]);
+		}
+
+		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
 		for(int i =0;i<online.length;i++)
 		{
 			System.out.println("room.textの中身:"+online[i]);
