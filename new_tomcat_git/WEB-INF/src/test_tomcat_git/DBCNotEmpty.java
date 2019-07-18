@@ -23,6 +23,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 		}
 		catch(SQLException e)
 		{
+			System.out.println(e);
 			System.out.println("ユーザーIDが検索できなかったお");
 		}
 		finally
