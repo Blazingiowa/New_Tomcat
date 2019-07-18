@@ -4,19 +4,16 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class TaiouText extends CardText
 {
-	DataBaseConnectRead DBCR = new DataBaseConnectRead();
+	/*DataBaseConnectRead DBCR = new DataBaseConnectRead();
 	DataBaseConnectCard DBCC = new DataBaseConnectCard();
 	CreateConnection CC = new CreateConnection();
-
 	ResultSet rs;
-	Connection conn;
+	Connection conn;*/
 
 	void taioucreate(File file)
 	{
