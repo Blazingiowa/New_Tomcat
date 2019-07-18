@@ -15,7 +15,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 
 		try
 		{
-			rs = stmt.executeQuery("SELECT MAX(user_id) FROM user;");
+			rs = stmt.executeQuery("SELECT MAX(user_id) AS user_id FROM user;");
 			//結果の挿入
 			rs.next();
 			user_id = rs.getInt("user_id");
