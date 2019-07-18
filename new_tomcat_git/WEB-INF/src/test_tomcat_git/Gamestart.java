@@ -50,7 +50,7 @@ public class Gamestart
 			createfile(files[0]);
 			permission(files[0]);
 		}
-		st.textfile(player[1], player[2],file);
+		st.textfile(player[1], player[2],files[0]);
 
 		if(files[1].exists() == false)//対応表の有無
 		{
