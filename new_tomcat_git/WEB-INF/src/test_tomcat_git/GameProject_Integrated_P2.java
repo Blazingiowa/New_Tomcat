@@ -7,6 +7,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		System.out.println("ｐ２で入った時の統合処理");
 
 		textF = txR.read(playerinfo[1], 1, 3);//ｐ１が使ったカードの情報を持ってきて退避
+
 		System.out.println("ｐ２の統合でｐ１の使ったカードを持ってくる" + textF);
 
 		//ｐ２のところにｐ１の情報を持ってくる
@@ -115,7 +116,6 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 			}
 		}
 
-		//現在修正箇所、＜問題＞：ｐ２に与えるダメージがおかしい
 		/*------------追記場所-------------------------------------------------------------------------------------*/
 		//ｐ１の使用したカードに攻撃カードがあった場合の処理
 		for (int i = 0; i < p1_card.length; i++)

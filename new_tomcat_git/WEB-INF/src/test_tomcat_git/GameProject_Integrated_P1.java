@@ -4,7 +4,6 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 {
 	void IntegratedP1(int[] playerinfo)
 	{
-
 		System.out.println("ｐ１で入った時の統合処理");
 
 		textF = txR.read(playerinfo[1], 2, 3);//ｐ２が使ったカードの情報を持ってきて退避
@@ -201,10 +200,10 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 				w = textmain[i][j];//２次元配列の情報をセット
 				textW[j] = w;
 			}
-
 			System.out.println("書き込み7の" + i + "回目");
 			txW.write(playerinfo[1], playerinfo[2], i, textW);//テキストに書き込み
 		}
+
 		//統合処理後に各プレイヤーの処理判定を０に戻す
 		/*ここでtextmainの処理判定部分を０に戻せばこの後に行われるｐ２の情報を
 		 	書き込む時にも０を入れてくれる*/

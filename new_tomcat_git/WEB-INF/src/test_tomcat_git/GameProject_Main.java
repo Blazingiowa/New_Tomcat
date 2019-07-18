@@ -32,18 +32,6 @@ public class GameProject_Main
 	//テキストの書き込みクラス
 	TextWrite txW = new TextWrite();
 
-	//ゲームのターン最初の処理クラス
-	GameProject_startup GPS = new GameProject_startup();
-
-	//ゲームのテキスト書き読み込みをするためのクラス
-	GameProject_txtReadWrite GPRW = new GameProject_txtReadWrite();
-
-	//ゲームのplayer1の統合処理クラス
-	GameProject_Integrated_P1 GPIP1 = new GameProject_Integrated_P1();
-
-	//ゲームのplayer2の統合処理クラス
-	GameProject_Integrated_P2 GPIP2 = new GameProject_Integrated_P2();
-
 	/*infoの配列内容------------------------/useの配列の内容--------/
 	/										/						/
 	/	[ユーザID][ルームID][ユーザ番号]	/	[カードID][][]...	/
@@ -52,6 +40,18 @@ public class GameProject_Main
 
 	void main(int[] info, int[] use)
 	{
+		//ゲームのターン最初の処理クラス
+		GameProject_startup GPS = new GameProject_startup();
+
+		//ゲームのテキスト書き読み込みをするためのクラス
+		GameProject_txtReadWrite GPRW = new GameProject_txtReadWrite();
+
+		//ゲームのplayer1の統合処理クラス
+		GameProject_Integrated_P1 GPIP1 = new GameProject_Integrated_P1();
+
+		//ゲームのplayer2の統合処理クラス
+		GameProject_Integrated_P2 GPIP2 = new GameProject_Integrated_P2();
+
 		//textmainの内容を初期化
 		GPS.start(info);
 
