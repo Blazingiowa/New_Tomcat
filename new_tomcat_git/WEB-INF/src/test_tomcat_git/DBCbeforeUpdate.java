@@ -25,7 +25,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 		{
 			rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
 			//結果の挿入
-			rs.next();
+			/*rs.next();
 			if(!rs.wasNull())//ユーザーIDに空きがあった時
 			{
 				Result[0] = rs.getInt("user_id");
@@ -34,26 +34,23 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			else//ユーザーIDに空きがなかった時
 			{
 				Result[0] = DBCNE.userIDNotempty();
-			}
-
-			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
-			//結果の挿入
-			/*rs.next();
-			if(!rs.isNull())
-			{
-				Result[1] = rs.getInt("room_id");
-				Result[2] = rs.getInt("player_number");
-				rs.close();
-			}
-			else
-			{
-				int[] keep = DBCNE.RoomNotempty(sql[1]);
-				Result[1] = keep[0];
-				Result[2] = keep[1];
 			}*/
 
 			if(rs.next())
 			{
+				Result[0] = rs.getInt("user_id");
+				rs.close();
+			}
+			else
+			{
+				Result[0] = DBCNE.userIDNotempty();
+			}
+
+			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
+			//結果の挿入
+			rs.next();
+			if(!rs.wasNull())
+			{
 				Result[1] = rs.getInt("room_id");
 				Result[2] = rs.getInt("player_number");
 				rs.close();
@@ -64,6 +61,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 				Result[1] = keep[0];
 				Result[2] = keep[1];
 			}
+
 
 			System.out.println("DBCbeforeUpdate上での値だお");
 			System.out.println("user_id:"+Result[0]);
