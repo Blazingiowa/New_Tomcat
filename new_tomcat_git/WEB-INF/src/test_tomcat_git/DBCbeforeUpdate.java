@@ -26,7 +26,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
 			//結果の挿入
 			rs.next();
-			if(rs != null)//ユーザーIDに空きがあった時
+			if(!rs.wasNull())//ユーザーIDに空きがあった時
 			{
 				Result[0] = rs.getInt("user_id");
 				rs.close();
@@ -39,7 +39,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
 			//結果の挿入
 			rs.next();
-			if(rs != null)
+			if(!rs.wasNull())
 			{
 				Result[1] = rs.getInt("room_id");
 				Result[2] = rs.getInt("player_number");
