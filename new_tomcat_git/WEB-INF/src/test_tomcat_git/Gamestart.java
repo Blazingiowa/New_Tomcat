@@ -115,8 +115,8 @@ public class Gamestart
 
 	void permission(File giveperm)
 	{
-		giveperm.setWritable(true);
+		giveperm.setWritable(true,false);
 		giveperm.setReadable(true,false);
-		giveperm.setExecutable(true);
+		giveperm.setExecutable(true,false);
 	}
 }
