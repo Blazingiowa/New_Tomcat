@@ -19,9 +19,11 @@ public class DBCNotEmpty extends DataBaseConnectRead
 			//結果の挿入
 			rs.next();
 			user_id = rs.getInt("user_id");
+			System.out.println("今のユーザーIDの最大値だよ"+user_id);
 			rs.close();
 			user_id++;
 			stmt.executeUpdate("INSERT INTO user VALUES("+user_id+",NULL); ");
+			System.out.println("追加したユーザーIDだよ"+user_id);
 
 		}
 		catch(SQLException e)
