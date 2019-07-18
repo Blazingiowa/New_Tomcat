@@ -23,6 +23,12 @@ public class GameProject_Main
 	int count = 0;
 	boolean flag = false;
 
+	//クールタイムの情報を入れるための配列
+	int[][]CT = new int[2][20];
+
+	//クールタイムの更新した情報をテキストに書き込む時に使う１次元配列
+	int[]CTwrite = new int[20];
+
 	//DBクラスのインスタンス
 	DataBaseConnectRead DBC = new DataBaseConnectRead();
 
@@ -72,14 +78,21 @@ public class GameProject_Main
 		{
 			if (info[2] == 1)
 			{
-				//統合処理
+				//ｐ１で入った場合の統合処理
 				GPIP1.IntegratedP1(info);
+
+				//クールタイム処理
+				GPIP1.setCT(info);
 			}
 			else if (info[2] == 2)
 			{
-				//統合処理
+				//ｐ２で入った場合の統合処理
 				GPIP2.IntegratedP2(info);
+
+				//クールタイム処理
+				GPIP2.setCT(info);
 			}
+
 		}
 	}
 }
