@@ -32,7 +32,7 @@ public class Gamestart
 		files[0] = new File("/var/www/html/"+player[1]+"/"+player[2]+".txt");
 		files[1] = new File("/var/www/html/"+player[1]+"/taiou.txt");
 		files[2] = new File("/var/www/html/"+player[1]+"/card.txt");
-		files[3] = new File( "/var/www/html/"+player[1]+"/room.txt");
+		files[3] = new File("/var/www/html/"+player[1]+"/room.txt");
 		files[4] = new File("/var/www/html/"+player[1]+"/cooltime.txt");
 
 		for(int i = 0;i<userinfo.length;i++)

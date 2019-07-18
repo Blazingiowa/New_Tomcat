@@ -14,7 +14,7 @@ public class TextWrite extends TextRead
 
 	void write(int room_id,int player_number,int line_number,int[] write)
 	{
-
+		System.out.println(room_id+","+player_number+","+line_number);
 		line = settext(room_id,player_number);
 		text = "" ; writetext = "";
 		System.out.println("writetext上の最初のlineだよ");
