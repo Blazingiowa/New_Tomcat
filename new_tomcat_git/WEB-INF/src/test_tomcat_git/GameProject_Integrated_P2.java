@@ -278,4 +278,71 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		System.out.println("ｐ１が３枚目のカードで与えるダメージ：" + textmain[6][2]);
 
 	}
+
+	//クールタイム処理
+	void setCT(int[] playerinfo)
+	{
+
+		//クールタイムテキストから情報を持ってくる
+		for (int i = 0; i < CT.length; i++)
+		{
+			//各プレイヤーのクールタイムテキストから情報を持ってきて退避
+			textF = txR.read(playerinfo[1], 4, i);
+			for (int j = 0; j < CT[0].length; j++)
+			{
+				w = textF[j];//wに退避
+				CT[i][j] = w;//対応した場所に格納
+			}
+		}
+
+		//クールタイムの短縮処理
+		for(int i = 0;i<CT.length;i++)
+		{
+			for(int j = 0;i<CT[0].length;j++)
+			{
+				if(CT[i][j] < 0)
+				{
+					CT[i][j]--;
+				}
+			}
+		}
+
+		//使ったカードのクールタイムをセット
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < textmain[3].length; j++)
+			{
+				//ｐ１のCTの設定
+				if (i == 0)
+				{
+					if (textmain[3][j] != -1)
+					{
+						//使用したカードIDのところにクールタイムをセット
+						CT[i][textmain[3][j]] = p2_card[j][1];
+					}
+				}
+				//ｐ２のCTの設定
+				else if (i == 1)
+				{
+					if (textmain[5][j] != -1)
+					{
+						//使用したカードIDのところにクールタイムをセット
+						CT[i][textmain[5][j]] = p1_card[j][1];
+					}
+				}
+			}
+		}
+
+		//更新したクールタイムの情報をテキストに書き込む
+		for(int i = 0;i<CT.length;i++)
+		{
+			//各プレイヤーのクールタイムの情報を１次元配列に退避させる
+			for(int j = 0;i<CT[0].length;j++)
+			{
+				w = CT[i][j];
+				CTwrite[j] = w;
+			}
+			txW.write(playerinfo[1], 4, i, CTwrite);//テキストに書き込み
+		}
+	}
 }
