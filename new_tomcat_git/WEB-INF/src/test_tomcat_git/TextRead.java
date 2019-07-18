@@ -41,6 +41,14 @@ public class TextRead
 			file = new File("/var/www/html/"+ room + "/room.txt");
 			System.out.println("room.txt見ようとしてるよ");
 		}
+		else if(player == 4)
+		{
+			alltext = new String[2][20];
+			line = new String[2];
+			data = new int[20];
+			file = new File("/var/www/html/"+ room + "/cooltime.txt");
+			System.out.println("room.txt見ようとしてるよ");
+		}
 		else
 		{
 			alltext = new String[7][3];
