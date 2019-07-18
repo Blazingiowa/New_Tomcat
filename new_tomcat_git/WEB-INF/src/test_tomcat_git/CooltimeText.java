@@ -25,6 +25,7 @@ public class CooltimeText extends CardText
 			for(int i = 0;rs.next();i++)
 			{
 				cooltimelist[i] = rs.getInt("cost");
+				cooltimelist[i] -= 2;
 			}
 		}
 		catch(SQLException e)
@@ -40,7 +41,7 @@ public class CooltimeText extends CardText
 				line += ",";
 			}
 		}
-		
+
 		writetext = line+",s,"+line;
 		System.out.println("txtに出力される文字だお");
 		System.out.println(writetext);
