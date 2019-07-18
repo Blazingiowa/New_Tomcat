@@ -40,9 +40,11 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			{
 				Result[0] = rs.getInt("user_id");
 				rs.close();
+				System.out.println("空きあったよ");
 			}
 			else
 			{
+				System.out.println("空きなかったよ(´・ω・｀)");
 				Result[0] = DBCNE.userIDNotempty();
 			}
 
