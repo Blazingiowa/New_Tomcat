@@ -117,6 +117,6 @@ public class Gamestart
 	{
 		giveperm.setWritable(true);
 		giveperm.setReadable(true,false);
-		giveperm.setExecutable(true);
+		giveperm.setExecutable(true,false);
 	}
 }
