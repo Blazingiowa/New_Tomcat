@@ -44,10 +44,10 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			}
 			else
 			{
-				rs = stmt.executeQuery("SELECT MAX( user_id ) FROM user;");
+				rs = stmt.executeQuery("SELECT MAX( user_id ) as maxno FROM user;");
 				//結果の挿入
 				rs.next();
-				int user_ida = rs.getInt("user_id");
+				int user_ida = rs.getInt("maxno");
 				System.out.println("これはてすとだお今のユーザーIDの最大値だよ"+user_ida);
 				System.out.println("空きなかったよ(´・ω・｀)");
 				Result[0] = DBCNE.userIDNotempty();
