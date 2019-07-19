@@ -71,7 +71,7 @@ public class StartupText extends TextWrite
 
 		catch(Exception e)
 		{
-
+			System.out.println("playerni出力できなかった(´・ω・｀)");
 		}
 
 		finally

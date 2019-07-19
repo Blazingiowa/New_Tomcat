@@ -47,7 +47,6 @@ public class TextRead
 			line = new String[2];
 			data = new int[20];
 			file = new File("/var/www/html/"+ room + "/cooltime.txt");
-			System.out.println("room.txt見ようとしてるよ");
 		}
 		else
 		{

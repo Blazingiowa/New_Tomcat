@@ -32,7 +32,7 @@ public class Gamestart
 		files[0] = new File("/var/www/html/"+player[1]+"/"+player[2]+".txt");
 		files[1] = new File("/var/www/html/"+player[1]+"/taiou.txt");
 		files[2] = new File("/var/www/html/"+player[1]+"/card.txt");
-		files[3] = new File( "/var/www/html/"+player[1]+"/room.txt");
+		files[3] = new File("/var/www/html/"+player[1]+"/room.txt");
 		files[4] = new File("/var/www/html/"+player[1]+"/cooltime.txt");
 
 		for(int i = 0;i<userinfo.length;i++)
@@ -50,7 +50,7 @@ public class Gamestart
 			createfile(files[0]);
 			permission(files[0]);
 		}
-		st.textfile(player[1], player[2],file);
+		st.textfile(player[1], player[2],files[0]);
 
 		if(files[1].exists() == false)//対応表の有無
 		{
@@ -117,6 +117,6 @@ public class Gamestart
 	{
 		giveperm.setWritable(true);
 		giveperm.setReadable(true,false);
-		giveperm.setExecutable(true);
+		giveperm.setExecutable(true,false);
 	}
 }
