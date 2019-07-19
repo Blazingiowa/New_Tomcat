@@ -19,11 +19,13 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			Result[i] = 0;
 		}
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());
+		Statement stmt1 = CC.createstatement(conn = CC.createconnection());
+		Statement stmt2 = CC.createstatement(conn = CC.createconnection());
+		Statement stmt3 = CC.createstatement(conn = CC.createconnection());
 
 		try
 		{
-			rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
+			rs = stmt1.executeQuery(sql[0]);//空いているユーザーIDの検索
 			//結果の挿入
 			/*rs.next();
 			if(!rs.wasNull())//ユーザーIDに空きがあった時
@@ -44,7 +46,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			}
 			else
 			{
-				rs = stmt.executeQuery("SELECT MAX(user_id) FROM user;");
+				rs = stmt3.executeQuery("SELECT MAX(user_id) FROM user;");
 				//結果の挿入
 				rs.next();
 				int user_ida = rs.getInt("user_id");
@@ -53,7 +55,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 				Result[0] = DBCNE.userIDNotempty();
 			}
 
-			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
+			rs = stmt2.executeQuery(sql[1]);//空いているルームの検索
 			//結果の挿入
 			rs.next();
 			if(!rs.wasNull())

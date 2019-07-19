@@ -25,6 +25,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 		{
 			System.out.println(e);
 			System.out.println("ユーザーIDが検索できなかったお");
+			System.out.print("実行したSQLは:SELECT user_id FROM user;");
 		}
 		finally
 		{
