@@ -35,7 +35,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 		{
 			CC.close();
 		}
-		System.out.print("追加されたuser_idだお"+user_id);
+		System.out.println("追加されたuser_idだお"+user_id);
 
 		return user_id;
 	}
@@ -44,7 +44,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 	{
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 		Result = new int[2];
-		System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのユーザーIDのデバッグだお//////////////////////////////////////////////////////////////////////");
+		System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのルームIDのデバッグだお//////////////////////////////////////////////////////////////////////");
 
 		try
 		{
@@ -56,7 +56,10 @@ public class DBCNotEmpty extends DataBaseConnectRead
 			rs.close();
 			Result[0]++;
 			stmt.executeUpdate("INSERT INTO room VALUES("+Result[0]+",1,0);");
+			System.out.println("実行したSQLは:INSERT INTO room VALUES("+Result[0]+",1,0);");
+			
 			stmt.executeUpdate("INSERT INTO room VALUES("+Result[0]+",2,0);");
+			System.out.println("実行したSQLは:INSERT INTO room VALUES("+Result[0]+",2,0);");
 
 			rs = stmt.executeQuery(sql);
 			rs.next();
