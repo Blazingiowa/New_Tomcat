@@ -13,9 +13,9 @@ public class DBCNotEmpty extends DataBaseConnectRead
 	{
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 
+		System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのデバッグだお//////////////////////////////////////////////////////////////////////");
 		/*try
 		{
-			System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのデバッグだお//////////////////////////////////////////////////////////////////////");
 			rs = stmt.executeQuery("SELECT MAX(user_id) as maxno FROM user;");
 			//結果の挿入
 			rs.next();
@@ -41,7 +41,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 
 		try
 		{
-			rs = stmt.executeQuery("SELECT MAX(user_id) as mxno FROM user;");
+			rs = stmt.executeQuery("SELECT MAX(user_id) as maxno FROM user;");
 			//結果の挿入
 			rs.next();
 			user_id = rs.getInt("maxno");
@@ -72,10 +72,10 @@ public class DBCNotEmpty extends DataBaseConnectRead
 
 		try
 		{
-			rs = stmt.executeQuery("SELECT MAX(room_id) FROM room;");
+			rs = stmt.executeQuery("SELECT MAX(room_id) as maxno FROM room;");
 			//結果の挿入
 			rs.next();
-			Result[0] = rs.getInt("room_id");
+			Result[0] = rs.getInt("maxno");
 			rs.close();
 			Result[0]++;
 			stmt.executeUpdate("INSERT INTO room VALUES("+Result[0]+",1,0);");
