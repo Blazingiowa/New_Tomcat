@@ -15,17 +15,19 @@ public class DBCNotEmpty extends DataBaseConnectRead
 
 		try
 		{
-			rs = stmt.executeQuery("SELECT user_id FROM user;");
+			System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのデバッグだお//////////////////////////////////////////////////////////////////////");
+			rs = stmt.executeQuery("SELECT MAX(user_id) FROM user;");
 			//結果の挿入
 			rs.next();
-			/*user_id = rs.getInt("user_id");
-			System.out.println("これはてすとだお今のユーザーIDの最大値だよ"+user_id);*/
+			user_id = rs.getInt("user_id");
+			System.out.println("これはてすとだお今のユーザーIDの最大値だよ"+user_id);
+			rs.close();
 		}
 		catch(SQLException e)
 		{
 			System.out.println(e);
 			System.out.println("ユーザーIDが検索できなかったお");
-			System.out.print("実行したSQLは:SELECT user_id FROM user;");
+			System.out.print("実行したSQLは:SELECT MAX(user_id) FROM user;");
 		}
 		finally
 		{
