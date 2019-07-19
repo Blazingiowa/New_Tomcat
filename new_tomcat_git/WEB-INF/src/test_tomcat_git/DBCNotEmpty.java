@@ -18,14 +18,13 @@ public class DBCNotEmpty extends DataBaseConnectRead
 			System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのデバッグだお//////////////////////////////////////////////////////////////////////");
 			rs = stmt.executeQuery("SELECT * FROM user;");
 			//結果の挿入
-			rs.next();
-			user_id = rs.getInt("user_id");
-			//////////デバッグ
-			String user_name = "";
-			user_name = rs.getString("user_name");
-			System.out.println("最後のユーザーの名前だよ"+user_name);
-			System.out.println();
-			////デバッグ
+			/*rs.next();
+			user_id = rs.getInt("user_id");*/
+			while(rs.next())
+			{
+				System.out.println("ユーザーID"+rs.getInt("user_id"));
+			}
+
 			System.out.println("これはてすとだお今のユーザーIDの最大値だよ"+user_id);
 			rs.close();
 		}
