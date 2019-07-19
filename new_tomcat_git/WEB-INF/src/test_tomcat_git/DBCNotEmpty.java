@@ -13,17 +13,17 @@ public class DBCNotEmpty extends DataBaseConnectRead
 	{
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 
-		try
+		/*try
 		{
 			System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのデバッグだお//////////////////////////////////////////////////////////////////////");
 			rs = stmt.executeQuery("SELECT MAX(user_id) as maxno FROM user;");
 			//結果の挿入
 			rs.next();
 			user_id = rs.getInt("maxno");
-			/*while(rs.next())
+			while(rs.next())
 			{
 				System.out.println("ユーザーID"+rs.getInt("user_id"));
-			}*/
+			}
 
 			System.out.println("これはてすとだお今のユーザーIDの最大値だよ"+user_id);
 			rs.close();
@@ -37,14 +37,14 @@ public class DBCNotEmpty extends DataBaseConnectRead
 		finally
 		{
 			CC.close();
-		}
+		}*/
 
 		try
 		{
-			rs = stmt.executeQuery("SELECT MAX(user_id) FROM user;");
+			rs = stmt.executeQuery("SELECT MAX(user_id) as mxno FROM user;");
 			//結果の挿入
 			rs.next();
-			user_id = rs.getInt("user_id");
+			user_id = rs.getInt("maxno");
 			System.out.println("今のユーザーIDの最大値だよ"+user_id);
 			rs.close();
 			user_id++;
