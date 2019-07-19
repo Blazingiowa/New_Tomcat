@@ -71,6 +71,12 @@ public class Servlet extends HttpServlet
 		System.out.println("使ったカード1:" + str_use_hand [0]);
 		System.out.println("使ったカード2:" + str_use_hand [1]);
 		System.out.println("使ったカード3:" + str_use_hand [2]);
+
+		//ubのnullはキャッシュが配布されるから許されないらしい
+		ub.setError("");
+		ub.setUserNumber("-1");
+		ub.setUserID("-1");
+		ub.setRoomID("-1");
 		//ここまでテストコード
 
 
@@ -82,9 +88,6 @@ public class Servlet extends HttpServlet
 				if(flag_name == false)
 				{
 					System.out.println("ネームエラーによりID,ナンバー'-1'で返す");
-					ub.setUserNumber("-1");
-					ub.setUserID("-1");
-					ub.setRoomID("-1");
 					ub.setError("禁止文字が含まれています");
 				}
 				else
