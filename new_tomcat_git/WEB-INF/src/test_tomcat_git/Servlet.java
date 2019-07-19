@@ -81,7 +81,11 @@ public class Servlet extends HttpServlet
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 				if(flag_name == false)
 				{
-					ub.setError("name");
+					System.out.println("ネームエラーによりID,ナンバー'-1'で返す");
+					ub.setUserNumber("-1");
+					ub.setUserID("-1");
+					ub.setRoomID("-1");
+					ub.setError("禁止文字が含まれています");
 				}
 				else
 				{
@@ -96,6 +100,8 @@ public class Servlet extends HttpServlet
 					System.out.println(str_user_info[1]);
 					System.out.println(str_user_info[2]);
 				}
+
+				System.out.println(ub);
 				//JSONを生成
 				response.setContentType("application/json");
 				response.setCharacterEncoding("utf-8");
