@@ -57,13 +57,17 @@ public class DBCNotEmpty extends DataBaseConnectRead
 			Result[0]++;
 			stmt.executeUpdate("INSERT INTO room VALUES("+Result[0]+",1,0);");
 			System.out.println("実行したSQLは:INSERT INTO room VALUES("+Result[0]+",1,0);");
-			
+
 			stmt.executeUpdate("INSERT INTO room VALUES("+Result[0]+",2,0);");
 			System.out.println("実行したSQLは:INSERT INTO room VALUES("+Result[0]+",2,0);");
 
 			rs = stmt.executeQuery(sql);
+			System.out.println(sql);
 			rs.next();
 			Result[1] = rs.getInt("player_number");
+
+			System.out.println("room_idは"+Result[0]);
+			System.out.println("player_numberは"+Result[1]);
 
 		}
 		catch(SQLException e)
