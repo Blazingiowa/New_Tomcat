@@ -24,17 +24,6 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 		try
 		{
 			rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
-			//結果の挿入
-			/*rs.next();
-			if(!rs.wasNull())//ユーザーIDに空きがあった時
-			{
-				Result[0] = rs.getInt("user_id");
-				rs.close();
-			}
-			else//ユーザーIDに空きがなかった時
-			{
-				Result[0] = DBCNE.userIDNotempty();
-			}*/
 
 			if(rs.next())
 			{
@@ -44,11 +33,6 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			}
 			else
 			{
-				/*rs = stmt.executeQuery("SELECT MAX( user_id ) as maxno FROM user;");
-				//結果の挿入
-				rs.next();
-				int user_ida = rs.getInt("maxno");
-				System.out.println("これはてすとだお今のユーザーIDの最大値だよ"+user_ida);*/
 				System.out.println("空きなかったよ(´・ω・｀)");
 				Result[0] = DBCNE.userIDNotempty();
 			}
@@ -56,7 +40,19 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
 			//結果の挿入
 			rs.next();
-			if(!rs.wasNull())
+			/*if(!rs.wasNull())
+			{
+				Result[1] = rs.getInt("room_id");
+				Result[2] = rs.getInt("player_number");
+				rs.close();
+			}
+			else
+			{
+				int[] keep = DBCNE.RoomNotempty(sql[1]);
+				Result[1] = keep[0];
+				Result[2] = keep[1];
+			}*/
+			if(rs.next())
 			{
 				Result[1] = rs.getInt("room_id");
 				Result[2] = rs.getInt("player_number");

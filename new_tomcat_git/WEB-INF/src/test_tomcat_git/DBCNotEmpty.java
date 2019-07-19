@@ -13,32 +13,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 	{
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 
-		System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのデバッグだお//////////////////////////////////////////////////////////////////////");
-		/*try
-		{
-			rs = stmt.executeQuery("SELECT MAX(user_id) as maxno FROM user;");
-			//結果の挿入
-			rs.next();
-			user_id = rs.getInt("maxno");
-			while(rs.next())
-			{
-				System.out.println("ユーザーID"+rs.getInt("user_id"));
-			}
-
-			System.out.println("これはてすとだお今のユーザーIDの最大値だよ"+user_id);
-			rs.close();
-		}
-		catch(SQLException e)
-		{
-			System.out.println(e);
-			System.out.println("ユーザーIDが検索できなかったお");
-			System.out.println("実行したSQLは:SELECT MAX(user_id) FROM user;");
-		}
-		finally
-		{
-			CC.close();
-		}*/
-
+		System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのユーザーIDのデバッグだお//////////////////////////////////////////////////////////////////////");
 		try
 		{
 			rs = stmt.executeQuery("SELECT MAX(user_id) as maxno FROM user;");
@@ -69,6 +44,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 	{
 		Statement stmt = CC.createstatement(conn = CC.createconnection());
 		Result = new int[2];
+		System.out.println("//////////////////////////////////////////////////////////////////////DBCNEのユーザーIDのデバッグだお//////////////////////////////////////////////////////////////////////");
 
 		try
 		{
@@ -76,6 +52,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 			//結果の挿入
 			rs.next();
 			Result[0] = rs.getInt("maxno");
+			System.out.println("一番最後の部屋だお"+Result[0]);
 			rs.close();
 			Result[0]++;
 			stmt.executeUpdate("INSERT INTO room VALUES("+Result[0]+",1,0);");
@@ -88,6 +65,7 @@ public class DBCNotEmpty extends DataBaseConnectRead
 		}
 		catch(SQLException e)
 		{
+			System.out.println(e);
 			System.out.println("ルームが追加できなかったお");
 		}
 		finally
