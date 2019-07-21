@@ -131,6 +131,18 @@ public class TaiouText extends CardText
 				writetext += ",s,";
 			}
 		}
+
+		/*テキスト改行新アルゴリズム用
+		for(int i =0;i<line.length;i++)
+		{
+			writetext += line[i];
+			if((i+1)<line.length)
+			{
+				writetext += "s";
+			}
+		}
+		*/
+
 		System.out.println("txtに出力される文字だお");
 		System.out.println(writetext);
 

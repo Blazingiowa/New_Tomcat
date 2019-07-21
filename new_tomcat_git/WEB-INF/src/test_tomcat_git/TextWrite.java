@@ -46,6 +46,19 @@ public class TextWrite extends TextRead
 				text += ",s,";
 			}
 		}
+
+		/* テキスト改行新アルゴリズム用
+		for(int i = 0;i<line.length;i++)
+		{
+			text += line[i];
+
+			if((i+1)<line.length)
+			{
+				text += "s";
+			}
+		}
+		*/
+
 		System.out.println("TextWriteでの書き込まれる文字列だお");
 		System.out.println(text);
 		System.out.println("書き込むのは"+line_number+"行目だよ");
