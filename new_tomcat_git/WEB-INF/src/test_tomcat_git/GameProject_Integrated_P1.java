@@ -181,10 +181,20 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 		{
 			textmain[1][1] += textmain[6][i];
 		}
+		//ｈｐが-１以下になった場合０にする
+		if(textmain[1][1] <= -1)
+		{
+			textmain[1][1] = 0;
+		}
 		//ｐ２のｈｐを減らす
 		for (int i = 0; i < textmain[0].length; i++)
 		{
 			textmain[1][2] -= textmain[4][i];
+		}
+		//ｈｐが-１以下になった場合０にする
+		if(textmain[1][2] <= -1)
+		{
+			textmain[1][2] = 0;
 		}
 
 		textmain[2][1]++;//ｐ１の行動値を１増やす
