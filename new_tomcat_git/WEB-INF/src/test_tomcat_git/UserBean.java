@@ -37,7 +37,7 @@ public class UserBean
 		System.out.println("user number通った");
 	}
 	public String getError() {
-		return userNumber;
+		return error;
 	}
 	public void setError(String error) {
 		// TODO 自動生成されたメソッド・スタブ

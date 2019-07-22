@@ -52,6 +52,18 @@ public class StartupText extends TextWrite
 				text = text+",s,";
 			}
 		}
+
+		/*テキスト改行新アルゴリズム用
+		for(int i = 0;i<line.length;i++)
+		{
+			text += line[i];
+			if((i+1)<line.length)
+			{
+				text = text+"s";
+			}
+		}
+		*/
+
 		/*System.out.println("以下はStartuptTextのデバッグだお");
 		System.out.println("一行ごとの情報だお");
 		System.out.println("ここでは完全に中の数字は入れきれてないよ書き込みでができてるかは実際に中身を見てね");*/
@@ -71,7 +83,7 @@ public class StartupText extends TextWrite
 
 		catch(Exception e)
 		{
-
+			System.out.println("playerni出力できなかった(´・ω・｀)");
 		}
 
 		finally

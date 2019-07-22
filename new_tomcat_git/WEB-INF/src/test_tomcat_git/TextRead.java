@@ -47,7 +47,6 @@ public class TextRead
 			line = new String[2];
 			data = new int[20];
 			file = new File("/var/www/html/"+ room + "/cooltime.txt");
-			System.out.println("room.txt見ようとしてるよ");
 		}
 		else
 		{
@@ -84,10 +83,19 @@ public class TextRead
 				}
 			}
 
+
 			for(int i = 0;i<alltext.length;i++)
 			{
 				line[i] = alltext[i][0]+","+alltext[i][1]+","+alltext[i][2];
 			}
+			/*  テキスト改行新アルゴリズム用
+			String[] array = text.split("s");
+
+			for(int i = 0;i<array.length;i++)
+			{
+				line[i] = array[i];
+			}
+			*/
 
 		}
 		catch(Exception e)

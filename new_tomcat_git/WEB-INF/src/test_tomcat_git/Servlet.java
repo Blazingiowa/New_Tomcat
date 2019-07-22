@@ -71,6 +71,12 @@ public class Servlet extends HttpServlet
 		System.out.println("使ったカード1:" + str_use_hand [0]);
 		System.out.println("使ったカード2:" + str_use_hand [1]);
 		System.out.println("使ったカード3:" + str_use_hand [2]);
+
+		//ubのnullはキャッシュが配布されるから許されないらしい
+		ub.setError("");
+		ub.setUserNumber("-1");
+		ub.setUserID("-1");
+		ub.setRoomID("-1");
 		//ここまでテストコード
 
 
@@ -81,7 +87,8 @@ public class Servlet extends HttpServlet
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 				if(flag_name == false)
 				{
-					ub.setError("name");
+					System.out.println("ネームエラーによりID,ナンバー'-1'で返す");
+					ub.setError("禁止文字が含まれています");
 				}
 				else
 				{
@@ -96,6 +103,8 @@ public class Servlet extends HttpServlet
 					System.out.println(str_user_info[1]);
 					System.out.println(str_user_info[2]);
 				}
+
+				System.out.println(ub);
 				//JSONを生成
 				response.setContentType("application/json");
 				response.setCharacterEncoding("utf-8");
@@ -145,6 +154,8 @@ public class Servlet extends HttpServlet
 
 				info();
 
+				//gpm.main(int_user_info, use_hand);
+				//上のに書き換えればCD制のやつらしい
 				game_project.main(int_user_info, use_hand);
 
 			}
