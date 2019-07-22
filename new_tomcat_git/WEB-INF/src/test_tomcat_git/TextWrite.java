@@ -37,6 +37,7 @@ public class TextWrite extends TextRead
 
 		line[line_number] = writetext;
 
+		/*
 		for(int i = 0;i<line.length;i++)
 		{
 			text += line[i];
@@ -46,8 +47,8 @@ public class TextWrite extends TextRead
 				text += ",s,";
 			}
 		}
+		*/
 
-		/* テキスト改行新アルゴリズム用
 		for(int i = 0;i<line.length;i++)
 		{
 			text += line[i];
@@ -57,7 +58,6 @@ public class TextWrite extends TextRead
 				text += "s";
 			}
 		}
-		*/
 
 		System.out.println("TextWriteでの書き込まれる文字列だお");
 		System.out.println(text);

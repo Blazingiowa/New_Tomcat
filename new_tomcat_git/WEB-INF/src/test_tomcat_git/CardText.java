@@ -103,10 +103,10 @@ public class CardText extends TextWrite //カードリストテキストを作�
 			writetext += line[i];
 			if((i+1)<line.length)
 			{
+				/*
 				writetext += ",s,";
-				/*テキスト改行新アルゴリズム用
-				writetext += "s";
 				*/
+				writetext += "s";
 			}
 		}
 		/*System.out.println("txtに出力される文字だお");

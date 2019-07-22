@@ -42,10 +42,11 @@ public class CooltimeText extends CardText
 			}
 		}
 
+		/*
 		writetext = line+",s,"+line;
-		/* テキスト改行新アルゴリズム用
-		writetext = line+"s"+line;
 		*/
+		writetext = line+"s"+line;
+
 		System.out.println("txtに出力される文字だお");
 		System.out.println(writetext);
 		try

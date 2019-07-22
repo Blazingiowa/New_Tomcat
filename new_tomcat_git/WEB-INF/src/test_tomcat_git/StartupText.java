@@ -44,6 +44,7 @@ public class StartupText extends TextWrite
 			line[i] =writetext;
 		}
 
+		/*
 		for(int i = 0;i<line.length;i++)
 		{
 			text += line[i];
@@ -52,8 +53,8 @@ public class StartupText extends TextWrite
 				text = text+",s,";
 			}
 		}
+		*/
 
-		/*テキスト改行新アルゴリズム用
 		for(int i = 0;i<line.length;i++)
 		{
 			text += line[i];
@@ -62,7 +63,6 @@ public class StartupText extends TextWrite
 				text = text+"s";
 			}
 		}
-		*/
 
 		/*System.out.println("以下はStartuptTextのデバッグだお");
 		System.out.println("一行ごとの情報だお");
