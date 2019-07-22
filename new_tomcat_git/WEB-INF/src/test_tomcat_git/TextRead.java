@@ -117,7 +117,7 @@ public class TextRead
 		return line;
 	}
 
-	private void brclose()
+	void brclose()
 	{
 		if(br!=null)
 		{

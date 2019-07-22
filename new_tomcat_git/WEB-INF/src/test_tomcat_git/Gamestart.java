@@ -17,6 +17,7 @@ public class Gamestart
 	TextWrite tw = new TextWrite();
 	TextRead tr = new TextRead();
 	CooltimeText coolt = new CooltimeText();
+	Player_name pn = new Player_name();
 
 	String[] userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
 	int[] player = new int[3];
@@ -81,10 +82,11 @@ public class Gamestart
 			coolt.createcooltime(files[4]);
 		}
 
-		if(files[5].exists() == false)
+		if(files[5].exists() == false)//player_name保持クラス
 		{
 			createfile(files[5]);
 			permission(files[5]);
+			pn.create_nametext(files[5]);
 		}
 
 		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
