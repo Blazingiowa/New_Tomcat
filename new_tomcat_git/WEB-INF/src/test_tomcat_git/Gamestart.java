@@ -24,7 +24,7 @@ public class Gamestart
 	String url;
 	String[] path = new String[6];
 
-	File[] files = new File[5];
+	File[] files = new File[6];
 	String[] createdirectry(String user_name) //
 	{
 		player = DBCU.update(user_name);
@@ -34,6 +34,7 @@ public class Gamestart
 		files[2] = new File("/var/www/html/"+player[1]+"/card.txt");
 		files[3] = new File("/var/www/html/"+player[1]+"/room.txt");
 		files[4] = new File("/var/www/html/"+player[1]+"/cooltime.txt");
+		files[5] = new File("/var/www/html/"+player[1]+"/player_name.txt");
 
 		for(int i = 0;i<userinfo.length;i++)
 		{
@@ -78,6 +79,12 @@ public class Gamestart
 			createfile(files[4]);
 			permission(files[4]);
 			coolt.createcooltime(files[4]);
+		}
+
+		if(files[5].exists() == false)
+		{
+			createfile(files[5]);
+			permission(files[5]);
 		}
 
 		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
