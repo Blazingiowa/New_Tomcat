@@ -54,6 +54,10 @@ public class Player_name  extends TextWrite
 		for(int i = 0; i<array.length;i++)
 		{
 			text += array[i];
+			if((i+1)<array.length)
+			{
+				text += ",";
+			}
 		}
 
 		try
