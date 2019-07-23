@@ -89,6 +89,8 @@ public class Gamestart
 			pn.create_nametext(files[5]);
 		}
 
+		pn.set_playername(files[5], user_name, player[2]);
+
 		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
 		for(int i =0;i<online.length;i++)
 		{
