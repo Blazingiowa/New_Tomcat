@@ -66,6 +66,7 @@ public class TextRead
 			System.out.println("Readでのテキストファイルの中身");
 			System.out.println(text);
 
+			/*
 			String[] array = text.split(",");
 
 			for(int i = 0,j = 0,k=0;k<array.length;k++)
@@ -84,18 +85,20 @@ public class TextRead
 			}
 
 
+
 			for(int i = 0;i<alltext.length;i++)
 			{
 				line[i] = alltext[i][0]+","+alltext[i][1]+","+alltext[i][2];
 			}
-			/*  テキスト改行新アルゴリズム用
+			*/
+
 			String[] array = text.split("s");
 
 			for(int i = 0;i<array.length;i++)
 			{
 				line[i] = array[i];
 			}
-			*/
+
 
 		}
 		catch(Exception e)
@@ -114,7 +117,7 @@ public class TextRead
 		return line;
 	}
 
-	private void brclose()
+	void brclose()
 	{
 		if(br!=null)
 		{

@@ -22,11 +22,12 @@ public class RoomText extends TextWrite
 			}
 		}
 
-		writetext += ",s,";
-
 		/*
+		writetext += ",s,";
+		*/
+
 		 writetext += "s";
-		 */
+
 
 		for(int i =0;i<turn.length;i++)
 		{

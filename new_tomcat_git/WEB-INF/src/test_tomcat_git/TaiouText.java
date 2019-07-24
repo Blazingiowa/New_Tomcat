@@ -9,11 +9,6 @@ import java.sql.Statement;
 
 public class TaiouText extends CardText
 {
-	/*DataBaseConnectRead DBCR = new DataBaseConnectRead();
-	DataBaseConnectCard DBCC = new DataBaseConnectCard();
-	CreateConnection CC = new CreateConnection();
-	ResultSet rs;
-	Connection conn;*/
 
 	void taioucreate(File file)
 	{
@@ -123,6 +118,7 @@ public class TaiouText extends CardText
 
 
 
+		/*
 		for(int i =0;i<line.length;i++)
 		{
 			writetext += line[i];
@@ -131,8 +127,8 @@ public class TaiouText extends CardText
 				writetext += ",s,";
 			}
 		}
+		*/
 
-		/*テキスト改行新アルゴリズム用
 		for(int i =0;i<line.length;i++)
 		{
 			writetext += line[i];
@@ -141,7 +137,7 @@ public class TaiouText extends CardText
 				writetext += "s";
 			}
 		}
-		*/
+
 
 		System.out.println("txtに出力される文字だお");
 		System.out.println(writetext);
