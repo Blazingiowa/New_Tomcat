@@ -104,7 +104,6 @@ public class Servlet extends HttpServlet
 					System.out.println(str_user_info[2]);
 				}
 
-				System.out.println(ub);
 				//JSONを生成
 				response.setContentType("application/json");
 				response.setCharacterEncoding("utf-8");
@@ -146,12 +145,6 @@ public class Servlet extends HttpServlet
 
 				//何かしらの値を入れないといけない。テスト的に値を入れてある
 
-
-				System.out.println("使ったカード int 変換後");
-				System.out.println("使ったカード1:" + use_hand [0]);
-				System.out.println("使ったカード2:" + use_hand [1]);
-				System.out.println("使ったカード3:" + use_hand [2]);
-
 				info();
 
 				//gpm.main(int_user_info, use_hand);
@@ -178,7 +171,7 @@ public class Servlet extends HttpServlet
 		if(us_id ==  null)
 		{
 			int_user_info[0] = 1;
-			System.out.println("UserID入ってない");
+
 		}
 		else
 		{
@@ -189,7 +182,7 @@ public class Servlet extends HttpServlet
 		if(room_id ==  null)
 		{
 			int_user_info[1] = 111;
-			System.out.println("ルームID入ってな");
+
 		}
 		else
 		{
@@ -200,7 +193,7 @@ public class Servlet extends HttpServlet
 		if(us_num ==  null)
 		{
 			int_user_info[2] = 2;
-			System.out.println("ナンバー入ってない");
+
 		}
 		else
 		{
@@ -211,11 +204,12 @@ public class Servlet extends HttpServlet
 	void check(String s)
 	{
 		flag_name = true;
+		System.out.println("■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("check通った 値 : " + s);
 		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$"))
 		{
 			flag_name = false;
-			System.out.println("英数字以外の物が入っています");
+
 		}
 	}
 }
