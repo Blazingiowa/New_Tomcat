@@ -204,6 +204,7 @@ public class Servlet extends HttpServlet
 	void check(String s)
 	{
 		flag_name = true;
+		System.out.println("■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("check通った 値 : " + s);
 		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$"))
 		{
