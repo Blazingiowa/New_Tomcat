@@ -70,6 +70,8 @@ public class GameProject_Main
 		//テキストを読み込み、書き換え
 		GPRW.txtReadWrite(info, use);
 
+		System.out.println("テキストの書き読み完了");
+
 		//ルーム状況表から情報をもってくる[ルームID][共有ファイルについてなので、３][ユーザ番号で行数指定]
 		player = txR.read(info[1], 3, 1);
 
