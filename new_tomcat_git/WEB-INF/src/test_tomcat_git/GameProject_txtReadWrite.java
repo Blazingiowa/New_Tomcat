@@ -8,6 +8,9 @@ public class GameProject_txtReadWrite extends GameProject_Main
 		System.out.println(playerinfo[0]+" "+playerinfo[1]+" "+playerinfo[2]);
 		System.out.println(usecard[0]+" "+usecard[1]+" "+usecard[2]);
 
+		//テキストファイルを検索[ルームID][ユーザ番号][行数][書き込みの場合のみ配列をセット]
+		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
+		textF = txR.read(playerinfo[1], playerinfo[2], 0);
 		System.out.println(textF[0]+" "+textF[1]+" "+textF[2]+" ");
 
 		//プレイヤーの処理が終わっているのかどうか判定（０はまだ、１で処理済み）
