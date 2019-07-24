@@ -61,14 +61,12 @@ public class GameProject_Main
 		//textmainの内容を初期化
 		GPS.start(info);
 
-		//テキストファイルを検索[ルームID][ユーザ番号][行数][書き込みの場合のみ配列をセット]
-		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
-		textF = txR.read(info[1], info[2], 0);
-
 		System.out.println("ここから、ゲームスタート");
 
 		//テキストを読み込み、書き換え
 		GPRW.txtReadWrite(info, use);
+
+		System.out.println("テキストの書き読み完了");
 
 		//ルーム状況表から情報をもってくる[ルームID][共有ファイルについてなので、３][ユーザ番号で行数指定]
 		player = txR.read(info[1], 3, 1);
