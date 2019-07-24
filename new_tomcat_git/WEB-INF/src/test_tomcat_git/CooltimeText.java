@@ -47,8 +47,8 @@ public class CooltimeText extends CardText
 		*/
 		writetext = line+"s"+line;
 
-		System.out.println("txtに出力される文字だお");
-		System.out.println(writetext);
+		//System.out.println("txtに出力される文字だお");
+		//System.out.println(writetext);
 		try
 		{
 			fw = new FileWriter(file);

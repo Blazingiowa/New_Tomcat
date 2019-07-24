@@ -29,7 +29,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			{
 				Result[0] = rs.getInt("user_id");
 				rs.close();
-				System.out.println("空きあったよ");
+				//System.out.println("空きあったよ");
 			}
 			else
 			{
@@ -66,10 +66,10 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 			}
 
 
-			System.out.println("DBCbeforeUpdate上での値だお");
+			/*System.out.println("DBCbeforeUpdate上での値だお");
 			System.out.println("user_id:"+Result[0]);
 			System.out.println("room_id:"+Result[1]);
-			System.out.println("player_number:"+Result[2]);
+			System.out.println("player_number:"+Result[2]);*/
 
 		}
 		catch(SQLException e)

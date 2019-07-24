@@ -92,18 +92,18 @@ public class Gamestart
 		pn.set_playername(files[5], user_name, player[2]);
 
 		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
-		for(int i =0;i<online.length;i++)
+		/*for(int i =0;i<online.length;i++)
 		{
 			System.out.println("room.textの中身:"+online[i]);
-		}
+		}*/
 		online[player[2]] = 1;
 
 		tw.write(player[1],3,0, online);
 
-		System.out.println("GameStartクラス上での情報だお");
+		/*System.out.println("GameStartクラス上での情報だお");
 		System.out.println("user_id:"+userinfo[0]);
 		System.out.println("room_id:"+userinfo[1]);
-		System.out.println("player_number:"+userinfo[2]);
+		System.out.println("player_number:"+userinfo[2]);*/
 
 		return userinfo;
 	}
@@ -114,7 +114,7 @@ public class Gamestart
 		{
 			if(newfile.createNewFile())
 			{
-				System.out.println("ファイル作れたお＼(^_^)／");
+				//System.out.println("ファイル作れたお＼(^_^)／");
 			}
 		}
 		catch (IOException e)

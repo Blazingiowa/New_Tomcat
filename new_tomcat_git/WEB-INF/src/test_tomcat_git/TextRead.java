@@ -39,7 +39,7 @@ public class TextRead
 			line = new String[2];
 			data = new int[3];
 			file = new File("/var/www/html/"+ room + "/room.txt");
-			System.out.println("room.txt見ようとしてるよ");
+			//System.out.println("room.txt見ようとしてるよ");
 		}
 		else if(player == 4)
 		{
@@ -63,8 +63,8 @@ public class TextRead
 			br = new BufferedReader(new FileReader(file));
 
 			text = br.readLine();
-			System.out.println("Readでのテキストファイルの中身");
-			System.out.println(text);
+			/*System.out.println("Readでのテキストファイルの中身");
+			System.out.println(text);*/
 
 			/*
 			String[] array = text.split(",");

@@ -11,10 +11,10 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 	int[] update(String username)//受け渡されたusernameをデータベースへインサートする
 	{
 		userinfo=DBCB.beforeupdate();//空いているルームと攻守を検索
-		System.out.println("DataBaseUpdateクラス上での情報だお");
+		/*System.out.println("DataBaseUpdateクラス上での情報だお");
 		System.out.println("user_id:"+userinfo[0]);
 		System.out.println("room_id:"+userinfo[1]);
-		System.out.println("player_number:"+userinfo[2]);
+		System.out.println("player_number:"+userinfo[2]);*/
 
 		try
 		{

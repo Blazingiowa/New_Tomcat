@@ -78,7 +78,7 @@ public class StartupText extends TextWrite
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
 			pw.println(text);
-			System.out.println("playerに出力される文字列"+text);
+			//System.out.println("playerに出力される文字列"+text);
 		}
 
 		catch(Exception e)

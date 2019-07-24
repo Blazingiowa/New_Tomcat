@@ -63,7 +63,7 @@ public class TaiouText extends CardText
 				count++;
 			}
 			System.out.println("taiou配列の中身だお 出力される-1は正常な値だお");
-			for(int i = 0;i<cardlist.length;i++)
+			/*for(int i = 0;i<cardlist.length;i++)
 			{
 				System.out.print("card_id:"+cardlist[i][0]);
 				System.out.print("対応1:"+cardlist[i][1]);
@@ -72,7 +72,7 @@ public class TaiouText extends CardText
 				System.out.print("対応4:"+cardlist[i][4]);
 				System.out.print("対応5:"+cardlist[i][5]);
 				System.out.println("");
-			}
+			}*/
 		}
 
 		catch (SQLException e)
@@ -95,7 +95,7 @@ public class TaiouText extends CardText
 			}
 		}
 
-		System.out.println("cardlist[0].length="+cardlist[0].length);
+		//System.out.println("cardlist[0].length="+cardlist[0].length);
 		for(int i =0;i<line.length;i++)
 		{
 
@@ -139,8 +139,8 @@ public class TaiouText extends CardText
 		}
 
 
-		System.out.println("txtに出力される文字だお");
-		System.out.println(writetext);
+		/*System.out.println("txtに出力される文字だお");
+		System.out.println(writetext);*/
 
 		try
 		{
