@@ -6,6 +6,18 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 	{
 		System.out.println("ｐ２で入った時の統合処理");
 
+		//自分のテキストの情報をもってくる
+		for(int i = 0;i<textmain.length;i++)
+		{
+			//テキストの０行目から順番に持ってきて退避
+			textW = txR.read(playerinfo[1], playerinfo[2], i);
+			for(int j = 0;j<textmain[0].length;j++)
+			{
+				w = textW[j];//退避させた１次元配列をさらに１つずつ退避
+				textmain[i][j] = w;//textmainに格納
+			}
+		}
+
 		textF = txR.read(playerinfo[1], 1, 3);//ｐ１が使ったカードの情報を持ってきて退避
 
 		System.out.println("ｐ２の統合でｐ１の使ったカードを持ってくる" + textF);
