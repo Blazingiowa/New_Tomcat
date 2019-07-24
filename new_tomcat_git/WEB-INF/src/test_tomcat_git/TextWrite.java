@@ -14,6 +14,11 @@ public class TextWrite extends TextRead
 
 	void write(int room_id,int player_number,int line_number,int[] write)
 	{
+		System.out.println("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲書き込みXのY回目の後ならまっすーがくれた数字");
+		for(int i =0;i<write.length;i++)
+		{
+			System.out.println(write[i]);
+		}
 		//System.out.println(room_id+","+player_number+","+line_number);
 		line = settext(room_id,player_number);
 		text = "" ; writetext = "";
