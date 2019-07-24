@@ -8,6 +8,8 @@ public class GameProject_txtReadWrite extends GameProject_Main
 		System.out.println(playerinfo[0]+" "+playerinfo[1]+" "+playerinfo[2]);
 		System.out.println(usecard[0]+" "+usecard[1]+" "+usecard[2]);
 
+		System.out.println(textF[0]+" "+textF[1]+" "+textF[2]+" ");
+
 		//プレイヤーの処理が終わっているのかどうか判定（０はまだ、１で処理済み）
 		if (textF[0] == 0)
 		{
