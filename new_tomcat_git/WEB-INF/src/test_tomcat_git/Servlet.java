@@ -147,9 +147,9 @@ public class Servlet extends HttpServlet
 
 				info();
 
-				//gpm.main(int_user_info, use_hand);
+				gpm.main(int_user_info, use_hand);
 				//上のに書き換えればCD制のやつらしい
-				game_project.main(int_user_info, use_hand);
+				//game_project.main(int_user_info, use_hand);
 
 			}
 		}
