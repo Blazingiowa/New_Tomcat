@@ -26,6 +26,10 @@ public class CooltimeText extends CardText
 			{
 				cooltimelist[i] = rs.getInt("cost");
 				cooltimelist[i] -= 2;
+				if(cooltimelist[i]<0)
+				{
+					cooltimelist[i]=0;
+				}
 			}
 		}
 		catch(SQLException e)
