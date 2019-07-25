@@ -169,7 +169,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 									//カウントをプラスする
 									count++;
 
-									//カウントが３回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
+									//カウントが６回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
 									if (count == 6 && flag == false)
 									{
 										textmain[6][i] -= p1_card[i][2];//ｐ１が与えたダメージを配列に入れる

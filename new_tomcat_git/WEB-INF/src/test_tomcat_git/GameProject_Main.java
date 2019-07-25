@@ -1,7 +1,12 @@
 package test_tomcat_git;
 
+import java.util.Arrays;
+
 public class GameProject_Main
 {
+	//送られてきた使ったカードIDを昇順にソートし格納するための配列
+	int[]SortedCard;
+
 	//ルーム状況を入れるための配列
 	int[] player = new int[3];
 
@@ -63,8 +68,11 @@ public class GameProject_Main
 
 		System.out.println("ここから、ゲームスタート");
 
+		//使ったカードIDを昇順にソート
+		int[]SortedCard = sort(use);
+
 		//テキストを読み込み、書き換え
-		GPRW.txtReadWrite(info, use);
+		GPRW.txtReadWrite(info, SortedCard);
 
 		System.out.println("テキストの書き読み完了");
 
@@ -92,5 +100,11 @@ public class GameProject_Main
 			}
 
 		}
+	}
+
+	int[] sort(int[]usecard)
+	{
+		Arrays.sort(usecard);
+		return usecard;
 	}
 }
