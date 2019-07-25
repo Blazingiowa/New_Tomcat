@@ -25,10 +25,14 @@ public class CooltimeText extends CardText
 			for(int i = 0;rs.next();i++)
 			{
 				cooltimelist[i] = rs.getInt("cost");
-				cooltimelist[i] -= 2;
-				if(cooltimelist[i]<0)
+
+				if(cooltimelist[i]-2<0)
 				{
 					cooltimelist[i]=0;
+				}
+				else
+				{
+					cooltimelist[i] -= 2;
 				}
 			}
 		}
