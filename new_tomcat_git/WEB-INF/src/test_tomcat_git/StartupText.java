@@ -44,17 +44,6 @@ public class StartupText extends TextWrite
 			line[i] =writetext;
 		}
 
-		/*
-		for(int i = 0;i<line.length;i++)
-		{
-			text += line[i];
-			if((i+1)<line.length)
-			{
-				text = text+",s,";
-			}
-		}
-		*/
-
 		for(int i = 0;i<line.length;i++)
 		{
 			text += line[i];

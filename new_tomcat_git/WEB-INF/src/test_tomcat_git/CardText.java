@@ -103,9 +103,6 @@ public class CardText extends TextWrite //カードリストテキストを作�
 			writetext += line[i];
 			if((i+1)<line.length)
 			{
-				/*
-				writetext += ",s,";
-				*/
 				writetext += "s";
 			}
 		}

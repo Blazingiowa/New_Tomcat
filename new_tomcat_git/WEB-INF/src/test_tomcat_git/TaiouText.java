@@ -116,19 +116,6 @@ public class TaiouText extends CardText
 			System.out.println(line[i]);
 		}*/
 
-
-
-		/*
-		for(int i =0;i<line.length;i++)
-		{
-			writetext += line[i];
-			if((i+1)<line.length)
-			{
-				writetext += ",s,";
-			}
-		}
-		*/
-
 		for(int i =0;i<line.length;i++)
 		{
 			writetext += line[i];

@@ -42,18 +42,6 @@ public class TextWrite extends TextRead
 
 		line[line_number] = writetext;
 
-		/*
-		for(int i = 0;i<line.length;i++)
-		{
-			text += line[i];
-
-			if((i+1)<line.length)
-			{
-				text += ",s,";
-			}
-		}
-		 */
-
 		for(int i = 0;i<line.length;i++)
 		{
 			text += line[i];
