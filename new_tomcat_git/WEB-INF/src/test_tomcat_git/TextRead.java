@@ -38,7 +38,7 @@ public class TextRead
 			alltext = new String[2][3];
 			line = new String[2];
 			data = new int[3];
-			file = new File("/var/www/html/game"+ room + "/room.txt");
+			file = new File("/var/www/html/game/"+ room + "/room.txt");
 			//System.out.println("room.txt見ようとしてるよ");
 		}
 		else if(player == 4)
@@ -46,14 +46,14 @@ public class TextRead
 			alltext = new String[2][20];
 			line = new String[2];
 			data = new int[20];
-			file = new File("/var/www/html/game"+ room + "/cooltime.txt");
+			file = new File("/var/www/html/game/"+ room + "/cooltime.txt");
 		}
 		else
 		{
 			alltext = new String[7][3];
 			line = new String[7];
 			data = new int[3];
-			file = new File("/var/www/html/game"+ room + "/"+player+".txt");
+			file = new File("/var/www/html/game/"+ room + "/"+player+".txt");
 		}
 
 
