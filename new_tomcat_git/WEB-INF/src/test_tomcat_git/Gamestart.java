@@ -42,7 +42,7 @@ public class Gamestart
 			userinfo[i] = String.valueOf(player[i]);
 		}
 
-		dir = new File("/var/www/html/"+player[1]);//ルームディレクトリの作成
+		dir = new File("/var/www/html/game/"+player[1]);//ルームディレクトリの作成
 		dir.mkdir();
 		permission(dir);
 
