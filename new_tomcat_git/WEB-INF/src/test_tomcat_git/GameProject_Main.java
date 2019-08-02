@@ -104,7 +104,14 @@ public class GameProject_Main
 
 	int[] sort(int[]usecard)
 	{
+		int[] w = new int[usecard.length];
 		Arrays.sort(usecard);
-		return usecard;
+		for(int i=0,j=usecard.length-1;i<usecard.length;i++,j--)
+		{
+			w[i] = usecard[j];
+		}
+
+
+		return w;
 	}
 }
