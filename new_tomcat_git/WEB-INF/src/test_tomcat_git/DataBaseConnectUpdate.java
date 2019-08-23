@@ -15,21 +15,26 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 		System.out.println("user_id:"+userinfo[0]);
 		System.out.println("room_id:"+userinfo[1]);
 		System.out.println("player_number:"+userinfo[2]);*/
-		int reserve=0;int room_id=0;
+
+
+		/*以下ロビー用のプログラム調整が終了したらコメントアウトを解除してくださいその後上の
+		 検索は削除してください
+
 		if(reserve ==0)//通常のマッチ
 		{
-			userinfo=DBCB.beforeupdate(/*reserve*/);
+			userinfo=DBCB.beforeupdate(reserve);
 		}
 		else if(room_id == 0)//部屋作成
 		{
-			userinfo=DBCB.beforeupdate(/*reserve*/);
+			userinfo=DBCB.beforeupdate(reserve);
 		}
 		else
 		{
-			userinfo=DBCB.beforeupdate(/*0*/);
+			userinfo=DBCB.beforeupdate(0);
 			userinfo[1] = room_id;
 			userinfo[2] = 2;
 		}
+		*/
 
 		try
 		{
