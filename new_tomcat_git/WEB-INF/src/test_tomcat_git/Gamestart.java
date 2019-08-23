@@ -25,10 +25,17 @@ public class Gamestart
 	String url;
 	String[] path = new String[6];
 
+
 	File[] files = new File[6];
-	String[] createdirectry(String user_name) //
+	/*
+	 大野へロビー用の変数を追加しました。ロビーを使用した場合reserveに1をint型で引数として渡してください。使用しない場合は0で大丈夫です
+	 ロビーを使用しない、ロビーで部屋を作成した場合はroom_idは0でお願いします。ロビーで部屋を検索した人はroom_idを保持しているのでそれを引数として渡してください。
+	 Servletクラスとunityの調整が終わったらメソッドの引数部分、引数を使用している場所のコメントアウトを解除してください。
+	 またDataBaseConnectUpdateにもこれ用のコメントアウトがあるため上記同様にコメントアウトを解除してください。
+	 */
+	String[] createdirectry(String user_name/*int reserve,int room_id*/)
 	{
-		player = DBCU.update(user_name);
+		player = DBCU.update(user_name/*int reserve,int room_id*/);
 
 		files[0] = new File("/var/www/html/game/"+player[1]+"/"+player[2]+".txt");
 		files[1] = new File("/var/www/html/game/"+player[1]+"/taiou.txt");
@@ -96,14 +103,14 @@ public class Gamestart
 		{
 			System.out.println("room.textの中身:"+online[i]);
 		}*/
-		
+
 		/*もしゲームエンド後に片方のプレイヤーがルームに残り続けて誰かが入ってくるのを待つ場合に以下のif処理が必要
 		*/
 		if(online[0]!=-1)
 		{
 			online[0]=-1;
 		}
-		
+
 		online[player[2]] = 1;
 
 		tw.write(player[1],3,0, online);

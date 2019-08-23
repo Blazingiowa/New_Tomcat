@@ -16,7 +16,7 @@ public class GameEND
 	void logout(int info[])//ユーザID　ルームID　プレイヤー番号
 	{
 
-
+		//たぶん使わないけど保持必要なかったら以下とファイルを削除する場合とともにソースから削除
 		path[0] = "/var/www/html/game/"+ info[1] +"/room.txt";//ルームテキストのパス
 		path[1] = "";
 
