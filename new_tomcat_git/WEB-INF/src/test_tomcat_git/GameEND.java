@@ -17,9 +17,11 @@ public class GameEND
 	{
 
 
-		path[0] = "";
+		path[0] = "/var/www/html/game/"+ info[1] +"/room.txt";//ルームテキストのパス
 		path[1] = "";
 
+		//ファイルを削除する場合
+		/*
 		file[0] = new File("");
 		file[1] = new File("");
 		for(int i = 0;i<file.length;i++)
@@ -36,11 +38,17 @@ public class GameEND
 				}
 			}
 		}
+		*/
+
+		//ファイルを消さずにログアウト判定を行う場合
+
+		write = tr.read(info[1],3,0);
+		write[0] = 0;
+
+		tw.write(info[1],3,0,write);
 
 		write = tr.read(info[1],3,0);
 		write[info[2]] = 0;
-
-		tw.write(info[1],3,0,write);
 
 		DBP.logout(info);
 	}
