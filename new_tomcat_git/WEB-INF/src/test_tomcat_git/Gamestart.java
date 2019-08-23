@@ -96,6 +96,14 @@ public class Gamestart
 		{
 			System.out.println("room.textの中身:"+online[i]);
 		}*/
+		
+		/*もしゲームエンド後に片方のプレイヤーがルームに残り続けて誰かが入ってくるのを待つ場合に以下のif処理が必要
+		*/
+		if(online[0]!=-1)
+		{
+			online[0]=-1;
+		}
+		
 		online[player[2]] = 1;
 
 		tw.write(player[1],3,0, online);

@@ -42,13 +42,14 @@ public class GameEND
 
 		//ファイルを消さずにログアウト判定を行う場合
 
+		//unity用の判定
 		write = tr.read(info[1],3,0);
-		write[0] = 0;
+
+		write[0] = 0; //誰かがログアウトした場合の判定
+		write[info[2]] = 0;//いなくなったプレイヤーをroom.txt上から削除
 
 		tw.write(info[1],3,0,write);
-
-		write = tr.read(info[1],3,0);
-		write[info[2]] = 0;
+		//片方のプレイヤーがログアウトし再度誰かを待つ際には-1に変更する必要があるためGamestartの100~105行目の処理で変更してます
 
 		DBP.logout(info);
 	}
