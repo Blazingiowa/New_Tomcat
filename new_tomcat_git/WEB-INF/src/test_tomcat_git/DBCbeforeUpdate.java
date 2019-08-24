@@ -16,7 +16,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 		/*
 		 if(reserve ==1 )
 		 {
-		 	sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 0 ORDER BY room_id LIMIT 1;";
+		 	sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
 		 }
 		 */
 
