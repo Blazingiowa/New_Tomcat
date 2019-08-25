@@ -7,10 +7,10 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class TaiouText extends CardText
+public class TaiouText extends CardText //対応するカードの情報をテキストファイルに出力
 {
 
-	void taioucreate(File file)
+	void taioucreate(File file) //taiou.txtに文字を出力する
 	{
 
 		//file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
@@ -32,15 +32,15 @@ public class TaiouText extends CardText
 			}
 		}
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());
+		Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
 		try
 		{
-			stmt.executeQuery("SELECT * FROM card;");
+			stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得
 			rs = stmt.getResultSet();
 		}
 		catch(SQLException e)
 		{
-
+			System.out.println(e);
 		}
 
 		try
@@ -51,7 +51,7 @@ public class TaiouText extends CardText
 			{
 				System.out.println("TaiouText.javaのrsはnullじゃないお");
 			}*/
-			while(rs.next())
+			while(rs.next())//検索結果を配列に格納
 			{
 				cardlist[count][0] = rs.getInt("card_id");
 				String[] array = rs.getString("taio_id").split(",");
@@ -83,10 +83,10 @@ public class TaiouText extends CardText
 
 		finally
 		{
-			CC.close();
+			CC.close();//データベースとの接続を解除
 			try
 			{
-				rs.close();
+				rs.close();//ResultSetをクローズ
 			}
 			catch (SQLException e)
 			{
@@ -96,6 +96,7 @@ public class TaiouText extends CardText
 		}
 
 		//System.out.println("cardlist[0].length="+cardlist[0].length);
+		//テキストファイルに出力する形にする
 		for(int i =0;i<line.length;i++)
 		{
 
@@ -110,11 +111,6 @@ public class TaiouText extends CardText
 
 
 		}
-		/*System.out.println("一行ごとの情報だお");
-		for(int i =0;i<line.length;i++)
-		{
-			System.out.println(line[i]);
-		}*/
 
 		for(int i =0;i<line.length;i++)
 		{
@@ -129,7 +125,7 @@ public class TaiouText extends CardText
 		/*System.out.println("txtに出力される文字だお");
 		System.out.println(writetext);*/
 
-		try
+		try//テキストファイルに出力する
 		{
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
