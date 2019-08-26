@@ -19,7 +19,7 @@ public class Servlet extends HttpServlet
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
 	private GameEND game_end = new GameEND();
-	private GameProject game_project = new GameProject();
+	//private GameProject game_project = new GameProject();
 
 	private GameProject_Main gpm = new GameProject_Main();
 
@@ -34,6 +34,13 @@ public class Servlet extends HttpServlet
 	private String us_num;
 	private String name;
 	private String flag;
+
+	private String reserve;
+
+	private int int_room_id;
+	private int int_reserve;
+
+
 	private boolean flag_name;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,6 +66,12 @@ public class Servlet extends HttpServlet
 		str_use_hand [1] = request.getParameter("usehand2");
 		str_use_hand [2] = request.getParameter("usehand3");
 
+		reserve = request.getParameter("reserve");
+		//ロビー用にint変換
+
+		int_room_id = conversion(room_id);
+		int_reserve = conversion(reserve);
+
 		check(name);
 
 		System.out.println(request);
@@ -67,6 +80,7 @@ public class Servlet extends HttpServlet
 		System.out.println("userNumber:"+ us_num);
 		System.out.println("name:" + name);
 		System.out.println("flag:" + flag);
+		System.out.println("reserve:" + reserve);
 
 		System.out.println("使ったカード1:" + str_use_hand [0]);
 		System.out.println("使ったカード2:" + str_use_hand [1]);
@@ -82,7 +96,7 @@ public class Servlet extends HttpServlet
 
 		if(flag == null)//game継続
 		{
-			if (room_id == null)//ルームID値持っていないとき始めてきたと認識
+			if (us_id == null)//ルームID値持っていないとき始めてきたと認識
 			{
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 				if(flag_name == false)
@@ -92,7 +106,8 @@ public class Servlet extends HttpServlet
 				}
 				else
 				{
-					str_user_info = game_start.createdirectry(name);
+					//str name int reserve int room
+					str_user_info = game_start.createdirectry(name, int_reserve, int_room_id);
 
 					ub.setUserID(str_user_info[0]);
 					ub.setRoomID(str_user_info[1]);
@@ -199,6 +214,21 @@ public class Servlet extends HttpServlet
 		{
 			int_user_info[2] =Integer.parseInt(us_num);
 		}
+
+	}
+	int conversion(String s)
+	{
+		int i = -1;
+
+		if(s == null)
+		{
+
+		}
+		else
+		{
+			i = Integer.parseInt(s);
+		}
+		return i;
 
 	}
 	void check(String s)

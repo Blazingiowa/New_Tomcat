@@ -7,12 +7,18 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 {
 	DBCNotEmpty DBCNE = new DBCNotEmpty();
 
-	int[] beforeupdate()
+	int[] beforeupdate(int reserve)
 	{
 		Result = new int[3];
 		String[] sql = new String[2];
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
 		sql[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
+
+		 if(reserve ==1 )
+		 {
+		 	sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
+		 }
+
 
 		for(int i = 0;i < Result.length;i++)
 		{
@@ -39,19 +45,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 
 			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
 			//結果の挿入
-			/*rs.next();
-			if(!rs.wasNull())
-			{
-				Result[1] = rs.getInt("room_id");
-				Result[2] = rs.getInt("player_number");
-				rs.close();
-			}
-			else
-			{
-				int[] keep = DBCNE.RoomNotempty(sql[1]);
-				Result[1] = keep[0];
-				Result[2] = keep[1];
-			}*/
+
 			if(rs.next())
 			{
 				Result[1] = rs.getInt("room_id");

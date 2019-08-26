@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateConnection
+public class CreateConnection //データベースに接続するための準備をするクラス
 {
 	Statement stmt;
 	Connection conn;
@@ -14,9 +14,9 @@ public class CreateConnection
 	protected final String user = "root";//データベースへアクセスするID
 	protected final String password = "ncc_NCC2019";//データベースのパスワード
 
-	Connection createconnection()
+	Connection createconnection()//データベースと接続を作成しConnectionを返す
 	{
-		try
+		try//使用するJDBC
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 		}
@@ -26,7 +26,7 @@ public class CreateConnection
 			e1.printStackTrace();
 		}
 
-		try
+		try//データベースに接続する
 		{
 			conn = DriverManager.getConnection(url,user,password);
 		}
@@ -39,12 +39,12 @@ public class CreateConnection
 		return conn;
 	}
 
-	Statement createstatement(Connection conn)
+	Statement createstatement(Connection conn)//ステートメントを作成し返す
 	{
 
 		try
 		{
-			stmt = conn.createStatement();
+			stmt = conn.createStatement();//ステートメントを作成する
 		}
 
 		catch (SQLException e)
@@ -56,12 +56,12 @@ public class CreateConnection
 		return stmt;
 	}
 
-	void close()
+	void close()//接続をクローズする
 	{
 		try
 		{
-			conn.close();
-			stmt.close();
+			conn.close();//接続切断
+			stmt.close();//ステートメントをクローズ
 		}
 		catch (SQLException e)
 		{

@@ -130,7 +130,7 @@ public class servlet_test extends HttpServlet
 		System.out.println(name_val);
 
 		//String test_name = "test";
-		str_user_info = game_start.createdirectry(name_val);
+		//str_user_info = game_start.createdirectry(name_val);
 
 		ub.setUserID(str_user_info[0]);
 		ub.setRoomID(str_user_info[1]);

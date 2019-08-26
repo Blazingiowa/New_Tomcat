@@ -7,12 +7,13 @@ import java.io.PrintWriter;
 
 public class RoomText extends TextWrite
 {
-	void createroomtxt(int room_id,File file)
+	void createroomtxt(int room_id,File file)//ルームテキストを作成
 	{
 		text = ""; writetext="";
-		int[] online = {-1,0,0};
-		int[] turn = {0,0,0};
+		int[] online = {-1,0,0};//左から接続が遮断されたか、一人目が入室、二人目が入室
+		int[] turn = {0,0,0};//help me まっすー
 
+		//配列をテキストファイルへ出力する形にする
 		for(int i =0;i<online.length;i++)
 		{
 			writetext += online[i];
@@ -22,12 +23,7 @@ public class RoomText extends TextWrite
 			}
 		}
 
-		/*
-		writetext += ",s,";
-		*/
-
 		 writetext += "s";
-
 
 		for(int i =0;i<turn.length;i++)
 		{
@@ -41,7 +37,7 @@ public class RoomText extends TextWrite
 		/*System.out.println("roomtextのデバッグだお");
 		System.out.println("出力される文字だお:"+writetext);*/
 
-		try
+		try//テキストファイルに出力する
 		{
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
@@ -50,7 +46,7 @@ public class RoomText extends TextWrite
 		}
 		catch(Exception e)
 		{
-
+			System.out.println(e);
 		}
 		finally
 		{

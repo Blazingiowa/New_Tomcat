@@ -16,10 +16,12 @@ public class GameEND
 	void logout(int info[])//ユーザID　ルームID　プレイヤー番号
 	{
 
-
-		path[0] = "";
+		//たぶん使わないけど保持必要なかったら以下とファイルを削除する場合とともにソースから削除
+		path[0] = "/var/www/html/game/"+ info[1] +"/room.txt";//ルームテキストのパス
 		path[1] = "";
 
+		//ファイルを削除する場合
+		/*
 		file[0] = new File("");
 		file[1] = new File("");
 		for(int i = 0;i<file.length;i++)
@@ -36,11 +38,18 @@ public class GameEND
 				}
 			}
 		}
+		*/
 
+		//ファイルを消さずにログアウト判定を行う場合
+
+		//unity用の判定
 		write = tr.read(info[1],3,0);
-		write[info[2]] = 0;
+
+		write[0] = 0; //誰かがログアウトした場合の判定
+		write[info[2]] = 0;//いなくなったプレイヤーをroom.txt上から削除
 
 		tw.write(info[1],3,0,write);
+		//片方のプレイヤーがログアウトし再度誰かを待つ際には-1に変更する必要があるためGamestartの100~105行目の処理で変更してます
 
 		DBP.logout(info);
 	}
