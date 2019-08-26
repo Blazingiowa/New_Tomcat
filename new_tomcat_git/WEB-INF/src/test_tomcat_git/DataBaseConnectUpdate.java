@@ -45,12 +45,12 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 			stmt1.executeUpdate("UPDATE user SET user_name = '"+username+"' WHERE user_id = "+userinfo[0]+";");
 			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");
-			/*部屋を作った際に相手の場所を予約する
+			//部屋を作った際に相手の場所を予約する
 			if(reserve !=0 && room_id ==0)
 			{
 				stmt2.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
 			}
-			*/
+
 		}
 		catch(SQLException e)
 		{
