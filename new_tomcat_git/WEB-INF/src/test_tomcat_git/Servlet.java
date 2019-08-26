@@ -80,6 +80,7 @@ public class Servlet extends HttpServlet
 		System.out.println("userNumber:"+ us_num);
 		System.out.println("name:" + name);
 		System.out.println("flag:" + flag);
+		System.out.println("reserve:" + reserve);
 
 		System.out.println("使ったカード1:" + str_use_hand [0]);
 		System.out.println("使ったカード2:" + str_use_hand [1]);
