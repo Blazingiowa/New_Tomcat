@@ -320,7 +320,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		//クールタイムの短縮処理
 		for(int i = 0;i<CT.length;i++)
 		{
-			for(int j = 0;i<CT[0].length;j++)
+			for(int j = 0;j<CT[0].length;j++)
 			{
 				if(CT[i][j] > 0)
 				{
