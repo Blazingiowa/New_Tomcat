@@ -320,9 +320,9 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 		//クールタイムの短縮処理
 		for(int i = 0;i<CT.length;i++)
 		{
-			for(int j = 0;i<CT[0].length;j++)
+			for(int j = 0;j<CT[0].length;j++)
 			{
-				if(CT[i][j] < 0)
+				if(CT[i][j] > 0)
 				{
 					CT[i][j]--;
 				}
@@ -359,7 +359,7 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 		for(int i = 0;i<CT.length;i++)
 		{
 			//各プレイヤーのクールタイムの情報を１次元配列に退避させる
-			for(int j = 0;i<CT[0].length;j++)
+			for(int j = 0;j<CT[0].length;j++)
 			{
 				w = CT[i][j];
 				CTwrite[j] = w;
