@@ -3,7 +3,7 @@ package test_tomcat_git;
 import java.io.File;
 import java.io.IOException;
 
-public class Gamestart
+public class Gamestart //ゲームが始まるときに一度だけ実行されるクラス
 {
 	Gamemain Gm = new Gamemain();
 	Text tx = new Text();
@@ -33,9 +33,9 @@ public class Gamestart
 	 Servletクラスとunityの調整が終わったらメソッドの引数部分、引数を使用している場所のコメントアウトを解除してください。
 	 またDataBaseConnectUpdateにもこれ用のコメントアウトがあるため上記同様にコメントアウトを解除してください。
 	 */
-	String[] createdirectry(String user_name,int reserve,int room_id)
+	String[] createdirectry(String user_name,int reserve,int room_id) //ルームディレクトリやテキストファイルを作成する
 	{
-		player = DBCU.update(user_name,reserve,room_id);
+		player = DBCU.update(user_name,reserve,room_id);//データベースの情報を更新する
 
 		files[0] = new File("/var/www/html/game/"+player[1]+"/"+player[2]+".txt");
 		files[1] = new File("/var/www/html/game/"+player[1]+"/taiou.txt");
@@ -96,7 +96,7 @@ public class Gamestart
 			pn.create_nametext(files[5]);
 		}
 
-		pn.set_playername(files[5], user_name, player[2]);
+		pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
 
 		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
 		/*for(int i =0;i<online.length;i++)
@@ -139,7 +139,7 @@ public class Gamestart
 		}
 	}
 
-	void permission(File giveperm)
+	void permission(File giveperm)//すべてのディレクトリとテキストファイルに権限を付与する
 	{
 		giveperm.setWritable(true);
 		giveperm.setReadable(true,false);

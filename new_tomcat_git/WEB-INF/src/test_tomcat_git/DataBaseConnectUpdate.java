@@ -3,7 +3,7 @@ package test_tomcat_git;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataBaseConnectUpdate extends DataBaseConnectRead
+public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインしたプレイヤーの情報をデータベースに格納する
 {
 	int[] userinfo;//ユーザID,ルームID,プレイヤー番号
 	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
@@ -28,7 +28,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 		{
 			userinfo=DBCB.beforeupdate(reserve);
 		}
-		else
+		else//部屋の検索
 		{
 			userinfo=DBCB.beforeupdate(0);
 			userinfo[1] = room_id;
@@ -43,12 +43,12 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 			Statement stmt3 = CC.createstatement(conn = CC.createconnection());
 
 
-			stmt1.executeUpdate("UPDATE user SET user_name = '"+username+"' WHERE user_id = "+userinfo[0]+";");
-			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");
+			stmt1.executeUpdate("UPDATE user SET user_name = '"+username+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
+			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");//空いているルームにユーザーIDを格納する
 			//部屋を作った際に相手の場所を予約する
 			if(reserve !=0 && room_id ==0)
 			{
-				stmt2.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
+				stmt3.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
 			}
 
 		}
@@ -63,11 +63,6 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 
 		return userinfo;
 
-
-	}
-
-	void reset()
-	{
 
 	}
 

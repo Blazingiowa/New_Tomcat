@@ -3,7 +3,7 @@ package test_tomcat_git;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataBasePlayerout extends DataBaseConnectUpdate
+public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤーが退出した際にデータベース上の情報を更新する
 {
 	void logout(int[] playerinfo)//ユーザID,ルームID,プレイヤー番号の順番で格納
 	{
@@ -23,7 +23,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate
 			{
 				if (conn != null)
 				{
-					conn.close();
+					conn.close();//データベースとの接続を解除
 				}
 			}
 			catch(SQLException e)

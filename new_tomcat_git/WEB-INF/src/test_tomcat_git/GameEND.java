@@ -2,7 +2,7 @@ package test_tomcat_git;
 
 import java.io.File;
 
-public class GameEND
+public class GameEND//プレイヤーがゲームから退出した際の処理を行う
 {
 	//プレイヤーが退出したときのDBを更新するためのクラスをインスタンス
 	DataBasePlayerout DBP = new DataBasePlayerout();
@@ -42,7 +42,7 @@ public class GameEND
 
 		//ファイルを消さずにログアウト判定を行う場合
 
-		//unity用の判定
+		//unityがプレイヤーが退出したかを確認するためにテキストファイルを更新する
 		write = tr.read(info[1],3,0);
 
 		write[0] = 0; //誰かがログアウトした場合の判定

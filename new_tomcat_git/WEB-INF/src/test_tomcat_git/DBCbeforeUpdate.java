@@ -3,23 +3,23 @@ package test_tomcat_git;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBCbeforeUpdate extends DataBaseConnectRead
+public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋と空いているユーザーIDを検索する
 {
 	DBCNotEmpty DBCNE = new DBCNotEmpty();
 
 	int[] beforeupdate(int reserve)
 	{
 		Result = new int[3];
-		String[] sql = new String[2];
+		String[] sql = new String[2];//実行するsqlを配列に格納する
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
 		sql[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
 
-		 if(reserve ==1 )
+		 if(reserve ==1 )//ロビーを使用した際にsql文を置き換える
 		 {
 		 	sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
 		 }
 
-
+		 //配列を初期化
 		for(int i = 0;i < Result.length;i++)
 		{
 			Result[i] = 0;

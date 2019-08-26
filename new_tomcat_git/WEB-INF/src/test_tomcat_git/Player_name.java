@@ -7,11 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class Player_name  extends TextWrite
+public class Player_name  extends TextWrite//プレイヤー名を保持する
 {
-	void create_nametext(File file)
+	void create_nametext(File file)//テキストファイルを作成する
 	{
-		text = "-1,-1,-1";
+		text = "-1,-1,-1";//初期化
 
 		try
 		{
@@ -31,11 +31,11 @@ public class Player_name  extends TextWrite
 
 	}
 
-	void set_playername(File file,String name,int number)
+	void set_playername(File file,String name,int number)//入ってきたプレイヤー名をテキストに出力する
 	{
 		try
 		{
-			br = new BufferedReader(new FileReader(file));
+			br = new BufferedReader(new FileReader(file));//テキストファイルを読み込む
 			text = br.readLine();
 		}
 		catch(Exception e)
@@ -60,6 +60,7 @@ public class Player_name  extends TextWrite
 			}
 		}
 
+		//書き換えた情報をテキストファイルを出力する
 		try
 		{
 			fw = new FileWriter(file);

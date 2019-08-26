@@ -6,6 +6,7 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 {
 	void resturt(int room_id)
 	{
+		//ゲームで使用したテキストファイルを初期化する
 		files = new File[3];
 		files[0] = new File("/var/www/html/game/"+room_id+"/1.txt");
 		files[1] = new File("/var/www/html/game/"+room_id+"/2.txt");
