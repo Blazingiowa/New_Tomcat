@@ -7,18 +7,18 @@ public class DBCbeforeUpdate extends DataBaseConnectRead
 {
 	DBCNotEmpty DBCNE = new DBCNotEmpty();
 
-	int[] beforeupdate(/*int reserve*/)
+	int[] beforeupdate(int reserve)
 	{
 		Result = new int[3];
 		String[] sql = new String[2];
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
 		sql[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
-		/*
+
 		 if(reserve ==1 )
 		 {
 		 	sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
 		 }
-		 */
+
 
 		for(int i = 0;i < Result.length;i++)
 		{

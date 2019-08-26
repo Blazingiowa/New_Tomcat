@@ -33,9 +33,9 @@ public class Gamestart
 	 Servletクラスとunityの調整が終わったらメソッドの引数部分、引数を使用している場所のコメントアウトを解除してください。
 	 またDataBaseConnectUpdateにもこれ用のコメントアウトがあるため上記同様にコメントアウトを解除してください。
 	 */
-	String[] createdirectry(String user_name/*int reserve,int room_id*/)
+	String[] createdirectry(String user_name,int reserve,int room_id)
 	{
-		player = DBCU.update(user_name/*int reserve,int room_id*/);
+		player = DBCU.update(user_name,reserve,room_id);
 
 		files[0] = new File("/var/www/html/game/"+player[1]+"/"+player[2]+".txt");
 		files[1] = new File("/var/www/html/game/"+player[1]+"/taiou.txt");

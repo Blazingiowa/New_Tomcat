@@ -8,17 +8,17 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 	int[] userinfo;//ユーザID,ルームID,プレイヤー番号
 	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
 
-	int[] update(String username/*int reserve,int room_id*/)//受け渡されたusernameをデータベースへインサートする
+	int[] update(String username,int reserve,int room_id)//受け渡されたusernameをデータベースへインサートする
 	{
-		userinfo=DBCB.beforeupdate();//空いているルームと攻守を検索
+		//userinfo=DBCB.beforeupdate();//空いているルームと攻守を検索
 		/*System.out.println("DataBaseUpdateクラス上での情報だお");
 		System.out.println("user_id:"+userinfo[0]);
 		System.out.println("room_id:"+userinfo[1]);
 		System.out.println("player_number:"+userinfo[2]);*/
 
 
-		/*以下ロビー用のプログラム調整が終了したらコメントアウトを解除してくださいその後上の
-		 検索は削除してください
+		//以下ロビー用のプログラム調整が終了したらコメントアウトを解除してくださいその後上の
+		 //検索は削除してください
 
 		if(reserve ==0)//通常のマッチ
 		{
@@ -34,7 +34,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead
 			userinfo[1] = room_id;
 			userinfo[2] = 2;
 		}
-		*/
+
 
 		try
 		{
