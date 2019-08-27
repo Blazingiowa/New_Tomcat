@@ -12,9 +12,10 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 		files[1] = new File("/var/www/html/game/"+room_id+"/2.txt");
 		files[2] = new File("/var/www/html/game/"+room_id+"/cooltime.txt");
 
+		//
 		st.textfile(room_id, 1, files[0]);
 		st.textfile(room_id, 2, files[1]);
-
+		
 		coolt.createcooltime(files[2]);
 
 	}
