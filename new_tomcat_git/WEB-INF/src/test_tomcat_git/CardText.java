@@ -11,8 +11,6 @@ import java.sql.Statement;
 
 public class CardText extends TextWrite //カードリストテキストを作るクラス
 {
-	DataBaseConnectRead DBCR = new DataBaseConnectRead();
-	DataBaseConnectCard DBCC = new DataBaseConnectCard();
 	CreateConnection CC = new CreateConnection();
 	ResultSet rs;
 	Connection conn;
