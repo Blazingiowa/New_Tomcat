@@ -6,7 +6,6 @@ import java.io.IOException;
 public class Gamestart //ゲームが始まるときに一度だけ実行されるクラス
 {
 
-	Text tx = new Text();
 	File file,dir;
 
 	DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
