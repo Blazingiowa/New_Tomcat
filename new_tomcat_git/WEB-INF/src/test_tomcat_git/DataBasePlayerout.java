@@ -11,8 +11,8 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 		try
 		{
 			Statement stmt = CC.createstatement(conn = CC.createconnection());
-			stmt.executeUpdate("UPDATE user SET user_name = NULL WHERE user_id = "+playerinfo[1]+";");
-			stmt.executeUpdate("UPDATE room SET user_id = 0 WHERE user_id = "+playerinfo[1]+";");
+			stmt.executeUpdate("UPDATE user SET user_name = NULL WHERE user_id = "+playerinfo[0]+";");
+			stmt.executeUpdate("UPDATE room SET user_id = 0 WHERE user_id = "+playerinfo[0]+";");
 		}
 		catch (SQLException e)
 		{
@@ -74,7 +74,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 				//例外処理
 			}
 		}
-		
+
 		if(Result[0]==0&&Result[1]==0)
 		{
 			rd.delete(room_id);
