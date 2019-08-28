@@ -8,7 +8,7 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 	//再選希望が来た場合ここへ
 	void wantremacth(int[] info)//ユーザID　ルームID　プレイヤー番号
 	{
-		/*
+
 		line = tr.read(info[1],3,0);
 		if(line[1]==3&&line[2]==3)
 		{
@@ -18,7 +18,7 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 			}
 		}
 		tw.write(info[1],3,0,line);
-		*/
+
 
 		line = tr.read(info[1],3,0);
 		line[info[2]] = 2;
@@ -46,8 +46,8 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 		 もし1で予期せぬ挙動をした場合は1ではなく一度3に変更してそれをunityに認識させてください。
 		そうした場合wantrematchメソッドにあるコメントアウト解除してみてください
 		*/
-		line[1] = 1;
-		line[2] = 1;
+		line[1] = 3;
+		line[2] = 3;
 		tw.write(room_id,3,0,line);
 
 		//ゲームで使用したテキストファイルを初期化する
