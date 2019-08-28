@@ -19,9 +19,10 @@ public class Servlet extends HttpServlet
 	private UserBean ub = new UserBean();
 	private Gamestart game_start = new Gamestart();
 	private GameEND game_end = new GameEND();
-	//private GameProject game_project = new GameProject();
 
 	private GameProject_Main gpm = new GameProject_Main();
+
+	private Rematch rematch = new Rematch();
 
 	private String[] str_user_info = new String[3]; //順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
 	private int[] int_user_info = new int[3];
@@ -72,9 +73,10 @@ public class Servlet extends HttpServlet
 		int_room_id = conversion(room_id);
 		int_reserve = conversion(reserve);
 
+		//名前に特殊文字が含まれているか
 		check(name);
 
-		System.out.println(request);
+		//送られてくるデータの表示（デバック用）
 		System.out.println("userID:"+ us_id);
 		System.out.println("roomID:"+ room_id);
 		System.out.println("userNumber:"+ us_num);
@@ -91,12 +93,10 @@ public class Servlet extends HttpServlet
 		ub.setUserNumber("-1");
 		ub.setUserID("-1");
 		ub.setRoomID("-1");
-		//ここまでテストコード
-
 
 		if(flag == null)//game継続
 		{
-			if (us_id == null)//ルームID値持っていないとき始めてきたと認識
+			if (us_id == null)//ID値持っていないとき始めてきたと認識
 			{
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 				if(flag_name == false)
@@ -104,6 +104,7 @@ public class Servlet extends HttpServlet
 					System.out.println("ネームエラーによりID,ナンバー'-1'で返す");
 					ub.setError("禁止文字が含まれています");
 				}
+				//始めてきた人用の処理
 				else
 				{
 					//str name int reserve int room
@@ -127,10 +128,11 @@ public class Servlet extends HttpServlet
 					    ));
 			}
 
-
+			//ゲーム中の処理
 			else
 			{
 				//int変換でNULLを入れるのを防ぐ
+				//nullなら使ってないとして扱う
 				if(str_use_hand [0] ==  null)
 				{
 					use_hand[0] = -1;
@@ -159,26 +161,29 @@ public class Servlet extends HttpServlet
 				}
 
 				//何かしらの値を入れないといけない。テスト的に値を入れてある
-
+				//正直いらないが念の為
 				info();
 
+				//GameProject_Mainに送られてきたユーザーの情報と使ったカードを送る
 				gpm.main(int_user_info, use_hand);
-				//上のに書き換えればCD制のやつらしい
-				//game_project.main(int_user_info, use_hand);
-
 			}
 		}
 		//flagが立った!
 		else if(flag.equals("1"))//Clientが更新したい時用
 		{
-
+			//実装間に合わず
 		}
 		else if(flag.equals("2"))//Clientが落としたい時用
 		{
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
 			info();
-
 			game_end.logout(int_user_info);
+		}
+		else if(flag.equals("3"))//再戦要求
+		{
+			//何かしらの値を入れないといけない。テスト的に値を入れてある
+			info();
+			rematch.wantremacth(int_user_info);
 		}
 	}
 	void info()
@@ -216,6 +221,7 @@ public class Servlet extends HttpServlet
 		}
 
 	}
+	//String→int変換
 	int conversion(String s)
 	{
 		int i = -1;
@@ -231,6 +237,7 @@ public class Servlet extends HttpServlet
 		return i;
 
 	}
+	//特殊文字探査
 	void check(String s)
 	{
 		flag_name = true;

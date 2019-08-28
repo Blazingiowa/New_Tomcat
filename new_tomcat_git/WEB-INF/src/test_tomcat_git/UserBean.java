@@ -7,6 +7,7 @@ public class UserBean
 	private String userNumber;//プレイヤー番号 1 or 2 ?
 	private String error;//エラー場所
 
+	//jsonで送るためにセットする
 	//setter & getter
 	public String getUserID() {
 		return userID;
