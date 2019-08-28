@@ -6,7 +6,7 @@ public class Roomdelete
 {
 		void delete(int room_id)
 		{
-			File file = new File("/var/www/html/game/"+ room_id +"/room.txt");
+			File file = new File("/var/www/html/game/"+ room_id);
 			if(file.exists())
 			{
 				if(file.delete())

@@ -20,7 +20,7 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 		tw.write(info[1],3,0,line);
 		*/
 
-		line = tr.read(info[1],1,0);
+		line = tr.read(info[1],info[2],0);
 		line[info[2]] = 2;
 		//一応デバッグ
 		System.out.println("再選を申し込んだプレイヤー:"+info[2]);
