@@ -30,6 +30,7 @@ public class GameProject_txtReadWrite extends GameProject_Main
 			}
 
 			textmain[0][0] = 1;//とりあえず、処理済みにデータを変更
+
 			//for文を使って２次元配列を１次元配列に退避し、テキストファイルに書き込む
 			for (int i = 0; i < textmain.length; i++)
 			{

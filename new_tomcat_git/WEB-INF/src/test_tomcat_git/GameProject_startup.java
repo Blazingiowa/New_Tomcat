@@ -80,11 +80,13 @@ public class GameProject_startup extends GameProject_Main
 					textmain[i][j] = -1;
 				}
 			}
+
 			textmain[0][0] = 0;//処理判定を０に戻す
 			textmain[1][1] = 100;//ｐ１のｈｐを初期化
 			textmain[1][2] = 100;//ｐ２のｈｐを初期化
 			textmain[2][1] = 1;//ｐ１の行動値を初期化
 			textmain[2][2] = 1;//ｐ２の行動値を初期化
+
 			//自分が与えるダメージと相手から受けるダメージの初期値は０にする
 			for (int j = 0; j < textmain[0].length; j++)
 			{
