@@ -9,6 +9,20 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 	void wantremacth(int[] info)//ユーザID　ルームID　プレイヤー番号
 	{
 
+		files = new File[4];
+		files[0] = new File("/var/www/html/game/"+info[1]+"/1.txt");
+		files[1] = new File("/var/www/html/game/"+info[1]+"/2.txt");
+		files[2] = new File("/var/www/html/game/"+info[1]+"/cooltime.txt");
+		files[3] = new File("/var/www/html/game/"+ info[1] +"/room.txt");
+		int[] write = {0,0,0};
+
+		//
+		st.textfile(info[1], 1, files[0]);
+		st.textfile(info[1], 2, files[1]);
+		tw.write(info[1],3,1,write);
+
+		coolt.createcooltime(files[2]);
+
 		line = tr.read(info[1],3,0);
 		System.out.println("誰かがリマッチを希望したときに読み込んだテキスト");
 		for(int i = 0;i<line.length;i++)
