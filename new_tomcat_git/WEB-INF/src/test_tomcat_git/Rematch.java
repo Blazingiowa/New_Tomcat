@@ -34,14 +34,14 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 		line = tr.read(info[1],1,0);
 		if(line[1]==2&&line[2]==2)
 		{
-			restart(info[1]);
+			restart(info[1],info[2]);
 		}
 	}
 
 	//再選が同意された場合の処理
-	void restart(int room_id)//ルームID
+	void restart(int room_id,int playernum)//ルームID
 	{
-		line = tr.read(room_id,1,0);
+		line = tr.read(room_id,playernum,0);
 		/*
 		 もし1で予期せぬ挙動をした場合は1ではなく一度3に変更してそれをunityに認識させてください。
 		そうした場合wantrematchメソッドにあるコメントアウト解除してみてください
