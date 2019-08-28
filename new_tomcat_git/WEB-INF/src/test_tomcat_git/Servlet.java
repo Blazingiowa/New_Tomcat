@@ -41,6 +41,11 @@ public class Servlet extends HttpServlet
 	private int int_room_id;
 	private int int_reserve;
 
+	//固定変数用
+	final int final_user = 0;
+	final int final_room = 1;
+	final int final_pl_num = 2;
+
 
 	private boolean flag_name;
 
@@ -68,6 +73,7 @@ public class Servlet extends HttpServlet
 		str_use_hand [2] = request.getParameter("usehand3");
 
 		reserve = request.getParameter("reserve");
+
 		//ロビー用にint変換
 
 		int_room_id = conversion(room_id);
@@ -115,9 +121,9 @@ public class Servlet extends HttpServlet
 					ub.setUserNumber(str_user_info[2]);
 
 					System.out.println("return チェック");
-					System.out.println(str_user_info[0]);
-					System.out.println(str_user_info[1]);
-					System.out.println(str_user_info[2]);
+					System.out.println(str_user_info[final_user]);
+					System.out.println(str_user_info[final_room]);
+					System.out.println(str_user_info[final_pl_num]);
 				}
 
 				//JSONを生成
@@ -190,34 +196,34 @@ public class Servlet extends HttpServlet
 	{
 		if(us_id ==  null)
 		{
-			int_user_info[0] = 1;
+			int_user_info[final_user] = 1;
 
 		}
 		else
 		{
-			int_user_info[0] =Integer.parseInt(us_id);
+			int_user_info[final_user] =Integer.parseInt(us_id);
 		}
 
 
 		if(room_id ==  null)
 		{
-			int_user_info[1] = 111;
+			int_user_info[final_room] = 111;
 
 		}
 		else
 		{
-			int_user_info[1] =Integer.parseInt(room_id);
+			int_user_info[final_room] =Integer.parseInt(room_id);
 		}
 
 
 		if(us_num ==  null)
 		{
-			int_user_info[2] = 2;
+			int_user_info[final_pl_num] = 2;
 
 		}
 		else
 		{
-			int_user_info[2] =Integer.parseInt(us_num);
+			int_user_info[final_pl_num] =Integer.parseInt(us_num);
 		}
 
 	}
