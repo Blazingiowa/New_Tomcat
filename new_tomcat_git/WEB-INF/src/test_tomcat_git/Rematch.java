@@ -9,7 +9,7 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 	void wantremacth(int[] info)//ユーザID　ルームID　プレイヤー番号
 	{
 		/*
-		line = tr.read(info[1],1,0);
+		line = tr.read(info[1],3,0);
 		if(line[1]==3&&line[2]==3)
 		{
 			for(int i = 1;i<line.length;i++)
