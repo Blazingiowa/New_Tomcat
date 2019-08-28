@@ -10,6 +10,11 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 	{
 
 		line = tr.read(info[1],3,0);
+		System.out.println("誰かがリマッチを希望したときに読み込んだテキスト");
+		for(int i = 0;i<line.length;i++)
+		{
+			System.out.println(i+"文字目"+line[i]);
+		}
 		if(line[1]==3&&line[2]==3)
 		{
 			for(int i = 1;i<line.length;i++)
