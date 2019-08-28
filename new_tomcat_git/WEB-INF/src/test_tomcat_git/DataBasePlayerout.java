@@ -34,6 +34,8 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 
 			}
 		}
+
+		noplayer(playerinfo[1]);//テスト
 	}
 
 	void noplayer(int room_id)
