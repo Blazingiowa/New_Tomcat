@@ -98,7 +98,8 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 								//ｐ２のカードが防御で、ｐ１の攻撃を防いだとき
 								else
 								{
-									textmain[4][i] += p2_card[k][2] / 2;//ｐ２がリフレクトしたダメージを計算して配列に入れる
+									//修正場所
+									textmain[4][i] += p1_card[k][2] / 2;//ｐ２がリフレクトしたダメージを計算して配列に入れる
 								}
 							}
 
