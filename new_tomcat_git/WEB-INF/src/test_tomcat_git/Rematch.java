@@ -20,7 +20,7 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 		tw.write(info[1],3,0,line);
 		*/
 
-		line = tr.read(info[1],info[2],0);
+		line = tr.read(info[1],3,0);
 		line[info[2]] = 2;
 		//一応デバッグ
 		System.out.println("再選を申し込んだプレイヤー:"+info[2]);
@@ -34,14 +34,14 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 		line = tr.read(info[1],1,0);
 		if(line[1]==2&&line[2]==2)
 		{
-			restart(info[1],info[2]);
+			restart(info[1]);
 		}
 	}
 
 	//再選が同意された場合の処理
-	void restart(int room_id,int playernum)//ルームID
+	void restart(int room_id)//ルームID
 	{
-		line = tr.read(room_id,playernum,0);
+		line = tr.read(room_id,3,0);
 		/*
 		 もし1で予期せぬ挙動をした場合は1ではなく一度3に変更してそれをunityに認識させてください。
 		そうした場合wantrematchメソッドにあるコメントアウト解除してみてください
