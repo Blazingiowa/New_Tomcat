@@ -5,6 +5,7 @@ import java.sql.Statement;
 
 public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインしたプレイヤーの情報をデータベースに格納する
 {
+	int user_id;
 	int[] userinfo;//ユーザID,ルームID,プレイヤー番号
 	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
 
@@ -31,8 +32,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		else//部屋の検索
 		{
 			userinfo=DBCB.beforeupdate(0);
-			userinfo[1] = room_id;
-			userinfo[2] = 2;
+			roomfull(room_id);
 		}
 
 
@@ -63,6 +63,48 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 
 		return userinfo;
 
+
+	}
+
+	private void roomfull(int room_id)
+	{
+		user_id=0;
+		Statement stmt4 = CC.createstatement(conn = CC.createconnection());
+
+		try
+		{
+			rs = stmt4.executeQuery("SELECT * FROM room WHERE room_id = "+ room_id +" AND player_number = 2 ;");
+
+			while(rs.next())
+			{
+				user_id = rs.getInt("user_id");
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+			System.out.println("ルームの満員チェックSQLでエラーです");
+		}
+		finally
+		{
+			CC.close();
+			try
+			{
+				rs.close();
+			}
+			catch(SQLException e)
+			{
+				System.out.println(e);
+				System.out.println("DataBasebeforeUpdateのrsが閉じれなかった");
+			}
+
+			if(user_id == -1)
+			{
+				userinfo[1] = room_id;
+				userinfo[2] = 2;
+			}
+
+		}
 
 	}
 
