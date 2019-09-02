@@ -249,7 +249,7 @@ public class Servlet extends HttpServlet
 		flag_name = true;
 		System.out.println("■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("check通った 値 : " + s);
-		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$"))
+		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$") || s.equals("null") || s.equals("NULL"))
 		{
 			flag_name = false;
 
