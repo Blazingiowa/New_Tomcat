@@ -16,6 +16,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 
 	protected int[] Result;//受け渡す情報が入る
 	protected int[] room = new int[3];//ルームIDとユーザIDが入る
+	protected Statement stmt;
 	protected ResultSet rs;
 
 	int[] reference(int id)
