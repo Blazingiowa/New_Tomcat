@@ -76,11 +76,13 @@ public class Rematch extends Gamestart //リマッチ用のクラスunityから�
 		files[2] = new File("/var/www/html/game/"+room_id+"/cooltime.txt");
 		files[3] = new File("/var/www/html/game/"+ room_id +"/room.txt");
 		int[] write = {0,0,0};
+		int[] write2 = {-1,1,1};
 
 		//
 		st.textfile(room_id, 1, files[0]);
 		st.textfile(room_id, 2, files[1]);
 		tw.write(room_id,3,1,write);
+		tw.write(room_id,3,0, write2);
 
 		coolt.createcooltime(files[2]);
 

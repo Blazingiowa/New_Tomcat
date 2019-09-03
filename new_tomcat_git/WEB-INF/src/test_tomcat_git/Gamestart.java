@@ -17,13 +17,16 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	TextRead tr = new TextRead();
 	CooltimeText coolt = new CooltimeText();
 	Player_name pn = new Player_name();
+	RoomCheck rc = new RoomCheck();
+	DBCSercheReserveRoom dr = new DBCSercheReserveRoom();
 
 	String[] userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
+	String[] error = {"-1","-1","-1"};
 	int[] player = new int[3];
 	int[] online;
 	String url;
 	String[] path = new String[6];
-
+	boolean exist,empty;
 
 	File[] files = new File[6];
 	/*
@@ -34,7 +37,32 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	 */
 	String[] createdirectry(String user_name,int reserve,int room_id) //ルームディレクトリやテキストファイルを作成する
 	{
-		player = DBCU.update(user_name,reserve,room_id);//データベースの情報を更新する
+		//ルームIDを探索する場合データベース上にその部屋が本当に存在しているか確認する
+		if(room_id > 0)
+		{
+			exist = rc.existroom(room_id);
+			empty = rc.roomfull(room_id);
+			if(exist == false)
+			{
+				return error;
+			}
+
+			if(empty == false)
+			{
+				return error;
+			}
+		}
+
+		if(reserve != 2)
+		{
+			player = DBCU.updateSQL(user_name,reserve,room_id);//データベースの情報を更新する
+		}
+		else
+		{
+			player = dr.entryroom(user_name, room_id);
+		}
+
+		player = DBCU.updateSQL(user_name,reserve,room_id);//データベースの情報を更新する
 
 		files[0] = new File("/var/www/html/game/"+player[1]+"/"+player[2]+".txt");
 		files[1] = new File("/var/www/html/game/"+player[1]+"/taiou.txt");
