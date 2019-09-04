@@ -56,6 +56,7 @@ public class RoomCheck extends DataBaseConnectUpdate
 
 	boolean roomfull(int room_id)
 	{
+		stmt =CC.createstatement(conn = CC.createconnection());
 		empty = true;
 
 		try
