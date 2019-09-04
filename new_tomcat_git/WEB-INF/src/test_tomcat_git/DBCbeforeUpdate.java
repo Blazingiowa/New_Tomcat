@@ -71,6 +71,8 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		}
 		catch(SQLException e)
 		{
+			System.out.println(sql[0]);
+			System.out.println(sql[1]);
 			System.out.println(e);
 		}
 		finally
