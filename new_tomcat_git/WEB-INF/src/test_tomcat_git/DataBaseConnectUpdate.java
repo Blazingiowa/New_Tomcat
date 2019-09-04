@@ -42,6 +42,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		if(reserve ==0)//通常のマッチ
 		{
 			sql[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
+			System.out.println("クイックマッチ");
 		}
 		else if(reserve == 1)//部屋作成
 		{

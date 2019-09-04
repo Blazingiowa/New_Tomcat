@@ -62,7 +62,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 			player = dr.entryroom(user_name, room_id);
 		}
 
-		player = DBCU.updateSQL(user_name,reserve,room_id);//データベースの情報を更新する
+		//player = DBCU.updateSQL(user_name,reserve,room_id);//データベースの情報を更新する
 
 		files[0] = new File("/var/www/html/game/"+player[1]+"/"+player[2]+".txt");
 		files[1] = new File("/var/www/html/game/"+player[1]+"/taiou.txt");
