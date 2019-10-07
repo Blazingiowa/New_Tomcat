@@ -2,11 +2,13 @@ package test_tomcat_git;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateConnection //データベースに接続するための準備をするクラス
 {
+	PreparedStatement pstmt;
 	Statement stmt;
 	Connection conn;
 
@@ -54,6 +56,19 @@ public class CreateConnection //データベースに接続するための準備
 		}
 
 		return stmt;
+	}
+
+	PreparedStatement SearchUsertable()
+	{
+		try
+		{
+			pstmt =conn.prepareStatement("SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return pstmt;
 	}
 
 	void close()//接続をクローズする

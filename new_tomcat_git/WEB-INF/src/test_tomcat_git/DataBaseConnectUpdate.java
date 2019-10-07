@@ -1,5 +1,6 @@
 package test_tomcat_git;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -9,6 +10,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 	int[] userinfo;//ユーザID,ルームID,プレイヤー番号
 	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
 	String[] sql = new String[2];
+	PreparedStatement[] pstmts;
 
 	int[] updateSQL(String user_name,int reserve,int room_id)//受け渡されたusernameをデータベースへインサートする
 	{
@@ -38,7 +40,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		}
 		*/
 
-		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
+		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;";
 		if(reserve ==0)//通常のマッチ
 		{
 			sql[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
