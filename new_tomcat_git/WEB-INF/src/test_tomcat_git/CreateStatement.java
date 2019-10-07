@@ -144,4 +144,35 @@ public class CreateStatement
 		return pstmts;
 	}
 
+	PreparedStatement[] addUserId()
+	{
+		pstmts = new PreparedStatement[2];
+		try
+		{
+			pstmts[0] = conn.prepareStatement("SELECT MAX(user_id) as maxno FROM user;");
+			pstmts[1] = conn.prepareStatement("INSERT INTO user VALUES(?,NULL);");
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return pstmts;
+	}
+
+	PreparedStatement[] addRoom()
+	{
+		pstmts = new PreparedStatement[3];
+		try
+		{
+			pstmts[0] = conn.prepareStatement("SELECT MAX(room_id) as maxno FROM room;");
+			pstmts[1] = conn.prepareStatement("INSERT INTO room VALUES(?,1,0);");
+			pstmts[2] = conn.prepareStatement("INSERT INTO room VALUES(?,2,0);");
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return pstmts;
+	}
+
 }
