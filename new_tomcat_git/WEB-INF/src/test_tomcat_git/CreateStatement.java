@@ -134,8 +134,8 @@ public class CreateStatement
 		pstmts = new PreparedStatement[2];
 		try
 		{
-			pstmt = conn.prepareStatement("UPDATE user SET user_name = NULL WHERE user_id = ?;");
-			pstmt = conn.prepareStatement("UPDATE room SET user_id = 0 WHERE user_id = ?;");
+			pstmts[0] = conn.prepareStatement("UPDATE user SET user_name = NULL WHERE user_id = ?;");
+			pstmts[1] = conn.prepareStatement("UPDATE room SET user_id = 0 WHERE user_id = ?;");
 		}
 		catch (SQLException e)
 		{
@@ -169,6 +169,35 @@ public class CreateStatement
 			pstmts[2] = conn.prepareStatement("INSERT INTO room VALUES(?,2,0);");
 		}
 		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return pstmts;
+	}
+
+	PreparedStatement SerchReserveRoom()
+	{
+		try
+		{
+			pstmt = conn.prepareStatement("SELECT * FROM room WHERE user_id = -1 AND room_id = ? ORDER BY user_id LIMIT 1;");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return pstmt;
+	}
+
+	PreparedStatement[] ExistCheck()
+	{
+		pstmts = new PreparedStatement[2];
+
+		try
+		{
+			pstmts[0] = conn.prepareStatement("SELECT DISTINCT room_id FROM room;");
+			pstmts[1] = conn.prepareStatement("SELECT * FROM room WHERE room_id = ? AND player_number = 2 ;");
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}

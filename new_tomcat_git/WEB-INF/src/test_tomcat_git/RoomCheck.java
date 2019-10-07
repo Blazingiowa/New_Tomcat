@@ -9,6 +9,11 @@ public class RoomCheck extends DataBaseConnectUpdate
 	protected boolean empty;
 	Statement stmt;
 
+	RoomCheck()
+	{
+		//PreparedStatement取得
+	}
+
 
 	boolean existroom(int room_id)
 	{
