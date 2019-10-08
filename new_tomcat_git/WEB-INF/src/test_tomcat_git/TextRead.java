@@ -18,8 +18,8 @@ public class TextRead
 
 	int[] read(int room_id,int player_number,int line_number)
 	{
-		line = settext(room_id,player_number);
-
+		file = setfile(room_id,player_number);
+		line = settext(file);
 
 		String[] array = line[line_number].split(",");
 
@@ -31,9 +31,9 @@ public class TextRead
 		return data;
 	}
 
-	String[] settext(int room,int player)
+	String[] settext(File readfile)
 	{
-		if(player==3)
+		/*if(player==3)
 		{
 			alltext = new String[2][3];
 			line = new String[2];
@@ -54,13 +54,13 @@ public class TextRead
 			line = new String[7];
 			data = new int[3];
 			file = new File("/var/www/html/game/"+ room + "/"+player+".txt");
-		}
+		}*/
 
 
 
 		try
 		{
-			br = new BufferedReader(new FileReader(file));
+			br = new BufferedReader(new FileReader(readfile));
 
 			text = br.readLine();
 			/*System.out.println("Readでのテキストファイルの中身");
@@ -89,6 +89,34 @@ public class TextRead
 			System.out.println(line[i]);
 		}
 		return line;
+	}
+
+	File setfile(int room,int player)
+	{
+		File serchfile;
+		if(player==3)
+		{
+			alltext = new String[2][3];
+			line = new String[2];
+			data = new int[3];
+			serchfile = new File("/var/www/html/game/"+ room + "/room.txt");
+			//System.out.println("room.txt見ようとしてるよ");
+		}
+		else if(player == 4)
+		{
+			alltext = new String[2][20];
+			line = new String[2];
+			data = new int[20];
+			serchfile = new File("/var/www/html/game/"+ room + "/cooltime.txt");
+		}
+		else
+		{
+			alltext = new String[7][3];
+			line = new String[7];
+			data = new int[3];
+			serchfile = new File("/var/www/html/game/"+ room + "/"+player+".txt");
+		}
+		return serchfile;
 	}
 
 	void brclose()

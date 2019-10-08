@@ -1,6 +1,7 @@
 package test_tomcat_git;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 import javax.servlet.ServletException;
@@ -61,7 +62,10 @@ public class Servlet extends HttpServlet
 		request.setCharacterEncoding("UTF-8");
 
 		//以下テストコード自由に変えてよし
-		//test();
+
+		System.out.println("■■■■■■■■■■■■■■■■■■■■");
+		LocalDateTime ldt = LocalDateTime.now();
+        System.out.println(ldt);
 		//一番下に作ったメソッド  Unityから送られてくるものをセットしておける
 		us_id = request.getParameter("userID");
 		room_id = request.getParameter("roomID");
@@ -247,9 +251,8 @@ public class Servlet extends HttpServlet
 	void check(String s)
 	{
 		flag_name = true;
-		System.out.println("■■■■■■■■■■■■■■■■■■■■");
 		System.out.println("check通った 値 : " + s);
-		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$"))
+		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$") || s.equals("null") || s.equals("NULL"))
 		{
 			flag_name = false;
 
