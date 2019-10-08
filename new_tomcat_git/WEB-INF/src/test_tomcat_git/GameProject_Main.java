@@ -1,7 +1,5 @@
 package test_tomcat_git;
 
-import java.util.Arrays;
-
 public class GameProject_Main
 {
 	//送られてきた使ったカードIDを昇順にソートし格納するための配列
@@ -27,6 +25,15 @@ public class GameProject_Main
 	//攻撃が通せるかどうか判定するための変数とフラグ
 	int count = 0;
 	boolean flag = false;
+
+	//ソート前のカード情報を格納するための配列
+	int[][]bfrcard = new int[4][3];
+	/*---bfrcardの配列概要---*/
+	/*０行目：統合処理を行っているプレイヤーの使った順カードID*/
+	/*１行目：統合処理を行っているプレイヤーの発生したダメージを使った順に並び替え格納*/
+	/*２行目：統合処理に入っていないプレイヤーの使った順カードID*/
+	/*３行目：統合処理に入っていないプレイヤーの発生したダメージを使った順に並び替え格納*/
+
 
 	//クールタイムの情報を入れるための配列
 	int[][]CT = new int[2][20];
@@ -68,11 +75,8 @@ public class GameProject_Main
 
 		System.out.println("ここから、ゲームスタート");
 
-		//使ったカードIDを昇順にソート
-		int[]SortedCard = sort(use);
-
 		//テキストを読み込み、書き換え
-		GPRW.txtReadWrite(info, SortedCard);
+		GPRW.txtReadWrite(info, use);
 
 		System.out.println("テキストの書き読み完了");
 
@@ -102,16 +106,5 @@ public class GameProject_Main
 		}
 	}
 
-	int[] sort(int[]usecard)
-	{
-		int[] w = new int[usecard.length];
-		Arrays.sort(usecard);
-		for(int i=0,j=usecard.length-1;i<usecard.length;i++,j--)
-		{
-			w[i] = usecard[j];
-		}
 
-
-		return w;
-	}
 }
