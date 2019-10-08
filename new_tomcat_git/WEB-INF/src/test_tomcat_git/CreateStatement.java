@@ -204,4 +204,17 @@ public class CreateStatement
 		return pstmts;
 	}
 
+	PreparedStatement CountCard()
+	{
+		try
+		{
+			pstmt = conn.prepareStatement("SELECT COUNT(*) AS number FROM card;");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return pstmt;
+	}
+
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,11 +13,13 @@ import java.sql.Statement;
 public class CardText extends TextWrite //カードリストテキストを作るクラス
 {
 	CreateConnection CC = new CreateConnection();
+	CreateStatement CS = new CreateStatement();
+
+	PreparedStatement pstmt;
 	ResultSet rs;
 	Connection conn;
 	int[][] cardlist;
-
-
+	int cardcount;
 
 	void cardcreate(File file)
 	{
@@ -119,6 +122,24 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 			bwclose();//テキストファイルへの出力関係をクローズ
 		}
+	}
+
+	int CardCount()
+	{
+		int number = 0;
+		pstmt = CS.CountCard();
+		try
+		{
+			pstmt.executeQuery();
+			rs = pstmt.getResultSet();
+			number = rs.getInt("number");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return number;
 	}
 
 
