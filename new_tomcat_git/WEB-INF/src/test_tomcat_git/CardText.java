@@ -132,7 +132,19 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 			pstmt.executeQuery();
 			rs = pstmt.getResultSet();
+			rs.next();
 			number = rs.getInt("number");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		CS.closepstmt(pstmt);
+
+		try
+		{
+			rs.close();
 		}
 		catch (SQLException e)
 		{

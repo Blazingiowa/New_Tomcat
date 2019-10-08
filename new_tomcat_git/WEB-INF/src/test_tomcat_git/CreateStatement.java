@@ -217,4 +217,16 @@ public class CreateStatement
 		return pstmt;
 	}
 
+	void closepstmt(PreparedStatement pstmt)
+	{
+		try
+		{
+			pstmt.close();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 }
