@@ -1,6 +1,7 @@
 package test_tomcat_git;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,7 +63,10 @@ public class TextWrite extends TextRead
 			System.out.println(i+"行目:"+line[i]);
 		}
 
-		try
+		writing(file,text);
+
+		//テスト後以下削除
+		/*try
 		{
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
@@ -72,6 +76,25 @@ public class TextWrite extends TextRead
 		catch(Exception e)
 		{
 
+		}
+		finally
+		{
+			bwclose();
+		}*/
+	}
+
+	void writing(File file,String text)
+	{
+		try
+		{
+			fw = new FileWriter(file);
+			bw = new BufferedWriter(fw);
+			pw = new PrintWriter(bw);
+			pw.println(text);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 		finally
 		{

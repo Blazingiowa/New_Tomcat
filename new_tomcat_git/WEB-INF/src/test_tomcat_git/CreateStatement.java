@@ -217,7 +217,18 @@ public class CreateStatement
 		return pstmt;
 	}
 
-
+	PreparedStatement CardTextget()
+	{
+		try
+		{
+			pstmt = conn.prepareStatement("SELECT * FROM card_text;");
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return pstmt;
+	}
 
 	void closepstmt(PreparedStatement pstmt)
 	{

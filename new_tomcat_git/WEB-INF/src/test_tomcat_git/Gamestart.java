@@ -19,22 +19,35 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	Player_name pn = new Player_name();
 	RoomCheck rc = new RoomCheck();
 	DBCSercheReserveRoom dr = new DBCSercheReserveRoom();
+	CardnameText cnt = new CardnameText();
 
-	String[] userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
-	String[] error = {"-1","-1","-1"};
-	int[] player = new int[3];
+	String[] userinfo;
+	String[] error;
+	int[] player;
 	int[] online;
-	String url;
-	String[] path = new String[6];
+	String cardtext;
 	boolean exist,empty;
 
-	File[] files = new File[6];
+	File[] files;
 	/*
 	 大野へロビー用の変数を追加しました。ロビーを使用した場合reserveに1をint型で引数として渡してください。使用しない場合は0で大丈夫です
 	 ロビーを使用しない、ロビーで部屋を作成した場合はroom_idは0でお願いします。ロビーで部屋を検索した人はroom_idを保持しているのでそれを引数として渡してください。
 	 Servletクラスとunityの調整が終わったらメソッドの引数部分、引数を使用している場所のコメントアウトを解除してください。
 	 またDataBaseConnectUpdateにもこれ用のコメントアウトがあるため上記同様にコメントアウトを解除してください。
 	 */
+	Gamestart()
+	{
+		userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
+		error = new String[3];
+		player = new int[3];
+		files = new File[7];
+		cardtext=null;
+		for(int i=0;i<error.length;i++)
+		{
+			error[i] = "-1";
+		}
+	}
+
 	String[] createdirectry(String user_name,int reserve,int room_id) //ルームディレクトリやテキストファイルを作成する
 	{
 		//ルームIDを探索する場合データベース上にその部屋が本当に存在しているか確認する
@@ -72,6 +85,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		files[3] = new File("/var/www/html/game/"+player[1]+"/room.txt");
 		files[4] = new File("/var/www/html/game/"+player[1]+"/cooltime.txt");
 		files[5] = new File("/var/www/html/game/"+player[1]+"/player_name.txt");
+		files[6] = new File("/var/www/html/game/"+player[1]+"/card_text.txt");
 
 		for(int i = 0;i<userinfo.length;i++)
 		{
@@ -84,7 +98,6 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 
 		if(files[0].exists() == false)//player.txt
 		{
-			System.out.println(path[1]);
 			createfile(files[0]);
 			permission(files[0]);
 		}
@@ -123,6 +136,14 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 			createfile(files[5]);
 			permission(files[5]);
 			pn.create_nametext(files[5]);
+		}
+
+		if(files[6].exists() == false)//カード情報を出力したテキストファイルの作成
+		{
+			createfile(files[6]);
+			permission(files[6]);
+			cardtext = cnt.cardname();
+			tw.writing(file, cardtext);
 		}
 
 		pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
