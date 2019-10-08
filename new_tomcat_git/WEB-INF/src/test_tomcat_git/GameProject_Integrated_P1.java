@@ -4,6 +4,11 @@ import java.util.Arrays;
 
 public class GameProject_Integrated_P1 extends GameProject_Main
 {
+	GameProject_Integrated_P1()
+	{
+		super();
+	}
+
 	void IntegratedP1(int[] playerinfo)
 	{
 		System.out.println("ｐ１で入った時の統合処理");

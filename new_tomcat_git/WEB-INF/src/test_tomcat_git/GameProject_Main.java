@@ -2,44 +2,6 @@ package test_tomcat_git;
 
 public class GameProject_Main
 {
-	//送られてきた使ったカードIDを昇順にソートし格納するための配列
-	int[]SortedCard;
-
-	//ルーム状況を入れるための配列
-	int[] player = new int[3];
-
-	int[][] p1_card = new int[3][8];//統合処理の時の、カード判定時に使う
-	int[][] p2_card = new int[3][8];//上に同じ
-
-	int[] hp;//ｈｐの情報を格納するための配列
-	int[] move_pt;//行動値の情報を格納するための配列
-
-	int[] p1_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p1
-	int[] p2_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p2
-
-	int[] textW = new int[3];//テキストファイルの内容を一時的に避難させるための１次元配列
-	int[] textF;//テキストファイルの内容を一時的に避難させるための可変可能な１次元配列
-	int w;//一時退避変数
-	int[][] textmain = new int[7][3];//避難させた内容を格納するための配列
-
-	//攻撃が通せるかどうか判定するための変数とフラグ
-	int count = 0;
-	boolean flag = false;
-
-	//ソート前のカード情報を格納するための配列
-	int[][]bfrcard = new int[4][3];
-	/*---bfrcardの配列概要---*/
-	/*０行目：統合処理を行っているプレイヤーの使った順カードID*/
-	/*１行目：統合処理を行っているプレイヤーの発生したダメージを使った順に並び替え格納*/
-	/*２行目：統合処理に入っていないプレイヤーの使った順カードID*/
-	/*３行目：統合処理に入っていないプレイヤーの発生したダメージを使った順に並び替え格納*/
-
-
-	//クールタイムの情報を入れるための配列
-	int[][]CT = new int[2][20];
-
-	//クールタイムの更新した情報をテキストに書き込む時に使う１次元配列
-	int[]CTwrite = new int[20];
 
 	//DBクラスのインスタンス
 	DataBaseConnectRead DBC = new DataBaseConnectRead();
@@ -50,12 +12,74 @@ public class GameProject_Main
 	//テキストの書き込みクラス
 	TextWrite txW = new TextWrite();
 
+	//カードテキストクラスのインスタンス
+	CardText cardtext = new CardText();
+
+
+	int[] player;//ルーム・プレイヤーの状況を判定するための配列
+	int[][] p1_card;//統合処理の時の、カード判定時に使う
+	int[][] p2_card;//上に同じ
+
+	int[] hp;//ｈｐの情報を格納するための配列
+	int[] move_pt;//行動値の情報を格納するための配列
+
+	int[] p1_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p1
+	int[] p2_cardinfo;//DBから持ってきたカード情報を退避させるための配列(p2
+
+	int[] textW;//テキストファイルの内容を一時的に避難させるための１次元配列
+	int[] textF;//テキストファイルの内容を一時的に避難させるための可変可能な１次元配列
+	int w;//一時退避変数
+	int[][] textmain;//避難させた内容を格納するための配列
+
+	//攻撃が通せるかどうか判定するための変数とフラグ
+	int count;
+	boolean flag;
+
+	//ソート前のカード情報を格納するための配列
+	int[][]bfrcard;
+
+	int[][]CT;//クールタイムの情報を格納するための配列
+
+	//クールタイムの更新した情報をテキストに書き込む時に使う１次元配列
+	int[]CTwrite;
+
+
+	//コンストラクタ
+	GameProject_Main()
+	{
+		player = new int[3];
+		p1_card = new int[3][8];
+		p2_card = new int[3][8];
+
+
+		textW = new int[3];
+		textmain = new int[7][3];
+
+		count = 0;
+		flag = false;
+
+		bfrcard = new int[4][3];
+		/*---bfrcardの配列概要---*/
+		/*０行目：統合処理を行っているプレイヤーの使った順カードID*/
+		/*１行目：統合処理を行っているプレイヤーの発生したダメージを使った順に並び替え格納*/
+		/*２行目：統合処理に入っていないプレイヤーの使った順カードID*/
+		/*３行目：統合処理に入っていないプレイヤーの発生したダメージを使った順に並び替え格納*/
+
+
+		w = cardtext.CardCount();//DBに登録されているカード枚数を取得
+
+		//カード枚数に応じて配列を作成
+		CT = new int[2][w];
+		CTwrite = new int[w];
+
+	}
+
+
 	/*infoの配列内容------------------------/useの配列の内容--------/
 	/										/						/
 	/	[ユーザID][ルームID][ユーザ番号]	/	[カードID][][]...	/
 	/										/						/
 	/---------------------------------------/----------------------*/
-
 	void main(int[] info, int[] use)
 	{
 		//ゲームのターン最初の処理クラス
