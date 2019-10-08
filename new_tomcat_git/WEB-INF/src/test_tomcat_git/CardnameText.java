@@ -20,7 +20,7 @@ public class CardnameText extends CardText
 
 	void cardnamewrite(File file)
 	{
-
+		cardcount = CardCount();
 	}
 
 }
