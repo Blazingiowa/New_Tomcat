@@ -6,12 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class TextWrite extends TextRead
+public class TextWrite //extends TextRead
 {
+	TextRead tr = new TextRead();
 	BufferedWriter bw;
 	PrintWriter pw;
 	FileWriter fw;
 	String text,writetext;
+	String[] line;
+	File file;
 
 	void write(int room_id,int player_number,int line_number,int[] write)
 	{
@@ -21,7 +24,8 @@ public class TextWrite extends TextRead
 			System.out.println(write[i]);
 		}
 		//System.out.println(room_id+","+player_number+","+line_number);
-		line = settext(room_id,player_number);
+		file = tr.setfile(room_id,player_number);
+		line = tr.settext(file);
 		text = "" ; writetext = "";
 		//System.out.println("writetext上の最初のlineだよ");
 		/*for(int i =0;i<line.length;i++)
@@ -63,7 +67,7 @@ public class TextWrite extends TextRead
 			System.out.println(i+"行目:"+line[i]);
 		}
 
-		writing(file,text);
+		writing(tr.file,text);
 
 		//テスト後以下削除
 		/*try
