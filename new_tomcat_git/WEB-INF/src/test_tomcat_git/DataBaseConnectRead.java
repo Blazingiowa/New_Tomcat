@@ -1,27 +1,36 @@
 package test_tomcat_git;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataBaseConnectRead //データベースから取得した情報を配列に格納し返す
 {
-	CreateConnection CC = new CreateConnection();
+	//CreateConnection CC = new CreateConnection();
+	CreateStatement cs = new CreateStatement();
 
 	protected Connection conn;
 	protected final String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
 	protected final String user = "root";//データベースへアクセスするID
 	protected final String password = "ncc_NCC2019";//データベースのパスワード
 
+	final int infonum = 3,Resultnum=9;
 	protected int[] Result;//受け渡す情報が入る
-	protected int[] room = new int[3];//ルームIDとユーザIDが入る
+	protected int[] room;//ルームIDとユーザIDが入る
 	protected Statement stmt;
+	protected PreparedStatement pstmt;
 	protected ResultSet rs;
+
+	DataBaseConnectRead()
+	{
+		Result = new int[Resultnum];
+		room = new int[infonum];
+	}
 
 	int[] reference(int id)
 	{
-		Result = new int[8];
 		String card;
 
 		for(int i = 0;i < Result.length;i++)
@@ -29,9 +38,45 @@ public class DataBaseConnectRead //データベースから取得した情報を
 			Result[i] = -1;
 		}
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-
+		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
+		pstmt = cs.SerchCardTabeleText();
 		try
+		{
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+
+			rs.next();
+			Result[0] = rs.getInt("card_id");
+			Result[1] = rs.getInt("cost");
+			Result[2] = rs.getInt("dmg");
+			card= rs.getString("taio_id");
+			Result[8] = rs.getInt("type");
+
+			String[] array = card.split(",");//カンマ区切りされているカード情報をsplitし配列に格納
+			for(int i = 0,j = 3;i<array.length;i++,j++)
+			{
+				Result[j] = Integer.parseInt(array[i]);
+			}
+		}
+		catch (SQLException e1)
+		{
+			e1.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				rs.close();
+			}
+			catch (SQLException e)
+			{
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			cs.closepstmt(pstmt);
+		}
+
+		/*try
 		{
 			//SQL
 			stmt = conn.createStatement();
@@ -42,6 +87,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 			Result[1] = rs.getInt("cost");
 			Result[2] = rs.getInt("dmg");
 			card= rs.getString("taio_id");
+			Result[8] = rs.getInt("type");
 
 			String[] array = card.split(",");//カンマ区切りされているカード情報をsplitし配列に格納
 			for(int i = 0,j = 3;i<array.length;i++,j++)
@@ -68,7 +114,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 				//例外処理
 
 			}
-		}
+		}*/
 
 		return Result;
 	}

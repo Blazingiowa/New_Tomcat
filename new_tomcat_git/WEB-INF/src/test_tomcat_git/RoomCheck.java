@@ -1,29 +1,92 @@
 package test_tomcat_git;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class RoomCheck extends DataBaseConnectUpdate
+public class RoomCheck //extends DataBaseConnectUpdate
 {
-	protected int serch;
-	protected boolean empty;
-	Statement stmt;
+	protected int serch,user_id;
+	protected final int rsnum = 2;
+	protected boolean empty,exist;
+	protected boolean[] roomchecker;
+	protected ResultSet[] rss;
+	protected PreparedStatement[] pstmts;
+	CreateStatement cs;
 
 	RoomCheck()
 	{
-		//PreparedStatement取得
+		serch = 0;
+		exist = false;
+		empty = true;
+		roomchecker = new boolean[rsnum];
+		roomchecker[0] = false;
+		roomchecker[1] = true;
+		rss = new ResultSet[rsnum];
+		cs = new CreateStatement();
+		pstmts = cs.ExistCheck();
 	}
 
 
+	boolean[] roomchcek(int room_id)
+	{
+		try
+		{
+			rss[0] = pstmts[0].executeQuery();
+			while(rss[0].next())
+			{
+				serch = rss[0].getInt("room_id");
+				if(room_id == serch)
+				{
+					roomchecker[0]=true;
+					break;
+				}
+			}
+
+			pstmts[1].setInt(1, room_id);
+			rss[1] = pstmts[1].executeQuery();
+			rss[1].next();
+			user_id = rss[1].getInt("user_id");
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			for(int i = 0;i<rss.length;i++)
+			{
+				try
+				{
+					rss[i].close();
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			cs.closepstmts(pstmts);
+		}
+
+		if(user_id != -1)
+		{
+			roomchecker[1] = false;
+		}
+
+		return roomchecker;
+	}
+
+	/*
 	boolean existroom(int room_id)
 	{
-		boolean exist = false;
-		stmt =CC.createstatement(conn = CC.createconnection());
+		//boolean exist = false;
+		//stmt =CC.createstatement(conn = CC.createconnection());
 
 		try
 		{
-			serch= 0;
-			rs = stmt.executeQuery("SELECT DISTINCT room_id FROM room;");
+			//serch= 0;
+			//rs = stmt.executeQuery("SELECT DISTINCT room_id FROM room;");
+			rs = pstmts[0].executeQuery();
 
 			while(rs.next())
 			{
@@ -42,7 +105,6 @@ public class RoomCheck extends DataBaseConnectUpdate
 		}
 		finally
 		{
-			CC.close();//データベースとの接続を解除
 
 			try
 			{
@@ -99,6 +161,7 @@ public class RoomCheck extends DataBaseConnectUpdate
 
 		return empty;
 	}
+	*/
 
 }
 

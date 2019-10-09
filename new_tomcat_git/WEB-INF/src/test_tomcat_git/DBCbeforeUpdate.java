@@ -1,15 +1,21 @@
 package test_tomcat_git;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋と空いているユーザーIDを検索する
 {
-	DBCNotEmpty DBCNE = new DBCNotEmpty();
+	DBCNotEmpty DBCNE;
+	final int Resultnum = 3;
 
-	int[] beforeupdate(String sql[])
+	DBCbeforeUpdate()
 	{
-		Result = new int[3];
+		Result = new int[Resultnum];
+		DBCNE = new DBCNotEmpty();
+	}
+
+	int[] beforeupdate(PreparedStatement[] pstmts)
+	{
 		/*
 		String[] sql = new String[2];//実行するsqlを配列に格納する
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
@@ -28,11 +34,12 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 			Result[i] = 0;
 		}
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());
+		//Statement stmt = CC.createstatement(conn = CC.createconnection());
 
 		try
 		{
-			rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
+			//rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
+			rs = pstmts[0].executeQuery();
 
 			if(rs.next())
 			{
@@ -46,7 +53,9 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 				Result[0] = DBCNE.userIDNotempty();
 			}
 
-			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
+
+			//rs = stmt.executeQuery(sql[1]);//空いているルームの検索
+			rs = pstmts[1].executeQuery();
 			//結果の挿入
 
 			if(rs.next())
@@ -57,7 +66,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 			}
 			else
 			{
-				int[] keep = DBCNE.RoomNotempty(sql[1]);
+				int[] keep = DBCNE.RoomNotempty(pstmts[1]);
 				Result[1] = keep[0];
 				Result[2] = keep[1];
 			}
@@ -71,8 +80,8 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		}
 		catch(SQLException e)
 		{
-			System.out.println(sql[0]);
-			System.out.println(sql[1]);
+			//System.out.println(sql[0]);
+			//System.out.println(sql[1]);
 			System.out.println(e);
 		}
 		finally

@@ -26,6 +26,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	int[] player;
 	int[] online;
 	String cardtext;
+	boolean[] roomchecker;
 	boolean exist,empty;
 
 	File[] files;
@@ -37,11 +38,25 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	 */
 	Gamestart()
 	{
+		DBCU = new  DataBaseConnectUpdate();
+		tt = new TaiouText();
+		ct = new CardText();
+		rt = new RoomText();
+		st = new StartupText();
+		tw = new TextWrite();
+		tr = new TextRead();
+		coolt = new CooltimeText();
+		pn = new Player_name();
+		rc = new RoomCheck();
+		dr = new DBCSercheReserveRoom();
+		cnt = new CardnameText();
+
 		userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
 		error = new String[3];
 		player = new int[3];
 		files = new File[7];
 		cardtext=null;
+
 		for(int i=0;i<error.length;i++)
 		{
 			error[i] = "-1";
@@ -53,15 +68,16 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		//ルームIDを探索する場合データベース上にその部屋が本当に存在しているか確認する
 		if(room_id > 0)
 		{
-			exist = rc.existroom(room_id);
-			empty = rc.roomfull(room_id);
-			if(exist == false)
+			roomchecker = rc.roomchcek(room_id);
+			//exist = rc.existroom(room_id);
+			//empty = rc.roomfull(room_id);
+			if(roomchecker[0] == false)
 			{
 				System.out.println("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲部屋が存在しなかったよ");
 				return error;
 			}
 
-			if(empty == false)
+			if(roomchecker[1] == false)
 			{
 				System.out.println("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲部屋が満員だったよ");
 				return error;
@@ -155,7 +171,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		}*/
 
 		/*もしゲームエンド後に片方のプレイヤーがルームに残り続けて誰かが入ってくるのを待つ場合に以下のif処理が必要
-		*/
+		 */
 		if(online[0]!=-1)
 		{
 			online[0]=-1;

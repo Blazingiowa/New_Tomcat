@@ -11,9 +11,10 @@ public class CreateStatement
 	PreparedStatement[] pstmts;
 	Connection conn;
 
+	CreateConnection CC = new CreateConnection();
+
 	CreateStatement()
 	{
-		CreateConnection CC = new CreateConnection();
 		conn = CC.createconnection();
 	}
 
@@ -43,11 +44,6 @@ public class CreateStatement
 		{
 			e.printStackTrace();
 		}
-		return pstmt;
-	}
-
-	PreparedStatement SerchUser()
-	{
 		return pstmt;
 	}
 
@@ -129,13 +125,31 @@ public class CreateStatement
 		return pstmt;
 	}
 
-	PreparedStatement[] Playerout()
+	PreparedStatement[] RoomEntry()
 	{
 		pstmts = new PreparedStatement[2];
 		try
 		{
+			pstmts[0] = SerchEmptyUserTable();
+			pstmts[1] = conn.prepareStatement("SELECT * FROM room WHERE user_id = -1 AND room_id = ? ORDER BY user_id LIMIT 1;");
+		}
+		catch (SQLException e)
+		{
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		return pstmts;
+	}
+
+	PreparedStatement[] Playerout()
+	{
+		pstmts = new PreparedStatement[3];
+		try
+		{
 			pstmts[0] = conn.prepareStatement("UPDATE user SET user_name = NULL WHERE user_id = ?;");
 			pstmts[1] = conn.prepareStatement("UPDATE room SET user_id = 0 WHERE user_id = ?;");
+			pstmts[2] = conn.prepareStatement("SELECT * FROM room WHERE room_id = ?;");
 		}
 		catch (SQLException e)
 		{
@@ -234,12 +248,49 @@ public class CreateStatement
 	{
 		try
 		{
+			pstmt.clearParameters();
+		}
+		catch (SQLException e1)
+		{
+			// TODO 自動生成された catch ブロック
+			e1.printStackTrace();
+		}
+		try
+		{
 			pstmt.close();
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
+
+		CC.close();
+	}
+
+	void closepstmts(PreparedStatement[] pstmts)
+	{
+		for(int i =0;i<pstmts.length;i++)
+		{
+			try
+			{
+				pstmts[i].clearParameters();
+			}
+			catch (SQLException e1)
+			{
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+			}
+			try
+			{
+				pstmts[i].close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+		CC.close();
 	}
 
 }

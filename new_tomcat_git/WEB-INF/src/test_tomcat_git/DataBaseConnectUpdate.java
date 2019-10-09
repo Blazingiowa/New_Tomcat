@@ -2,15 +2,25 @@ package test_tomcat_git;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインしたプレイヤーの情報をデータベースに格納する
+public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログインしたプレイヤーの情報をデータベースに格納する
 {
-	int user_id;
-	int[] userinfo;//ユーザID,ルームID,プレイヤー番号
-	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
+	protected int user_id;
+	protected int[] userinfo;//ユーザID,ルームID,プレイヤー番号
 	String[] sql = new String[2];
-	PreparedStatement[] pstmts;
+	final int select_num = 2,update_num = 2;
+	PreparedStatement[] pstmts_select,pstmts_update;
+	PreparedStatement reserve_pstmt;
+	CreateStatement cs;
+	DBCbeforeUpdate DBCB;
+
+	DataBaseConnectUpdate()
+	{
+		pstmts_select = new PreparedStatement[select_num];
+		pstmts_update =new PreparedStatement[update_num];
+		cs = new CreateStatement();
+		DBCB = new DBCbeforeUpdate();
+	}
 
 	int[] updateSQL(String user_name,int reserve,int room_id)//受け渡されたusernameをデータベースへインサートする
 	{
@@ -40,6 +50,10 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		}
 		*/
 
+		pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
+		pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
+
+		/*
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;";
 		if(reserve ==0)//通常のマッチ
 		{
@@ -49,8 +63,9 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		else if(reserve == 1)//部屋作成
 		{
 			sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
-		}
-		userinfo=DBCB.beforeupdate(sql);
+		}*/
+		//userinfo=DBCB.beforeupdate(sql);
+		userinfo=DBCB.beforeupdate(pstmts_select);
 
 		update(user_name,userinfo,reserve);
 
@@ -97,10 +112,9 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 	{
 		try
 		{
-			Statement stmt1 = CC.createstatement(conn = CC.createconnection());
+			/*Statement stmt1 = CC.createstatement(conn = CC.createconnection());
 			Statement stmt2 = CC.createstatement(conn = CC.createconnection());
 			Statement stmt3 = CC.createstatement(conn = CC.createconnection());
-
 
 			stmt1.executeUpdate("UPDATE user SET user_name = '"+user_name+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
 			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");//空いているルームにユーザーIDを格納する
@@ -108,6 +122,20 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 			if(reserve == 1)
 			{
 				stmt3.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
+				reserve_pstmt = cs.RoomReserve();
+			}*/
+
+			pstmts_update[0] = cs.UpdateUserTable();
+			pstmts_update[0].setString(1, user_name);
+			pstmts_update[0].setInt(2, userinfo[0]);
+
+			pstmts_update[1] = cs.UpdateRoomTable();
+			pstmts_update[1].setInt(1, userinfo[1]);
+
+			if(reserve == 1)
+			{
+				reserve_pstmt = cs.RoomReserve();
+				reserve_pstmt.setInt(1, userinfo[1]);
 			}
 
 		}
@@ -117,7 +145,9 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		}
 		finally
 		{
-			CC.close();
+			//CC.close();
+			cs.closepstmt(reserve_pstmt);
+			cs.closepstmts(pstmts_update);
 		}
 	}
 
