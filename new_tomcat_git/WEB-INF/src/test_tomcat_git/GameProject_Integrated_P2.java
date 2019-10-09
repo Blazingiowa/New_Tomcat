@@ -72,14 +72,14 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		}
 
 		//ｐ１の使ったカードの情報をDBから持ってくる
-		for (int i = 0; i < p1_card.length; i++)
+		for (int i = 0; i < p1_card.length; i++)//３回
 		{
 			//使ったカードがあったら（つまり、－１でなければ）
-			if (p1_card[i][0] != -1)
+			if (p1_card[i][0] != JudgeCard)
 			{
 				p1_cardinfo = DBC.reference(p1_card[i][0]);//p1の使ったカード情報をDBからもってくる
 
-				for (int j = 0; j < p1_cardinfo.length; j++)
+				for (int j = 0; j < p1_cardinfo.length; j++)//９回
 				{
 					//ｐ１の情報を入れていく
 					w = p1_cardinfo[j];
@@ -92,7 +92,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		for (int i = 0; i < p2_card.length; i++)
 		{
 			//使ったカードがあったら（つまり、－１でなければ）
-			if (p2_card[i][0] != -1)
+			if (p2_card[i][0] != JudgeCard)
 			{
 				p2_cardinfo = DBC.reference(p2_card[i][0]);//p2の使ったカード情報をDBからもってくる
 
@@ -109,19 +109,19 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		for (int i = 0; i < p2_card.length; i++)
 		{
 			//攻撃が通せるか判定するためのフラグリセット
-			flag = false;
+			ATKflag = false;
 
 			//攻撃が通せるか判定するための変数リセット
-			count = 0;
+			ATKcount = 0;
 
 			//使ったカードがあるかどうか判定
-			if (p2_card[i][0] != -1)
+			if (p2_card[i][0] != JudgeCard)
 			{
 				//p2_cardの対応IDの列を回すためのfor
-				for (int j = 3; j < p2_card[0].length; j++)
+				for (int j = 3; j < p2_card[0].length - 1; j++)
 				{
 					//対応IDがあるかどうかの判定
-					if (p2_card[i][j] != -1)
+					if (p2_card[i][j] != JudgeCard)
 					{
 						//p1_cardのIDの行を回すためのfor
 						for (int k = 0; k < p1_card.length; k++)
@@ -130,10 +130,10 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 							if (p2_card[i][j] == p1_card[k][0])
 							{
 								//ｐ２のカードが攻撃で、ｐ１の防御に防がれたとき
-								if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
+								if (p2_card[i][9] == JudgeATKCard)
 								{
 									textmain[6][k] -= p2_card[i][2] / 2;//ｐ２が受けたダメージを計算して配列に入れる
-									flag = true;
+									ATKflag = true;
 								}
 								//ｐ２のカードが防御で、ｐ１の攻撃を防いだとき
 								else
@@ -147,16 +147,16 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 							else
 							{
 								//攻撃カードかどうかの判定
-								if (0 <= p2_card[i][0] && p2_card[i][0] < 12)
+								if (p2_card[i][9] == JudgeATKCard)
 								{
 									//カウントをプラスする
-									count++;
+									ATKcount++;
 
 									//カウントが３回溜まっていて、ｐ１の使ったカードに対応IDがなかった場合
-									if (count == 6 && flag == false)
+									if (ATKcount == 6 && ATKflag == false)
 									{
 										textmain[4][i] += p2_card[i][2];//ｐ２が与えたダメージを配列に入れる
-										count = 0;//カウントリセット
+										ATKcount = 0;//カウントリセット
 
 										System.out.println("ｐ２の攻撃が通ったよ！" + textmain[4][i] + "ダメージ");
 									}
@@ -173,22 +173,22 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		for (int i = 0; i < p1_card.length; i++)
 		{
 			//攻撃が通せるか判定するためのフラグリセット
-			flag = false;
+			ATKflag = false;
 
 			//攻撃が通せるか判定するための変数リセット
-			count = 0;
+			ATKcount = 0;
 
 			//使ったカードがあるかどうか判定
-			if (p1_card[i][0] != -1)
+			if (p1_card[i][0] != JudgeCard)
 			{
 				//攻撃カードかどうかの判定
-				if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+				if (p1_card[i][9] == JudgeATKCard)
 				{
 					//p1_cardの対応IDの列を回すためのfor
-					for (int j = 3; j < p1_card[0].length; j++)
+					for (int j = 3; j < p1_card[0].length - 1; j++)
 					{
 						//対応IDがあるかどうかの判定
-						if (p1_card[i][j] != -1)
+						if (p1_card[i][j] != JudgeCard)
 						{
 							//p2_cardのIDの行を回すためのfor
 							for (int k = 0; k < p2_card.length; k++)
@@ -197,9 +197,9 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 								if (p1_card[i][j] == p2_card[k][0])
 								{
 									//ｐ１のカードが攻撃で、ｐ２の防御に防がれたとき
-									if (0 <= p1_card[i][0] && p1_card[i][0] < 12)
+									if (p1_card[i][9] == JudgeATKCard)
 									{
-										flag = true;
+										ATKflag = true;
 									}
 								}
 
@@ -207,13 +207,13 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 								else
 								{
 									//カウントをプラスする
-									count++;
+									ATKcount++;
 
 									//カウントが６回溜まっていて、ｐ２の使ったカードに対応IDがなかった場合
-									if (count == 6 && flag == false)
+									if (ATKcount == 6 && ATKflag == false)
 									{
 										textmain[6][i] -= p1_card[i][2];//ｐ１が与えたダメージを配列に入れる
-										count = 0;//カウントリセット
+										ATKcount = 0;//カウントリセット
 
 										System.out.println("ｐ１の攻撃が通ったよ！" + textmain[6][i] + "ダメージ");
 									}
@@ -297,10 +297,10 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 			for (int j = 0; j < textmain[3].length; j++)//３回
 			{
 				//カードIDを格納
-				textmain[i][j] = bfrcard[i-3][j];
+				textmain[i][j] = bfrcard[i - 3][j];
 
 				//ダメージを格納
-				textmain[i+1][j] = bfrcard[i-2][j];
+				textmain[i + 1][j] = bfrcard[i - 2][j];
 			}
 		}
 
@@ -422,12 +422,12 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		}
 
 		//使ったカードのクールタイムをセット
-		for (int i = 0; i < 2; i++)
+		for (int i = 1; i <= 2; i++)
 		{
 			for (int j = 0; j < textmain[3].length; j++)
 			{
 				//ｐ１のCTの設定
-				if (i == 0)
+				if (i == JudgePlayer1)
 				{
 					if (textmain[3][j] != -1)
 					{
@@ -436,7 +436,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 					}
 				}
 				//ｐ２のCTの設定
-				else if (i == 1)
+				else if (i == JudgePlayer2)
 				{
 					if (textmain[5][j] != -1)
 					{

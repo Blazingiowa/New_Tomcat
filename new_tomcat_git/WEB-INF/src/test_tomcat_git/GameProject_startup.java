@@ -7,7 +7,6 @@ public class GameProject_startup extends GameProject_Main
 		super();
 	}
 
-
 	void start(int[] playerinfo)
 	{
 
@@ -15,7 +14,7 @@ public class GameProject_startup extends GameProject_Main
 		player = txR.read(playerinfo[1], 3, 1);
 
 		//それぞれの状況が１だったらターンが進んでいるのでHPと行動値の情報を更新して、ほかの部分を初期化
-		if (player[1] == 1 && player[2] == 1)
+		if (player[1] == JudgePlayering[1] && player[2] == JudgePlayering[1])
 		{
 			//ユニティが見続ける場所を統合処理が終わったので初期値（０）に戻す
 			player[0] = 0;
