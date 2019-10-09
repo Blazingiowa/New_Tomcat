@@ -2,8 +2,15 @@ package test_tomcat_git;
 
 public class GameProject_startup extends GameProject_Main
 {
+	GameProject_startup()
+	{
+		super();
+	}
+
+
 	void start(int[] playerinfo)
 	{
+
 		//ルーム状況表から情報を持ってくる
 		player = txR.read(playerinfo[1], 3, 1);
 

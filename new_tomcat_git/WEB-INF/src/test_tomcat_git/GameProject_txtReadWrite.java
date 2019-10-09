@@ -2,6 +2,11 @@ package test_tomcat_git;
 
 public class GameProject_txtReadWrite extends GameProject_Main
 {
+	GameProject_txtReadWrite()
+	{
+		super();
+	}
+
 	void txtReadWrite(int[] playerinfo, int[] usecard)
 	{
 		System.out.println("テキストの書き読みクラスに入った");
