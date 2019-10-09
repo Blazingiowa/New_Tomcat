@@ -8,24 +8,25 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 
 	File file,dir;
 
-	DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
-	TaiouText tt = new TaiouText();
-	CardText ct = new CardText();
-	RoomText rt = new RoomText();
-	StartupText st = new StartupText();
-	TextWrite tw = new TextWrite();
-	TextRead tr = new TextRead();
-	CooltimeText coolt = new CooltimeText();
-	Player_name pn = new Player_name();
-	RoomCheck rc = new RoomCheck();
-	DBCSercheReserveRoom dr = new DBCSercheReserveRoom();
-	CardnameText cnt = new CardnameText();
+	DataBaseConnectUpdate DBCU;
+	TaiouText tt;
+	CardText ct;
+	RoomText rt;
+	StartupText st;
+	TextWrite tw;
+	TextRead tr;
+	CooltimeText coolt;
+	Player_name pn;
+	RoomCheck rc;
+	DBCSercheReserveRoom dr;
+	CardnameText cnt;
 
-	String[] userinfo;
+	String[] S_userinfo;
 	String[] error;
 	int[] player;
 	int[] online;
 	String cardtext;
+	boolean[] roomchecker;
 	boolean exist,empty;
 
 	File[] files;
@@ -37,11 +38,25 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	 */
 	Gamestart()
 	{
-		userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
+		DBCU = new  DataBaseConnectUpdate();
+		tt = new TaiouText();
+		ct = new CardText();
+		rt = new RoomText();
+		st = new StartupText();
+		tw = new TextWrite();
+		tr = new TextRead();
+		coolt = new CooltimeText();
+		pn = new Player_name();
+		rc = new RoomCheck();
+		dr = new DBCSercheReserveRoom();
+		cnt = new CardnameText();
+
+		S_userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
 		error = new String[3];
 		player = new int[3];
 		files = new File[7];
 		cardtext=null;
+
 		for(int i=0;i<error.length;i++)
 		{
 			error[i] = "-1";
@@ -53,15 +68,16 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		//ルームIDを探索する場合データベース上にその部屋が本当に存在しているか確認する
 		if(room_id > 0)
 		{
-			exist = rc.existroom(room_id);
-			empty = rc.roomfull(room_id);
-			if(exist == false)
+			roomchecker = rc.roomchcek(room_id);
+			//exist = rc.existroom(room_id);
+			//empty = rc.roomfull(room_id);
+			if(roomchecker[0] == false)
 			{
 				System.out.println("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲部屋が存在しなかったよ");
 				return error;
 			}
 
-			if(empty == false)
+			if(roomchecker[1] == false)
 			{
 				System.out.println("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲部屋が満員だったよ");
 				return error;
@@ -87,9 +103,9 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		files[5] = new File("/var/www/html/game/"+player[1]+"/player_name.txt");
 		files[6] = new File("/var/www/html/game/"+player[1]+"/card_text.txt");
 
-		for(int i = 0;i<userinfo.length;i++)
+		for(int i = 0;i<S_userinfo.length;i++)
 		{
-			userinfo[i] = String.valueOf(player[i]);
+			S_userinfo[i] = String.valueOf(player[i]);
 		}
 
 		dir = new File("/var/www/html/game/"+player[1]);//ルームディレクトリの作成
@@ -155,7 +171,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		}*/
 
 		/*もしゲームエンド後に片方のプレイヤーがルームに残り続けて誰かが入ってくるのを待つ場合に以下のif処理が必要
-		*/
+		 */
 		if(online[0]!=-1)
 		{
 			online[0]=-1;
@@ -170,7 +186,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		System.out.println("room_id:"+userinfo[1]);
 		System.out.println("player_number:"+userinfo[2]);*/
 
-		return userinfo;
+		return S_userinfo;
 	}
 
 	void createfile(File newfile)
