@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class TextRead
 {
-	BufferedReader br;
-	File file;
-	String text;
-	String[][] alltext;
-	String[] line;
+	protected BufferedReader br;
+	protected File file;
+	protected String text;
+	protected String[][] alltext;
+	protected String[] line;
 	//SetText set = new SetText();
 
 	int[] data;

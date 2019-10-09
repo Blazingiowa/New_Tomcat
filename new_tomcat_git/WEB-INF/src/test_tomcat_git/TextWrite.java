@@ -8,13 +8,19 @@ import java.io.PrintWriter;
 
 public class TextWrite //extends TextRead
 {
-	TextRead tr = new TextRead();
-	BufferedWriter bw;
-	PrintWriter pw;
-	FileWriter fw;
-	String text,writetext;
-	String[] line;
-	File file;
+	protected TextRead tr;
+	protected BufferedWriter bw;
+	protected PrintWriter pw;
+	protected FileWriter fw;
+	protected String text,writetext;
+	protected String[] line;
+	protected File file;
+
+	TextWrite()
+	{
+		tr = new TextRead();
+		text = null ; writetext = null;
+	}
 
 	void write(int room_id,int player_number,int line_number,int[] write)
 	{
@@ -26,7 +32,7 @@ public class TextWrite //extends TextRead
 		//System.out.println(room_id+","+player_number+","+line_number);
 		file = tr.setfile(room_id,player_number);
 		line = tr.settext(file);
-		text = "" ; writetext = "";
+
 		//System.out.println("writetext上の最初のlineだよ");
 		/*for(int i =0;i<line.length;i++)
 		{

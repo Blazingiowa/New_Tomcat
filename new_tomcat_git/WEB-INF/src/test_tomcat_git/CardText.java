@@ -8,24 +8,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class CardText extends TextWrite //カードリストテキストを作るクラス
 {
-	CreateConnection CC = new CreateConnection();
-	CreateStatement CS = new CreateStatement();
+	CreateStatement cs;
 
 	PreparedStatement pstmt;
 	ResultSet rs;
 	Connection conn;
-	int[][] cardlist;
-	int cardcount;
+	private final int item = 4;
+	private int[][] cardlist;
+
+	CardText()
+	{
+		super();
+		cs = new CreateStatement();
+	}
 
 	void cardcreate(File file)
 	{
 		//配列の宣言
-		cardlist = new int[20][3];
-		line = new String[20];
+		cardlist = new int[CardCount()][item];
+		line = new String[CardCount()];
 
 		for(int i =0;i<line.length;i++)//配列lineを初期化
 		{
@@ -33,12 +37,13 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		}
 		writetext = "";
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
+		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
+		pstmt = cs.SerchCardTabeleText();
 
 		try
 		{
-			stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得するためのSQL
-			rs = stmt.getResultSet();
+			//stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得するためのSQL
+			rs = pstmt.executeQuery();
 		}
 		catch(SQLException e)
 		{
@@ -53,6 +58,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 				cardlist[count][0] = rs.getInt("card_id");
 				cardlist[count][1] = rs.getInt("dmg");
 				cardlist[count][2] = rs.getInt("cost");
+				cardlist[count][3] = rs.getInt("type");
 				count++;
 			}
 			/*System.out.println("以下はcardtextのデバッグだよ");
@@ -72,7 +78,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		}
 		finally
 		{
-			CC.close();//データベースとの接続を解除
+			cs.closepstmt(pstmt);
 			try
 			{
 				rs.close();//ResultSetをクローズ
@@ -128,7 +134,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	int CardCount()
 	{
 		int number = 0;
-		pstmt = CS.CountCard();
+		pstmt = cs.CountCard();
 		try
 		{
 			pstmt.executeQuery();
@@ -141,7 +147,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 			e.printStackTrace();
 		}
 
-		CS.closepstmt(pstmt);
+		cs.closepstmt(pstmt);
 
 		try
 		{

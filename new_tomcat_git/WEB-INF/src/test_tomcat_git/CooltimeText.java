@@ -4,23 +4,38 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class CooltimeText extends CardText //カードのクールタイムを初期化し出力するクラス
+public class CooltimeText extends TextWrite //カードのクールタイムを初期化し出力するクラス
 {
+	CardText ct;
+	CreateStatement cs;
+
+	private int[] cooltimelist;
+	private String line;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+
+	CooltimeText()
+	{
+		super();
+		cs = new CreateStatement();
+		ct = new CardText();
+		writetext =null;
+		line = null;
+	}
+
 	void createcooltime(File file)
 	{
-		int[] cooltimelist = new int[20];
+		cooltimelist = new int[ct.CardCount()];
 
-		writetext = "";
-		String line = "";
-
-		Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
+		pstmt = cs.SerchCardTabeleText();
+		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
 		try
 		{
-			stmt.executeQuery("SELECT cost FROM card;");//カードのコスト(クールタイム)を取得
-			rs = stmt.getResultSet();
+			rs = pstmt.executeQuery();
 
 			//検索結果がなくなるまでcooltimelistにcostを格納
 			for(int i = 0;rs.next();i++)

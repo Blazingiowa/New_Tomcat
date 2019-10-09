@@ -58,19 +58,6 @@ public class CreateConnection //データベースに接続するための準備
 		return stmt;
 	}
 
-	PreparedStatement SearchUsertable()
-	{
-		try
-		{
-			pstmt =conn.prepareStatement("SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;");
-		}
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
-		return pstmt;
-	}
-
 	void close()//接続をクローズする
 	{
 		try

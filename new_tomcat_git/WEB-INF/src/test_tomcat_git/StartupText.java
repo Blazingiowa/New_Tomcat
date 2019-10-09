@@ -7,6 +7,11 @@ import java.io.PrintWriter;
 
 public class StartupText extends TextWrite //player.txtを出力するクラス
 {
+	StartupText()
+	{
+		super();
+	}
+
 	void textfile(int room_id,int player_number,File file)
 	{
 		text = ""; writetext = "";

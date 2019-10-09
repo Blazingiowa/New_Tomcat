@@ -8,6 +8,12 @@ import java.io.IOException;
 public class Player_name  extends TextWrite//プレイヤー名を保持する
 {
 	BufferedReader br;
+
+	Player_name()
+	{
+		super();
+	}
+
 	void create_nametext(File file)//テキストファイルを作成する
 	{
 		text = "-1,-1,-1";//初期化

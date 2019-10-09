@@ -7,7 +7,6 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 {
 	protected int user_id;
 	protected int[] userinfo;//ユーザID,ルームID,プレイヤー番号
-	String[] sql = new String[2];
 	final int select_num = 2,update_num = 2;
 	PreparedStatement[] pstmts_select,pstmts_update;
 	PreparedStatement reserve_pstmt;
@@ -16,10 +15,10 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 
 	DataBaseConnectUpdate()
 	{
-		pstmts_select = new PreparedStatement[select_num];
-		pstmts_update =new PreparedStatement[update_num];
 		cs = new CreateStatement();
 		DBCB = new DBCbeforeUpdate();
+		pstmts_select = new PreparedStatement[select_num];
+		pstmts_update =new PreparedStatement[update_num];
 	}
 
 	int[] updateSQL(String user_name,int reserve,int room_id)//受け渡されたusernameをデータベースへインサートする

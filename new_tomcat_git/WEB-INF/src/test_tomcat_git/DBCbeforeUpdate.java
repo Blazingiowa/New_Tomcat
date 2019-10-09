@@ -5,13 +5,14 @@ import java.sql.SQLException;
 
 public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋と空いているユーザーIDを検索する
 {
-	DBCNotEmpty DBCNE;
+	DBCNotEmpty dbcne;
 	final int Resultnum = 3;
 
 	DBCbeforeUpdate()
 	{
+		super();
 		Result = new int[Resultnum];
-		DBCNE = new DBCNotEmpty();
+		dbcne = new DBCNotEmpty();
 	}
 
 	int[] beforeupdate(PreparedStatement[] pstmts)
@@ -50,7 +51,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 			else
 			{
 				System.out.println("空きなかったよ(´・ω・｀)");
-				Result[0] = DBCNE.userIDNotempty();
+				Result[0] = dbcne.userIDNotempty();
 			}
 
 
@@ -66,7 +67,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 			}
 			else
 			{
-				int[] keep = DBCNE.RoomNotempty(pstmts[1]);
+				int[] keep = dbcne.RoomNotempty(pstmts[1]);
 				Result[1] = keep[0];
 				Result[2] = keep[1];
 			}
@@ -86,18 +87,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		}
 		finally
 		{
-			try
-			{
-				if (conn != null)
-				{
-					conn.close();
-				}
-			}
-			catch(SQLException e)
-			{
-				System.out.println(e);
-				//例外処理
-			}
+			cs.closepstmts(pstmts);
 		}
 
 		return Result;

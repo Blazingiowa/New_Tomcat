@@ -1,6 +1,5 @@
 package test_tomcat_git;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,12 +8,7 @@ import java.sql.Statement;
 public class DataBaseConnectRead //データベースから取得した情報を配列に格納し返す
 {
 	//CreateConnection CC = new CreateConnection();
-	CreateStatement cs = new CreateStatement();
-
-	protected Connection conn;
-	protected final String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
-	protected final String user = "root";//データベースへアクセスするID
-	protected final String password = "ncc_NCC2019";//データベースのパスワード
+	CreateStatement cs;
 
 	final int infonum = 3,Resultnum=9;
 	protected int[] Result;//受け渡す情報が入る
@@ -25,6 +19,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 
 	DataBaseConnectRead()
 	{
+		cs = new CreateStatement();
 		Result = new int[Resultnum];
 		room = new int[infonum];
 	}

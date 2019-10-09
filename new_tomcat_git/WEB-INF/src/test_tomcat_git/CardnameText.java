@@ -12,13 +12,17 @@ public class CardnameText
 	String[] line;
 	String writetext;
 
-	CreateStatement CS = new CreateStatement();
-	CardText ct = new CardText();
-	TextWrite tw = new TextWrite();
+	CreateStatement cs;
+	CardText ct;
+	TextWrite tw;
 
 	CardnameText()
 	{
-		pstmt = CS.CountCard();
+		cs = new CreateStatement();
+		ct = new CardText();
+		tw = new TextWrite();
+
+		pstmt = cs.CountCard();
 		cardcount = 0;
 		writetext = null;
 	}

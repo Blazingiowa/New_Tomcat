@@ -5,10 +5,7 @@ import java.io.IOException;
 
 public class Gamestart //ゲームが始まるときに一度だけ実行されるクラス
 {
-
-	File file,dir;
-
-	DataBaseConnectUpdate DBCU;
+	DataBaseConnectUpdate dbcu;
 	TaiouText tt;
 	CardText ct;
 	RoomText rt;
@@ -21,24 +18,20 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	DBCSercheReserveRoom dr;
 	CardnameText cnt;
 
-	String[] S_userinfo;
-	String[] error;
-	int[] player;
-	int[] online;
-	String cardtext;
-	boolean[] roomchecker;
-	boolean exist,empty;
+	protected final int userinfonum=3,errornum=3,playernum=3,filenum=7;
+	protected String[] S_userinfo;
+	protected String[] error;
+	protected int[] player;
+	protected int[] online;
+	protected String cardtext;
+	protected boolean[] roomchecker;
+	protected boolean exist,empty;
+	protected File[] files;
+	protected File file,dir;
 
-	File[] files;
-	/*
-	 大野へロビー用の変数を追加しました。ロビーを使用した場合reserveに1をint型で引数として渡してください。使用しない場合は0で大丈夫です
-	 ロビーを使用しない、ロビーで部屋を作成した場合はroom_idは0でお願いします。ロビーで部屋を検索した人はroom_idを保持しているのでそれを引数として渡してください。
-	 Servletクラスとunityの調整が終わったらメソッドの引数部分、引数を使用している場所のコメントアウトを解除してください。
-	 またDataBaseConnectUpdateにもこれ用のコメントアウトがあるため上記同様にコメントアウトを解除してください。
-	 */
 	Gamestart()
 	{
-		DBCU = new  DataBaseConnectUpdate();
+		dbcu = new  DataBaseConnectUpdate();
 		tt = new TaiouText();
 		ct = new CardText();
 		rt = new RoomText();
@@ -51,10 +44,10 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		dr = new DBCSercheReserveRoom();
 		cnt = new CardnameText();
 
-		S_userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
-		error = new String[3];
-		player = new int[3];
-		files = new File[7];
+		S_userinfo = new String[userinfonum];//ユーザーID,ルームID,プレイヤー番号の順番で格納
+		error = new String[errornum];
+		player = new int[playernum];
+		files = new File[filenum];
 		cardtext=null;
 
 		for(int i=0;i<error.length;i++)
@@ -86,7 +79,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 
 		if(reserve != 2)
 		{
-			player = DBCU.updateSQL(user_name,reserve,room_id);//データベースの情報を更新する
+			player = dbcu.updateSQL(user_name,reserve,room_id);//データベースの情報を更新する
 		}
 		else
 		{

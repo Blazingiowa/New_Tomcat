@@ -4,8 +4,14 @@ import java.io.File;
 
 public class Rematch extends Gamestart //リマッチ用のクラスunityからリマッチ要望が来た場合ここに飛ばしてね
 {
-	int [] line;
+	protected int [] line;
 	//再選希望が来た場合ここへ
+
+	Rematch()
+	{
+		super();
+	}
+
 	void wantremacth(int[] info)//ユーザID　ルームID　プレイヤー番号
 	{
 

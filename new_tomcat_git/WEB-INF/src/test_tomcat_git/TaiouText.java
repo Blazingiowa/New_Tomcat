@@ -4,19 +4,35 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class TaiouText extends CardText //対応するカードの情報をテキストファイルに出力
+public class TaiouText extends TextWrite //対応するカードの情報をテキストファイルに出力
 {
+	CardText ct;
+	CreateStatement cs;
+
+	private final int tiounum=6;
+	private int[][] cardlist;
+	private String[] line;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+
+	TaiouText()
+	{
+		super();
+		cs = new CreateStatement();
+		ct = new CardText();
+	}
 
 	void taioucreate(File file) //taiou.txtに文字を出力する
 	{
 
 		//file = new File("var/www/html/"+room+"/taiou.txt");//room_idを使用してファイルを作成
 		/*取得したデータをもとにテキストファイルに出力する*/
-		cardlist = new int[20][6];
-		line = new String[20];
+		cardlist = new int[ct.CardCount()][tiounum];
+		line = new String[ct.CardCount()];
 
 		for(int i =0;i<line.length;i++)
 		{
@@ -32,11 +48,12 @@ public class TaiouText extends CardText //対応するカードの情報をテ�
 			}
 		}
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
+		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
+		pstmt = cs.SerchCardTabeleText();
 		try
 		{
-			stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得
-			rs = stmt.getResultSet();
+			rs = pstmt.executeQuery();//カードの情報を取得
+			//rs = stmt.getResultSet();
 		}
 		catch(SQLException e)
 		{
@@ -83,7 +100,7 @@ public class TaiouText extends CardText //対応するカードの情報をテ�
 
 		finally
 		{
-			CC.close();//データベースとの接続を解除
+			cs.closepstmt(pstmt);
 			try
 			{
 				rs.close();//ResultSetをクローズ

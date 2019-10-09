@@ -5,13 +5,20 @@ import java.io.File;
 public class GameEND//プレイヤーがゲームから退出した際の処理を行う
 {
 	//プレイヤーが退出したときのDBを更新するためのクラスをインスタンス
-	DataBasePlayerout DBP = new DataBasePlayerout();
-	TextWrite tw = new TextWrite();
-	TextRead tr = new TextRead();
+	DataBasePlayerout dbp;
+	TextWrite tw;
+	TextRead tr;
 
 	String[] path = new String[2];
 	File[] file = new File[2];
 	int[] write;
+
+	GameEND()
+	{
+		dbp = new DataBasePlayerout();
+		tw = new TextWrite();
+		tr = new TextRead();
+	}
 
 	void logout(int info[])//ユーザID　ルームID　プレイヤー番号
 	{
@@ -51,6 +58,6 @@ public class GameEND//プレイヤーがゲームから退出した際の処理�
 		tw.write(info[1],3,0,write);
 		//片方のプレイヤーがログアウトし再度誰かを待つ際には-1に変更する必要があるためGamestartの100~105行目の処理で変更してます
 
-		DBP.logout(info);
+		dbp.logout(info);
 	}
 }

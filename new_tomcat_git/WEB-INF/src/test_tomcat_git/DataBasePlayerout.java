@@ -15,6 +15,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 
 	DataBasePlayerout()
 	{
+		super();
 		rd = new Roomdelete();
 		cs = new CreateStatement();
 		pstmts = cs.Playerout();

@@ -1,12 +1,14 @@
 package test_tomcat_git;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 
 public class RoomText extends TextWrite
 {
+	RoomText()
+	{
+		super();
+	}
+
 	void createroomtxt(int room_id,File file)//ルームテキストを作成
 	{
 		text = ""; writetext="";
@@ -37,6 +39,8 @@ public class RoomText extends TextWrite
 		/*System.out.println("roomtextのデバッグだお");
 		System.out.println("出力される文字だお:"+writetext);*/
 
+		writing(file,writetext);
+		/*
 		try//テキストファイルに出力する
 		{
 			fw = new FileWriter(file);
@@ -52,5 +56,6 @@ public class RoomText extends TextWrite
 		{
 			bwclose();
 		}
+		*/
 	}
 }
