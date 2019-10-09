@@ -8,20 +8,20 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 
 	File file,dir;
 
-	DataBaseConnectUpdate DBCU = new  DataBaseConnectUpdate();
-	TaiouText tt = new TaiouText();
-	CardText ct = new CardText();
-	RoomText rt = new RoomText();
-	StartupText st = new StartupText();
-	TextWrite tw = new TextWrite();
-	TextRead tr = new TextRead();
-	CooltimeText coolt = new CooltimeText();
-	Player_name pn = new Player_name();
-	RoomCheck rc = new RoomCheck();
-	DBCSercheReserveRoom dr = new DBCSercheReserveRoom();
-	CardnameText cnt = new CardnameText();
+	DataBaseConnectUpdate DBCU;
+	TaiouText tt;
+	CardText ct;
+	RoomText rt;
+	StartupText st;
+	TextWrite tw;
+	TextRead tr;
+	CooltimeText coolt;
+	Player_name pn;
+	RoomCheck rc;
+	DBCSercheReserveRoom dr;
+	CardnameText cnt;
 
-	String[] userinfo;
+	String[] S_userinfo;
 	String[] error;
 	int[] player;
 	int[] online;
@@ -51,7 +51,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		dr = new DBCSercheReserveRoom();
 		cnt = new CardnameText();
 
-		userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
+		S_userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
 		error = new String[3];
 		player = new int[3];
 		files = new File[7];
@@ -103,9 +103,9 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		files[5] = new File("/var/www/html/game/"+player[1]+"/player_name.txt");
 		files[6] = new File("/var/www/html/game/"+player[1]+"/card_text.txt");
 
-		for(int i = 0;i<userinfo.length;i++)
+		for(int i = 0;i<S_userinfo.length;i++)
 		{
-			userinfo[i] = String.valueOf(player[i]);
+			S_userinfo[i] = String.valueOf(player[i]);
 		}
 
 		dir = new File("/var/www/html/game/"+player[1]);//ルームディレクトリの作成
@@ -186,7 +186,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		System.out.println("room_id:"+userinfo[1]);
 		System.out.println("player_number:"+userinfo[2]);*/
 
-		return userinfo;
+		return S_userinfo;
 	}
 
 	void createfile(File newfile)
