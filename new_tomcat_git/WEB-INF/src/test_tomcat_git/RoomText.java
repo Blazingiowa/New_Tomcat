@@ -7,10 +7,6 @@ import java.io.PrintWriter;
 
 public class RoomText extends TextWrite
 {
-	protected TextRead tr;
-	protected BufferedWriter bw;
-	protected PrintWriter pw;
-	protected FileWriter fw;
 
 	RoomText()
 	{

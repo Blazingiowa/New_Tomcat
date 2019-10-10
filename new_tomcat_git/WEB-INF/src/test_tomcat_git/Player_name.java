@@ -11,11 +11,6 @@ import java.io.PrintWriter;
 public class Player_name  extends TextWrite//プレイヤー名を保持する
 {
 	protected BufferedReader br;
-	protected TextRead tr;
-	protected BufferedWriter bw;
-	protected PrintWriter pw;
-	protected FileWriter fw;
-	protected String writetext;
 
 	Player_name()
 	{
