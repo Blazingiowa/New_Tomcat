@@ -22,7 +22,7 @@ public class CardnameText
 		ct = new CardText();
 		tw = new TextWrite();
 
-		pstmt = cs.CountCardSQL();
+		//pstmt = cs.CountCardSQL();
 		cardcount = 0;
 		writetext = null;
 	}
@@ -31,6 +31,7 @@ public class CardnameText
 	{
 		cardcount = ct.CardCount();
 		line = new String[cardcount];
+		pstmt = cs.CountCardSQL();
 		for(int i =0;i<line.length;i++)
 		{
 			line[i]=null;
@@ -39,8 +40,8 @@ public class CardnameText
 		try
 		{
 			int count = 0;
-			pstmt.executeQuery();
-			rs = pstmt.getResultSet();
+			rs = pstmt.executeQuery();
+			//rs = pstmt.getResultSet();
 			while(rs.next())
 			{
 				line[count] += rs.getString("card_name")+",";
