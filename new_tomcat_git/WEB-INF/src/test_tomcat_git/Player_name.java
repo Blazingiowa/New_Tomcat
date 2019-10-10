@@ -25,9 +25,9 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 	{
 		text = "-1,-1,-1";//初期化
 
-		writing(file,text);
+		//writing(file,text);
 
-		/*
+
 		try
 		{
 			fw = new FileWriter(file);
@@ -43,7 +43,7 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 		{
 			bwclose();
 		}
-		*/
+
 
 	}
 

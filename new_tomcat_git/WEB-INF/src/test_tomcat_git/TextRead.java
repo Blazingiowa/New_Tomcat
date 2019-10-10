@@ -21,7 +21,7 @@ public class TextRead
 		file = setfile(room_id,player_number);
 		line = settext(file);
 
-		String[] array = line[line_number].split(",");
+		String[] array = line[line_number].split(",");//NULL
 
 		for(int i = 0;i<array.length;i++)
 		{
