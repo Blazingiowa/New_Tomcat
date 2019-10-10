@@ -47,8 +47,8 @@ public class CardnameText
 				line[count] += rs.getString("card_name")+",";
 				line[count] += rs.getString("card_text_first")+",";
 				line[count] += rs.getString("card_text_second")+",";
-				line[count] += rs.getString("card_text_hukidashi_first")+",";
-				line[count] += rs.getString("card_text_hukidashi_second")+",";
+				line[count] += rs.getString("hukidashi_first")+",";
+				line[count] += rs.getString("hukidashi_second")+",";
 				line[count] += rs.getString("s");
 				count++;
 			}
