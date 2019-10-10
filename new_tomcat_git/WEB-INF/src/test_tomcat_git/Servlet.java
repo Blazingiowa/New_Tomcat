@@ -52,6 +52,9 @@ public class Servlet extends HttpServlet
 
 	final int room_Search =2;
 
+	final String room_Exit ="2";
+	final String room_Rematch ="3";
+
 	final String st_default ="-1";
 
 	final String error_name ="10";
@@ -118,7 +121,7 @@ public class Servlet extends HttpServlet
 				initial();
 
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
-				if(ub.getError().equals("-1"))
+				if(ub.getError().equals(st_default))
 				{
 					str_user_info = game_start.createdirectry(name, int_reserve, int_room_id);
 
@@ -146,7 +149,6 @@ public class Servlet extends HttpServlet
 				//int変換でNULLを入れるのを防ぐ
 				//nullなら使ってないとして扱う
 
-				//今作ったの
 				for(int i=0;i<use_hand.length;i++)
 				{
 					use_hand[i]=i_check(str_use_hand[i]);
@@ -163,13 +165,13 @@ public class Servlet extends HttpServlet
 		{
 			//実装間に合わず
 		}
-		else if(flag.equals("2"))//Clientが落としたい時用
+		else if(flag.equals(room_Exit))//Clientが落としたい時用
 		{
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
 			info();
 			game_end.logout(int_user_info);
 		}
-		else if(flag.equals("3"))//再戦要求
+		else if(flag.equals(room_Rematch))//再戦要求
 		{
 			//何かしらの値を入れないといけない。テスト的に値を入れてある
 			info();
@@ -234,7 +236,7 @@ public class Servlet extends HttpServlet
 	{
 		System.out.println("i_check通った 値 : " + s);
 		int i=final_default;
-		if(s.matches("[0]") || s.matches("[1-9][0-9]{1,}"))
+		if(s.matches("[0]") || s.matches("[1-9][0-9]{0,}"))
 		{
 			i= Integer.parseInt(s);
 		}

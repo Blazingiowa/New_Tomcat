@@ -31,7 +31,7 @@ public class CardnameText
 	{
 		cardcount = ct.CardCount();
 		line = new String[cardcount];
-		pstmt = cs.CountCardSQL();
+		pstmt = cs.CardTextget();
 		for(int i =0;i<line.length;i++)
 		{
 			line[i]=null;
