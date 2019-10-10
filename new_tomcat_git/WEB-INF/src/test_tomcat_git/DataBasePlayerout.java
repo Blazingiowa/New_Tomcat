@@ -37,6 +37,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 
 			pstmts[1].setInt(1, playerinfo[0]);
 			pstmts[1].executeUpdate();
+			System.out.println("LogoutのUpdate通ったよ");
 
 			noplayer(playerinfo[1]);//テスト
 
