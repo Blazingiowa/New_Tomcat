@@ -246,6 +246,7 @@ public class CreateStatement
 
 	void closepstmt(PreparedStatement pstmt)
 	{
+		/*
 		try
 		{
 			pstmt.clearParameters();
@@ -255,6 +256,7 @@ public class CreateStatement
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
 		}
+		*/
 		try
 		{
 			pstmt.close();
