@@ -40,18 +40,22 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
 		select_card_pstmt = cs.SerchAllCard();
 
+		/*
 		try
 		{
 			//stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得するためのSQL
-			card_rs = select_card_pstmt.executeQuery();
+
 		}
 		catch(SQLException e)
 		{
 			System.out.println("card.txt作成時にデータベースから情報が取れなかったよ");
 		}
+		*/
 
 		try
 		{
+			card_rs = select_card_pstmt.executeQuery();
+
 			int count = 0;
 			while(card_rs.next())//データベースからの検索結果を最後まで取得
 			{
@@ -78,7 +82,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		}
 		finally
 		{
-			cs.closepstmt(select_card_pstmt);
+
 			try
 			{
 				card_rs.close();//ResultSetをクローズ
@@ -89,6 +93,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
+			cs.closepstmt(select_card_pstmt);
 		}
 
 		for(int i = 0;i<line.length;i++)//テキストファイルに書き込む情報を行ごとにまとめる

@@ -152,7 +152,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 			createfile(files[6]);
 			permission(files[6]);
 			cardtext = cnt.cardname();
-			tw.writing(file, cardtext);
+			tw.writing(files[6], cardtext);
 		}
 
 		pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
