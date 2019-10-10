@@ -95,6 +95,12 @@ public class TextWrite //extends TextRead
 
 	void writing(File file,String text)
 	{
+
+		if(file == null)
+		{
+			System.out.println("ふぁいるはぬるだよぉぉぉぉぉぉっぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉおぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉっぉぉ");
+		}
+
 		try
 		{
 			fw = new FileWriter(file);
