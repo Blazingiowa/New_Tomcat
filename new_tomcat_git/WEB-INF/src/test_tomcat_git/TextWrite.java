@@ -79,7 +79,7 @@ public class TextWrite //extends TextRead
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
-			pw.println(text);
+			pw.print(text);
 		}
 		catch(Exception e)
 		{

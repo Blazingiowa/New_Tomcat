@@ -34,10 +34,11 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
 			pw.println(writetext);
+			System.out.println("create_nametext通った");
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			System.out.print(e);
 		}
 		finally
 		{
@@ -93,7 +94,7 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
-			pw.println(text);
+			pw.print(text);
 		}
 		catch(Exception e)
 		{
