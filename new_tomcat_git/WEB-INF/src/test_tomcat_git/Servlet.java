@@ -106,17 +106,17 @@ public class Servlet extends HttpServlet
 		System.out.println("使ったカード3:" + str_use_hand [2]);
 
 
-		//名前に特殊文字が含まれているか
-		check(name);
-
-		//ロビー用にint変換
-
-		initial();
-
 		if(flag == null)//game継続
 		{
 			if (us_id == null)//ID値持っていないとき始めてきたと認識
 			{
+
+				//名前に特殊文字が含まれているか
+				check(name);
+
+				//ロビーに入るために入力した値が間違えてないか
+				initial();
+
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
 				if(ub.getError().equals("-1"))
 				{
@@ -189,25 +189,33 @@ public class Servlet extends HttpServlet
 		int_reserve = final_default;
 		int_room_id = final_default;
 
-		if(reserve.matches("[0-2]"))
-		{
-			int_reserve = Integer.parseInt(reserve);
-			if(int_reserve == room_Search)
-			{
-				if(room_id.matches("[0]") || room_id.matches("[1-9][0-9]{1,}"))
-				{
-					int_room_id = Integer.parseInt(room_id);
-				}
-				else
-				{
-					error(error_id);
-				}
-			}
-		}
-		else
+		if(reserve == null)
 		{
 			error(error_id);
 		}
+		else
+		{
+			if(reserve.matches("[0-2]"))
+			{
+				int_reserve = Integer.parseInt(reserve);
+				if(int_reserve == room_Search)
+				{
+					if(room_id.matches("[0]") || room_id.matches("[1-9][0-9]{1,}"))
+					{
+						int_room_id = Integer.parseInt(room_id);
+					}
+					else
+					{
+						error(error_id);
+					}
+				}
+			}
+			else
+			{
+				error(error_id);
+			}
+		}
+
 
 	}
 	//特殊文字探査
