@@ -49,8 +49,8 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 		}
 		*/
 
-		pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
-		pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
+		//pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
+		//pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
 
 		/*
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;";
@@ -64,7 +64,7 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 			sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
 		}*/
 		//userinfo=DBCB.beforeupdate(sql);
-		userinfo=DBCB.beforeupdate(pstmts_select);
+		userinfo=DBCB.beforeupdate(/*pstmts_select*/reserve);
 
 		update(user_name,userinfo,reserve);
 

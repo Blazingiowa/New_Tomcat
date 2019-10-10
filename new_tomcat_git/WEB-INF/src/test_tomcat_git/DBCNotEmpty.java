@@ -114,7 +114,7 @@ public class DBCNotEmpty //extends DataBaseConnectRead //データベース上�
 				e.printStackTrace();
 			}
 			cs.closepstmts(pstmts);
-			cs.closepstmt(pstmt);
+			//cs.closepstmt(pstmt);
 			//CC.close();//データベースとの接続を解除
 		}
 		//System.out.print("追加されたroomだお"+Result[0]);
