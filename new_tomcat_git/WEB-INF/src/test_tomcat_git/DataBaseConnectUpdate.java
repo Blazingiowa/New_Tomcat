@@ -64,7 +64,7 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 			sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
 		}*/
 		//userinfo=DBCB.beforeupdate(sql);
-		userinfo=DBCB.beforeupdate(/*pstmts_select*/reserve);
+		userinfo=DBCB.beforeupdate(pstmts_select);
 
 		update(user_name,userinfo,reserve);
 

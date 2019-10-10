@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋と空いているユーザーIDを検索する
 {
 	DBCNotEmpty dbcne;
-	PreparedStatement[] pstmts_select;
+	//PreparedStatement[] pstmts_select;
 	final int Resultnum = 3,select_num = 2;
 
 	DBCbeforeUpdate()
@@ -14,13 +14,13 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		super();
 		Result = new int[Resultnum];
 		dbcne = new DBCNotEmpty();
-		pstmts_select = new PreparedStatement[select_num];
+		//pstmts_select = new PreparedStatement[select_num];
 	}
 
-	int[] beforeupdate(/*PreparedStatement[] pstmts*/int reserve)
+	int[] beforeupdate(PreparedStatement[] pstmts)
 	{
-		pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
-		pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
+		/*pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
+	/*	pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
 
 		/*
 		String[] sql = new String[2];//実行するsqlを配列に格納する
@@ -45,7 +45,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		try
 		{
 			//rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
-			rs = pstmts_select[0].executeQuery();
+			rs = pstmts[0].executeQuery();
 
 			if(rs.next())
 			{
@@ -61,7 +61,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 
 
 			//rs = stmt.executeQuery(sql[1]);//空いているルームの検索
-			rs = pstmts_select[1].executeQuery();
+			rs = pstmts[1].executeQuery();
 			//結果の挿入
 
 			if(rs.next())
@@ -72,7 +72,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 			}
 			else
 			{
-				int[] keep = dbcne.RoomNotempty(pstmts_select[1]);
+				int[] keep = dbcne.RoomNotempty(pstmts[1]);
 				Result[1] = keep[0];
 				Result[2] = keep[1];
 			}
@@ -92,7 +92,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		}
 		finally
 		{
-			cs.closepstmts(pstmts_select);
+			//cs.closepstmts(pstmts);
 		}
 
 		return Result;
