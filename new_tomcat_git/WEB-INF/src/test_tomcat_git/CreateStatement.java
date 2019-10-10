@@ -218,7 +218,7 @@ public class CreateStatement
 		return pstmts;
 	}
 
-	PreparedStatement CountCard()
+	PreparedStatement CountCardSQL()
 	{
 		try
 		{

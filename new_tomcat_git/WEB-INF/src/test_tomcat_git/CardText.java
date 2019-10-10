@@ -13,8 +13,8 @@ public class CardText extends TextWrite //カードリストテキストを作�
 {
 	CreateStatement cs;
 
-	PreparedStatement pstmt;
-	ResultSet rs;
+	PreparedStatement select_card_pstmt,count_card_pstmt;
+	ResultSet card_rs,count_rs;
 	Connection conn;
 	private final int item = 4;
 	private int[][] cardlist;
@@ -38,12 +38,12 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		writetext = "";
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-		pstmt = cs.SerchCardTabeleText();
+		select_card_pstmt = cs.SerchCardTabeleText();
 
 		try
 		{
 			//stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得するためのSQL
-			rs = pstmt.executeQuery();
+			card_rs = select_card_pstmt.executeQuery();
 		}
 		catch(SQLException e)
 		{
@@ -53,12 +53,12 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		try
 		{
 			int count = 0;
-			while(rs.next())//データベースからの検索結果を最後まで取得
+			while(card_rs.next())//データベースからの検索結果を最後まで取得
 			{
-				cardlist[count][0] = rs.getInt("card_id");
-				cardlist[count][1] = rs.getInt("dmg");
-				cardlist[count][2] = rs.getInt("cost");
-				cardlist[count][3] = rs.getInt("type");
+				cardlist[count][0] = card_rs.getInt("card_id");
+				cardlist[count][1] = card_rs.getInt("dmg");
+				cardlist[count][2] = card_rs.getInt("cost");
+				cardlist[count][3] = card_rs.getInt("type");
 				count++;
 			}
 			/*System.out.println("以下はcardtextのデバッグだよ");
@@ -78,10 +78,10 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		}
 		finally
 		{
-			cs.closepstmt(pstmt);
+			cs.closepstmt(select_card_pstmt);
 			try
 			{
-				rs.close();//ResultSetをクローズ
+				card_rs.close();//ResultSetをクローズ
 			}
 
 			catch (SQLException e)
@@ -134,24 +134,23 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	int CardCount()
 	{
 		int number = 0;
-		pstmt = cs.CountCard();
+		count_card_pstmt = cs.CountCardSQL();
 		try
 		{
-			pstmt.executeQuery();
-			rs = pstmt.getResultSet();
-			rs.next();
-			number = rs.getInt("number");
+			count_rs = count_card_pstmt.executeQuery();
+			count_rs.next();
+			number = count_rs.getInt("number");
 		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 
-		cs.closepstmt(pstmt);
+		cs.closepstmt(count_card_pstmt);
 
 		try
 		{
-			rs.close();
+			count_rs.close();
 		}
 		catch (SQLException e)
 		{

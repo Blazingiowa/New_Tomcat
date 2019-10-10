@@ -22,7 +22,7 @@ public class CardnameText
 		ct = new CardText();
 		tw = new TextWrite();
 
-		pstmt = cs.CountCard();
+		pstmt = cs.CountCardSQL();
 		cardcount = 0;
 		writetext = null;
 	}
