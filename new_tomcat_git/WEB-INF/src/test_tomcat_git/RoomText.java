@@ -52,7 +52,7 @@ public class RoomText extends TextWrite
 		{
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
-			pw = new PrintWriter(bw);
+			pw = new PrintWriter(bw,false);
 			pw.println(writetext);
 		}
 		catch(Exception e)

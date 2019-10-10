@@ -20,11 +20,12 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 	Player_name()
 	{
 		super();
+		writetext = "-1,-1,-1";
 	}
 
 	void create_nametext(File file)//テキストファイルを作成する
 	{
-		writetext = "-1,-1,-1";//初期化
+		//初期化
 
 		//writing(file,text);
 
@@ -32,7 +33,7 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 		{
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
-			pw = new PrintWriter(bw);
+			pw = new PrintWriter(bw,false);
 			pw.println(writetext);
 			System.out.println("create_nametext通った");
 		}
