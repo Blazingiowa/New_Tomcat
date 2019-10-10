@@ -69,6 +69,7 @@ public class CooltimeText extends TextWrite //カードのクールタイムを�
 		}
 
 		writetext = line+"s"+line;//sを改行文字として二人分のcooltimeを用意する
+		System.out.println("cooltime.txtに入る文字だよ:"+writetext);
 
 		//System.out.println("txtに出力される文字だよ");
 		//System.out.println(writetext);

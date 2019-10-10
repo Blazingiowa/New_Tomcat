@@ -19,7 +19,7 @@ public class TextWrite //extends TextRead
 	TextWrite()
 	{
 		tr = new TextRead();
-		text = null ; writetext = null;
+		text = ""; writetext = "";
 	}
 
 	void write(int room_id,int player_number,int line_number,int[] write)
@@ -73,10 +73,8 @@ public class TextWrite //extends TextRead
 			System.out.println(i+"行目:"+line[i]);
 		}
 
-		writing(file,text);
-
-		//テスト後以下削除
-		/*try
+		//writing(file,text);
+		try
 		{
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
@@ -90,7 +88,7 @@ public class TextWrite //extends TextRead
 		finally
 		{
 			bwclose();
-		}*/
+		}
 	}
 
 	void writing(File file,String text)

@@ -98,7 +98,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 
 		for(int i = 0;i<line.length;i++)//テキストファイルに書き込む情報を行ごとにまとめる
 		{
-			line[i] = cardlist[i][0]+","+cardlist[i][1]+","+cardlist[i][2];
+			line[i] = cardlist[i][0]+","+cardlist[i][1]+","+cardlist[i][2]+","+cardlist[i][3];
 		}
 		/*System.out.println("一行ごとの情報だよ");
 		for(int i =0;i<line.length;i++)

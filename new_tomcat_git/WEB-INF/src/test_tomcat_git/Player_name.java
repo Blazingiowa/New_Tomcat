@@ -1,13 +1,20 @@
 package test_tomcat_git;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Player_name  extends TextWrite//プレイヤー名を保持する
 {
-	BufferedReader br;
+	protected BufferedReader br;
+	protected TextRead tr;
+	protected BufferedWriter bw;
+	protected PrintWriter pw;
+	protected FileWriter fw;
 
 	Player_name()
 	{
@@ -77,10 +84,10 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 			}
 		}
 
-		writing(file,text);
+		//writing(file,text);
 
 		//書き換えた情報をテキストファイルを出力する
-		/*
+
 		 try
 		{
 			fw = new FileWriter(file);
@@ -96,7 +103,7 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 		{
 			bwclose();
 		}
-		*/
+
 
 	}
 }

@@ -1,11 +1,20 @@
 package test_tomcat_git;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CardnameText
 {
+	protected TextRead tr;
+	protected BufferedWriter bw;
+	protected PrintWriter pw;
+	protected FileWriter fw;
+
 	int cardcount;
 	PreparedStatement pstmt;
 	ResultSet rs;
@@ -24,10 +33,10 @@ public class CardnameText
 
 		//pstmt = cs.CountCardSQL();
 		cardcount = 0;
-		writetext = null;
+		writetext = "";
 	}
 
-	String cardname()
+	void cardname(File file)
 	{
 		cardcount = ct.CardCount();
 		line = new String[cardcount];
@@ -66,7 +75,21 @@ public class CardnameText
 			}
 		}
 
-		return writetext;
+		try//テキストファイルに出力する
+		{
+			fw = new FileWriter(file);
+			bw = new BufferedWriter(fw);
+			pw = new PrintWriter(bw);
+			pw.println(writetext);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		finally
+		{
+			tw.bwclose();
+		}
 	}
 
 }

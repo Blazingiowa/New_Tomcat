@@ -146,16 +146,17 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 			permission(files[5]);
 			pn.create_nametext(files[5]);
 		}
+		pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
 
 		if(files[6].exists() == false)//カード情報を出力したテキストファイルの作成
 		{
 			createfile(files[6]);
 			permission(files[6]);
-			cardtext = cnt.cardname();
+			cnt.cardname(files[6]);
 			tw.writing(files[6], cardtext);
 		}
 
-		pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
+
 
 		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
 		/*for(int i =0;i<online.length;i++)
