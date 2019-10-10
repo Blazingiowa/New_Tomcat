@@ -62,8 +62,8 @@ public class CreateConnection //データベースに接続するための準備
 	{
 		try
 		{
+			//stmt.close();//ステートメントをクローズ
 			conn.close();//接続切断
-			stmt.close();//ステートメントをクローズ
 		}
 		catch (SQLException e)
 		{
