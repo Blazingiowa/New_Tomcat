@@ -49,8 +49,8 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 		}
 		*/
 
-		//pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
-		//pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
+		pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
+		pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
 
 		/*
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;";
