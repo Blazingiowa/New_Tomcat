@@ -69,38 +69,6 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 
 		update(user_name,userinfo,reserve);
 
-		try
-		{
-
-			pstmts_update[0] = cs.UpdateUserTable();
-			pstmts_update[0].setString(1, user_name);
-			pstmts_update[0].setInt(2, userinfo[0]);
-
-			pstmts_update[1] = cs.UpdateRoomTable();
-			pstmts_update[1].setInt(1, userinfo[1]);
-
-			pstmts_update[0].executeUpdate();
-			pstmts_update[1].executeUpdate();
-
-			if(reserve == 1)
-			{
-				reserve_pstmt = cs.RoomReserve();
-				reserve_pstmt.setInt(1, userinfo[1]);
-				reserve_pstmt.executeUpdate();
-				cs.closepstmt(reserve_pstmt);
-			}
-
-		}
-		catch(SQLException e)
-		{
-			System.out.println(e);
-		}
-		finally
-		{
-			//CC.close();
-			//cs.closepstmt(reserve_pstmt);
-			cs.closepstmts(pstmts_update);
-		}
 		return userinfo;
 
 	}
@@ -127,7 +95,12 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 			pstmts_update[0].setInt(2, userinfo[0]);
 
 			pstmts_update[1] = cs.UpdateRoomTable();
-			pstmts_update[1].setInt(1, userinfo[1]);
+			pstmts_update[1].setInt(1, userinfo[0]);
+			pstmts_update[1].setInt(2, userinfo[1]);
+			pstmts_update[1].setInt(3, userinfo[2]);
+
+			pstmts_update[0].executeUpdate();
+			pstmts_update[1].executeUpdate();
 
 			if(reserve == 1)
 			{
