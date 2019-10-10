@@ -19,6 +19,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 		rd = new Roomdelete();
 		cs = new CreateStatement();
 		userid = new int[useridnum];
+		pstmts = cs.Playerout();
 	}
 
 	void logout(int[] playerinfo)//ユーザID,ルームID,プレイヤー番号の順番で格納
@@ -31,7 +32,6 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			stmt.executeUpdate("UPDATE room SET user_id = 0 WHERE user_id = "+playerinfo[0]+";");
 			*/
 
-			pstmts = cs.Playerout();
 			pstmts[0].setInt(1, playerinfo[0]);
 			pstmts[0].executeUpdate();
 

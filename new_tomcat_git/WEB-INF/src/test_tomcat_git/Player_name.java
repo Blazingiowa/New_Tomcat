@@ -15,6 +15,7 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 	protected BufferedWriter bw;
 	protected PrintWriter pw;
 	protected FileWriter fw;
+	protected String writetext;
 
 	Player_name()
 	{
@@ -23,7 +24,7 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 
 	void create_nametext(File file)//テキストファイルを作成する
 	{
-		text = "-1,-1,-1";//初期化
+		writetext = "-1,-1,-1";//初期化
 
 		//writing(file,text);
 
@@ -38,7 +39,7 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 			pw = new PrintWriter(bw);
-			pw.print(text);
+			pw.print(writetext);
 		}
 		catch(Exception e)
 		{
