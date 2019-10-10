@@ -135,6 +135,8 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 			{
 				reserve_pstmt = cs.RoomReserve();
 				reserve_pstmt.setInt(1, userinfo[1]);
+				reserve_pstmt.executeUpdate();
+				cs.closepstmt(reserve_pstmt);
 			}
 
 		}
@@ -145,7 +147,7 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 		finally
 		{
 			//CC.close();
-			cs.closepstmt(reserve_pstmt);
+			//cs.closepstmt(reserve_pstmt);
 			cs.closepstmts(pstmts_update);
 		}
 	}
