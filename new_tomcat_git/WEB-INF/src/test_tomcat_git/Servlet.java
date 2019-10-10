@@ -42,13 +42,23 @@ public class Servlet extends HttpServlet
 	private int int_room_id;
 	private int int_reserve;
 
-	//固定変数用
+
 	final int final_user = 0;
 	final int final_room = 1;
 	final int final_pl_num = 2;
+	final int final_res = 3;
 
+	final int final_default = -1;
 
-	private boolean flag_name;
+	final int room_Search =2;
+
+	final String st_default ="-1";
+
+	final String error_name ="10";
+	final String error_id ="20";
+
+	final String separator =",";
+
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException
@@ -60,8 +70,6 @@ public class Servlet extends HttpServlet
             throws ServletException, IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-
-		//以下テストコード自由に変えてよし
 
 		System.out.println("■■■■■■■■■■■■■■■■■■■■");
 		LocalDateTime ldt = LocalDateTime.now();
@@ -78,13 +86,12 @@ public class Servlet extends HttpServlet
 
 		reserve = request.getParameter("reserve");
 
-		//ロビー用にint変換
 
-		int_room_id = conversion(room_id);
-		int_reserve = conversion(reserve);
-
-		//名前に特殊文字が含まれているか
-		check(name);
+		//ubのnullはキャッシュが配布されるから許されないらしい
+		ub.setError(st_default);
+		ub.setUserNumber(st_default);
+		ub.setUserID(st_default);
+		ub.setRoomID(st_default);
 
 		//送られてくるデータの表示（デバック用）
 		System.out.println("userID:"+ us_id);
@@ -98,26 +105,21 @@ public class Servlet extends HttpServlet
 		System.out.println("使ったカード2:" + str_use_hand [1]);
 		System.out.println("使ったカード3:" + str_use_hand [2]);
 
-		//ubのnullはキャッシュが配布されるから許されないらしい
-		ub.setError("");
-		ub.setUserNumber("-1");
-		ub.setUserID("-1");
-		ub.setRoomID("-1");
+
+		//名前に特殊文字が含まれているか
+		check(name);
+
+		//ロビー用にint変換
+
+		initial();
 
 		if(flag == null)//game継続
 		{
 			if (us_id == null)//ID値持っていないとき始めてきたと認識
 			{
 				//リクエスト内に[name]パラメーターで名前を入れてもらう
-				if(flag_name == false)
+				if(ub.getError().equals("-1"))
 				{
-					System.out.println("ネームエラーによりID,ナンバー'-1'で返す");
-					ub.setError("禁止文字が含まれています");
-				}
-				//始めてきた人用の処理
-				else
-				{
-					//str name int reserve int room
 					str_user_info = game_start.createdirectry(name, int_reserve, int_room_id);
 
 					ub.setUserID(str_user_info[0]);
@@ -143,35 +145,13 @@ public class Servlet extends HttpServlet
 			{
 				//int変換でNULLを入れるのを防ぐ
 				//nullなら使ってないとして扱う
-				if(str_use_hand [0] ==  null)
+
+				//今作ったの
+				for(int i=0;i<use_hand.length;i++)
 				{
-					use_hand[0] = -1;
-				}
-				else
-				{
-					use_hand[0] = Integer.parseInt(str_use_hand [0]);
+					use_hand[i]=i_check(str_use_hand[i]);
 				}
 
-				if(str_use_hand [1] ==  null)
-				{
-					use_hand[1] = -1;
-				}
-				else
-				{
-					use_hand[1] = Integer.parseInt(str_use_hand [1]);
-				}
-
-				if(str_use_hand [2] ==  null)
-				{
-					use_hand[2] = -1;
-				}
-				else
-				{
-					use_hand[2] = Integer.parseInt(str_use_hand [2]);
-				}
-
-				//何かしらの値を入れないといけない。テスト的に値を入れてある
-				//正直いらないが念の為
 				info();
 
 				//GameProject_Mainに送られてきたユーザーの情報と使ったカードを送る
@@ -198,63 +178,80 @@ public class Servlet extends HttpServlet
 	}
 	void info()
 	{
-		if(us_id ==  null)
-		{
-			int_user_info[final_user] = 1;
-
-		}
-		else
-		{
-			int_user_info[final_user] =Integer.parseInt(us_id);
-		}
-
-
-		if(room_id ==  null)
-		{
-			int_user_info[final_room] = 111;
-
-		}
-		else
-		{
-			int_user_info[final_room] =Integer.parseInt(room_id);
-		}
-
-
-		if(us_num ==  null)
-		{
-			int_user_info[final_pl_num] = 2;
-
-		}
-		else
-		{
-			int_user_info[final_pl_num] =Integer.parseInt(us_num);
-		}
+		int_user_info[final_user] =i_check(us_id);
+		int_user_info[final_room]  =i_check(room_id);
+		int_user_info[final_pl_num]  =i_check(us_num);
 
 	}
-	//String→int変換
-	int conversion(String s)
+	//初期用
+	void initial()
 	{
-		int i = -1;
+		int_reserve = final_default;
+		int_room_id = final_default;
 
-		if(s == null)
+		if(reserve.matches("[0-2]"))
 		{
-
+			int_reserve = Integer.parseInt(reserve);
+			if(int_reserve == room_Search)
+			{
+				if(room_id.matches("[0]") || room_id.matches("[1-9][0-9]{1,}"))
+				{
+					int_room_id = Integer.parseInt(room_id);
+				}
+				else
+				{
+					error(error_id);
+				}
+			}
 		}
 		else
 		{
-			i = Integer.parseInt(s);
+			error(error_id);
 		}
-		return i;
 
 	}
 	//特殊文字探査
 	void check(String s)
 	{
-		flag_name = true;
 		System.out.println("check通った 値 : " + s);
 		if (s==null || !s.matches("^[ぁ-んァ-ン一-龥０-９ａ-ｚＡ-Ｚa-zA-Z0-9]+$") || s.equals("null") || s.equals("NULL"))
 		{
-			flag_name = false;
+			System.out.println("ネームエラーによりID,ナンバー'-1'で返す");
+			error(error_name);
+
+		}
+	}
+	//数値のみ許可→変換。違ったらデフォルト(-1)で返す
+	int i_check(String s)
+	{
+		System.out.println("i_check通った 値 : " + s);
+		int i=final_default;
+		if(s.matches("[0]") || s.matches("[1-9][0-9]{1,}"))
+		{
+			i= Integer.parseInt(s);
+		}
+
+		return i;
+	}
+	void error(String s)
+	{
+		String e = ub.getError();
+		//デフォルト値なら上書きして書き換える
+		if(e.contains(st_default))
+		{
+			ub.setError(s);
+		}
+		else
+		{
+			//同じエラーコードがあるかどうかの確認
+			if(e.contains(s))
+			{
+
+			}
+			else
+			{
+				ub.setError(e + separator + s);
+			}
 
 		}
 	}
