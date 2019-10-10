@@ -13,16 +13,17 @@ public class CreateStatement
 
 	CreateConnection CC = new CreateConnection();
 
-	CreateStatement()
+	private Connection Connect()
 	{
 		conn = CC.createconnection();
+		return conn;
 	}
 
 	PreparedStatement SerchEmptyUserTable()
 	{
 		try
 		{
-			pstmt = conn.prepareStatement( "SELECT * FROM user WHERE user_name is NULL ORDER BY user_id LIMIT 1;");
+			pstmt = Connect().prepareStatement( "SELECT * FROM user WHERE user_name is NULL ORDER BY user_id LIMIT 1;");
 		}
 		catch (SQLException e)
 		{
@@ -38,7 +39,7 @@ public class CreateStatement
 		Roomsql[1] =  "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
 		try
 		{
-			pstmt = conn.prepareStatement(Roomsql[reserve]);
+			pstmt = Connect().prepareStatement(Roomsql[reserve]);
 		}
 		catch (SQLException e)
 		{
@@ -51,7 +52,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("SELECT * FROM room WHERE room_id = ?;");
+			pstmt = Connect().prepareStatement("SELECT * FROM room WHERE room_id = ?;");
 		}
 		catch (SQLException e)
 		{
@@ -64,7 +65,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("SELECT * FROM card WHERE card_id = ?;");
+			pstmt = Connect().prepareStatement("SELECT * FROM card WHERE card_id = ?;");
 		}
 		catch (SQLException e)
 		{
@@ -77,7 +78,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("SELECT * FROM card;");
+			pstmt = Connect().prepareStatement("SELECT * FROM card;");
 		}
 		catch (SQLException e)
 		{
@@ -90,7 +91,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt= conn.prepareStatement("UPDATE user SET user_name = ? WHERE user_id = ?;");
+			pstmt= Connect().prepareStatement("UPDATE user SET user_name = ? WHERE user_id = ?;");
 		}
 		catch (SQLException e)
 		{
@@ -103,7 +104,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("UPDATE room SET user_id = ? WHERE room_id = ? AND player_number = ?;");
+			pstmt = Connect().prepareStatement("UPDATE room SET user_id = ? WHERE room_id = ? AND player_number = ?;");
 		}
 		catch (SQLException e)
 		{
@@ -116,7 +117,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("UPDATE room SET user_id = -1 WHERE room_id = ? AND player_number = 2;");
+			pstmt = Connect().prepareStatement("UPDATE room SET user_id = -1 WHERE room_id = ? AND player_number = 2;");
 		}
 		catch (SQLException e)
 		{
@@ -131,7 +132,7 @@ public class CreateStatement
 		try
 		{
 			pstmts[0] = SerchEmptyUserTable();
-			pstmts[1] = conn.prepareStatement("SELECT * FROM room WHERE user_id = -1 AND room_id = ? ORDER BY user_id LIMIT 1;");
+			pstmts[1] = Connect().prepareStatement("SELECT * FROM room WHERE user_id = -1 AND room_id = ? ORDER BY user_id LIMIT 1;");
 		}
 		catch (SQLException e)
 		{
@@ -147,9 +148,9 @@ public class CreateStatement
 		pstmts = new PreparedStatement[3];
 		try
 		{
-			pstmts[0] = conn.prepareStatement("UPDATE user SET user_name = NULL WHERE user_id = ?;");
-			pstmts[1] = conn.prepareStatement("UPDATE room SET user_id = 0 WHERE user_id = ?;");
-			pstmts[2] = conn.prepareStatement("SELECT * FROM room WHERE room_id = ?;");
+			pstmts[0] = Connect().prepareStatement("UPDATE user SET user_name = NULL WHERE user_id = ?;");
+			pstmts[1] = Connect().prepareStatement("UPDATE room SET user_id = 0 WHERE user_id = ?;");
+			pstmts[2] = Connect().prepareStatement("SELECT * FROM room WHERE room_id = ?;");
 		}
 		catch (SQLException e)
 		{
@@ -163,8 +164,8 @@ public class CreateStatement
 		pstmts = new PreparedStatement[2];
 		try
 		{
-			pstmts[0] = conn.prepareStatement("SELECT MAX(user_id) as maxno FROM user;");
-			pstmts[1] = conn.prepareStatement("INSERT INTO user VALUES(?,NULL);");
+			pstmts[0] = Connect().prepareStatement("SELECT MAX(user_id) as maxno FROM user;");
+			pstmts[1] = Connect().prepareStatement("INSERT INTO user VALUES(?,NULL);");
 		}
 		catch(SQLException e)
 		{
@@ -178,9 +179,9 @@ public class CreateStatement
 		pstmts = new PreparedStatement[3];
 		try
 		{
-			pstmts[0] = conn.prepareStatement("SELECT MAX(room_id) as maxno FROM room;");
-			pstmts[1] = conn.prepareStatement("INSERT INTO room VALUES(?,1,0);");
-			pstmts[2] = conn.prepareStatement("INSERT INTO room VALUES(?,2,0);");
+			pstmts[0] = Connect().prepareStatement("SELECT MAX(room_id) as maxno FROM room;");
+			pstmts[1] = Connect().prepareStatement("INSERT INTO room VALUES(?,1,0);");
+			pstmts[2] = Connect().prepareStatement("INSERT INTO room VALUES(?,2,0);");
 		}
 		catch(SQLException e)
 		{
@@ -193,7 +194,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("SELECT * FROM room WHERE user_id = -1 AND room_id = ? ORDER BY user_id LIMIT 1;");
+			pstmt = Connect().prepareStatement("SELECT * FROM room WHERE user_id = -1 AND room_id = ? ORDER BY user_id LIMIT 1;");
 		}
 		catch (SQLException e)
 		{
@@ -208,8 +209,8 @@ public class CreateStatement
 
 		try
 		{
-			pstmts[0] = conn.prepareStatement("SELECT DISTINCT room_id FROM room;");
-			pstmts[1] = conn.prepareStatement("SELECT * FROM room WHERE room_id = ? AND player_number = 2 ;");
+			pstmts[0] = Connect().prepareStatement("SELECT DISTINCT room_id FROM room;");
+			pstmts[1] = Connect().prepareStatement("SELECT * FROM room WHERE room_id = ? AND player_number = 2 ;");
 		}
 		catch (SQLException e)
 		{
@@ -222,7 +223,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("SELECT COUNT(*) AS number FROM card;");
+			pstmt = Connect().prepareStatement("SELECT COUNT(*) AS number FROM card;");
 		}
 		catch (SQLException e)
 		{
@@ -235,7 +236,7 @@ public class CreateStatement
 	{
 		try
 		{
-			pstmt = conn.prepareStatement("SELECT * FROM card_text;");
+			pstmt = Connect().prepareStatement("SELECT * FROM card_text;");
 		}
 		catch (SQLException e)
 		{
