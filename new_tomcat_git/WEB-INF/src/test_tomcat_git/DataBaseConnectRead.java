@@ -34,7 +34,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 		}
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-		pstmt = cs.SerchAllCard();
+		pstmt = cs.SerchCardTable();
 		try
 		{
 			pstmt.setInt(1, id);

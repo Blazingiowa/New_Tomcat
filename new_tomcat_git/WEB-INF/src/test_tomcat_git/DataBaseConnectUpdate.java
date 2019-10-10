@@ -21,7 +21,7 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 		pstmts_update =new PreparedStatement[update_num];
 	}
 
-	int[] updateSQL(String user_name,int reserve,int room_id)//受け渡されたusernameをデータベースへインサートする
+	int[] updateSQL(String user_name,int reserve,int room_id)//受け渡されたusernameをデータベースへ挿入する
 	{
 		//userinfo=DBCB.beforeupdate();//空いているルームと攻守を検索
 		/*System.out.println("DataBaseUpdateクラス上での情報だお");
@@ -51,6 +51,7 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 
 		pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
 		pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
+		System.out.println(pstmts_select);
 
 		/*
 		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;";
@@ -68,29 +69,25 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 
 		update(user_name,userinfo,reserve);
 
-		/*
-		else//部屋の検索
-		{
-			userinfo=DBCB.beforeupdate(0);
-			roomfull(room_id);
-		}
-		*/
-
-
-/*
 		try
 		{
-			Statement stmt1 = CC.createstatement(conn = CC.createconnection());
-			Statement stmt2 = CC.createstatement(conn = CC.createconnection());
-			Statement stmt3 = CC.createstatement(conn = CC.createconnection());
 
+			pstmts_update[0] = cs.UpdateUserTable();
+			pstmts_update[0].setString(1, user_name);
+			pstmts_update[0].setInt(2, userinfo[0]);
 
-			stmt1.executeUpdate("UPDATE user SET user_name = '"+user_name+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
-			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");//空いているルームにユーザーIDを格納する
-			//部屋を作った際に相手の場所を予約する
+			pstmts_update[1] = cs.UpdateRoomTable();
+			pstmts_update[1].setInt(1, userinfo[1]);
+
+			pstmts_update[0].executeUpdate();
+			pstmts_update[1].executeUpdate();
+
 			if(reserve == 1)
 			{
-				stmt3.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
+				reserve_pstmt = cs.RoomReserve();
+				reserve_pstmt.setInt(1, userinfo[1]);
+				reserve_pstmt.executeUpdate();
+				cs.closepstmt(reserve_pstmt);
 			}
 
 		}
@@ -100,9 +97,10 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 		}
 		finally
 		{
-			CC.close();
+			//CC.close();
+			//cs.closepstmt(reserve_pstmt);
+			cs.closepstmts(pstmts_update);
 		}
-*/
 		return userinfo;
 
 	}
