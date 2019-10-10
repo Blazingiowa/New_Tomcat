@@ -28,6 +28,11 @@ public class Player_name  extends TextWrite//プレイヤー名を保持する
 		//writing(file,text);
 
 
+		if(file == null)
+		{
+			System.out.println("ふぁいるはぬるだよぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉぉ");
+		}
+
 		try
 		{
 			fw = new FileWriter(file);

@@ -158,7 +158,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 
 
 
-		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
+		/*原因*/online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
 		/*for(int i =0;i<online.length;i++)
 		{
 			System.out.println("room.textの中身:"+online[i]);
