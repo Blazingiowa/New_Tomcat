@@ -49,7 +49,7 @@ public class TaiouText extends TextWrite //対応するカードの情報をテ�
 		}
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-		pstmt = cs.SerchCardTabeleText();
+		pstmt = cs.SerchAllCard();
 		try
 		{
 			rs = pstmt.executeQuery();//カードの情報を取得

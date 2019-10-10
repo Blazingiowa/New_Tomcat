@@ -31,7 +31,7 @@ public class CooltimeText extends TextWrite //カードのクールタイムを�
 	{
 		cooltimelist = new int[ct.CardCount()];
 
-		pstmt = cs.SerchCardTabeleText();
+		pstmt = cs.SerchAllCard();
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
 		try
 		{

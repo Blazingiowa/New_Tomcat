@@ -13,7 +13,7 @@ public class DataBaseConnectCard //extends DataBaseConnectRead //データベー
 	DataBaseConnectCard()
 	{
 		cs = new CreateStatement();
-		pstmt = cs.SerchCardTabeleText();
+		pstmt = cs.SerchAllCard();
 	}
 
 	ResultSet cardinfo()

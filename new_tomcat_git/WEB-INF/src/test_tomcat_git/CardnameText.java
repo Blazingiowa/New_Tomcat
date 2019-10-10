@@ -22,7 +22,7 @@ public class CardnameText
 		ct = new CardText();
 		tw = new TextWrite();
 
-		pstmt = cs.CountCard();
+		pstmt = cs.CountCardSQL();
 		cardcount = 0;
 		writetext = null;
 	}
@@ -45,7 +45,10 @@ public class CardnameText
 			{
 				line[count] += rs.getString("card_name")+",";
 				line[count] += rs.getString("card_text_first")+",";
-				line[count] += rs.getString("card_text_first");
+				line[count] += rs.getString("card_text_second")+",";
+				line[count] += rs.getString("card_text_hukidashi_first")+",";
+				line[count] += rs.getString("card_text_hukidashi_second")+",";
+				line[count] += rs.getString("s");
 				count++;
 			}
 		}
