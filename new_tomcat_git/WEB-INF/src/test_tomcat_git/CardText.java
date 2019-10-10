@@ -38,7 +38,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		writetext = "";
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-		select_card_pstmt = cs.SerchCardTabeleText();
+		select_card_pstmt = cs.SerchAllCard();
 
 		try
 		{

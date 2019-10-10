@@ -73,7 +73,7 @@ public class CreateStatement
 		return pstmt;
 	}
 
-	PreparedStatement SerchCardTabeleText()
+	PreparedStatement SerchAllCard()
 	{
 		try
 		{
