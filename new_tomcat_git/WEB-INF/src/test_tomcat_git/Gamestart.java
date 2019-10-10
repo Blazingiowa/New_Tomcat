@@ -146,7 +146,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 			permission(files[5]);
 			pn.create_nametext(files[5]);
 		}
-		pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
+		//pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
 
 		if(files[6].exists() == false)//カード情報を出力したテキストファイルの作成
 		{
