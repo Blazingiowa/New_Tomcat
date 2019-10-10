@@ -73,7 +73,7 @@ public class TextWrite //extends TextRead
 			System.out.println(i+"行目:"+line[i]);
 		}
 
-		writing(tr.file,text);
+		writing(file,text);
 
 		//テスト後以下削除
 		/*try

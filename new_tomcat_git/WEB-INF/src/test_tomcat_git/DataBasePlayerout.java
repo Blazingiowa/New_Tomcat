@@ -18,7 +18,6 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 		super();
 		rd = new Roomdelete();
 		cs = new CreateStatement();
-		pstmts = cs.Playerout();
 		userid = new int[useridnum];
 	}
 
@@ -32,6 +31,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			stmt.executeUpdate("UPDATE room SET user_id = 0 WHERE user_id = "+playerinfo[0]+";");
 			*/
 
+			pstmts = cs.Playerout();
 			pstmts[0].setInt(1, playerinfo[0]);
 			pstmts[1].setInt(1, playerinfo[0]);
 
