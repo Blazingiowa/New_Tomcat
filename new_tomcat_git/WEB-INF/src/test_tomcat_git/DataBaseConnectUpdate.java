@@ -2,7 +2,6 @@ package test_tomcat_git;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインしたプレイヤーの情報をデータベースに格納する
 {
@@ -103,9 +102,11 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 	{
 		try
 		{
+			/*
 			Statement stmt1 = cc.createstatement(conn = cc.createconnection());
 			Statement stmt2 = cc.createstatement(conn = cc.createconnection());
 			Statement stmt3 = cc.createstatement(conn = cc.createconnection());
+			*/
 
 			update_user_pstmt = cc.createpStatement(cc.createconnection(),sr.UpdateLoginUser());
 			update_room_pstmt = cc.createpStatement(cc.createconnection(),sr.UpdateLoginRoom());
@@ -117,19 +118,20 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 			update_room_pstmt.setInt(2,userinfo[1]);
 			update_room_pstmt.setInt(3,userinfo[2]);
 
-			stmt1.executeUpdate("UPDATE user SET user_name = '"+user_name+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
-			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");//空いているルームにユーザーIDを格納する
+			//stmt1.executeUpdate("UPDATE user SET user_name = '"+user_name+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
+			//stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");//空いているルームにユーザーIDを格納する
 
-			update_user_pstmt.executeQuery();
-			update_room_pstmt.executeQuery();
+			update_user_pstmt.executeUpdate();
+			update_room_pstmt.executeUpdate();
 
 			//部屋を作った際に相手の場所を予約する
 			if(reserve == 1)
 			{
-				stmt3.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
+				//stmt3.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
 
 				reserve_pstmt =cc.createpStatement(cc.createconnection(),sr.UpdateReserveRoom());
 				reserve_pstmt.setInt(1,userinfo[1]);
+				reserve_pstmt.executeUpdate();
 			}
 
 		}
