@@ -13,7 +13,7 @@ public class CreateConnection //データベースに接続するための準備
 	Connection conn;
 
 	protected final String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
-	protected final String user = "root";//データベースへアクセスするID
+	protected final String user = "ktmttfr";//データベースへアクセスするID
 	protected final String password = "ncc_NCC2019";//データベースのパスワード
 
 	Connection createconnection()//データベースと接続を作成しConnectionを返す
