@@ -1,5 +1,6 @@
 package test_tomcat_git;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -8,17 +9,19 @@ public class RoomCheck extends DataBaseConnectUpdate
 	protected int serch;
 	protected boolean empty;
 	Statement stmt;
-
+	PreparedStatement room_exist,room_full;
 
 	boolean existroom(int room_id)
 	{
 		boolean exist = false;
-		stmt =CC.createstatement(conn = CC.createconnection());
+		stmt =cc.createstatement(conn = cc.createconnection());
+		room_exist=cc.createpStatement(cc.createconnection(),sr.SelectRoomExist());
 
 		try
 		{
 			serch= 0;
-			rs = stmt.executeQuery("SELECT DISTINCT room_id FROM room;");
+			//rs = stmt.executeQuery("SELECT DISTINCT room_id FROM room;");
+			rs = room_exist.executeQuery();
 
 			while(rs.next())
 			{
@@ -37,7 +40,7 @@ public class RoomCheck extends DataBaseConnectUpdate
 		}
 		finally
 		{
-			CC.close();//データベースとの接続を解除
+			cc.close();//データベースとの接続を解除
 
 			try
 			{
@@ -56,12 +59,15 @@ public class RoomCheck extends DataBaseConnectUpdate
 
 	boolean roomfull(int room_id)
 	{
-		stmt =CC.createstatement(conn = CC.createconnection());
+		stmt =cc.createstatement(conn = cc.createconnection());
 		empty = true;
+		room_full=cc.createpStatement(cc.createconnection(),sr.SelectRoomFull());
 
 		try
 		{
-			rs = stmt.executeQuery("SELECT * FROM room WHERE room_id = "+ room_id +" AND player_number = 2 ;");
+			//rs = stmt.executeQuery("SELECT * FROM room WHERE room_id = "+ room_id +" AND player_number = 2 ;");
+			room_full.setInt(1,room_id);
+			rs = room_full.executeQuery();
 
 			while(rs.next())
 			{
@@ -75,7 +81,7 @@ public class RoomCheck extends DataBaseConnectUpdate
 		}
 		finally
 		{
-			CC.close();
+			cc.close();
 			try
 			{
 				rs.close();

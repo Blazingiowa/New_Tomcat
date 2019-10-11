@@ -17,7 +17,7 @@ public class SQLRepository
 		return sql;
 	}
 
-	String CountCard()//データベース上にあるカードを検索する
+	String SelectCountCard()//データベース上にあるカードの枚数を検索する
 	{
 		sql = "SELECT COUNT(*) AS number FROM card;";
 		return sql;
@@ -29,7 +29,7 @@ public class SQLRepository
 		return sql;
 	}
 
-	String SelectRoom(int reserve)//ルームを検索または検索し予約
+	String SelectEmptyRoom(int reserve)//ルームを検索または検索し予約
 	{
 		if(reserve ==0)//通常のマッチ
 		{

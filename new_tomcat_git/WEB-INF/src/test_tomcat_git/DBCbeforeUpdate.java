@@ -1,13 +1,14 @@
 package test_tomcat_git;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋と空いているユーザーIDを検索する
 {
 	DBCNotEmpty DBCNE = new DBCNotEmpty();
+	PreparedStatement user_pstmt,room_pstmt;
 
-	int[] beforeupdate(String sql[])
+	int[] beforeupdate(String sqls[])
 	{
 		Result = new int[3];
 		/*
@@ -28,11 +29,14 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 			Result[i] = 0;
 		}
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());
+		//Statement stmt = cc.createstatement(conn = cc.createconnection());
+		user_pstmt=cc.createpStatement(cc.createconnection(),sqls[0]);
+		room_pstmt=cc.createpStatement(cc.createconnection(), sqls[1]);
 
 		try
 		{
-			rs = stmt.executeQuery(sql[0]);//空いているユーザーIDの検索
+			//rs = stmt.executeQuery(sqls[0]);//空いているユーザーIDの検索
+			rs = user_pstmt.executeQuery();
 
 			if(rs.next())
 			{
@@ -46,7 +50,8 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 				Result[0] = DBCNE.userIDNotempty();
 			}
 
-			rs = stmt.executeQuery(sql[1]);//空いているルームの検索
+			//rs = stmt.executeQuery(sqls[1]);//空いているルームの検索
+			rs = room_pstmt.executeQuery();
 			//結果の挿入
 
 			if(rs.next())
@@ -57,7 +62,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 			}
 			else
 			{
-				int[] keep = DBCNE.RoomNotempty(sql[1]);
+				int[] keep = DBCNE.RoomNotempty(sqls[1]);
 				Result[1] = keep[0];
 				Result[2] = keep[1];
 			}
@@ -71,8 +76,8 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		}
 		catch(SQLException e)
 		{
-			System.out.println(sql[0]);
-			System.out.println(sql[1]);
+			System.out.println(sqls[0]);
+			System.out.println(sqls[1]);
 			System.out.println(e);
 		}
 		finally

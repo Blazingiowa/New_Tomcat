@@ -32,7 +32,7 @@ public class TaiouText extends CardText //対応するカードの情報をテ�
 			}
 		}
 
-		Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
+		Statement stmt = cc.createstatement(conn = cc.createconnection());//ステートメントを取得
 		try
 		{
 			stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得
@@ -83,7 +83,7 @@ public class TaiouText extends CardText //対応するカードの情報をテ�
 
 		finally
 		{
-			CC.close();//データベースとの接続を解除
+			cc.close();//データベースとの接続を解除
 			try
 			{
 				rs.close();//ResultSetをクローズ
