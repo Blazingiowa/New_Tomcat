@@ -130,7 +130,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 							if (p2_card[i][j] == p1_card[k][0])
 							{
 								//ｐ２のカードが攻撃で、ｐ１の防御に防がれたとき
-								if (p2_card[i][9] == JudgeATKCard)
+								if (p2_card[i][8] == JudgeATKCard)
 								{
 									textmain[6][k] -= p2_card[i][2] / 2;//ｐ２が受けたダメージを計算して配列に入れる
 									ATKflag = true;
@@ -147,7 +147,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 							else
 							{
 								//攻撃カードかどうかの判定
-								if (p2_card[i][9] == JudgeATKCard)
+								if (p2_card[i][8] == JudgeATKCard)
 								{
 									//カウントをプラスする
 									ATKcount++;
@@ -182,7 +182,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 			if (p1_card[i][0] != JudgeCard)
 			{
 				//攻撃カードかどうかの判定
-				if (p1_card[i][9] == JudgeATKCard)
+				if (p1_card[i][8] == JudgeATKCard)
 				{
 					//p1_cardの対応IDの列を回すためのfor
 					for (int j = 3; j < p1_card[0].length - 1; j++)
@@ -197,7 +197,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 								if (p1_card[i][j] == p2_card[k][0])
 								{
 									//ｐ１のカードが攻撃で、ｐ２の防御に防がれたとき
-									if (p1_card[i][9] == JudgeATKCard)
+									if (p1_card[i][8] == JudgeATKCard)
 									{
 										ATKflag = true;
 									}

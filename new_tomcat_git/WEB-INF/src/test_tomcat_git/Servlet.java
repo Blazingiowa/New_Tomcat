@@ -238,6 +238,7 @@ public class Servlet extends HttpServlet
 		int i=final_default;
 		if(s.matches("[0]") || s.matches("[1-9][0-9]{0,}"))
 		{
+			System.out.println("i_check成功");
 			i= Integer.parseInt(s);
 		}
 
