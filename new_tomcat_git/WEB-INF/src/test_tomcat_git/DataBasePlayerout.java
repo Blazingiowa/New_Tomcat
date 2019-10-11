@@ -10,6 +10,8 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 
 	void logout(int[] playerinfo)//ユーザID,ルームID,プレイヤー番号の順番で格納
 	{
+		System.out.println("logout通ったよ");
+
 		logout_user =cc.createpStatement(cc.createconnection(),sr.UpdateLogoutUser());
 		logout_room =cc.createpStatement(cc.createconnection(),sr.UpdateLogoutRoom());
 
