@@ -6,6 +6,9 @@ import java.sql.SQLException;
 public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤーが退出した際にデータベース上の情報を更新する
 {
 	Roomdelete rd = new Roomdelete();
+	CreateConnection cc = new CreateConnection();
+	SQLRepository sr = new SQLRepository();
+
 	PreparedStatement logout_user,logout_room,room_check;
 
 	void logout(int[] playerinfo)//ユーザID,ルームID,プレイヤー番号の順番で格納
@@ -27,7 +30,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			logout_user.executeUpdate();
 
 			logout_room.setInt(1,playerinfo[0]);
-			logout_user.executeUpdate();
+			logout_room.executeUpdate();
 
 		}
 		catch (SQLException e)
