@@ -9,7 +9,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 	CreateConnection cc = new CreateConnection();
 	SQLRepository sr = new SQLRepository();
 
-	PreparedStatement logout_user,logout_room,room_check;
+	PreparedStatement logout_user,logout_room,room_check,reserve_cancel;
 
 	void logout(int[] playerinfo)//ユーザID,ルームID,プレイヤー番号の順番で格納
 	{
@@ -70,6 +70,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 		}
 
 		room_check = cc.createpStatement(cc.createconnection(),sr.SelectRoomUser());
+		reserve_cancel = cc.createpStatement(cc.createconnection(),sr.UpdateLogoutReserve());
 
 		try
 		{
@@ -84,6 +85,17 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			for(int i = 0;rs.next();i++)
 			{
 				Result[i] = rs.getInt("user_id");
+			}
+
+			for(int i=0;i<Result.length;i++)
+			{
+				int w=i;
+				if(Result[i] <0)
+				{
+					reserve_cancel.setInt(1,room_id);
+					reserve_cancel.setInt(2,++w);
+					reserve_cancel.executeUpdate();
+				}
 			}
 		}
 		catch(SQLException e)
