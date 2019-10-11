@@ -14,7 +14,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	CreateConnection cc = new CreateConnection();
 	SQLRepository sr = new SQLRepository();
 	ResultSet rs;
-	PreparedStatement pstmt;
+	PreparedStatement all_card,count;
 	Connection conn;
 	int[][] cardlist;
 
@@ -33,12 +33,12 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		writetext = "";
 
 		//Statement stmt = cc.createstatement(conn = cc.createconnection());//ステートメントを取得
-		pstmt = cc.createpStatement(cc.createconnection(),sr.SelectAllCard());
+		all_card = cc.createpStatement(cc.createconnection(),sr.SelectAllCard());
 
 		try
 		{
 			//stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得するためのSQL
-			rs = pstmt.executeQuery();
+			rs = all_card.executeQuery();
 			//rs = stmt.getResultSet();
 		}
 		catch(SQLException e)
@@ -129,10 +129,10 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	{
 		int number =0;
 
-		pstmt = cc.createpStatement(cc.createconnection(),sr.SelectCountCard());
+		count = cc.createpStatement(cc.createconnection(),sr.SelectCountCard());
 		try
 		{
-			rs = pstmt.executeQuery();
+			rs = count.executeQuery();
 			number = rs.getInt("number");
 		}
 		catch (SQLException e)
