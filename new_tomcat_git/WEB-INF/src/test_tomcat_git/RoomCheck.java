@@ -12,10 +12,12 @@ public class RoomCheck //extends DataBaseConnectUpdate
 	protected boolean[] roomchecker;
 	protected ResultSet[] rss;
 	protected PreparedStatement[] pstmts;
+	CreateConnection cc;
 	CreateStatement cs;
 
 	RoomCheck()
 	{
+		cc = new CreateConnection();
 		serch = 0;
 		exist = false;
 		empty = true;
@@ -24,12 +26,13 @@ public class RoomCheck //extends DataBaseConnectUpdate
 		roomchecker[1] = true;
 		rss = new ResultSet[rsnum];
 		cs = new CreateStatement();
-		pstmts = cs.ExistCheck();
+
 	}
 
 
 	boolean[] roomchcek(int room_id)
 	{
+		pstmts = cs.ExistCheck(cc.createconnection());
 		try
 		{
 			rss[0] = pstmts[0].executeQuery();

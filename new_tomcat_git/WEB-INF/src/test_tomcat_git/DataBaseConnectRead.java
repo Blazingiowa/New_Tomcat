@@ -9,6 +9,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 {
 	//CreateConnection CC = new CreateConnection();
 	CreateStatement cs;
+	CreateConnection cc;
 
 	final int infonum = 3,Resultnum=9;
 	protected int[] Result;//受け渡す情報が入る
@@ -19,6 +20,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 
 	DataBaseConnectRead()
 	{
+		cc = new CreateConnection();
 		cs = new CreateStatement();
 		Result = new int[Resultnum];
 		room = new int[infonum];
@@ -34,7 +36,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 		}
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-		pstmt = cs.SerchCardTable();
+		pstmt = cs.SerchCardTable(cc.createconnection());
 		try
 		{
 			pstmt.setInt(1, id);

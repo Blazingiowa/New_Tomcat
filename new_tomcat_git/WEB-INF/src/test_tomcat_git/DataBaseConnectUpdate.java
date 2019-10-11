@@ -10,11 +10,13 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 	final int select_num = 2,update_num = 2;
 	PreparedStatement[] pstmts_select,pstmts_update;
 	PreparedStatement reserve_pstmt;
+	CreateConnection cc;
 	CreateStatement cs;
 	DBCbeforeUpdate DBCB;
 
 	DataBaseConnectUpdate()
 	{
+		cc = new CreateConnection();
 		cs = new CreateStatement();
 		DBCB = new DBCbeforeUpdate();
 		pstmts_select = new PreparedStatement[select_num];
@@ -49,8 +51,8 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 		}
 		*/
 
-		pstmts_select[0] = cs.SerchEmptyUserTable();//空いているユーザーID
-		pstmts_select[1] = cs.SerchEmptyRoomTable(reserve);//空いている部屋の検索
+		pstmts_select[0] = cs.SerchEmptyUserTable(cc.createconnection());//空いているユーザーID
+		pstmts_select[1] = cs.SerchEmptyRoomTable(reserve,cc.createconnection());//空いている部屋の検索
 		System.out.println(pstmts_select);
 
 		/*
@@ -90,11 +92,11 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 				reserve_pstmt = cs.RoomReserve();
 			}*/
 
-			pstmts_update[0] = cs.UpdateUserTable();
+			pstmts_update[0] = cs.UpdateUserTable(cc.createconnection());
 			pstmts_update[0].setString(1, user_name);
 			pstmts_update[0].setInt(2, userinfo[0]);
 
-			pstmts_update[1] = cs.UpdateRoomTable();
+			pstmts_update[1] = cs.UpdateRoomTable(cc.createconnection());
 			pstmts_update[1].setInt(1, userinfo[0]);
 			pstmts_update[1].setInt(2, userinfo[1]);
 			pstmts_update[1].setInt(3, userinfo[2]);
@@ -104,7 +106,7 @@ public class DataBaseConnectUpdate //extends DataBaseConnectRead //ログイン�
 
 			if(reserve == 1)
 			{
-				reserve_pstmt = cs.RoomReserve();
+				reserve_pstmt = cs.RoomReserve(cc.createconnection());
 				reserve_pstmt.setInt(1, userinfo[1]);
 				reserve_pstmt.executeUpdate();
 				cs.closepstmt(reserve_pstmt);

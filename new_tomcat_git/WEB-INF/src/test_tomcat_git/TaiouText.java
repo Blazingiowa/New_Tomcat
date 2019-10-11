@@ -3,7 +3,6 @@ package test_tomcat_git;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +10,7 @@ import java.sql.SQLException;
 public class TaiouText extends TextWrite //対応するカードの情報をテキストファイルに出力
 {
 	CardText ct;
+	CreateConnection cc;
 	CreateStatement cs;
 
 	private final int tiounum=6;
@@ -22,6 +22,7 @@ public class TaiouText extends TextWrite //対応するカードの情報をテ�
 	TaiouText()
 	{
 		super();
+		cc = new CreateConnection();
 		cs = new CreateStatement();
 		ct = new CardText();
 	}
@@ -49,7 +50,7 @@ public class TaiouText extends TextWrite //対応するカードの情報をテ�
 		}
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-		pstmt = cs.SerchAllCard();
+		pstmt = cs.SerchAllCard(cc.createconnection());
 		try
 		{
 			rs = pstmt.executeQuery();//カードの情報を取得
@@ -146,8 +147,9 @@ public class TaiouText extends TextWrite //対応するカードの情報をテ�
 		{
 			fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
-			pw = new PrintWriter(bw,false);
-			pw.println(writetext);
+			bw.write(writetext);
+			//pw = new PrintWriter(bw,false);
+			//pw.println(writetext);
 		}
 		catch(Exception e)
 		{

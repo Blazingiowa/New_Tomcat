@@ -8,6 +8,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 {
 	Roomdelete rd;
 	CreateStatement cs;
+	CreateConnection cc;
 	ResultSet rs;
 	int [] userid;
 	final int useridnum = 2,logout = 3,no_user = 0;
@@ -16,10 +17,11 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 	DataBasePlayerout()
 	{
 		super();
+		cc = new CreateConnection();
 		rd = new Roomdelete();
 		cs = new CreateStatement();
 		userid = new int[useridnum];
-		pstmts = cs.Playerout();
+		pstmts = cs.Playerout(cc.createconnection());
 	}
 
 	void logout(int[] playerinfo)//ユーザID,ルームID,プレイヤー番号の順番で格納

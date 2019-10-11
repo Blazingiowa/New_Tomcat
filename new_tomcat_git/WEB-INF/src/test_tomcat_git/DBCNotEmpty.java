@@ -12,17 +12,19 @@ public class DBCNotEmpty //extends DataBaseConnectRead //データベース上�
 	private final int roominfonum =2,userid_emp =2,roomid_emp=3;
 	PreparedStatement[] pstmts;
 	ResultSet rs;
+	CreateConnection cc;
 	CreateStatement cs;
 
 	DBCNotEmpty()
 	{
+		cc = new CreateConnection();
 		cs = new CreateStatement();
 	}
 
 	int userIDNotempty()//ユーザーIDを追加する
 	{
 		pstmts = new PreparedStatement[userid_emp];
-		pstmts = cs.addUserId();
+		pstmts = cs.addUserId(cc.createconnection());
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
 

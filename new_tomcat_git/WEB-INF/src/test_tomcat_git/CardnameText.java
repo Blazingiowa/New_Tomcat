@@ -14,6 +14,8 @@ public class CardnameText
 	protected BufferedWriter bw;
 	protected PrintWriter pw;
 	protected FileWriter fw;
+	protected CreateConnection cc;
+
 
 	int cardcount;
 	PreparedStatement pstmt;
@@ -28,6 +30,7 @@ public class CardnameText
 	CardnameText()
 	{
 		cs = new CreateStatement();
+		cc = new CreateConnection();
 		ct = new CardText();
 		tw = new TextWrite();
 
@@ -40,7 +43,7 @@ public class CardnameText
 	{
 		cardcount = ct.CardCount();
 		line = new String[cardcount];
-		pstmt = cs.CardTextget();
+		pstmt = cs.CardTextget(cc.createconnection());
 		for(int i =0;i<line.length;i++)
 		{
 			line[i]=null;

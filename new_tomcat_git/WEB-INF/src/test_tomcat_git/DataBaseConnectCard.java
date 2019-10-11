@@ -7,17 +7,19 @@ import java.sql.SQLException;
 public class DataBaseConnectCard //extends DataBaseConnectRead //データベースからカードの検索結果を返す
 {
 	protected PreparedStatement pstmt;
+	protected CreateConnection cc;
 	protected ResultSet rs;
 	protected CreateStatement cs;
 
 	DataBaseConnectCard()
 	{
 		cs = new CreateStatement();
-		pstmt = cs.SerchAllCard();
+		cc = new CreateConnection();
 	}
 
 	ResultSet cardinfo()
 	{
+		pstmt = cs.SerchAllCard(cc.createconnection());
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
 
 		try

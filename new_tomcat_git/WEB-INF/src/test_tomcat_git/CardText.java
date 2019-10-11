@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class CardText extends TextWrite //カードリストテキストを作るクラス
 {
 	CreateStatement cs;
+	CreateConnection cc;
 
 	PreparedStatement select_card_pstmt,count_card_pstmt;
 	ResultSet card_rs,count_rs;
@@ -23,6 +24,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	{
 		super();
 		cs = new CreateStatement();
+		cc = new CreateConnection();
 	}
 
 	void cardcreate(File file)
@@ -38,7 +40,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		writetext = "";
 
 		//Statement stmt = CC.createstatement(conn = CC.createconnection());//ステートメントを取得
-		select_card_pstmt = cs.SerchAllCard();
+		select_card_pstmt = cs.SerchAllCard(cc.createconnection());
 
 		/*
 		try
@@ -139,7 +141,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	int CardCount()
 	{
 		int number = 0;
-		count_card_pstmt = cs.CountCardSQL();
+		count_card_pstmt = cs.CountCardSQL(cc.createconnection());
 		try
 		{
 			count_rs = count_card_pstmt.executeQuery();
@@ -161,6 +163,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		{
 			e.printStackTrace();
 		}
+		System.out.println("データベースにあるカードの枚数は"+number);
 
 		return number;
 	}

@@ -10,9 +10,11 @@ public class DBCSercheReserveRoom //extends DataBaseConnectUpdate
 	protected PreparedStatement[] pstmts;
 	protected DataBaseConnectUpdate DBCU;
 	protected DBCbeforeUpdate DBCB;
+	CreateConnection cc;
 
 	DBCSercheReserveRoom()
 	{
+		cc = new CreateConnection();
 		cs = new CreateStatement();
 		pstmts = new PreparedStatement[sqlnum];
 		userinfo = new int[user_num];
@@ -25,7 +27,7 @@ public class DBCSercheReserveRoom //extends DataBaseConnectUpdate
 		sql[1] = "SELECT * FROM room WHERE user_id = -1 AND room_id = "+room_id+ " ORDER BY user_id LIMIT 1;" ;
 		System.out.println("○○○○○○○○○○○○○○○○○○○○○○お部屋探し○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○");
 		*/
-		pstmts = cs.RoomEntry();
+		pstmts = cs.RoomEntry(cc.createconnection());
 		userinfo=DBCB.beforeupdate(pstmts);
 		DBCU.update(user_name,userinfo,0);
 		return userinfo;
