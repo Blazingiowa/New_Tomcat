@@ -153,7 +153,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 			e.printStackTrace();
 		}
 
-		cs.closepstmt(count_card_pstmt);
+		//cs.closepstmt(count_card_pstmt);
 
 		try
 		{

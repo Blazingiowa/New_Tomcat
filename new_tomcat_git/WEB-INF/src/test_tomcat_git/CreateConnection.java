@@ -41,7 +41,7 @@ public class CreateConnection //データベースに接続するための準備
 		return conn;
 	}
 
-	Statement createstatement(Connection conn)//ステートメントを作成し返す
+	/*Statement createstatement(Connection conn)//ステートメントを作成し返す
 	{
 
 		try
@@ -56,7 +56,7 @@ public class CreateConnection //データベースに接続するための準備
 		}
 
 		return stmt;
-	}
+	}*/
 
 	void close()//接続をクローズする
 	{
