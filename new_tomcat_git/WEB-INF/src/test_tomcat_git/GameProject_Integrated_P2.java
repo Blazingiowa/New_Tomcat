@@ -425,12 +425,12 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		}
 
 		//使ったカードのクールタイムをセット
-		for (int i = 1; i <= 2; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			for (int j = 0; j < textmain[3].length; j++)
 			{
 				//ｐ１のCTの設定
-				if (i == JudgePlayer1)
+				if (i + 1 == JudgePlayer1)
 				{
 					if (textmain[3][j] != -1)
 					{
@@ -439,7 +439,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 					}
 				}
 				//ｐ２のCTの設定
-				else if (i == JudgePlayer2)
+				else if (i + 1 == JudgePlayer2)
 				{
 					if (textmain[5][j] != -1)
 					{
