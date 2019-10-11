@@ -34,6 +34,8 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 		}
 		finally
 		{
+			cc.close();
+			/*
 			try
 			{
 				if (conn != null)
@@ -47,6 +49,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 				//例外処理
 
 			}
+			*/
 		}
 
 		noplayer(playerinfo[1]);//テスト
@@ -84,6 +87,8 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 		}
 		finally
 		{
+			cc.close();
+			/*
 			try
 			{
 				if (conn != null)
@@ -97,6 +102,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 				System.out.println(e);
 				//例外処理
 			}
+			*/
 		}
 
 		if(Result[0]==0&&Result[1]==0)

@@ -75,13 +75,13 @@ public class SQLRepository
 
 	String UpdateLogoutUser()//ユーザー表からユーザーを削除
 	{
-		sql = "UPDATE user FROM user_name = NULL WHERE user_id =?;";
+		sql = "UPDATE user FROM user_name = NULL WHERE user_id = ?;";
 		return sql;
 	}
 
 	String UpdateLogoutRoom()//ルーム表からユーザーを削除
 	{
-		sql = "UPDATE room FROM user_id = 0 WHERE user_id =?;";
+		sql = "UPDATE room FROM user_id = 0 WHERE user_id = ?;";
 		return sql;
 	}
 
