@@ -134,6 +134,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		try
 		{
 			rs = count.executeQuery();
+			rs.next();
 			number = rs.getInt("number");
 		}
 		catch (SQLException e)
