@@ -75,7 +75,7 @@ public class SQLRepository
 
 	String UpdateLogoutUser()//ユーザー表からユーザーを削除
 	{
-		sql = "UPDATE user FROM user_name = NULL WHERE user_id = ?;";
+		sql = "UPDATE user SET user_name = NULL WHERE user_id = ?;";
 		return sql;
 	}
 
