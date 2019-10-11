@@ -41,6 +41,7 @@ public class DBCSercheReserveRoom extends DataBaseConnectRead
 				userinfo[0] = DBCNE.userIDNotempty();
 			}
 
+			pstmts[1].setInt(1,room_id);
 			rs = pstmts[1].executeQuery();
 
 			if(rs.next())
