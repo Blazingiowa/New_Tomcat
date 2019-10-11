@@ -2,17 +2,19 @@ package test_tomcat_git;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateConnection //データベースに接続するための準備をするクラス
 {
 	Statement stmt;
+	PreparedStatement pstmt;
 	Connection conn;
 
 	protected final String url = "jdbc:mysql://localhost:3306/u22?characterEncoding=UTF-8&serverTimezone=JST"; //データベースのURLまたはIPアドレス、ローカルの場合はパス
-	protected final String user = "root";//データベースへアクセスするID
-	protected final String password = "ncc_NCC2019";//データベースのパスワード
+	protected final String user = "ktmttfr";//データベースへアクセスするID
+	protected final String password = "_zwcgLWsg6S-9Ls";//データベースのパスワード
 
 	Connection createconnection()//データベースと接続を作成しConnectionを返す
 	{
@@ -56,12 +58,27 @@ public class CreateConnection //データベースに接続するための準備
 		return stmt;
 	}
 
+	PreparedStatement createpStatement(Connection conn,String SQL)
+	{
+
+		try
+		{
+			pstmt = conn.prepareStatement(SQL);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return pstmt;
+	}
+
 	void close()//接続をクローズする
 	{
 		try
 		{
+			//pstmt.close();//ステートメントをクローズ
 			conn.close();//接続切断
-			stmt.close();//ステートメントをクローズ
 		}
 		catch (SQLException e)
 		{

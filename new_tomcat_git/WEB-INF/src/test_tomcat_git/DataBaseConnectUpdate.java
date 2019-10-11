@@ -1,14 +1,15 @@
 package test_tomcat_git;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインしたプレイヤーの情報をデータベースに格納する
 {
 	int user_id;
 	int[] userinfo;//ユーザID,ルームID,プレイヤー番号
 	DBCbeforeUpdate DBCB = new DBCbeforeUpdate();
-	String[] sql = new String[2];
+	String[] sqls = new String[2];
+	PreparedStatement update_user_pstmt,update_room_pstmt,reserve_pstmt;
 
 	int[] updateSQL(String user_name,int reserve,int room_id)//受け渡されたusernameをデータベースへインサートする
 	{
@@ -38,17 +39,23 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		}
 		*/
 
-		sql[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
+		/*
+		sqls[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
 		if(reserve ==0)//通常のマッチ
 		{
-			sql[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
+			sqls[1] = "SELECT * FROM room WHERE user_id = 0 ORDER BY room_id LIMIT 1;";
 			System.out.println("クイックマッチ");
 		}
 		else if(reserve == 1)//部屋作成
 		{
-			sql[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
+			sqls[1] = "SELECT * FROM room WHERE user_id = 0 AND player_number = 1 ORDER BY room_id LIMIT 1;";
 		}
-		userinfo=DBCB.beforeupdate(sql);
+		*/
+
+		sqls[0]=sr.SelectEmptyUser();
+		sqls[1]=sr.SelectEmptyRoom(reserve);
+
+		userinfo=DBCB.beforeupdate(sqls);
 
 		update(user_name,userinfo,reserve);
 
@@ -64,9 +71,9 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 /*
 		try
 		{
-			Statement stmt1 = CC.createstatement(conn = CC.createconnection());
-			Statement stmt2 = CC.createstatement(conn = CC.createconnection());
-			Statement stmt3 = CC.createstatement(conn = CC.createconnection());
+			Statement stmt1 = cc.createstatement(conn = cc.createconnection());
+			Statement stmt2 = cc.createstatement(conn = cc.createconnection());
+			Statement stmt3 = cc.createstatement(conn = cc.createconnection());
 
 
 			stmt1.executeUpdate("UPDATE user SET user_name = '"+user_name+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
@@ -84,7 +91,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		}
 		finally
 		{
-			CC.close();
+			cc.close();
 		}
 */
 		return userinfo;
@@ -95,17 +102,36 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 	{
 		try
 		{
-			Statement stmt1 = CC.createstatement(conn = CC.createconnection());
-			Statement stmt2 = CC.createstatement(conn = CC.createconnection());
-			Statement stmt3 = CC.createstatement(conn = CC.createconnection());
+			/*
+			Statement stmt1 = cc.createstatement(conn = cc.createconnection());
+			Statement stmt2 = cc.createstatement(conn = cc.createconnection());
+			Statement stmt3 = cc.createstatement(conn = cc.createconnection());
+			*/
 
+			update_user_pstmt = cc.createpStatement(cc.createconnection(),sr.UpdateLoginUser());
+			update_room_pstmt = cc.createpStatement(cc.createconnection(),sr.UpdateLoginRoom());
 
-			stmt1.executeUpdate("UPDATE user SET user_name = '"+user_name+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
-			stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");//空いているルームにユーザーIDを格納する
+			update_user_pstmt.setString(1,user_name);
+			update_user_pstmt.setInt(2,userinfo[0]);
+
+			update_room_pstmt.setInt(1,userinfo[0]);
+			update_room_pstmt.setInt(2,userinfo[1]);
+			update_room_pstmt.setInt(3,userinfo[2]);
+
+			//stmt1.executeUpdate("UPDATE user SET user_name = '"+user_name+"' WHERE user_id = "+userinfo[0]+";");//空いているユーザーIDにユーザー名を格納する
+			//stmt2.executeUpdate("UPDATE room SET user_id = "+userinfo[0]+" WHERE room_id = "+userinfo[1]+" AND player_number = "+userinfo[2]+";");//空いているルームにユーザーIDを格納する
+
+			update_user_pstmt.executeUpdate();
+			update_room_pstmt.executeUpdate();
+
 			//部屋を作った際に相手の場所を予約する
 			if(reserve == 1)
 			{
-				stmt3.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
+				//stmt3.executeUpdate("UPDATE room SET user_id = -1 WHERE room_id = "+userinfo[1]+" AND player_number = 2;");
+
+				reserve_pstmt =cc.createpStatement(cc.createconnection(),sr.UpdateReserveRoom());
+				reserve_pstmt.setInt(1,userinfo[1]);
+				reserve_pstmt.executeUpdate();
 			}
 
 		}
@@ -115,14 +141,14 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		}
 		finally
 		{
-			CC.close();
+			cc.close();
 		}
 	}
 
 /*	private void roomfull(int room_id)
 	{
 		user_id=0;
-		Statement stmt4 = CC.createstatement(conn = CC.createconnection());
+		Statement stmt4 = cc.createstatement(conn = cc.createconnection());
 
 		try
 		{
@@ -140,7 +166,7 @@ public class DataBaseConnectUpdate extends DataBaseConnectRead //ログインし
 		}
 		finally
 		{
-			CC.close();
+			cc.close();
 			try
 			{
 				rs.close();

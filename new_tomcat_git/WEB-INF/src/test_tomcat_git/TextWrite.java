@@ -93,4 +93,11 @@ public class TextWrite extends TextRead
 			}
 		}
 	}
+
+	int  CountCard()
+	{
+		int number =0;
+
+		return number;
+	}
 }
