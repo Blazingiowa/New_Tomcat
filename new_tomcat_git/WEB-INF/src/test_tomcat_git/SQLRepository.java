@@ -23,7 +23,7 @@ public class SQLRepository
 		return sql;
 	}
 
-	String SelectCardtext()
+	String SelectCardtext()//カード情報を検索
 	{
 		sql ="SELECT * FROM card_text;";
 		return sql;
