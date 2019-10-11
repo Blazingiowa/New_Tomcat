@@ -40,26 +40,23 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		//p2_cardにｐ２が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p2_card.length; i++)
 		{
-			//ｐ２のテキストフィールドにｐ１のカード情報を追記
-			textmain[5][i] = textF[i];
-
 			p2_card[i][0] = textF[i];
 
 			//textmainのｐ２の欄にもソート後の情報でカードIDを格納
 			textmain[3][i] = textF[i];
 		}
 
+		textF = txR.read(playerinfo[1], 1, 3);//ｐ１が使ったカードの情報を持ってきて退避
 		System.out.println("ｐ２の統合でｐ１の使ったカードを持ってくる" + textF);
-		textF = txR.read(playerinfo[1], 1, 3);//ｐ２が使ったカードの情報を持ってきて退避
 
 		//ｐ１の使ったカードを降順に並び替えするための前準備
 		for (int i = 0; i < textmain[5].length; i++)
 		{
 			//ｐ１の使ったカードを退避
-			bfrcard[2][i] = textmain[5][i];
+			bfrcard[2][i] = textF[i];
 
 			//ソートメソッドに送る配列に格納
-			textW[i] = textmain[5][i];
+			textW[i] = textF[i];
 
 		}
 		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
@@ -466,13 +463,13 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 	//使ったカードを降順にするメソッド
 	int[] sort(int[] usecard)
 	{
-		int[] w = new int[usecard.length];
+		int[] descCard = new int[usecard.length];
 		Arrays.sort(usecard);
 		for (int i = 0, j = usecard.length - 1; i < usecard.length; i++, j--)
 		{
-			w[i] = usecard[j];
+			descCard[i] = usecard[j];
 		}
 
-		return w;
+		return descCard;
 	}
 }

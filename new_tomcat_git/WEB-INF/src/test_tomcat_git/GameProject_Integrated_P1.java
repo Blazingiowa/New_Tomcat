@@ -18,6 +18,7 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 		{
 			//テキストの０行目から順番に持ってきて退避
 			textW = txR.read(playerinfo[1], playerinfo[2], i);
+
 			for (int j = 0; j < textmain[0].length; j++)
 			{
 				w = textW[j];//退避させた１次元配列をさらに１つずつ退避
@@ -46,8 +47,8 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 			textmain[3][i] = textF[i];
 		}
 
-		System.out.println("ｐ１の統合でｐ２の使ったカードを持ってくる" + textF);
 		textF = txR.read(playerinfo[1], 2, 3);//ｐ２が使ったカードの情報を持ってきて退避
+		System.out.println("ｐ１の統合でｐ２の使ったカードを持ってくる" + textF);
 
 		//ｐ２の使ったカードを降順に並び替えするための前準備
 		for (int i = 0; i < textmain[5].length; i++)
@@ -464,13 +465,13 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 	//使ったカードを降順にするメソッド
 	int[] sort(int[] usecard)
 	{
-		int[] w = new int[usecard.length];
+		int[] descCard = new int[usecard.length];
 		Arrays.sort(usecard);
 		for (int i = 0, j = usecard.length - 1; i < usecard.length; i++, j--)
 		{
-			w[i] = usecard[j];
+			descCard[i] = usecard[j];
 		}
 
-		return w;
+		return descCard;
 	}
 }
