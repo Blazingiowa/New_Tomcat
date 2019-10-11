@@ -40,6 +40,9 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		//p2_cardにｐ２が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p2_card.length; i++)
 		{
+			//ｐ２のテキストフィールドにｐ１のカード情報を追記
+			textmain[5][i] = textF[i];
+
 			p2_card[i][0] = textF[i];
 
 			//textmainのｐ２の欄にもソート後の情報でカードIDを格納

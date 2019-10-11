@@ -52,6 +52,9 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 		//ｐ２の使ったカードを降順に並び替えするための前準備
 		for (int i = 0; i < textmain[5].length; i++)
 		{
+			//ｐ１のテキストフィールドにｐ２のカード情報を追記
+			textmain[5][i] = textF[i];
+
 			//ｐ１の使ったカードを退避
 			bfrcard[2][i] = textmain[5][i];
 
@@ -61,7 +64,7 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 		}
 		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
 		textF = sort(textW);
-		//p1_cardにｐ１が使ったカード情報をセット（ソート済み）
+		//p2_cardにｐ２が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p2_card.length; i++)
 		{
 			p2_card[i][0] = textF[i];
