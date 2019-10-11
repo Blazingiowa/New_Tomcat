@@ -81,7 +81,7 @@ public class SQLRepository
 
 	String UpdateLogoutRoom()//ルーム表からユーザーを削除
 	{
-		sql = "UPDATE room FROM user_id = 0 WHERE user_id = ?;";
+		sql = "UPDATE room SET user_id = 0 WHERE user_id = ?;";
 		return sql;
 	}
 
