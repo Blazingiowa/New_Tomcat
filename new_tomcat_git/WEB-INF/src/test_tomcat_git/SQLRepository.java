@@ -85,11 +85,18 @@ public class SQLRepository
 		return sql;
 	}
 
+	String UpdateLogoutReserve()//予約したけどゲームを始めずに終了した場合に部屋を開放
+	{
+		sql = "UPDATE room SET user_id = 0 WHERE room_id = ? AND player_number = ?";
+		return sql;
+	}
+
 	String SelectRoomUser()//ルームにいるユーザーを確認
 	{
 		sql = "SELECT * FROM room WHERE room_id = ?;";
 		return sql;
 	}
+
 
 	String SelectMaxUserid()//ユーザーIDの最大値を検索
 	{
