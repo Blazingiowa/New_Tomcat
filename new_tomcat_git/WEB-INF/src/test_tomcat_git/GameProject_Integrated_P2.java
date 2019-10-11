@@ -18,6 +18,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		{
 			//テキストの０行目から順番に持ってきて退避
 			textW = txR.read(playerinfo[1], playerinfo[2], i);
+
 			for (int j = 0; j < textmain[0].length; j++)
 			{
 				w = textW[j];//退避させた１次元配列をさらに１つずつ退避
@@ -33,9 +34,9 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 
 			//ソートメソッドに送る配列に格納
 			textW[i] = textmain[3][i];
-
 		}
-		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
+
+		//使用したカードを降順にするメソッドを実行
 		textF = sort(textW);
 		//p2_cardにｐ２が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p2_card.length; i++)
@@ -59,7 +60,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 			textW[i] = textF[i];
 
 		}
-		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
+		//使用したカードを降順にするメソッドを実行
 		textF = sort(textW);
 		//p1_cardにｐ１が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p1_card.length; i++)

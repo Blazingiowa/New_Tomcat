@@ -34,9 +34,9 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 
 			//ソートメソッドに送る配列に格納
 			textW[i] = textmain[3][i];
-
 		}
-		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
+
+		//使用したカードを降順にするメソッドを実行
 		textF = sort(textW);
 		//p1_cardにｐ１が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p1_card.length; i++)
@@ -63,7 +63,7 @@ public class GameProject_Integrated_P1 extends GameProject_Main
 			textW[i] = textmain[5][i];
 
 		}
-		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
+		//使用したカードを降順にするメソッドを実行
 		textF = sort(textW);
 		//p2_cardにｐ２が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p2_card.length; i++)
