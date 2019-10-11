@@ -247,7 +247,7 @@ public class CreateStatement
 
 	void closepstmt(PreparedStatement pstmt)
 	{
-
+		/*
 		try
 		{
 			pstmt.clearParameters();
@@ -266,12 +266,14 @@ public class CreateStatement
 		{
 			e.printStackTrace();
 		}
+		*/
 
 		CC.close();
 	}
 
 	void closepstmts(PreparedStatement[] pstmts)
 	{
+		/*
 		for(int i =0;i<pstmts.length;i++)
 		{
 			try
@@ -292,6 +294,7 @@ public class CreateStatement
 				e.printStackTrace();
 			}
 		}
+		*/
 
 		CC.close();
 	}
