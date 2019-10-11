@@ -4,11 +4,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TaiouText extends CardText //対応するカードの情報をテキストファイルに出力
 {
+
+	PreparedStatement pstmt;
 
 	void taioucreate(File file) //taiou.txtに文字を出力する
 	{
@@ -32,11 +34,15 @@ public class TaiouText extends CardText //対応するカードの情報をテ�
 			}
 		}
 
-		Statement stmt = cc.createstatement(conn = cc.createconnection());//ステートメントを取得
+		//Statement stmt = cc.createstatement(conn = cc.createconnection());//ステートメントを取得
+		pstmt = cc.createpStatement(cc.createconnection(),sr.SelectAllCard());
 		try
 		{
+			/*
 			stmt.executeQuery("SELECT * FROM card;");//カードの情報を取得
 			rs = stmt.getResultSet();
+			*/
+			rs = pstmt.executeQuery();
 		}
 		catch(SQLException e)
 		{
