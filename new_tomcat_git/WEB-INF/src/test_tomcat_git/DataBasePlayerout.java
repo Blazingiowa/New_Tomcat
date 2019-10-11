@@ -59,6 +59,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 
 	void noplayer(int room_id)
 	{
+		System.out.println("noplayer入ったお");
 		Result = new int[2];
 		for(int i = 0;i<Result.length;i++)
 		{

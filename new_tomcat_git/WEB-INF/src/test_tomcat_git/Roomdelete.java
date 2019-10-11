@@ -6,6 +6,7 @@ public class Roomdelete
 {
 		void delete(int room_id)
 		{
+			System.out.println("ファイルを消しに来たよ");
 			File file = new File("/var/www/html/game/"+ room_id);
 			File[] files = file.listFiles();
 			for(int i = 0; i<files.length;i++)
