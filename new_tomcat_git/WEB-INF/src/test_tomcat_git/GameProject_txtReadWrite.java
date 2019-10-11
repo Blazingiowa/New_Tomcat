@@ -2,19 +2,24 @@ package test_tomcat_git;
 
 public class GameProject_txtReadWrite extends GameProject_Main
 {
+	GameProject_txtReadWrite()
+	{
+		super();
+	}
+
 	void txtReadWrite(int[] playerinfo, int[] usecard)
 	{
 		System.out.println("テキストの書き読みクラスに入った");
-		System.out.println(playerinfo[0]+" "+playerinfo[1]+" "+playerinfo[2]);
-		System.out.println(usecard[0]+" "+usecard[1]+" "+usecard[2]);
+		System.out.println(playerinfo[0] + " " + playerinfo[1] + " " + playerinfo[2]);
+		System.out.println(usecard[0] + " " + usecard[1] + " " + usecard[2]);
 
 		//テキストファイルを検索[ルームID][ユーザ番号][行数][書き込みの場合のみ配列をセット]
 		//プレイヤーの処理状況の情報が入っている０行目を持ってくる
 		textF = txR.read(playerinfo[1], playerinfo[2], 0);
-		System.out.println(textF[0]+" "+textF[1]+" "+textF[2]+" ");
+		System.out.println(textF[0] + " " + textF[1] + " " + textF[2] + " ");
 
 		//プレイヤーの処理が終わっているのかどうか判定（０はまだ、１で処理済み）
-		if (textF[0] == 0)
+		if (textF[0] == JudgePlayering[0])
 		{
 			for (int i = 0; i < textmain.length; i++)
 			{
@@ -56,17 +61,17 @@ public class GameProject_txtReadWrite extends GameProject_Main
 			}
 
 			//プレイヤー１のときの処理
-			if (playerinfo[2] == 1)
+			if (playerinfo[2] == JudgePlayer1)
 			{
 				//ルーム状況表を読み込む
 				player = txR.read(playerinfo[1], 3, 1);
-				if (player[1] == 0 && player[2] == 0)
+				if (player[1] == JudgePlayering[0] && player[2] == JudgePlayering[0])
 				{
 					player[1] = 1;
 					player[2] = 0;
 				}
 
-				else if (player[1] == 0 && player[2] == 1)
+				else if (player[1] == JudgePlayering[0] && player[2] == JudgePlayering[1])
 				{
 					player[1] = 1;
 					player[2] = 1;
@@ -80,17 +85,17 @@ public class GameProject_txtReadWrite extends GameProject_Main
 			}
 
 			//プレイヤー２の時の処理
-			else if (playerinfo[2] == 2)
+			else if (playerinfo[2] == JudgePlayer2)
 			{
 				//ルーム状況表を読み込む
 				player = txR.read(playerinfo[1], 3, 1);
-				if (player[1] == 0 && player[2] == 0)
+				if (player[1] == JudgePlayering[0] && player[2] == JudgePlayering[0])
 				{
 					player[1] = 0;
 					player[2] = 1;
 				}
 
-				else if (player[1] == 1 && player[2] == 0)
+				else if (player[1] == JudgePlayering[1] && player[2] == JudgePlayering[0])
 				{
 					player[1] = 1;
 					player[2] = 1;
