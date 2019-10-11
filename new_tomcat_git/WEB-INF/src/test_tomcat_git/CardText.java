@@ -23,7 +23,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 	void cardcreate(File file)
 	{
 		//配列の宣言
-		cardlist = new int[20][3];
+		cardlist = new int[20][4];
 		line = new String[20];
 
 		for(int i =0;i<line.length;i++)//配列lineを初期化
@@ -54,6 +54,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 				cardlist[count][0] = rs.getInt("card_id");
 				cardlist[count][1] = rs.getInt("dmg");
 				cardlist[count][2] = rs.getInt("cost");
+				cardlist[count][3] = rs.getInt("type");
 				count++;
 			}
 			/*System.out.println("以下はcardtextのデバッグだよ");
@@ -88,7 +89,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 
 		for(int i = 0;i<line.length;i++)//テキストファイルに書き込む情報を行ごとにまとめる
 		{
-			line[i] = cardlist[i][0]+","+cardlist[i][1]+","+cardlist[i][2];
+			line[i] = cardlist[i][0]+","+cardlist[i][1]+","+cardlist[i][2]+","+cardlist[i][3];
 		}
 		/*System.out.println("一行ごとの情報だよ");
 		for(int i =0;i<line.length;i++)
@@ -133,6 +134,7 @@ public class CardText extends TextWrite //カードリストテキストを作�
 		try
 		{
 			rs = count.executeQuery();
+			rs.next();
 			number = rs.getInt("number");
 		}
 		catch (SQLException e)

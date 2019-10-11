@@ -23,7 +23,7 @@ public class SQLRepository
 		return sql;
 	}
 
-	String SelectCardtext()
+	String SelectCardtext()//カード情報を検索
 	{
 		sql ="SELECT * FROM card_text;";
 		return sql;
@@ -75,13 +75,13 @@ public class SQLRepository
 
 	String UpdateLogoutUser()//ユーザー表からユーザーを削除
 	{
-		sql = "UPDATE user FROM user_name = NULL WHERE user_id = ?;";
+		sql = "UPDATE user SET user_name = NULL WHERE user_id = ?;";
 		return sql;
 	}
 
 	String UpdateLogoutRoom()//ルーム表からユーザーを削除
 	{
-		sql = "UPDATE room FROM user_id = 0 WHERE user_id = ?;";
+		sql = "UPDATE room SET user_id = 0 WHERE user_id = ?;";
 		return sql;
 	}
 

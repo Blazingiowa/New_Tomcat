@@ -82,7 +82,10 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 		}
 		finally
 		{
-			try
+			cc.close();
+
+			/*
+			 try
 			{
 				if (conn != null)
 				{
@@ -94,6 +97,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 				System.out.println(e);
 				//例外処理
 			}
+			*/
 		}
 
 		return Result;
