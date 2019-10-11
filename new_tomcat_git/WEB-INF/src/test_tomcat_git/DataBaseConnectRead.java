@@ -20,7 +20,7 @@ public class DataBaseConnectRead //データベースから取得した情報を
 
 	int[] reference(int id)
 	{
-		Result = new int[8];
+		Result = new int[9];
 		String card;
 
 		for(int i = 0;i < Result.length;i++)
@@ -43,7 +43,9 @@ public class DataBaseConnectRead //データベースから取得した情報を
 			Result[0] = rs.getInt("card_id");
 			Result[1] = rs.getInt("cost");
 			Result[2] = rs.getInt("dmg");
+			Result[8] = rs.getInt("type");
 			card= rs.getString("taio_id");
+
 
 			String[] array = card.split(",");//カンマ区切りされているカード情報をsplitし配列に格納
 			for(int i = 0,j = 3;i<array.length;i++,j++)

@@ -23,6 +23,12 @@ public class SQLRepository
 		return sql;
 	}
 
+	String SelectCardtext()
+	{
+		sql ="SELECT * FROM card_text;";
+		return sql;
+	}
+
 	String SelectEmptyUser()//空いているユーザーを検索
 	{
 		sql =  "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;

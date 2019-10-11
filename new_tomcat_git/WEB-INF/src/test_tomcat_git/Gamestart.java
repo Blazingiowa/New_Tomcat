@@ -19,6 +19,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	Player_name pn = new Player_name();
 	RoomCheck rc = new RoomCheck();
 	DBCSercheReserveRoom dr = new DBCSercheReserveRoom();
+	Cardname cn  = new Cardname();
 
 	String[] userinfo = new String[3];//ユーザーID,ルームID,プレイヤー番号の順番で格納
 	String[] error = {"-1","-1","-1"};
@@ -28,7 +29,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 	String[] path = new String[6];
 	boolean exist,empty;
 
-	File[] files = new File[6];
+	File[] files = new File[7];
 	/*
 	 大野へロビー用の変数を追加しました。ロビーを使用した場合reserveに1をint型で引数として渡してください。使用しない場合は0で大丈夫です
 	 ロビーを使用しない、ロビーで部屋を作成した場合はroom_idは0でお願いします。ロビーで部屋を検索した人はroom_idを保持しているのでそれを引数として渡してください。
@@ -72,6 +73,7 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		files[3] = new File("/var/www/html/game/"+player[1]+"/room.txt");
 		files[4] = new File("/var/www/html/game/"+player[1]+"/cooltime.txt");
 		files[5] = new File("/var/www/html/game/"+player[1]+"/player_name.txt");
+		files[6] = new File("/var/www/html/game/"+player[1]+"/card_info.txt");
 
 		for(int i = 0;i<userinfo.length;i++)
 		{
@@ -126,6 +128,13 @@ public class Gamestart //ゲームが始まるときに一度だけ実行され�
 		}
 
 		pn.set_playername(files[5], user_name, player[2]);//プレイヤー名をテキストファイル上に保持する
+
+		if(files[6].exists()==false)
+		{
+			createfile(files[6]);
+			permission(files[6]);
+
+		}
 
 		online = tr.read(player[1],3,0);//プレイヤーのオンライン処理
 		/*for(int i =0;i<online.length;i++)
