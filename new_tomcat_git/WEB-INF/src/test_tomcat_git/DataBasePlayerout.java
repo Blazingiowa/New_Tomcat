@@ -123,7 +123,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			*/
 		}
 
-		if(Result[0]==0&&Result[1]==0)
+		if(Result[0]<=0&&Result[1]<=0)
 		{
 			rd.delete(room_id);
 		}
