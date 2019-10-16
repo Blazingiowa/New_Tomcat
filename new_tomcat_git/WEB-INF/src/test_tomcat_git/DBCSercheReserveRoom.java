@@ -23,6 +23,7 @@ public class DBCSercheReserveRoom extends DataBaseConnectRead
 			userinfo[i] = 0;
 		}
 
+
 		pstmts[0] = cc.createpStatement(cc.createconnection(),sr.SelectEmptyUser());
 		pstmts[1] = cc.createpStatement(cc.createconnection(),sr.SelectReserveRoom());
 
@@ -44,6 +45,7 @@ public class DBCSercheReserveRoom extends DataBaseConnectRead
 			pstmts[1].setInt(1,room_id);
 			rs = pstmts[1].executeQuery();
 
+
 			if(rs.next())
 			{
 				userinfo[1] = rs.getInt("room_id");
@@ -56,6 +58,7 @@ public class DBCSercheReserveRoom extends DataBaseConnectRead
 				userinfo[1] = keep[0];
 				userinfo[2] = keep[1];
 			}
+
 		}
 		catch (SQLException e)
 		{
@@ -65,13 +68,16 @@ public class DBCSercheReserveRoom extends DataBaseConnectRead
 		{
 			cc.close();
 		}
+
 		/*
 		sqls[0] = "SELECT * FROM user WHERE user_name is null ORDER BY user_id LIMIT 1;" ;
 		sqls[1] = "SELECT * FROM room WHERE user_id = -1 AND room_id = "+room_id+ " ORDER BY user_id LIMIT 1;" ;
 		System.out.println("○○○○○○○○○○○○○○○○○○○○○○お部屋探し○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○○");
 		*/
 
-		userinfo=dbcb.beforeupdate(sqls);
+
+		//sqls[0] = sr.SelectEmptyUser();
+		//userinfo=dbcb.beforeupdate(sqls);
 		dbcu.update(user_name,userinfo,0);
 		return userinfo;
 	}

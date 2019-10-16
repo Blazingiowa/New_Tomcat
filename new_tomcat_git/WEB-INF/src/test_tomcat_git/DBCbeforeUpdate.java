@@ -31,7 +31,7 @@ public class DBCbeforeUpdate extends DataBaseConnectRead//空いている部屋�
 
 		//Statement stmt = cc.createstatement(conn = cc.createconnection());
 		user_pstmt=cc.createpStatement(cc.createconnection(),sqls[0]);
-		room_pstmt=cc.createpStatement(cc.createconnection(), sqls[1]);
+		room_pstmt=cc.createpStatement(cc.createconnection(),sqls[1]);
 
 		try
 		{
