@@ -95,6 +95,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 					reserve_cancel.setInt(1,room_id);
 					reserve_cancel.setInt(2,++w);
 					reserve_cancel.executeUpdate();
+					Result[i] =0;
 				}
 			}
 		}
@@ -123,7 +124,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			*/
 		}
 
-		if(Result[0]<=0&&Result[1]<=0)
+		if(Result[0]==0&&Result[1]==0)
 		{
 			rd.delete(room_id);
 		}
