@@ -6,6 +6,7 @@ public class UserBean
 	private String roomID;	//ルームID
 	private String userNumber;//プレイヤー番号 1 or 2 ?
 	private String error;//エラー場所
+	private String maxCardnum;
 
 	//jsonで送るためにセットする
 	//setter & getter
@@ -43,6 +44,15 @@ public class UserBean
 	public void setError(String error) {
 		// TODO 自動生成されたメソッド・スタブ
 		this.error = error;
+		System.out.println("error通った");
+	}
+
+	public String getMaxCardnum() {
+		return maxCardnum;
+	}
+	public void setMaxCardnum(String maxCardnum) {
+		// TODO 自動生成されたメソッド・スタブ
+		this.maxCardnum = maxCardnum;
 		System.out.println("error通った");
 	}
 }

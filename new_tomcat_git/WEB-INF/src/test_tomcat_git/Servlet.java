@@ -25,6 +25,8 @@ public class Servlet extends HttpServlet
 
 	private Rematch rematch = new Rematch();
 
+	private CardText card_text = new CardText();
+
 	private String[] str_user_info = new String[3]; //順番 0 ユーザーID, 1 ルームID, 2 プレイヤー番号
 	private int[] int_user_info = new int[3];
 
@@ -38,6 +40,8 @@ public class Servlet extends HttpServlet
 	private String flag;
 
 	private String reserve;
+
+	private String maxCard;
 
 	private int int_room_id;
 	private int int_reserve;
@@ -95,6 +99,7 @@ public class Servlet extends HttpServlet
 		ub.setUserNumber(st_default);
 		ub.setUserID(st_default);
 		ub.setRoomID(st_default);
+		ub.setMaxCardnum(st_default);
 
 		//送られてくるデータの表示（デバック用）
 		System.out.println("userID:"+ us_id);
@@ -125,9 +130,13 @@ public class Servlet extends HttpServlet
 				{
 					str_user_info = game_start.createdirectry(name, int_reserve, int_room_id);
 
+					maxCard = String.valueOf(card_text.CardCount());
+
 					ub.setUserID(str_user_info[0]);
 					ub.setRoomID(str_user_info[1]);
 					ub.setUserNumber(str_user_info[2]);
+
+					ub.setMaxCardnum(maxCard);
 
 					System.out.println("return チェック");
 					System.out.println(str_user_info[final_user]);
