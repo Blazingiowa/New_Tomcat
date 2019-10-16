@@ -6,7 +6,10 @@ import java.sql.SQLException;
 public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤーが退出した際にデータベース上の情報を更新する
 {
 	Roomdelete rd = new Roomdelete();
-	PreparedStatement logout_user,logout_room,room_check;
+	CreateConnection cc = new CreateConnection();
+	SQLRepository sr = new SQLRepository();
+
+	PreparedStatement logout_user,logout_room,room_check,reserve_cancel;
 
 	void logout(int[] playerinfo)//ユーザID,ルームID,プレイヤー番号の順番で格納
 	{
@@ -27,7 +30,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			logout_user.executeUpdate();
 
 			logout_room.setInt(1,playerinfo[0]);
-			logout_user.executeUpdate();
+			logout_room.executeUpdate();
 
 		}
 		catch (SQLException e)
@@ -59,6 +62,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 
 	void noplayer(int room_id)
 	{
+		System.out.println("noplayer入ったお");
 		Result = new int[2];
 		for(int i = 0;i<Result.length;i++)
 		{
@@ -66,6 +70,7 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 		}
 
 		room_check = cc.createpStatement(cc.createconnection(),sr.SelectRoomUser());
+		reserve_cancel = cc.createpStatement(cc.createconnection(),sr.UpdateLogoutReserve());
 
 		try
 		{
@@ -80,6 +85,18 @@ public class DataBasePlayerout extends DataBaseConnectUpdate //プレイヤー�
 			for(int i = 0;rs.next();i++)
 			{
 				Result[i] = rs.getInt("user_id");
+			}
+
+			for(int i=0;i<Result.length;i++)
+			{
+				int w=i;
+				if(Result[i] <0)
+				{
+					reserve_cancel.setInt(1,room_id);
+					reserve_cancel.setInt(2,++w);
+					reserve_cancel.executeUpdate();
+					Result[i] =0;
+				}
 			}
 		}
 		catch(SQLException e)

@@ -18,6 +18,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		{
 			//テキストの０行目から順番に持ってきて退避
 			textW = txR.read(playerinfo[1], playerinfo[2], i);
+
 			for (int j = 0; j < textmain[0].length; j++)
 			{
 				w = textW[j];//退避させた１次元配列をさらに１つずつ退避
@@ -33,9 +34,9 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 
 			//ソートメソッドに送る配列に格納
 			textW[i] = textmain[3][i];
-
 		}
-		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
+
+		//使用したカードを降順にするメソッドを実行
 		textF = sort(textW);
 		//p2_cardにｐ２が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p2_card.length; i++)
@@ -46,20 +47,20 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 			textmain[3][i] = textF[i];
 		}
 
+		textF = txR.read(playerinfo[1], 1, 3);//ｐ１が使ったカードの情報を持ってきて退避
 		System.out.println("ｐ２の統合でｐ１の使ったカードを持ってくる" + textF);
-		textF = txR.read(playerinfo[1], 1, 3);//ｐ２が使ったカードの情報を持ってきて退避
 
 		//ｐ１の使ったカードを降順に並び替えするための前準備
 		for (int i = 0; i < textmain[5].length; i++)
 		{
 			//ｐ１の使ったカードを退避
-			bfrcard[2][i] = textmain[5][i];
+			bfrcard[2][i] = textF[i];
 
 			//ソートメソッドに送る配列に格納
-			textW[i] = textmain[5][i];
+			textW[i] = textF[i];
 
 		}
-		//ソートメソッドに退避配列を渡す→textWにソートされた順で格納される→それをtextFに入れる
+		//使用したカードを降順にするメソッドを実行
 		textF = sort(textW);
 		//p1_cardにｐ１が使ったカード情報をセット（ソート済み）
 		for (int i = 0; i < p1_card.length; i++)
@@ -422,12 +423,12 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 		}
 
 		//使ったカードのクールタイムをセット
-		for (int i = 1; i <= 2; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			for (int j = 0; j < textmain[3].length; j++)
 			{
 				//ｐ１のCTの設定
-				if (i == JudgePlayer1)
+				if (i + 1 == JudgePlayer1)
 				{
 					if (textmain[3][j] != -1)
 					{
@@ -436,7 +437,7 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 					}
 				}
 				//ｐ２のCTの設定
-				else if (i == JudgePlayer2)
+				else if (i + 1 == JudgePlayer2)
 				{
 					if (textmain[5][j] != -1)
 					{
@@ -463,13 +464,13 @@ public class GameProject_Integrated_P2 extends GameProject_Main
 	//使ったカードを降順にするメソッド
 	int[] sort(int[] usecard)
 	{
-		int[] w = new int[usecard.length];
+		int[] descCard = new int[usecard.length];
 		Arrays.sort(usecard);
 		for (int i = 0, j = usecard.length - 1; i < usecard.length; i++, j--)
 		{
-			w[i] = usecard[j];
+			descCard[i] = usecard[j];
 		}
 
-		return w;
+		return descCard;
 	}
 }

@@ -14,7 +14,7 @@ public class RoomCheck extends DataBaseConnectUpdate
 	boolean existroom(int room_id)
 	{
 		boolean exist = false;
-		stmt =cc.createstatement(conn = cc.createconnection());
+		//stmt =cc.createstatement(conn = cc.createconnection());
 		room_exist=cc.createpStatement(cc.createconnection(),sr.SelectRoomExist());
 
 		try
@@ -59,7 +59,7 @@ public class RoomCheck extends DataBaseConnectUpdate
 
 	boolean roomfull(int room_id)
 	{
-		stmt =cc.createstatement(conn = cc.createconnection());
+		//stmt =cc.createstatement(conn = cc.createconnection());
 		empty = true;
 		room_full=cc.createpStatement(cc.createconnection(),sr.SelectRoomFull());
 
