@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "AntiEclipse", urlPatterns = { "/antieclipse" }, asyncSupported = true)
+@WebServlet(name = "AntiEclipse", urlPatterns = { "/photonisgood" }, asyncSupported = true)
 
 public class AntiEclipse extends HttpServlet{
 
@@ -32,7 +32,7 @@ public class AntiEclipse extends HttpServlet{
 			    String varsion;//名前
 			    int osusume;//住所
 			    String gazo;//電話番号
-			    String url = "jdbc:mysql://localhost:3306/antieclipse?user=root&password=yasutaka13&useUnicode=true&characterEncoding=utf-8";
+			    String url = "jdbc:mysql://localhost:3306/antieclipse?user=root&password=yasutaka13&useUnicode=true&characterEncoding=utf-8&serverTimezone=JST";
 
 			    try{
 			      // JDBCドライバをロードする
