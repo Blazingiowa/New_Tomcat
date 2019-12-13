@@ -36,7 +36,7 @@ public class AntiEclipse extends HttpServlet{
 
 			    try{
 			      // JDBCドライバをロードする
-			      Class.forName("com.mysql.jdbc.Driver").newInstance();
+			      Class.forName("com.mysql.jdbc.Driver");
 
 			      // DBへ接続する
 			      Connection con = DriverManager.getConnection(url);
